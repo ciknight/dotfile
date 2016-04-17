@@ -1,0 +1,15 @@
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	pl = pull
+[user]
+	email = hainingw@yishow.me
+	name = hainingw
+[color]
+	ui = true
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
