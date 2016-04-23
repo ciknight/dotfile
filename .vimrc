@@ -261,6 +261,10 @@ set shell=bash\ -i
 " Snippets author
 let g:snips_author = 'Yuez'
 
+" close python mode Regenerate repo cache
+let g:pymode_rope = 0
+let g:pymode_rope_lookup_project = 0
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
