@@ -86,9 +86,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# ptyhon venv
 source ~/workspace/python2.7/bin/activate
 
-
+# alias
+alias yishow='sh /Users/haining/workspace/yishow/upload.sh'
+alias free='top -l 1 | head -n 10 | grep PhysMem'
 alias vi=vim
-
-alias sync_yishow='sh /Users/haining/workspace/yishow/upload.sh'

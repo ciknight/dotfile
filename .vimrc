@@ -35,10 +35,10 @@ set nowrap
 ""            \ set fileformat=unix
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
-au BufNewFile,BufRead *.js, *.html, *.css
-            \ set tabstop=2
-            \ set softtabstop=2
-            \ set shiftwidth=2
+"au BufNewFile,BufRead *.js, *.html, *.css
+"            \ set tabstop=2
+"            \ set softtabstop=2
+"            \ set shiftwidth=2
 
 
 " ui cinfig
