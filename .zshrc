@@ -93,3 +93,5 @@ source ~/workspace/python2.7/bin/activate
 alias yishow='sh /Users/haining/workspace/yishow/upload.sh'
 alias free='top -l 1 | head -n 10 | grep PhysMem'
 alias vi=vim
+
+# use rm 
