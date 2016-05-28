@@ -91,7 +91,11 @@ source ~/workspace/python2.7/bin/activate
 
 # alias
 alias yishow='sh /Users/haining/workspace/yishow/upload.sh'
+alias doge='sh /Users/haining/workspace/my_git_workspace/doge_upload.sh'
 alias free='top -l 1 | head -n 10 | grep PhysMem'
 alias vi=vim
 
-# use rm 
+# use rm
+
+# install rabbitmq
+PATH=$PATH:/usr/local/sbin

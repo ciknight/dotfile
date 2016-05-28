@@ -216,8 +216,8 @@ nnoremap <Leader>r :RunInInteractiveShell<space>
 " Vim-instant-markdown doesn't work in zsh
 " set shell=bash\ -i
 " close python mode Regenerate repo cache
-" let g:pymode_rope = 0
-" let g:pymode_rope_lookup_project = 0
+let g:pymode_rope = 0
+let g:pymode_rope_lookup_project = 0
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local

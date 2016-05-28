@@ -49,7 +49,7 @@ Bundle 'xsbeats/vim-blade'
 Bundle 'Raimondi/delimitMate'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'Lokaltog/vim-easymotion'
-" Bundle 'klen/python-mode'
+Bundle 'klen/python-mode'
 " fold
 Plugin 'tmhedberg/SimpylFold'
 " python ato indent
