@@ -94,8 +94,15 @@ alias yishow='sh /Users/haining/workspace/yishow/upload.sh'
 alias doge='sh /Users/haining/workspace/my_git_workspace/doge_upload.sh'
 alias free='top -l 1 | head -n 10 | grep PhysMem'
 alias vi=vim
+# tmux alias
+alias ta='tmux attach -t'
+alias tn='tmux new -s'
+alias t=tmux
+# git alias
+alias g=git
 
 # use rm
 
 # install rabbitmq
 PATH=$PATH:/usr/local/sbin
+

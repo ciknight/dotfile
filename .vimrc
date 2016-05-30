@@ -214,6 +214,7 @@ nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
 nnoremap <Leader>s :call RunNearestSpec()<CR>
 nnoremap <Leader>l :call RunLastSpec()<CR>
 " Run commands that require an interactive shell
+" vim-run-interactive
 nnoremap <Leader>r :RunInInteractiveShell<space>
 " Vim-instant-markdown doesn't work in zsh
 " set shell=bash\ -i
