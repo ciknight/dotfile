@@ -81,6 +81,8 @@ set showmatch
 set incsearch     " do incremental searching
 set hlsearch
 set ignorecase smartcase
+let g:EasyGrepRecursive=1  " 可以使默认模式改为递归
+let g:EasyGrepMode=2  " grep指定文件
 " Folding
 set foldenable
 set foldlevelstart=10
