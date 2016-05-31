@@ -97,7 +97,7 @@ alias vi=vim
 # tmux alias
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
-alias t=tmux
+alias t=~/bin/tmuxinit
 # git alias
 alias g=git
 
