@@ -39,17 +39,22 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+" quick switch slpite panel
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" h,j,k,l
+nnoremap h <Left>
+nnoremap j <Up>
+nnoremap k <Down>
+nnoremap l <Right>
 " Get off my lawn
 " nnoremap <Left> :echoe 'Use h'<CR>
 " nnoremap <Right> :echoe 'Use l'<CR>
 " nnoremap <Up> :echoe 'Use k'<CR>
 " nnoremap <Down> :echoe 'Use j'<CR>
 " split navigations
-" quick switch slpite panel
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 " space & tab
 set tabstop=4
 set softtabstop=4
