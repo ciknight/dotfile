@@ -1,0 +1,2 @@
+#!/bin/bash
+top -l 1 | head -n 10 | grep PhysMem

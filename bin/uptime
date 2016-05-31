@@ -1,0 +1,5 @@
+#!/bin/bash
+uptime | cut -d":" -f4- | sed s/,//g
+# sysctl -n vm.loadavg
+# w | head -n1 | cut -d":" -f4
+
