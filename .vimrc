@@ -34,6 +34,11 @@ set nocursorbind
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
 set splitright
+" h,j,k,l
+nnoremap h <Left>
+nnoremap j <Up>
+nnoremap k <Down>
+nnoremap l <Right>
 " Quicker window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -44,11 +49,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-" h,j,k,l
-nnoremap h <Left>
-nnoremap j <Up>
-nnoremap k <Down>
-nnoremap l <Right>
 " Get off my lawn
 " nnoremap <Left> :echoe 'Use h'<CR>
 " nnoremap <Right> :echoe 'Use l'<CR>
@@ -195,6 +195,9 @@ endif
 let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nmap <F6> :TagbarToggle<CR>
+" setup powerline
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+set laststatus=2
 " Emmet
 let g:user_emmet_mode='i' " enable for insert mode
 " nohlsearch shortcut
@@ -223,9 +226,31 @@ nnoremap <Leader>l :call RunLastSpec()<CR>
 nnoremap <Leader>r :RunInInteractiveShell<space>
 " Vim-instant-markdown doesn't work in zsh
 " set shell=bash\ -i
+" PyMode settings
 " close python mode Regenerate repo cache
 let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0
+" Documentation
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
+"Linting
+let g:pymode_lint = 1
+let g:pymode_lint_checker = 'pyflakes,pep8'
+" Auto check on save
+let g:pymode_lint_write = 1
+" Support virtualenv
+let g:pymode_virtualenv = 1
+" Enable breakpoints plugin
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'
+" syntax highlighting
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" Don't autofold code
+let g:pymode_folding = 0
+" End PyMode settings
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
