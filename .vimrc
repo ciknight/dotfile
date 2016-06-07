@@ -61,6 +61,7 @@ set softtabstop=4
 set shiftwidth=4
 set backspace=2   " Backspace deletes like most programs in insert mode"
 set shiftround
+" common
 set expandtab
 set autoindent
 " file backup
@@ -198,8 +199,6 @@ nmap <F6> :TagbarToggle<CR>
 " setup powerline
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
-" Emmet
-let g:user_emmet_mode='i' " enable for insert mode
 " nohlsearch shortcut
 nmap -hl :nohlsearch<cr>
 nmap +hl :set hlsearch<cr>
