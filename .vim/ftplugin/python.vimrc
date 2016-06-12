@@ -3,7 +3,7 @@
             \ set tabstop=4 |
             \ set softtabstop=4 |
             \ set shiftwidth=4 |
-            \ set textwidth=90 |
+            \ set textwidth=95 |
             \ set colorcolumn=+1 |
             \ set expandtab |
             \ set autoindent |
