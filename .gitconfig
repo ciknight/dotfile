@@ -1,15 +1,16 @@
 [alias]
-	st = status
-	co = checkout
-	br = branch
-	ci = commit
-	pl = pull
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    pl = pull
+    ls = log
 [user]
-	email = hainingw@yishow.me
-	name = hainingw
+    email = hainingw@yishow.me
+    name = hainingw
 [color]
-	ui = true
+    ui = true
 [core]
-	editor = vim
+    editor = vim
 [merge]
-	tool = vimdiff
+    tool = vimdiff

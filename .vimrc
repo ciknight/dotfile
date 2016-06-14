@@ -21,8 +21,6 @@ filetype indent on
 " Syntax
 syntax enable
 syntax on
-" Set to auto read when a file is changed from the outside
-set autoread
 " 编辑vimrc之后，重新加载
 autocmd! bufwritepost .vimrc source ~/.vimrc
 " 禁用Vi的兼容模式
@@ -68,11 +66,16 @@ set autoindent
 set nobackup
 set nowritebackup
 set noswapfile
-set autowrite     " Automatically :write before running commands"
 set history=50
 set confirm       " Need confrimation while exit"
 set fileformat=unix
 set nowrap
+" file auto do something
+set autowrite     " Automatically :write before running commands"
+set autoread      " Set to auto read when a file is changed from the outside
+set autowriteall
+set tw=140        " 140字符自动换行"
+let autosave=30   " Automatically :per 30 second"
 " ui config
 set number
 set numberwidth=5
