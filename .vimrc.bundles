@@ -12,45 +12,48 @@ if filereadable(expand('~/.vimrc.bundles.local'))
 endif
 
 " Let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Define bundles via Github repos
-Bundle 'christoomey/vim-run-interactive'
+Plugin 'christoomey/vim-run-interactive'
 " auto complate
-Bundle 'Valloric/YouCompleteMe'
-" Bundle 'croaky/vim-colors-github'
-Bundle 'danro/rename.vim'
-Bundle 'majutsushi/tagbar'
-" Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'pbrisbin/vim-mkdir'
-Bundle 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+" Plugin 'croaky/vim-colors-github'
+Plugin 'danro/rename.vim'
+Plugin 'majutsushi/tagbar'
+" Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'pbrisbin/vim-mkdir'
+Plugin 'scrooloose/syntastic'
 " slim syntax highlighting for vim
-Bundle 'slim-template/vim-slim'
-Bundle 'thoughtbot/vim-rspec'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-endwise'
+Plugin 'slim-template/vim-slim'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-bundler'
+Plugin 'tpope/vim-endwise'
 " git
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-" Bundle 'vim-scripts/ctags.vim'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'vim-scripts/tComment'
-Bundle 'mattn/emmet-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+" Plugin 'vim-scripts/ctags.vim'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'vim-scripts/tComment'
+" css and css plugins
+Plugin 'JulesWang/css.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'mattn/emmet-vim'
 " file tree
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " powerline
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'godlygeek/tabular'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'godlygeek/tabular'
 " code complete use tab
-" Bundle 'msanders/snipmate.vim'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'othree/html5.vim'
-Bundle 'xsbeats/vim-blade'
-Bundle 'Raimondi/delimitMate'
-Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'klen/python-mode'
+" Plugin 'msanders/snipmate.vim'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/html5.vim'
+Plugin 'xsbeats/vim-blade'
+Plugin 'Raimondi/delimitMate'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'klen/python-mode'
 " fold
 Plugin 'tmhedberg/SimpylFold'
 " python ato indent
@@ -59,5 +62,5 @@ Plugin 'nvie/vim-flake8'
 " gui theme
 Plugin 'jnurmine/Zenburn'
 " terminal theme
-Bundle 'tomasr/molokai'
+Plugin 'tomasr/molokai'
 filetype on
