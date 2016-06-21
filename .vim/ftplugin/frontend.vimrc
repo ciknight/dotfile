@@ -1,4 +1,4 @@
-:au BufNewFile,BufRead *.html,*.css,*.js
+au BufNewFile,BufRead *.html,*.css,*.js
             \ set tabstop=2 |
             \ set softtabstop=2 |
             \ set shiftwidth=2 |
@@ -10,7 +10,7 @@
             \ set fileformat=unix |
 
 " JQuery syntax support
-:au Syntax javascript set syntax=jquery 
+au Syntax javascript set syntax=jquery 
 " Emmet
 let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 " only use html,css
@@ -18,3 +18,5 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 " To remap the default <C-Y> leader:>
 " let g:user_emmet_leader_key='<C-Y>'
+au BufRead,BufNewFile *.scss set filetype=scss.css
+autocmd FileType scss set iskeyword+=-

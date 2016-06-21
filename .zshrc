@@ -52,8 +52,6 @@ ZSH_THEME="avit"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git, autojump, brew, osx)
 
-# [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -86,12 +84,17 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
 # ptyhon venv
 source ~/workspace/python2.7/bin/activate
 
+# local alias
+local_alias=~/.local_alias.sh
+if [ -f $local_alias ]; then
+    source $local_alias
+fi
 # alias
-alias yishow='sh /Users/haining/workspace/yishow/upload.sh'
-alias doge='sh /Users/haining/workspace/my_git_workspace/doge_upload.sh'
 alias free='top -l 1 | head -n 10 | grep PhysMem'
 alias vi=vim
 # tmux alias
