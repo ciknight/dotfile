@@ -1,5 +1,5 @@
 #!/bin/bash
-uptime | cut -d":" -f4- | sed s/,//g
+uptime | cut -d":" -f4- | sed s/,//g | awk -F ' ' '{print $1,$2,$3}'
 # sysctl -n vm.loadavg
 # w | head -n1 | cut -d":" -f4
 

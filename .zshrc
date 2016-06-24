@@ -103,9 +103,14 @@ alias tn='tmux new -s'
 alias t=~/bin/tmuxinit
 # git alias
 alias g=git
-
+# vim backend sign
+PS1_BAK=$PS1
+if [ $MYVIMRC ]; then
+    PS1='(vim)'$PS1
+else
+    PS1=$PS1_BAK
+fi
 # use rm
 
 # install rabbitmq
 PATH=$PATH:/usr/local/sbin
-
