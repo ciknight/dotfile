@@ -1,0 +1,195 @@
+" Use Vim settings, rather then Vi settings.
+
+" 编辑vimrc之后，重新加载
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+""""""""""
+" Enable
+""""""""""
+" Filetype
+filetype on  " 侦测文件类型
+filetype plugin on  " 载入文件类型相关插件
+filetype indent on  " 载入文件类型相关缩进文件
+" Syntax
+syntax enable
+syntax on
+
+"""""""""""""
+" Formatting
+"""""""""""""
+set tabstop=4  " tab为4个空格
+set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
+set shiftwidth=4 " 设置格式化时制表符占用空格数
+set expandtab  " Tab转换为空格
+set wildmenu  " Tab自动补全时，单行菜单形式显示
+set wildmode=list:longest,list:full
+set nowrap  " 不自动折行
+set backspace=2   " Backspace deletes like most programs in insert mode"
+
+" 缩进
+set autoindent  " 与前一行同样等级缩进
+" set smartindent  " C and Java 根据大括号等自动缩进
+" set shiftround  " 更加智能的缩进，当遇到缩进不为整数与上对齐
+set showmatch  " 括号匹配
+
+""""""""""""""""""
+" File
+""""""""""""""""""
+" file backup
+set nobackup
+set nowritebackup
+set noswapfile
+set history=50
+set confirm       " Need confrimation while exit
+set fileformat=unix
+" save as sudo
+ca w!! w !sudo tee "%"
+" file auto do something
+set autowrite     " Automatically :write before running commands
+set autoread      " Set to auto read when a file is changed from the outside
+set autowriteall
+" set tw=140        " 140字符自动换行
+
+" 文件类型配置
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
+au BufRead,BufNewFile *.{js,json} set filetype=javascript
+au BufRead,BufNewFile *.{html} set filetype=html
+au BufRead,BufNewFile *.{css,scss,sass} set filetype=css
+au BufRead,BufNewFile *.{py,pyc} set filetype=python
+au BufRead,BufNewFile *.{go} set filetype=go
+au BufRead,BufNewFile *.{c} set filetype=c
+au BufRead,BufNewFile *.{cpp} set filetype=cpp
+au BufRead,BufNewFile *.{ruby} set filetype=ruby
+au BufRead,BufNewFile *.{sh} set filetype=sh
+au BufRead,BufNewFile *.{java} set filetype=java
+au BufRead,BufNewFile *.{lua} set filetype=lua
+
+"""""""""""""""""""""
+" General
+"""""""""""""""""""""
+" ui config
+set number
+set relativenumber
+set numberwidth=5
+" set ruler         " show the cursor position all the time
+set showcmd       " display incomplete commands"
+set laststatus=2  " 启动显示状态行(1),总是显示状态行(2)
+" 禁止光标闪烁
+set gcr=a:block-blinkon0
+" 禁止显示滚动条
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+" 禁止显示菜单和工具条
+set guioptions-=m
+set guioptions-=T
+" 禁用Vi的兼容模式
+set nocompatible
+" 设定状态栏多显示信息
+" set ncb!
+set noscrollbind
+set nocursorbind
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+" Highlight current line
+au WinEnter * set cursorline cursorcolumn
+au WinLeave * set nocursorline nocursorcolumn
+" Searching
+set incsearch     " do incremental searching
+set hlsearch  " 检索时高亮显示匹配项
+set ignorecase  " 搜索忽略大小写
+set smartcase  " 智能大小写搜索
+" encoding
+set fileencodings=ucs-bom,utf-8,cp936,gbk,gb18030,big5,euc-jp,euc-kr,latin1
+set fileencoding=utf-8
+set encoding=utf-8
+" Folding
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+" 基于缩进或语法进行代码折叠
+set foldmethod=indent
+" set foldmethod=syntax
+" 启动 vim 时关闭折叠代码
+set nofoldenable
+" Enable folding with the spacebar
+nnoremap <space> za
+" 保存全局变量
+set viminfo+=!
+" 带有如下符号的单词不要被换行分割
+set iskeyword+=_,$,@,%,#,-  
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
+"共享剪贴板
+set clipboard+=unnamed
+
+""""""""""""
+" Key Map
+""""""""""""
+" tab navigation
+map tn :tabn<CR>
+map tp :tabp<CR>
+map tm :tabm<CR>
+map tt :tabnew
+map <C-S-Right> :tabn<CR>
+imap <C-S-Right> <ESC>:tabn<CR>
+map <C-S-Left> :tabp<CR>
+imap <C-S-Left> <ESC>:tabp<CR>
+
+" arrow key map
+nnoremap h <Left>
+nnoremap j <Up>
+nnoremap k <Down>
+nnoremap l <Right>
+
+" navigate window movement with C+arrows
+nnoremap <C-j> <C-w>k
+nnoremap <C-k> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" panel key map
+"imap <M-Right> <ESC><c-w>l
+"imap <M-Left> <ESC><c-w>h
+"imap <M-Up> <ESC><c-w>k
+"imap <M-Down> <ESC><c-w>j
+
+" leader mapping
+let mapleader = "," 
+set timeoutlen=350  " wait leader
+
+" file operate
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+nmap <Leader>Q :qa!<CR>
+
+" 定义快捷键到行首和行尾
+nmap lb 0
+nmap le $
+
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至 vim
+nmap <Leader>p "+p"
+
+nnoremap nw <C-W><C-W>
+" 跳转至右方的窗口
+nnoremap <Leader>lw <C-W>l
+" 跳转至左方的窗口
+nnoremap <Leader>hw <C-W>h
+" 跳转至上方的子窗口
+nnoremap <Leader>kw <C-W>k
+" 跳转至下方的子窗口
+nnoremap <Leader>jw <C-W>j
+" 定义快捷键在结对符之间跳转
+nmap <Leader>M %
+
+" no whitespace
+" define BadWhitespace before using in a match
+highlight BadWhitespace ctermbg=red guibg=darkred
+" removes trailing spaces of python files (and restores cursor position)
+autocmd BufWritePre *.py mark z | %s/ *$//e | 'z
+" 标示不必要的空白字符
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/

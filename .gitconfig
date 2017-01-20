@@ -1,15 +1,27 @@
-[alias]
-	st = status
-	co = checkout
-	br = branch
-	ci = commit
-	pl = pull
-[user]
-	email = hainingw@yishow.me
-	name = hainingw
 [color]
-	ui = true
+    ui = true
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    pl = pull
+    lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 [core]
-	editor = vim
+    editor = vim
+    safecrlf = true
+    excludesfile = ~/.gitignore.global
+    ignorecase = false
+[push]
+    default = current
+[user]
+    email = ci_knight@msn.cn
+    name = ci_knight
 [merge]
-	tool = vimdiff
+    tool = vimdiff
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+[url "git@github.com:"]
+    insteadOf = http://github.com/
+[url "git@github.com:"]
+    insteadOf = git://github.com/

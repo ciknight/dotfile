@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ $SYSTEM = "Darwin" ] ; then
+    top -l 1 | head -n 10 | grep PhysMem
+elif [ $SYSTEM = "Linux" ] ; then
+    echo $SYSTEM
+fi

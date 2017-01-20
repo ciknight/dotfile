@@ -1,8 +1,10 @@
-*
-!.gitignore
-!.gitconfig
-!.pip/
-!.tmux.conf
-!.vimrc
-!.vimrc.bundles
-!.zshrc
+# zsh
+zsh-cache
+
+# plug manager
+bundle/
+plugged/
+plug.vim
+
+# other
+.ipython/

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if hash python 2>/dev/null; then
+    port=$1
+    # VERSION=`python -V`
+    [[ $PATH =~ "python2" ]] && python -m SimpleHTTPServer $port
+    [[ $PATH =~ "python3" ]] && python -m http.server $port
+else
+    echo 'please install python!'
+fi
