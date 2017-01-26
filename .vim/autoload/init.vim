@@ -28,7 +28,7 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-scripts/DfrankUtil'
 
 " rainbow pair
-Plug 'kien/rainbowparentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
 " manage multipie project
 Plug 'vim-scripts/vimprj'
@@ -101,7 +101,7 @@ Plug 'tpope/vim-endwise'
 """"""""""""""
 " Powerline
 """"""""""""""
-Plug 'Lokaltog/vim-powerline'
+Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
 
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -127,6 +127,10 @@ Plug 'mattn/emmet-vim'
 
 " XML/HTML tags navigation
 Plug 'matchit.zip'
+
+Plug 'Glench/Vim-Jinja2-Syntax'
+
+Plug 'elzr/vim-json'
 
 
 """"""""""

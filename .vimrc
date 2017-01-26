@@ -135,9 +135,11 @@ set ignorecase  " 搜索忽略大小写
 set smartcase  " 智能大小写搜索
 
 " encoding
-set fileencodings=ucs-bom,utf-8,cp936,gbk,gb18030,big5,euc-jp,euc-kr,latin1
-set fileencoding=utf-8
 set encoding=utf-8
+" new file
+set fileencodings=ucs-bom,utf-8,cp936,gbk,gb18030,big5,euc-jp,euc-kr,latin1
+" write file
+set fileencoding=utf-8
 
 " Folding
 set foldenable
@@ -194,6 +196,10 @@ nnoremap <C-l> <C-w>l
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
+" 定义快捷键到行首和行尾
+nmap lt ^
+nmap le $
+
 " Quickfix
 nnoremap ]q :cnext<cr>zz
 nnoremap [q :cprev<cr>zz
@@ -209,7 +215,7 @@ nnoremap ]t :tabn<cr>
 nnoremap [t :tabp<cr>
 
 " leader mapping
-let mapleader = "," 
+let mapleader = ","
 set timeoutlen=350  " wait leader
 
 " file operate
@@ -219,10 +225,6 @@ inoremap <leader>w :w<CR>
 inoremap <leader>q :q<CR>
 nmap <Leader>Q :qa!<CR>
 
-" 定义快捷键到行首和行尾
-nmap lb 0
-nmap le $
-
 " 定义快捷键在结对符之间跳转
 nmap <Leader>M %
 
@@ -231,21 +233,38 @@ nmap <Leader>M %
 " Load file config
 """"""""""""""""""""""""
 " Python Stuffs
-if filereadable(expand("~/.vim/ftplugin/python.vimrc"))
-    source ~/.vim/ftplugin/python.vimrc
+if filereadable(expand("~/.vim/ftplugin/python.vim"))
+    source ~/.vim/ftplugin/python.vim
 endif
 " Html Stuffs
-if filereadable(expand("~/.vim/ftplugin/frontend.vimrc"))
-    source ~/.vim/ftplugin/frontend.vimrc
+if filereadable(expand("~/.vim/ftplugin/frontend.vim"))
+    source ~/.vim/ftplugin/frontend.vim
 endif
 " markwodn Stuffs
-if filereadable(expand("~/.vim/ftplugin/markdown.vimrc"))
-    source ~/.vim/ftplugin/markdown.vimrc
+if filereadable(expand("~/.vim/ftplugin/markdown.vim"))
+    source ~/.vim/ftplugin/markdown.vim
 endif
-" markwodn Stuffs
-if filereadable(expand("~/.vim/ftplugin/newfile.vimrc"))
-    source ~/.vim/ftplugin/newfile.vimrc
+" newfile Stuffs
+if filereadable(expand("~/.vim/ftplugin/newfile.vim"))
+    source ~/.vim/ftplugin/newfile.vim
 endif
+" runit Stuffs
+if filereadable(expand("~/.vim/ftplugin/runit.vim"))
+    source ~/.vim/ftplugin/runit.vim
+endif
+
+
+"""""""""""""""""""
+" custom script
+"""""""""""""""""""
+" :command WS :%s/\s\+$//e
+" :command ci :call Runit()
+" define BadWhitespace before using in a match
+highlight BadWhitespace ctermbg=red guibg=darkred
+" removes trailing spaces of python files (and restores cursor position)
+autocmd BufWritePre *.py,*.vim,*.sh mark z | %s/ *$//e | 'z
+" 标示不必要的空白字符
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 
 """""""""""""""""""
@@ -259,13 +278,6 @@ else
   set background=dark
   colorscheme molokai
 endif
-
-" define BadWhitespace before using in a match
-highlight BadWhitespace ctermbg=red guibg=darkred
-" removes trailing spaces of python files (and restores cursor position)
-autocmd BufWritePre *.py,*.vim,*.sh mark z | %s/ *$//e | 'z
-" 标示不必要的空白字符
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " will insert tab at beginning of line,
 " will use completion if not at beginning
@@ -390,7 +402,9 @@ set tags+=/data/misc/software/misc./vim/stdcpp.tags
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
 " 补全内容不以分割子窗口形式出现，只显示补全列表
-set completeopt-=preview
+" set completeopt-=preview
+set completeopt=longest,menu
+
 " 从第一个键入字符就开始罗列匹配项
 let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
