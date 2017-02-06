@@ -1,5 +1,5 @@
 " set python pep8
-au BufNewFile,BufRead *.py
+autocmd BufNewFile,BufRead *.py
             \ set tabstop=4 |
             \ set softtabstop=4 |
             \ set shiftwidth=4 |

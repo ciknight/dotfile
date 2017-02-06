@@ -194,25 +194,25 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " qq to record, Q to replay (recursive map due to peekaboo)
-nmap Q @q
+nnoremap Q @q
 
 " 定义快捷键到行首和行尾
-nmap lt ^
-nmap le $
+nnoremap lt ^
+nnoremap le $
 
 " Quickfix
-nnoremap ]q :cnext<cr>zz
-nnoremap [q :cprev<cr>zz
-nnoremap ]l :lnext<cr>zz
-nnoremap [l :lprev<cr>zz
+nnoremap ]q :cnext<CR>zz
+nnoremap [q :cprev<CR>zz
+nnoremap ]l :lnext<CR>zz
+nnoremap [l :lprev<CR>zz
 
 " Buffers
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
 
 " Tabs
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
 
 " leader mapping
 let mapleader = ","
@@ -223,10 +223,10 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 inoremap <leader>w :w<CR>
 inoremap <leader>q :q<CR>
-nmap <Leader>Q :qa!<CR>
+nnoremap <Leader>Q :qa!<CR>
 
 " 定义快捷键在结对符之间跳转
-nmap <Leader>M %
+nnoremap <Leader>M %
 
 
 """"""""""""""""""""""""
@@ -290,7 +290,7 @@ function! InsertTabWrapper()
     endif
 endfunction
 
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <Tab> <c-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <c-n>
 
 " Treat <li> and <p> tags like the block tags they are
@@ -299,7 +299,7 @@ let g:html_indent_tags = 'li\|p'
 """" Tagbar
 let g:tagbar_width=35
 let g:tagbar_autofocus=1
-nmap <F6> :TagbarToggle<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
@@ -308,25 +308,36 @@ set matchpairs+=<:>
 
 """" Nerd Tree
 let NERDChristmasTree=0
-let NERDTreeWinSize=40
+" 设置NERDTree子窗口宽度
+let NERDTreeWinSize=32
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 let NERDTreeShowBookmarks=1
 " 设置NERDTree子窗口位置
 let NERDTreeWinPos="left"
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nmap <Leader>fl :NERDTreeToggle<CR>
-" 设置NERDTree子窗口宽度
-let NERDTreeWinSize=32
+nnoremap <Leader>fl :NERDTreeToggle<CR>
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " NERDTree 子窗口中不显示冗余帮助信息
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
-autocmd vimenter * if !argc() | NERDTree | endif " Automatically open a NERDTree if no files where specified
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " Close vim if the only window left open is a NERDTree
-nmap <F5> :NERDTreeToggle<cr>
+" 打开文件后关闭File Tree
+" let NERDTreeQuitOnOpen=1
+" Automatically open a NERDTree if no files where specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close vim if the only window left open is a NERDTree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nnoremap <Leader>f :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+fun! ToggleNERDTreeWithRefresh()
+    :NERDTreeToggle
+    if(exists("b:NERDTreeType") == 1)
+        call feedkeys("R")
+    endi
+endf
+nnoremap <silent> <Leader>r :call ToggleNERDTreeWithRefresh()<CR>
 
 """"" ctrlp
 " ignore
@@ -379,7 +390,7 @@ let g:indent_guides_start_level=2
 " 色块宽度
 let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+nnoremap <silent> <Leader>i <Plug>IndentGuidesToggle
 
 """" ctrlsf
 " 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project

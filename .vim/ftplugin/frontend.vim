@@ -1,4 +1,4 @@
-au BufNewFile,BufRead *.html,*.css,*.js,*.json,*.yaml
+autocmd BufNewFile,BufRead *.html,*.css,*.js,*.json,*.yaml
             \ set tabstop=2 |
             \ set softtabstop=2 |
             \ set shiftwidth=2 |

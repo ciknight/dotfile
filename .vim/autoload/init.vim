@@ -58,6 +58,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " file tree
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Plug 'fholgado/minibufexpl.vim'  " Handle Buffers with Duplicate Name
 
