@@ -1,2 +1,2 @@
 #!/bin/bash
-tar zxvf $1.tar.gz
+tar zxvf $1

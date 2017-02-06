@@ -27,16 +27,16 @@ if [ $SYSTEM = "Darwin" ] ; then
     alias free='top -l 1 | head -n 10 | grep PhysMem'
 fi
 alias vi=vim
+alias rm=safe_rm
 alias ta='tmux attach -t'
 alias tn='tmux new -s'
+alias tl='tmux list'
 alias t=tmuxinit
 alias g=git
 alias py=python
 alias ipy=ipython
 alias py2='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
-alias py3='source ~/.zshrc;~/workspace/python3.5/bin/activate'
-# use rm
-# rm=mv /tmp
+alias py3='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
 
 # local alias
 local_alias=~/.local_alias.sh
@@ -77,7 +77,7 @@ elif [ $SYSTEM = "Linux" ] ; then
 fi
 
 # default ptyhon venv
-source ~/workspace/python3.5/bin/activate
+source ~/workspace/python3.6/bin/activate
 # Fix python shell failed to write data to stream
 export PYTHONIOENCODING=UTF-8
 
