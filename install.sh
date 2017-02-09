@@ -32,7 +32,6 @@ virtualenv -p `which python3` ~/workspace/python3.5
 
 # vim
 ln -s $PWD_DIR/.vimrc ~/
-ln -s $PWD_DIR/.vimrc.bundles ~/
 ln -s $PWD_DIR/.vim ~/
 
 # tmux

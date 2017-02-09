@@ -71,7 +71,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'tpope/vim-surround'
 
 " auto sign complate
-" Plug 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 
 " Fold
 Plug 'tmhedberg/SimpylFold'
@@ -115,6 +115,9 @@ Plug 'kien/ctrlp.vim'
 " about language
 """""""""""""""""""
 " Plug 'vim-syntastic/syntastic'
+
+" swift
+Plug 'keith/swift.vim'
 
 " python
 Plug 'klen/python-mode'
