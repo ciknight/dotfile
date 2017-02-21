@@ -396,7 +396,10 @@ nnoremap <silent> <Leader>i <Plug>IndentGuidesToggle
 " 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
 nnoremap <Leader>sp :CtrlSF<CR>
 
-"""" ycm
+
+""""""""""""""""""
+" => YCM Settings
+""""""""""""""""""
 " YCM 补全菜单配色
 " highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
 " 选中项
@@ -412,29 +415,39 @@ let g:ycm_collect_identifiers_from_tags_files=1
 set tags+=/data/misc/software/misc./vim/stdcpp.tags
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
-" 补全内容不以分割子窗口形式出现，只显示补全列表
-" set completeopt-=preview
+" 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228))
 set completeopt=longest,menu
-
+" 离开插入模式后自动关闭预览窗口"
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " 从第一个键入字符就开始罗列匹配项
 let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
+" 在注释输入中也能补全
+let g:ycm_complete_in_comments=1
+" 在字符串输入中也能补全
+" 注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings=0
+let g:ycm_complete_in_strings=1
 let g:syntastic_always_populate_loc_list=1
 let g:ycm_autoclose_preview_window_after_completion=1
-let python_highlight_all=1
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<c-p>', '<Up>']
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'nerdtree' : 1,
+      \}
 
 """" Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"

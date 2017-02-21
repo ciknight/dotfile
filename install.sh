@@ -9,10 +9,10 @@ if [ $SYSTEM = "Darwin" ] ; then
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
-    brew install git htop vim zsh tmux autojump python3 ctags
+    brew install git htop vim zsh tmux autojump python3 ctags clang golang
     # suggest install by appstore
     # open -a Go2Shell --args config
-    brew install Caskroom/cask/go2shell
+    # brew install Caskroom/cask/go2shell
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
 elif [ $SYSTEM = "Linux" ] ; then

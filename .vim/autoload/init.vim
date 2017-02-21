@@ -51,7 +51,7 @@ Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'tpope/vim-tbone'
 
 " Plug 'AutoComplPop'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
 
 " generate ycm.conf
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -69,6 +69,8 @@ Plug 'pbrisbin/vim-mkdir'
 
 " surroundings in pairs
 Plug 'tpope/vim-surround'
+" for repeat -> enhance surround.vim, . to repeat command
+Plug 'tpope/vim-repeat'
 
 " auto sign complate
 Plug 'Raimondi/delimitMate'
@@ -135,6 +137,9 @@ Plug 'matchit.zip'
 Plug 'Glench/Vim-Jinja2-Syntax'
 
 Plug 'elzr/vim-json'
+
+" Golang
+Plug 'fatih/vim-go'
 
 
 """"""""""
