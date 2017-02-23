@@ -1,4 +1,6 @@
 " Setting up vim-plug - the vim plugin manager
+" http://vimawesome.com/
+
 let iCanHazPlugged=1
 let plug_readme=expand('~/.vim/plugged/vim-plug/README.md')
 if !filereadable(plug_readme)
@@ -17,23 +19,37 @@ call plug#begin('~/.vim/plugged')
 " Plug manager
 Plug 'junegunn/vim-plug'
 
-" vim mark
+" vim mark, http://www.wklken.me/posts/2015/06/07/vim-plugin-signature.html
 " Plug 'kshenoy/vim-signature'
-
-" Plug 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
 
 " 23333
 Plug 'mhinz/vim-startify'
 
-Plug 'vim-scripts/DfrankUtil'
+" http://www.wklken.me/posts/2015/06/07/vim-plugin-multiplecursors.html
+Plug 'terryma/vim-multiple-cursors'
 
-" rainbow pair
+" http://www.wklken.me/posts/2015/06/07/vim-plugin-easyalign.html
+Plug 'junegunn/vim-easy-align'
+
+" % extend
+Plug 'vim-scripts/matchit.zip'
+
+" http://www.wklken.me/posts/2015/06/13/vim-plugin-quickrun.html
+Plug 'thinca/vim-quickrun'
+
+" use V or v
+Plug 'terryma/vim-expand-region'
+
+" rainbow pair, http://www.wklken.me/posts/2015/06/07/vim-plugin-rainbowparentheses.html
 Plug 'kien/rainbow_parentheses.vim'
 
 " manage multipie project
 Plug 'vim-scripts/vimprj'
+" Vimprj dependcy
+Plug 'vim-scripts/DfrankUtil'
 
-Plug 'dyng/ctrlsf.vim'  " TODO study
+" ":CtrlSF [pattern]
+Plug 'dyng/ctrlsf.vim'
 
 " ctrlsf depend
 Plug 'terryma/vim-multiple-cursors'
@@ -68,8 +84,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'pbrisbin/vim-mkdir'
 
 " surroundings in pairs
+" cs => change surring cst => tag, ds => delete, csw => add
 Plug 'tpope/vim-surround'
-" for repeat -> enhance surround.vim, . to repeat command
+" for repeat -> enhance surround.vim, use . to repeat command
 Plug 'tpope/vim-repeat'
 
 " auto sign complate
