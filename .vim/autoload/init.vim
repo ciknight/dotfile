@@ -58,7 +58,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 
 " Draw ascii paint  http://www.opstool.com/article/178
-" Plug 'vim-scripts/DrawIt'
+" :DIstart or \di
+Plug 'vim-scripts/DrawIt'
 
 " Indent line
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
@@ -77,9 +78,11 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Plug 'fholgado/minibufexpl.vim'  " Handle Buffers with Duplicate Name
+" Handle Buffers with Duplicate Name
+" Plug 'fholgado/minibufexpl.vim'
 
-" Plug 'gcmt/wildfire.vim'  " Code and files fuzzy finder
+" Code and files fuzzy finder
+" Plug 'gcmt/wildfire.vim'
 
 " auto create not exists dir
 Plug 'pbrisbin/vim-mkdir'
@@ -106,9 +109,9 @@ Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 
 
-""""""""""
+""""""""""""""""""
 " Git
-""""""""""
+""""""""""""""""""
 " Git integration
 Plug 'motemen/git-vim'
 
@@ -122,9 +125,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-endwise'
 
 
-""""""""""""""
+""""""""""""""""""
 " airline
-""""""""""""""
+""""""""""""""""""
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -137,7 +140,7 @@ Plug 'kien/ctrlp.vim'
 
 """"""""""""""""""
 " about language
-"""""""""""""""""""
+""""""""""""""""""
  Plug 'vim-syntastic/syntastic'
 
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
@@ -146,15 +149,10 @@ Plug 'plasticboy/vim-markdown', {'for': 'md'}
 Plug 'keith/swift.vim'
 
 " python
-Plug 'hdima/python-syntax'
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'klen/python-mode'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'jmcantrell/vim-virtualenv'
 " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
-" pip install isort
-Plug 'fisadev/vim-isort'
-" Shift-V 上下选中, ctrl + i 规范化
-let g:vim_isort_map = '<C-i>'
+Plug 'fisadev/vim-isort', {'do': 'pip install isort'}
 
 " shell
 Plug 'Shougo/vimshell.vim'
@@ -172,17 +170,15 @@ Plug 'docunext/closetag.vim', {'for': ['html', 'xml']}
 " XML/HTML tags navigation
 Plug 'matchit.zip'
 
-Plug 'Glench/Vim-Jinja2-Syntax'
-
 Plug 'elzr/vim-json'
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
 
 
-""""""""""
+""""""""""""""""""
 " Theme
-""""""""""
+""""""""""""""""""
 Plug 'tomasr/molokai'  " i like it
 Plug 'altercation/vim-colors-solarized'
 

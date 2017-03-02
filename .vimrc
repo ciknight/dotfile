@@ -34,7 +34,6 @@ syntax on
 " Syntax
 syntax enable
 
-
 " tab为4个空格
 set tabstop=4
 " 让 vim 把连续数量的空格视为一个制表符
@@ -308,9 +307,11 @@ nnoremap <Leader>M %
 " kj 替换 Esc
 inoremap kj <Esc>
 
+
 "==========================================
 " Load file config
 "==========================================
+
 " Python Stuffs
 if filereadable(expand("~/.vim/ftplugin/python.vim"))
     source ~/.vim/ftplugin/python.vim
@@ -336,28 +337,13 @@ endif
 "==========================================
 " custom script
 "==========================================
-" :command WS :%s/\s\+$//e
-" :command ci :call Runit()
+
 " define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
 " removes trailing spaces of python files (and restores cursor position)
 autocmd BufWritePre *.py,*.vim,*.sh mark z | %s/ *$//e | 'z
 " 标示不必要的空白字符
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-
-"==========================================
-" Plugin config
-"==========================================
-" Theme
-if has('gui_running')
-    set background=light
-    colorscheme solarized
-else
-    set background=dark
-    colorscheme molokai
-endif
-
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 function! InsertTabWrapper()
@@ -372,20 +358,52 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<CR>
 inoremap <S-Tab> <c-n>
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
 
-"""" Tagbar
+"==========================================
+" Plugin config
+"==========================================
+
+" ====> Theme <====
+if has('gui_running')
+    set background=light
+    colorscheme solarized
+else
+    set background=dark
+    colorscheme molokai
+endif
+
+" ====> Tagbar <====
 let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nnoremap <Leader>t :TagbarToggle<CR>
 
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-set matchpairs+=<:>
+" ====> pyMode <====
+" close python mode Regenerate repo cache
+let g:pymode_rope=0
+let g:pymode_rope_lookup_project=0
+" let g:pymode_python='python3'
+let g:pymode_doc=0
+let g:pymode_doc_key='K'
+" Lint
+let g:pymode_lint=1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257']
+let g:pymode_lint_ignore='E402,E501,D,W0401'
+let g:pymode_lint_message=1
+" auto check on save
+let g:pymode_lint_write=1
+" Auto open cwindow (quickfix) if any errors have been found
+let g:pymode_lint_cwindow=0
+" Support virtualenv
+let g:pymode_virtualenv=1
+" Enable breakpoints plugin
+let g:pymode_breakpoint=1
+let g:pymode_breakpoint_bind='<leader>b'
+" syntax highlighting
+let g:pymode_syntax_all=1
+" Don't autofold code
+let g:pymode_folding=0
 
-"""" Nerd Tree
+" ====> Nerd Tree <====
 let NERDChristmasTree=0
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize=32
@@ -418,15 +436,14 @@ fun! ToggleNERDTreeWithRefresh()
 endf
 nnoremap <silent> <Leader>r :call ToggleNERDTreeWithRefresh()<CR>
 
-""""" ctrlp
+" ====> Ctrlp <====
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
-
 " 显示折叠代码的文档字符串
 let g:SimpylFold_docstring_preview=1
 
-""""" Indent Guides
+" ====> Indent Guides <====
 " 随 vim 自启动
 let g:indent_guides_enable_on_vim_startup=1
 " 从第二层开始可视化显示缩进
@@ -436,14 +453,11 @@ let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 nnoremap <silent> <Leader>i <Plug>IndentGuidesToggle
 
-"""" ctrlsf
+" ====> Ctrlsf <====
 " 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
 nnoremap <Leader>sp :CtrlSF<CR>
 
-
-""""""""""""""""""
-" => YCM Settings
-""""""""""""""""""
+" ====> YCM <====
 " YCM 补全菜单配色
 " highlight Pmenu ctermfg=2 ctermbg=3 guifg=#005f87 guibg=#EEE8D5
 " 选中项
@@ -455,8 +469,6 @@ let g:ycm_complete_in_comments=1
 let g:ycm_confirm_extra_conf=0
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=1
-" 引入 C++ 标准库tags
-set tags+=/data/misc/software/misc./vim/stdcpp.tags
 " YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <leader>; <C-x><C-o>
 " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228))
@@ -471,7 +483,6 @@ let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax=1
 " 在注释输入中也能补全
 let g:ycm_complete_in_comments=1
-" 在字符串输入中也能补全
 " 注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings=0
 let g:ycm_complete_in_strings=1
@@ -488,7 +499,7 @@ let g:ycm_filetype_blacklist = {
             \ 'nerdtree' : 1,
             \}
 
-"""" Ultisnips
+" ====> Ultisnips <====
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -496,9 +507,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-"""""""""""""""
-" => rainbow
-"""""""""""""""
+" ====> Rainbow <====
 let g:rbpt_colorpairs = [
             \ ['brown',       'RoyalBlue3'],
             \ ['Darkblue',    'SeaGreen3'],
@@ -516,10 +525,8 @@ let g:rbpt_colorpairs = [
             \ ['darkred',     'DarkOrchid3'],
             \ ['red',         'firebrick3'],
             \ ]
-
-" 不加入这行, 防止黑色括号出现, 很难识别
-" \ ['black',       'SeaGreen3'],
-
+            " 不加入这行, 防止黑色括号出现, 很难识别
+            " \ ['black',       'SeaGreen3'],
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle
@@ -527,9 +534,7 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-""""""""""""""
-" => vim-multiple-cursors
-""""""""""""""
+" ====> Vim Multple cursor <====
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
 let g:multi_cursor_next_key='<C-m>'
@@ -541,9 +546,7 @@ let g:multi_cursor_quit_key='<Esc>'
 set selection=inclusive
 set selectmode=mouse,key
 
-""""""""""""""
-" => vim-easy-align
-""""""""""""""
+" ====> Vim easy align <====
 vmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
@@ -551,37 +554,29 @@ if !exists('g:easy_align_delimiters')
 endif
 let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 
-""""""""""""""
-" => quick run
-""""""""""""""
+" ====> quick run <====
 let g:quickrun_config = {
             \   "_" : {
             \       "outputter" : "message",
             \   },
             \}
-
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
 map <F10> :QuickRun<CR>
 
-""""""""""""""
-" => vim-expand-region
-""""""""""""""
+" ====> Vim expand region <====
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
-""""""""""""""
-" => nerdcommenter
-""""""""""""""
+" ====> nerdcommenter <====
 " <leader>cc   加注释
 " <leader>cu   解开注释
 " <leader>c<space>  加上/解开注释, 智能判断
 " <leader>cy   先复制, 再注解(p可以进行黏贴)
 " 注释的时候自动加个空格, 强迫症必配
 " let g:NERDSpaceDelims=1
- 
 
-" airline
+" ====> airline <====
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -592,5 +587,9 @@ let g:airline_right_alt_sep = '❮'
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
 " 是否打开tabline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='solarized dark'
+"let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='molokai'
+
+" ====> airline <====
+" Shift-V 上下选中, ctrl + i 规范化
+let g:vim_isort_map = '<C-i>'
