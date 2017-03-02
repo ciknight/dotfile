@@ -123,9 +123,10 @@ Plug 'tpope/vim-endwise'
 
 
 """"""""""""""
-" Powerline
+" airline
 """"""""""""""
-Plug 'Lokaltog/vim-powerline', {'branch': 'develop'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -137,8 +138,9 @@ Plug 'kien/ctrlp.vim'
 """"""""""""""""""
 " about language
 """""""""""""""""""
+ Plug 'vim-syntastic/syntastic'
+
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
-" Plug 'vim-syntastic/syntastic'
 
 " swift
 Plug 'keith/swift.vim'

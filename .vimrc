@@ -113,6 +113,9 @@ au BufRead,BufNewFile *.{lua} set filetype=lua
 
 set number
 set relativenumber
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
 set numberwidth=5
 " display incomplete commands"
 set showcmd
@@ -245,6 +248,15 @@ nnoremap [t :tabp<CR>
 " F1 废弃这个键,防止调出系统帮助
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
 noremap <F1> <Esc>"
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+  endif
+endfunc
+nnoremap <C-n> :call NumberToggle()<cr>
 
 " F2 行号开关，用于鼠标复制代码用
 " 为方便复制，用<F2>开启/关闭行号显示:
@@ -411,10 +423,6 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
 
-""""" setup powerline
-set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-let g:Powerline_colorscheme='solarized256'
-
 " 显示折叠代码的文档字符串
 let g:SimpylFold_docstring_preview=1
 
@@ -571,3 +579,18 @@ vmap V <Plug>(expand_region_shrink)
 " <leader>cy   先复制, 再注解(p可以进行黏贴)
 " 注释的时候自动加个空格, 强迫症必配
 " let g:NERDSpaceDelims=1
+ 
+
+" airline
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '▶'
+let g:airline_left_alt_sep = '❯'
+let g:airline_right_sep = '◀'
+let g:airline_right_alt_sep = '❮'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+" 是否打开tabline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='solarized dark'
