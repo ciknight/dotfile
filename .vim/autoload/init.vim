@@ -65,6 +65,7 @@ Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 
 " TMUX
 Plug 'tpope/vim-tbone'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Plug 'AutoComplPop'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
@@ -101,6 +102,9 @@ Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
+" nerdtree nerdtreetabs
+Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
+
 
 """"""""""
 " Git
@@ -121,7 +125,7 @@ Plug 'tpope/vim-endwise'
 """"""""""""""
 " Powerline
 """"""""""""""
-Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
+Plug 'Lokaltog/vim-powerline', {'branch': 'develop'}
 
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -133,20 +137,35 @@ Plug 'kien/ctrlp.vim'
 """"""""""""""""""
 " about language
 """""""""""""""""""
+Plug 'plasticboy/vim-markdown', {'for': 'md'}
 " Plug 'vim-syntastic/syntastic'
 
 " swift
 Plug 'keith/swift.vim'
 
 " python
-Plug 'klen/python-mode'
-
+Plug 'hdima/python-syntax'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'jmcantrell/vim-virtualenv'
+" isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
+" pip install isort
+Plug 'fisadev/vim-isort'
+" Shift-V 上下选中, ctrl + i 规范化
+let g:vim_isort_map = '<C-i>'
+
+" shell
+Plug 'Shougo/vimshell.vim'
+
+" nginx
+Plug 'evanmiller/nginx-vim-syntax'
 
 " front end
 Plug 'pangloss/vim-javascript'
-
 Plug 'mattn/emmet-vim'
+
+" 自动补全html/xml标签
+Plug 'docunext/closetag.vim', {'for': ['html', 'xml']}
 
 " XML/HTML tags navigation
 Plug 'matchit.zip'
@@ -156,7 +175,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'elzr/vim-json'
 
 " Golang
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
 
 
 """"""""""

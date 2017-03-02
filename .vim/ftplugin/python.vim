@@ -9,16 +9,11 @@ autocmd BufNewFile,BufRead *.py
             \ set autoindent |
             \ set fileformat=unix |
 
-" 按F7运行python
-map <F7> :call RunPython()<CR>
-function! RunPython()
-  let mp = &makeprg
-  let ef = &errorformat
-  let exeFile = expand("%:t")
-  setlocal makeprg=python\ -u
-  set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-  silent make %
-  copen
-  let &makeprg = mp
-  let &errorformat = ef
-endfunction
+" 保存python文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
