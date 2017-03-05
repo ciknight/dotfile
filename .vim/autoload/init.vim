@@ -58,13 +58,15 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 
 " Draw ascii paint  http://www.opstool.com/article/178
-" Plug 'vim-scripts/DrawIt'
+" :DIstart or \di
+Plug 'vim-scripts/DrawIt'
 
 " Indent line
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 
 " TMUX
 Plug 'tpope/vim-tbone'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Plug 'AutoComplPop'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
@@ -76,9 +78,11 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Plug 'fholgado/minibufexpl.vim'  " Handle Buffers with Duplicate Name
+" Handle Buffers with Duplicate Name
+" Plug 'fholgado/minibufexpl.vim'
 
-" Plug 'gcmt/wildfire.vim'  " Code and files fuzzy finder
+" Code and files fuzzy finder
+" Plug 'gcmt/wildfire.vim'
 
 " auto create not exists dir
 Plug 'pbrisbin/vim-mkdir'
@@ -95,16 +99,24 @@ Plug 'Raimondi/delimitMate'
 " Fold
 Plug 'tmhedberg/SimpylFold'
 
+" <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
+Plug 'yonchu/accelerated-smooth-scroll'
+
 " Track the engine.
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html
+Plug 'justinj/vim-react-snippets'
+Plug 'honza/vim-snippets'
 
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
+" nerdtree nerdtreetabs
+Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
 
-""""""""""
+
+""""""""""""""""""
 " Git
-""""""""""
+""""""""""""""""""
 " Git integration
 Plug 'motemen/git-vim'
 
@@ -118,10 +130,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-endwise'
 
 
-""""""""""""""
-" Powerline
-""""""""""""""
-Plug 'Lokaltog/vim-powerline', { 'branch': 'develop' }
+""""""""""""""""""
+" airline
+""""""""""""""""""
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -132,36 +145,49 @@ Plug 'kien/ctrlp.vim'
 
 """"""""""""""""""
 " about language
-"""""""""""""""""""
+""""""""""""""""""
+
 " Plug 'vim-syntastic/syntastic'
+
+Plug 'plasticboy/vim-markdown', {'for': 'md'}
 
 " swift
 Plug 'keith/swift.vim'
 
+" React native
+Plug 'mxw/vim-jsx'
+
 " python
 Plug 'klen/python-mode'
+Plug 'Glench/Vim-Jinja2-Syntax'
+" isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
+Plug 'fisadev/vim-isort', {'do': 'pip install isort'}
 
-Plug 'jmcantrell/vim-virtualenv'
+" shell
+Plug 'Shougo/vimshell.vim'
+
+" nginx
+Plug 'evanmiller/nginx-vim-syntax'
 
 " front end
 Plug 'pangloss/vim-javascript'
-
 Plug 'mattn/emmet-vim'
+
+" 自动补全html/xml标签
+Plug 'docunext/closetag.vim', {'for': ['html', 'xml']}
 
 " XML/HTML tags navigation
 Plug 'matchit.zip'
 
-Plug 'Glench/Vim-Jinja2-Syntax'
-
 Plug 'elzr/vim-json'
 
 " Golang
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
 
 
-""""""""""
+""""""""""""""""""
 " Theme
-""""""""""
+""""""""""""""""""
 Plug 'tomasr/molokai'  " i like it
 Plug 'altercation/vim-colors-solarized'
 

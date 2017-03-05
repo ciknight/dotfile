@@ -23,20 +23,29 @@ export LANG=zh_CN.UTF-8
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # alias
-if [ $SYSTEM = "Darwin" ] ; then
-    alias free='top -l 1 | head -n 10 | grep PhysMem'
-fi
 alias vi=vim
+alias edit=vim
 alias rm=safe_rm
-alias ta='tmux attach -t'
-alias tn='tmux new -s'
-alias tl='tmux list'
-alias t=tmuxinit
+alias df='df -h'
+alias du='du -h'
+alias last=last
+alias ssh='ssh -2'
+alias ta='tmux -2 attach -t' # -2 Force tmux to assume the terminal supports 256 colours.
+alias tn='tmux -2 new -s'
+alias tl='tmux ls'
+alias tinit=tmuxinit
 alias g=git
 alias py=python
 alias ipy=ipython
 alias py2='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
 alias py3='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
+alias weather='curl wttr.in/shanghai'
+alias myip='curl ip.cn' # 'http://ipecho.net/plain;echo'
+alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
+alias now='date +"%Y-%m-%d %T"'
+alias pg='ps -ef | grep'
+alias pong='ping -c 5 ' # ping，限制
+alias ports='netstat -tulanp'
 
 # local alias
 local_alias=~/.local_alias.sh
