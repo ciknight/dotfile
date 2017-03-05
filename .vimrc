@@ -593,3 +593,6 @@ let g:airline_theme='molokai'
 " ====> airline <====
 " Shift-V 上下选中, ctrl + i 规范化
 let g:vim_isort_map = '<C-i>'
+
+" ====> React Native <====
+let g:jsx_ext_required = 0

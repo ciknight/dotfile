@@ -99,8 +99,13 @@ Plug 'Raimondi/delimitMate'
 " Fold
 Plug 'tmhedberg/SimpylFold'
 
+" <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
+Plug 'yonchu/accelerated-smooth-scroll'
+
 " Track the engine.
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html
+Plug 'justinj/vim-react-snippets'
+Plug 'honza/vim-snippets'
 
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
@@ -141,12 +146,16 @@ Plug 'kien/ctrlp.vim'
 """"""""""""""""""
 " about language
 """"""""""""""""""
- Plug 'vim-syntastic/syntastic'
+
+" Plug 'vim-syntastic/syntastic'
 
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
 
 " swift
 Plug 'keith/swift.vim'
+
+" React native
+Plug 'mxw/vim-jsx'
 
 " python
 Plug 'klen/python-mode'
