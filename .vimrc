@@ -381,7 +381,7 @@ nnoremap <Leader>t :TagbarToggle<CR>
 " close python mode Regenerate repo cache
 let g:pymode_rope=0
 let g:pymode_rope_lookup_project=0
-" let g:pymode_python='python3'
+"let g:pymode_python='python2'
 let g:pymode_doc=0
 let g:pymode_doc_key='K'
 " Lint
