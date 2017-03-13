@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for dir in ./*
+do
+    if test -f $dir
+    then
+        echo "$dir is file"
+    else
+        echo "$dir is dir"
+        cd $dir
+        git pull origin
+        cd ..
+    fi
+done

@@ -50,7 +50,6 @@ Plug 'vim-scripts/DfrankUtil'
 
 " ":CtrlSF [pattern]
 Plug 'dyng/ctrlsf.vim'
-
 " ctrlsf depend
 Plug 'terryma/vim-multiple-cursors'
 
@@ -105,8 +104,6 @@ Plug 'yonchu/accelerated-smooth-scroll'
 " Track the engine.
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html
 Plug 'justinj/vim-react-snippets'
-Plug 'honza/vim-snippets'
-
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 

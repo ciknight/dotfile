@@ -12,7 +12,7 @@ if [ $SYSTEM = "Darwin" ] ; then
     brew install git htop vim zsh tmux autojump python3 ctags clang golang
     # ack, ag, pt or rg, support ctrlsf
     brew install ack
-    brew install aria2
+    brew install aria2, cloc
     # brew install Caskroom/cask/go2shell
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
