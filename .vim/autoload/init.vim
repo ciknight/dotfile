@@ -178,6 +178,9 @@ Plug 'matchit.zip'
 
 Plug 'elzr/vim-json'
 
+Plug 'vim-scripts/SQLComplete.vim'
+Plug 'vim-scripts/dbext.vim'
+
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
 

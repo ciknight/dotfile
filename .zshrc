@@ -36,9 +36,9 @@ alias tl='tmux ls'
 alias tinit=tmuxinit
 alias g=git
 alias py=python
-alias ipy=ipython
 alias py2='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
-alias py3='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
+alias py34='source ~/.zshrc;source ~/workspace/python3.4/bin/activate'
+alias py36='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
 alias weather='curl wttr.in/shanghai'
 alias myip='curl ip.cn' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
@@ -85,10 +85,14 @@ elif [ $SYSTEM = "Linux" ] ; then
     # TODO doing somthing
 fi
 
-# default ptyhon venv
-source ~/workspace/python3.6/bin/activate
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 # Fix python shell failed to write data to stream
 export PYTHONIOENCODING=UTF-8
+# default ptyhon venv
+source ~/workspace/python3.6/bin/activate
 
 # JAVA_HOME
 export JAVA_HOME=$(/usr/libexec/java_home)
