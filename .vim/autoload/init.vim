@@ -50,6 +50,7 @@ Plug 'vim-scripts/DfrankUtil'
 
 " ":CtrlSF [pattern]
 Plug 'dyng/ctrlsf.vim'
+Plug 'mileszs/ack.vim'
 " ctrlsf depend
 Plug 'terryma/vim-multiple-cursors'
 
@@ -67,11 +68,11 @@ Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'tpope/vim-tbone'
 Plug 'christoomey/vim-tmux-navigator'
 
+" generate ycm.conf
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 " Plug 'AutoComplPop'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
 
-" generate ycm.conf
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " file tree
 Plug 'scrooloose/nerdtree'
