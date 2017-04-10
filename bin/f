@@ -3,5 +3,5 @@
 if [ ! $1 ]; then
     echo 'what do you seach for?'
 else
-    grep -FIrn --color "$*" *
+    grep -FIrni --color "$*" *
 fi

@@ -12,9 +12,14 @@ if [ $SYSTEM = "Darwin" ] ; then
     brew install git htop vim zsh tmux autojump python3 ctags clang golang
     # ack, ag, pt or rg, support ctrlsf
     brew install ack
+    brew install aria2, cloc
     # brew install Caskroom/cask/go2shell
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
+    # Python env
+    brew install pyenv
+    curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+    pyenv install 3.4.5
 elif [ $SYSTEM = "Linux" ] ; then
     echo 'updating apt and install software'
     sudo apt-get update
@@ -25,10 +30,17 @@ fi
 ln -s $PWD_DIR/.pip ~/
 ln -s $PWD_DIR/.ipython ~/
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py
-sudo pip install virtualenv ipython
+sudo pip install virtualenv
 mkdir -p ~/workspace
 virtualenv ~/workspace/python2.7
-virtualenv -p `which python3` ~/workspace/python3.5
+
+pyenv global 3.4.5
+wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py
+virtualenv -p `which python3` ~/workspace/python3.4
+
+pyenv global system
+wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py
+virtualenv -p `which python3` ~/workspace/python3.6
 
 # vim
 ln -s $PWD_DIR/.vimrc ~/
