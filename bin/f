@@ -3,5 +3,7 @@
 if [ ! $1 ]; then
     echo 'what do you seach for?'
 else
-    grep -FIrni --color "$*" *
+    # -I ignore binary
+    # -i ignore case
+    grep -FIrni --color --exclude-dir=".git" --exclude-dir="venv" "$*" *
 fi
