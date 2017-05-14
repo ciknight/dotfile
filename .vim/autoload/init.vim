@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plug manager
 Plug 'junegunn/vim-plug'
+Plug 'junegunn/vim-emoji'
 
 " vim mark, http://www.wklken.me/posts/2015/06/07/vim-plugin-signature.html
 " Plug 'kshenoy/vim-signature'

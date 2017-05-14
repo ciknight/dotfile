@@ -1,8 +1,8 @@
 "==========================================
 " .vimrc of ci_knight
-" 
+"
 " blog site https://blog.ibeats.top
-" 
+"
 "==========================================
 
 
@@ -22,7 +22,7 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "==========================================
 
 " Filetype
-filetype on 
+filetype on
 " 载入文件类型相关插件
 filetype plugin on
 " 载入文件类型相关缩进文件
@@ -336,10 +336,16 @@ endif
 
 " define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
-" removes trailing spaces of python files (and restores cursor position)
-autocmd BufWritePre *.py,*.vim,*.sh mark z | %s/ *$//e | 'z
 " 标示不必要的空白字符
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" 保存文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd FileType vim,c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 function! InsertTabWrapper()
@@ -374,22 +380,61 @@ let g:tagbar_autofocus=1
 nnoremap <Leader>t :TagbarToggle<CR>
 
 " ====> ale <====
-" default pylint
-let g:ale_linters = {
-\   'python': ['flake8'],
-\}
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters = {
+\   'vim' : ['vint'],
+\   'python' : ['flake8'],
+\   'markdown' : ['mdl'],
+\   'sh' : ['shellcheck'],
+\   'javascript' : ['eslint'],
+\}
+try
+    let g:ale_sign_error = emoji#for('boom')
+    let g:ale_sign_warning = emoji#for('small_orange_diamond')
+catch
+    let g:ale_sign_error = '•'
+    let g:ale_sign_warning = '•'
+endtry
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = '✹ Error'
+let g:ale_echo_msg_warning_str = '⚠ Warning'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-highlight ALEErrorSign ctermfg=197 ctermbg=NONE cterm=NONE
-highlight ALEWarningSign ctermfg=192 ctermbg=NONE cterm=NONE
-highlight SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
+highlight ALEErrorSign ctermfg=197 ctermbg=None cterm=NONE
+highlight ALEWarningSign ctermfg=192 ctermbg=None cterm=NONE
+highlight SignColumn ctermfg=NONE ctermbg=None cterm=NONE
+" For a more fancy ale statusline
+function! ALEGetError()
+    let l:res = ale#statusline#Status()
+    if l:res ==# 'OK'
+        return ''
+    else
+        let l:e_w = split(l:res)
+        if len(l:e_w) == 2 || match(l:e_w, 'E') > -1
+            return ' •' . matchstr(l:e_w[0], '\d\+') .' '
+        endif
+    endif
+endfunction
+function! ALEGetWarning()
+    let l:res = ale#statusline#Status()
+    if l:res ==# 'OK'
+        return ''
+    else
+        let l:e_w = split(l:res)
+        if len(l:e_w) == 2
+            return ' •' . matchstr(l:e_w[1], '\d\+')
+        elseif match(l:e_w, 'W') > -1
+            return ' •' . matchstr(l:e_w[0], '\d\+')
+        endif
+    endif
+endfunction
+
+" ====> gitgutter <====
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_max_signs = 200
+let g:gitgutter_async = 1
 
 " ====> Nerd Tree <====
 let NERDChristmasTree=0
