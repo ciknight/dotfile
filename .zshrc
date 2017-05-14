@@ -92,7 +92,7 @@ eval "$(pyenv init -)"
 # Fix python shell failed to write data to stream
 export PYTHONIOENCODING=UTF-8
 # default ptyhon venv
-source ~/workspace/python3.6/bin/activate
+source ~/workspace/python3.4/bin/activate
 
 # JAVA_HOME
 export JAVA_HOME=$(/usr/libexec/java_home)

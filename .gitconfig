@@ -11,7 +11,7 @@
     editor = vim
     safecrlf = true
     excludesfile = ~/.gitignore.global
-    ignorecase = true
+    ignorecase = false
 [push]
     default = current
 [user]
