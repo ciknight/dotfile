@@ -3,14 +3,12 @@
 " 
 " blog site https://blog.ibeats.top
 " 
-" Use Vim settings, rather then Vi settings.
 "==========================================
 
 
 "==========================================
-" About Vim-Plug
+" Initial Vim Plugin
 "==========================================
-
 if filereadable(expand("~/.vim/autoload/init.vim"))
     source ~/.vim/autoload/init.vim
 endif
@@ -118,8 +116,6 @@ autocmd InsertLeave * :set relativenumber
 set numberwidth=5
 " display incomplete commands"
 set showcmd
-" 启动显示状态行(1),总是显示状态行(2)
-set laststatus=2
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
 " 禁止显示滚动条
@@ -377,31 +373,23 @@ let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nnoremap <Leader>t :TagbarToggle<CR>
 
-" ====> pyMode <====
-" close python mode Regenerate repo cache
-let g:pymode_rope=0
-let g:pymode_rope_lookup_project=0
-"let g:pymode_python='python2'
-let g:pymode_doc=0
-let g:pymode_doc_key='K'
-" Lint
-let g:pymode_lint=1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257']
-let g:pymode_lint_ignore='E402,E501,D,W0401'
-let g:pymode_lint_message=1
-" auto check on save
-let g:pymode_lint_write=1
-" Auto open cwindow (quickfix) if any errors have been found
-let g:pymode_lint_cwindow=0
-" Support virtualenv
-let g:pymode_virtualenv=1
-" Enable breakpoints plugin
-let g:pymode_breakpoint=1
-let g:pymode_breakpoint_bind='<leader>b'
-" syntax highlighting
-let g:pymode_syntax_all=1
-" Don't autofold code
-let g:pymode_folding=0
+" ====> ale <====
+" default pylint
+let g:ale_linters = {
+\   'python': ['flake8'],
+\}
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+highlight ALEErrorSign ctermfg=197 ctermbg=NONE cterm=NONE
+highlight ALEWarningSign ctermfg=192 ctermbg=NONE cterm=NONE
+highlight SignColumn ctermfg=NONE ctermbg=NONE cterm=NONE
 
 " ====> Nerd Tree <====
 let NERDChristmasTree=0
@@ -577,20 +565,29 @@ vmap V <Plug>(expand_region_shrink)
 " let g:NERDSpaceDelims=1
 
 " ====> airline <====
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+" 启动显示状态行(1),总是显示状态行(2)
+set laststatus=2
+if !exists('g:airline_powerline_fonts')
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    let g:airline_symbols.linenr = '␊'
+    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.linenr = '¶'
+    let g:airline_symbols.branch = '⎇'
+    let g:airline_symbols.paste = 'Þ'
+    let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline_left_sep = '▶'
+    let g:airline_left_alt_sep = '❯'
+    let g:airline_right_sep = '◀'
+    let g:airline_right_alt_sep = '❮'
 endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
 " 是否打开tabline
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='molokai'
+let g:airline_section_error = '%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 
-" ====> airline <====
+" ====> isort <====
 " Shift-V 上下选中, ctrl + i 规范化
 let g:vim_isort_map = '<C-i>'
 

@@ -144,20 +144,13 @@ Plug 'kien/ctrlp.vim'
 """"""""""""""""""
 " about language
 """"""""""""""""""
-
-" Plug 'vim-syntastic/syntastic'
-
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
-
-" swift
-Plug 'keith/swift.vim'
 
 " React native
 Plug 'mxw/vim-jsx'
 
 " python
-Plug 'klen/python-mode'
-Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'w0rp/ale', {'do': 'pip install flake8'}
 " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'fisadev/vim-isort', {'do': 'pip install isort'}
 

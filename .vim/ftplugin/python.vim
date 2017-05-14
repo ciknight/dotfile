@@ -3,7 +3,7 @@ autocmd BufNewFile,BufRead *.py
             \ set tabstop=4 |
             \ set softtabstop=4 |
             \ set shiftwidth=4 |
-            \ set textwidth=100 |
+            \ set textwidth=90 |
             \ set colorcolumn=+1 |
             \ set expandtab |
             \ set autoindent |
@@ -17,3 +17,6 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+" highlight
+hi pythonSelf ctermfg=174 guifg=#6094DB cterm=bold gui=bold
