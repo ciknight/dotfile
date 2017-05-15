@@ -42,6 +42,8 @@ pyenv global system
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py
 virtualenv -p `which python3` ~/workspace/python3.6
 
+# pip install cheat
+
 # vim
 ln -s $PWD_DIR/.vimrc ~/
 ln -s $PWD_DIR/.vim ~/

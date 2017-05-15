@@ -62,6 +62,8 @@ Plug 'scrooloose/nerdcommenter'
 " :DIstart or \di
 Plug 'vim-scripts/DrawIt'
 
+Plug 'vimwiki/vimwiki'
+
 " Indent line
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 
