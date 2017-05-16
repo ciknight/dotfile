@@ -365,8 +365,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', 'OK']
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-highlight ALEErrorSign ctermfg=197 ctermbg=NONE cterm=NONE
-highlight ALEWarningSign ctermfg=192 ctermbg=NONE cterm=NONE
+highlight ALEErrorSign ctermfg=197 ctermbg=236
+highlight ALEWarningSign ctermfg=192 ctermbg=236
 " For a more fancy ale statusline
 function! ALEGetError()
     let l:res = ale#statusline#Status()
