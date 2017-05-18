@@ -42,6 +42,8 @@ pyenv global system
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py
 virtualenv -p `which python3` ~/workspace/python3.6
 
+# pip install cheat, flake8
+
 # vim
 ln -s $PWD_DIR/.vimrc ~/
 ln -s $PWD_DIR/.vim ~/
@@ -66,3 +68,6 @@ ln -s $PWD_DIR/.zshrc ~/
 
 # ycm
 ln -s $PWD_DIR/.ycm_extra_conf ~/.ycm_extra_conf.py
+
+# flake8
+ln -s $PWD_DIR/.flake8 ~/.flake8

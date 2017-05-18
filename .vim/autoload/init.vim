@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plug manager
 Plug 'junegunn/vim-plug'
+Plug 'junegunn/vim-emoji'
 
 " vim mark, http://www.wklken.me/posts/2015/06/07/vim-plugin-signature.html
 " Plug 'kshenoy/vim-signature'
@@ -60,6 +61,8 @@ Plug 'scrooloose/nerdcommenter'
 " Draw ascii paint  http://www.opstool.com/article/178
 " :DIstart or \di
 Plug 'vim-scripts/DrawIt'
+
+Plug 'vimwiki/vimwiki'
 
 " Indent line
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
@@ -144,20 +147,13 @@ Plug 'kien/ctrlp.vim'
 """"""""""""""""""
 " about language
 """"""""""""""""""
-
-" Plug 'vim-syntastic/syntastic'
-
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
-
-" swift
-Plug 'keith/swift.vim'
 
 " React native
 Plug 'mxw/vim-jsx'
 
 " python
-Plug 'klen/python-mode'
-Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'w0rp/ale', {'do': 'pip install flake8'}
 " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'fisadev/vim-isort', {'do': 'pip install isort'}
 
@@ -184,6 +180,8 @@ Plug 'vim-scripts/dbext.vim'
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
+
+Plug 'godlygeek/tabular'
 
 
 """"""""""""""""""

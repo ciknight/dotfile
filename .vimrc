@@ -1,22 +1,20 @@
 "==========================================
 " .vimrc of ci_knight
-" 
+"
 " blog site https://blog.ibeats.top
-" 
-" Use Vim settings, rather then Vi settings.
+"
 "==========================================
 
 
 "==========================================
-" About Vim-Plug
+" Initial Vim Plugin
 "==========================================
-
 if filereadable(expand("~/.vim/autoload/init.vim"))
     source ~/.vim/autoload/init.vim
 endif
 
 " 编辑vimrc之后，重新加载 :source %
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 
 "==========================================
@@ -24,7 +22,7 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "==========================================
 
 " Filetype
-filetype on 
+filetype on
 " 载入文件类型相关插件
 filetype plugin on
 " 载入文件类型相关缩进文件
@@ -44,14 +42,14 @@ set shiftwidth=4
 set expandtab
 " Tab自动补全时，单行菜单形式显示
 set wildmenu
-" 不自动折行
-set nowrap
+" max tab page
+set tabpagemax=15
 " Backspace deletes like most programs in insert mode"
 set backspace=2
 " 与前一行同样等级缩进
 set autoindent
 " C and Java 根据大括号等自动缩进
-set smartindent
+" set smartindent
 " 更加智能的缩进，当遇到缩进不为整数与上对齐
 " set shiftround
 " 括号匹配
@@ -88,28 +86,15 @@ set autoread      " Set to auto read when a file is changed from the outside
 set autowriteall
 " save as sudo
 ca w!! w !sudo tee "%"
+" 不自动折行
+set nowrap
 " 140字符自动换行
-" set tw=140
-
-" 文件类型配置
-au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
-au BufRead,BufNewFile *.{js,json} set filetype=javascript
-au BufRead,BufNewFile *.{html} set filetype=html
-au BufRead,BufNewFile *.{css,scss,sass} set filetype=css
-au BufRead,BufNewFile *.{py,pyc} set filetype=python
-au BufRead,BufNewFile *.{go} set filetype=go
-au BufRead,BufNewFile *.{c} set filetype=c
-au BufRead,BufNewFile *.{cpp} set filetype=cpp
-au BufRead,BufNewFile *.{ruby} set filetype=ruby
-au BufRead,BufNewFile *.{sh} set filetype=sh
-au BufRead,BufNewFile *.{java} set filetype=java
-au BufRead,BufNewFile *.{lua} set filetype=lua
+" set textwidth=140
 
 
 "==========================================
 " General Display
 "==========================================
-
 set number
 set relativenumber
 " 插入模式下用绝对行号, 普通模式下用相对
@@ -118,8 +103,6 @@ autocmd InsertLeave * :set relativenumber
 set numberwidth=5
 " display incomplete commands"
 set showcmd
-" 启动显示状态行(1),总是显示状态行(2)
-set laststatus=2
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
 " 禁止显示滚动条
@@ -143,15 +126,13 @@ au WinEnter * set cursorline cursorcolumn
 au WinLeave * set nocursorline nocursorcolumn
 set cursorline cursorcolumn
 " Searching
-set incsearch     " do incremental searching
-set hlsearch  " 检索时高亮显示匹配项
-set ignorecase  " 搜索忽略大小写
-set smartcase  " 智能大小写搜索
+set incsearch " do incremental searching
+set hlsearch " 检索时高亮显示匹配项
+set ignorecase " 搜索忽略大小写
+set smartcase " 智能大小写搜索
 " 去掉输入错误的提示声音
 set novisualbell
 set noerrorbells
-set t_vb=
-set tm=500
 " encoding
 set encoding=utf-8
 " new file
@@ -179,11 +160,12 @@ set list listchars=tab:»·,trail:·
 set clipboard+=unnamed
 " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
 set t_ti= t_te=
+set t_vb=
+set tm=500
 " 设置标记一列的背景颜色和数字一行颜色一致
-hi! link SignColumn   LineNr
-hi! link ShowMarksHLl DiffAdd
-hi! link ShowMarksHLu DiffChange
-
+highlight! link SignColumn LineNr
+highlight! link ShowMarksHLl DiffAdd
+highlight! link ShowMarksHLu DiffChange
 " for error highlight，防止错误整行标红导致看不清
 highlight clear SpellBad
 highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
@@ -194,6 +176,7 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
+
 "==========================================
 " Key Map
 "==========================================
@@ -202,52 +185,40 @@ map tn :tabn<CR>
 map tp :tabp<CR>
 map tm :tabm<CR>
 map tt :tabnew<CR>
-
 " 关闭方向键, 强迫自己用 hjkl
 " map <Left> <Nop>
 " map <Right> <Nop>
 " map <Up> <Nop>
 " map <Down> <Nop>
-
 " arrow key map
 nnoremap h <Left>
 nnoremap j <Up>
 nnoremap k <Down>
 nnoremap l <Right>
-
 " navigate window movement with C+arrows
 nnoremap <C-j> <C-w>k
 nnoremap <C-k> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-
 " qq to record, Q to replay (recursive map due to peekaboo)
 nnoremap Q @q
-
 " 定义快捷键到行首和行尾
 nnoremap lt ^
 nnoremap le $
-
 " Quickfix
 nnoremap ]q :cnext<CR>zz
 nnoremap [q :cprev<CR>zz
 nnoremap ]l :lnext<CR>zz
 nnoremap [l :lprev<CR>zz
-
 " Buffers
 nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 
-" Tabs
-nnoremap ]t :tabn<CR>
-nnoremap [t :tabp<CR>
-
 " F1 - F6 设置
-
 " F1 废弃这个键,防止调出系统帮助
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
 noremap <F1> <Esc>"
-
+" F2 行号开关，用于鼠标复制代码用
 function! NumberToggle()
   if(&relativenumber == 1)
     set norelativenumber number
@@ -256,8 +227,6 @@ function! NumberToggle()
   endif
 endfunc
 nnoremap <C-n> :call NumberToggle()<cr>
-
-" F2 行号开关，用于鼠标复制代码用
 " 为方便复制，用<F2>开启/关闭行号显示:
 function! HideNumber()
     if(&relativenumber == &number)
@@ -274,19 +243,11 @@ nnoremap <F2> :call HideNumber()<CR>
 nnoremap <F3> :set list! list?<CR>
 " F4 换行开关
 nnoremap <F4> :set wrap! wrap?<CR>
-" leader mapping
-let mapleader = ","
-set timeoutlen=350  " wait leader
-
-set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
-"    paste mode, where you can paste mass data
-"    that won't be autoindented
-
+" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
+" F5 set paste问题已解决, 粘贴代码前不需要按F5了
+set pastetoggle=<F5>
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
-
-" F5 set paste问题已解决, 粘贴代码前不需要按F5了
-" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
 " Automatically set paste mode in Vim when pasting in insert mode
 function! XTermPasteBegin()
     set pastetoggle=<Esc>[201~
@@ -295,13 +256,15 @@ function! XTermPasteBegin()
 endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
+" leader mapping
+let mapleader = ","
+set timeoutlen=350  " wait leader
 " file operate
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 inoremap <leader>w :w<CR>
 inoremap <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
-
 " 定义快捷键在结对符之间跳转
 nnoremap <Leader>M %
 " kj 替换 Esc
@@ -340,10 +303,17 @@ endif
 
 " define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
-" removes trailing spaces of python files (and restores cursor position)
-autocmd BufWritePre *.py,*.vim,*.sh mark z | %s/ *$//e | 'z
 " 标示不必要的空白字符
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" 保存文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd FileType vim,c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 function! InsertTabWrapper()
@@ -377,31 +347,56 @@ let g:tagbar_width=35
 let g:tagbar_autofocus=1
 nnoremap <Leader>t :TagbarToggle<CR>
 
-" ====> pyMode <====
-" close python mode Regenerate repo cache
-let g:pymode_rope=0
-let g:pymode_rope_lookup_project=0
-"let g:pymode_python='python2'
-let g:pymode_doc=0
-let g:pymode_doc_key='K'
-" Lint
-let g:pymode_lint=1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'pep257']
-let g:pymode_lint_ignore='E402,E501,D,W0401'
-let g:pymode_lint_message=1
-" auto check on save
-let g:pymode_lint_write=1
-" Auto open cwindow (quickfix) if any errors have been found
-let g:pymode_lint_cwindow=0
-" Support virtualenv
-let g:pymode_virtualenv=1
-" Enable breakpoints plugin
-let g:pymode_breakpoint=1
-let g:pymode_breakpoint_bind='<leader>b'
-" syntax highlighting
-let g:pymode_syntax_all=1
-" Don't autofold code
-let g:pymode_folding=0
+" ====> ale <====
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_linters = {
+\   'vim' : ['vint'],
+\   'python' : ['flake8'],
+\   'markdown' : ['mdl'],
+\   'sh' : ['shellcheck'],
+\   'javascript' : ['eslint'],
+\}
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+let g:ale_echo_msg_error_str = '✹ Error'
+let g:ale_echo_msg_warning_str = '⚠ Warning'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', 'OK']
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+highlight ALEErrorSign ctermfg=197 ctermbg=236
+highlight ALEWarningSign ctermfg=192 ctermbg=236
+" For a more fancy ale statusline
+function! ALEGetError()
+    let l:res = ale#statusline#Status()
+    if l:res ==# 'OK'
+        return ''
+    else
+        let l:e_w = split(l:res)
+        if len(l:e_w) == 2 || match(l:e_w, 'E') > -1
+            return ' •' . matchstr(l:e_w[0], '\d\+') .' '
+        endif
+    endif
+endfunction
+function! ALEGetWarning()
+    let l:res = ale#statusline#Status()
+    if l:res ==# 'OK'
+        return ''
+    else
+        let l:e_w = split(l:res)
+        if len(l:e_w) == 2
+            return ' •' . matchstr(l:e_w[1], '\d\+')
+        elseif match(l:e_w, 'W') > -1
+            return ' •' . matchstr(l:e_w[0], '\d\+')
+        endif
+    endif
+endfunction
+
+" ====> gitgutter <====
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_max_signs = 200
+let g:gitgutter_async = 1
 
 " ====> Nerd Tree <====
 let NERDChristmasTree=0
@@ -577,20 +572,29 @@ vmap V <Plug>(expand_region_shrink)
 " let g:NERDSpaceDelims=1
 
 " ====> airline <====
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+" 启动显示状态行(1),总是显示状态行(2)
+set laststatus=2
+if !exists('g:airline_powerline_fonts')
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+    let g:airline_symbols.linenr = '␊'
+    let g:airline_symbols.linenr = '␤'
+    let g:airline_symbols.linenr = '¶'
+    let g:airline_symbols.branch = '⎇'
+    let g:airline_symbols.paste = 'Þ'
+    let g:airline_symbols.whitespace = 'Ξ'
+    let g:airline_left_sep = '▶'
+    let g:airline_left_alt_sep = '❯'
+    let g:airline_right_sep = '◀'
+    let g:airline_right_alt_sep = '❮'
 endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
 " 是否打开tabline
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='molokai'
+let g:airline_section_error = '%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 
-" ====> airline <====
+" ====> isort <====
 " Shift-V 上下选中, ctrl + i 规范化
 let g:vim_isort_map = '<C-i>'
 
