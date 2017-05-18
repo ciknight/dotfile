@@ -49,7 +49,7 @@ set backspace=2
 " 与前一行同样等级缩进
 set autoindent
 " C and Java 根据大括号等自动缩进
-set smartindent
+" set smartindent
 " 更加智能的缩进，当遇到缩进不为整数与上对齐
 " set shiftround
 " 括号匹配
