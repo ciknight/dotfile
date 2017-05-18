@@ -181,6 +181,8 @@ Plug 'vim-scripts/dbext.vim'
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
 
+Plug 'godlygeek/tabular'
+
 
 """"""""""""""""""
 " Theme

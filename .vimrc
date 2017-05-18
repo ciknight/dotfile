@@ -14,7 +14,7 @@ if filereadable(expand("~/.vim/autoload/init.vim"))
 endif
 
 " 编辑vimrc之后，重新加载 :source %
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 
 "==========================================
@@ -42,8 +42,6 @@ set shiftwidth=4
 set expandtab
 " Tab自动补全时，单行菜单形式显示
 set wildmenu
-" 不自动折行
-set nowrap
 " max tab page
 set tabpagemax=15
 " Backspace deletes like most programs in insert mode"
@@ -88,8 +86,10 @@ set autoread      " Set to auto read when a file is changed from the outside
 set autowriteall
 " save as sudo
 ca w!! w !sudo tee "%"
+" 不自动折行
+set nowrap
 " 140字符自动换行
-" set tw=140
+" set textwidth=140
 
 
 "==========================================
