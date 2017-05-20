@@ -8,6 +8,3 @@ autocmd BufNewFile,BufRead *.py
             \ set expandtab |
             \ set autoindent |
             \ set fileformat=unix |
-
-" highlight
-hi pythonSelf ctermfg=174 guifg=#6094DB cterm=bold gui=bold

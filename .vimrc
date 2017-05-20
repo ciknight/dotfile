@@ -20,288 +20,31 @@ endif
 "==========================================
 " General Settings
 "==========================================
-
-" Filetype
-filetype on
-" 载入文件类型相关插件
-filetype plugin on
-" 载入文件类型相关缩进文件
-filetype indent on
-" 开启语法高亮
-syntax on
-" Syntax
-syntax enable
-
-" tab为4个空格
-set tabstop=4
-" 让 vim 把连续数量的空格视为一个制表符
-set softtabstop=4
-" 设置格式化时制表符占用空格数
-set shiftwidth=4
-" Tab转换为空格
-set expandtab
-" Tab自动补全时，单行菜单形式显示
-set wildmenu
-" max tab page
-set tabpagemax=15
-" Backspace deletes like most programs in insert mode"
-set backspace=2
-" 与前一行同样等级缩进
-set autoindent
-" C and Java 根据大括号等自动缩进
-" set smartindent
-" 更加智能的缩进，当遇到缩进不为整数与上对齐
-" set shiftround
-" 括号匹配
-set showmatch
-" history存储容量
-" How many tenths of a second to blink when matching brackets
-set matchtime=2
-set history=2000
-
-set wildmode=list:longest,list:full
-" ignore
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
-" set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-" 鼠标暂不启用, 键盘党....
-set mouse-=a
-
-
-"==========================================
-" File Settings
-"==========================================
-
-" file backup
-set nobackup
-set nowritebackup
-set noswapfile
-
-" Need confrimation while exit
-set confirm
-set fileformat=unix
-
-" file auto do something
-set autowrite     " Automatically :write before running commands
-set autoread      " Set to auto read when a file is changed from the outside
-set autowriteall
-" save as sudo
-ca w!! w !sudo tee "%"
-" 不自动折行
-set nowrap
-" 140字符自动换行
-" set textwidth=140
-
-
-"==========================================
-" General Display
-"==========================================
-set number
-set relativenumber
-" 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
-set numberwidth=5
-" display incomplete commands"
-set showcmd
-" 禁止光标闪烁
-set gcr=a:block-blinkon0
-" 禁止显示滚动条
-set guioptions-=l
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
-" 禁止显示菜单和工具条
-set guioptions-=m
-set guioptions-=T
-" 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
-set nocompatible
-" 设定状态栏多显示信息
-set noscrollbind
-set nocursorbind
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-" Highlight current line
-au WinEnter * set cursorline cursorcolumn
-au WinLeave * set nocursorline nocursorcolumn
-set cursorline cursorcolumn
-" Searching
-set incsearch " do incremental searching
-set hlsearch " 检索时高亮显示匹配项
-set ignorecase " 搜索忽略大小写
-set smartcase " 智能大小写搜索
-" 去掉输入错误的提示声音
-set novisualbell
-set noerrorbells
-" encoding
-set encoding=utf-8
-" new file
-set fileencodings=ucs-bom,utf-8,cp936,gbk,gb18030,big5,euc-jp,euc-kr,latin1
-" write file
-set fileencoding=utf-8
-set helplang=cn
-" Folding
-set foldenable
-set foldlevelstart=10
-set foldnestmax=10
-" 基于缩进或语法进行代码折叠
-set foldmethod=indent
-" 启动 vim 时关闭折叠代码
-set nofoldenable
-" Enable folding with the spacebar
-nnoremap <space> za
-" 保存全局变量
-set viminfo+=!
-" 带有如下符号的单词不要被换行分割
-set iskeyword+=_,$,@,%,#,-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
-"共享剪贴板
-set clipboard+=unnamed
-" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
-set t_ti= t_te=
-set t_vb=
-set tm=500
-" 设置标记一列的背景颜色和数字一行颜色一致
-highlight! link SignColumn LineNr
-highlight! link ShowMarksHLl DiffAdd
-highlight! link ShowMarksHLu DiffChange
-" for error highlight，防止错误整行标红导致看不清
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline
-highlight clear SpellRare
-highlight SpellRare term=underline cterm=underline
-highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline
+if filereadable(expand("~/.vim/autoload/config.vim"))
+    source ~/.vim/autoload/config.vim
+endif
 
 
 "==========================================
 " Key Map
 "==========================================
-" tab navigation
-map tn :tabn<CR>
-map tp :tabp<CR>
-map tm :tabm<CR>
-map tt :tabnew<CR>
-" 关闭方向键, 强迫自己用 hjkl
-" map <Left> <Nop>
-" map <Right> <Nop>
-" map <Up> <Nop>
-" map <Down> <Nop>
-" arrow key map
-nnoremap h <Left>
-nnoremap j <Up>
-nnoremap k <Down>
-nnoremap l <Right>
-" navigate window movement with C+arrows
-nnoremap <C-j> <C-w>k
-nnoremap <C-k> <C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-" qq to record, Q to replay (recursive map due to peekaboo)
-nnoremap Q @q
-" 定义快捷键到行首和行尾
-nnoremap lt ^
-nnoremap le $
-" Quickfix
-nnoremap ]q :cnext<CR>zz
-nnoremap [q :cprev<CR>zz
-nnoremap ]l :lnext<CR>zz
-nnoremap [l :lprev<CR>zz
-" Buffers
-nnoremap ]b :bnext<CR>
-nnoremap [b :bprev<CR>
-
-" F1 - F6 设置
-" F1 废弃这个键,防止调出系统帮助
-" I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
-noremap <F1> <Esc>"
-" F2 行号开关，用于鼠标复制代码用
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber number
-  else
-    set relativenumber
-  endif
-endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
-" 为方便复制，用<F2>开启/关闭行号显示:
-function! HideNumber()
-    if(&relativenumber == &number)
-        set relativenumber! number!
-    elseif(&number)
-        set number!
-    else
-        set relativenumber!
-    endif
-    set number?
-endfunc
-nnoremap <F2> :call HideNumber()<CR>
-" F3 显示可打印字符开关
-nnoremap <F3> :set list! list?<CR>
-" F4 换行开关
-nnoremap <F4> :set wrap! wrap?<CR>
-" F5 粘贴模式paste_mode开关,用于有格式的代码粘贴
-" F5 set paste问题已解决, 粘贴代码前不需要按F5了
-set pastetoggle=<F5>
-" disbale paste mode when leaving insert mode
-au InsertLeave * set nopaste
-" Automatically set paste mode in Vim when pasting in insert mode
-function! XTermPasteBegin()
-    set pastetoggle=<Esc>[201~
-    set paste
-    return ""
-endfunction
-inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
-
-" leader mapping
-let mapleader = ","
-set timeoutlen=350  " wait leader
-" file operate
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-inoremap <leader>w :w<CR>
-inoremap <leader>q :q<CR>
-nnoremap <Leader>Q :qa!<CR>
-" 定义快捷键在结对符之间跳转
-nnoremap <Leader>M %
-" kj 替换 Esc
-inoremap kj <Esc>
-
-
-"==========================================
-" Load file config
-"==========================================
-
-" Python Stuffs
-if filereadable(expand("~/.vim/ftplugin/python.vim"))
-    source ~/.vim/ftplugin/python.vim
-endif
-" Html Stuffs
-if filereadable(expand("~/.vim/ftplugin/frontend.vim"))
-    source ~/.vim/ftplugin/frontend.vim
-endif
-" markwodn Stuffs
-if filereadable(expand("~/.vim/ftplugin/markdown.vim"))
-    source ~/.vim/ftplugin/markdown.vim
-endif
-" newfile Stuffs
-if filereadable(expand("~/.vim/ftplugin/newfile.vim"))
-    source ~/.vim/ftplugin/newfile.vim
-endif
-" runit Stuffs
-if filereadable(expand("~/.vim/ftplugin/runit.vim"))
-    source ~/.vim/ftplugin/runit.vim
+if filereadable(expand("~/.vim/autoload/keymap.vim"))
+    source ~/.vim/autoload/keymap.vim
 endif
 
 
 "==========================================
-" custom script
+" Code Language Setting
 "==========================================
+if filereadable(expand("~/.vim/language.vim"))
+    source ~/.vim/language.vim
+endif
 
-" define BadWhitespace before using in a match
+
+"==========================================
+" Custome Plugin
+"==========================================
+"define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
 " 标示不必要的空白字符
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
@@ -312,27 +55,12 @@ fun! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
-autocmd FileType vim,c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-
-inoremap <Tab> <c-r>=InsertTabWrapper()<CR>
-inoremap <S-Tab> <c-n>
+autocmd FileType vim,c,cpp,java,go,php,javascript,puppet,python,rust,xml,yml,perl,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 
 "==========================================
-" Plugin config
+" Plugin Setting
 "==========================================
-
 " ====> Theme <====
 if has('gui_running')
     set background=light
@@ -600,3 +328,12 @@ let g:vim_isort_map = '<C-i>'
 
 " ====> React Native <====
 let g:jsx_ext_required = 0
+
+" ====> Emmet <====
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+" only use html,css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+" To remap the default <C-Y> leader:>
+" let g:user_emmet_leader_key='<C-Y>'
+" scss support

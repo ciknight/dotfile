@@ -183,6 +183,8 @@ Plug 'fatih/vim-go', {'for': 'go'}
 
 Plug 'godlygeek/tabular'
 
+Plug 'tpope/vim-projectionist'
+
 
 """"""""""""""""""
 " Theme
