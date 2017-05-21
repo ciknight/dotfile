@@ -71,9 +71,6 @@ Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'tpope/vim-tbone'
 Plug 'christoomey/vim-tmux-navigator'
 
-" generate ycm.conf
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-" Plug 'AutoComplPop'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
 
 
