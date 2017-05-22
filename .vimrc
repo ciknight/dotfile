@@ -301,7 +301,6 @@ vmap V <Plug>(expand_region_shrink)
 
 " ====> airline <====
 " 启动显示状态行(1),总是显示状态行(2)
-set laststatus=2
 if !exists('g:airline_powerline_fonts')
     if !exists('g:airline_symbols')
         let g:airline_symbols = {}

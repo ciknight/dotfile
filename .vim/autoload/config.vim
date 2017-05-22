@@ -3,6 +3,7 @@ syntax on " Syntax highlighting
 
 set backspace=2 " Backspace deletes like most programs in insert mode"
 set history=2000
+set laststatus=2
 set linespace=0 " No extra spaces between rows
 set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4 " 设置格式化时制表符占用空格数
@@ -54,6 +55,7 @@ set numberwidth=4
 set showcmd " display incomplete commands"
 set gcr=a:block-blinkon0 " 禁止光标闪烁
 
+set number
 set relativenumber
 set cursorline cursorcolumn
 " 插入模式下用绝对行号, 普通模式下用相对
