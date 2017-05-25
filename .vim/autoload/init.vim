@@ -176,7 +176,7 @@ Plug 'vim-scripts/SQLComplete.vim'
 Plug 'vim-scripts/dbext.vim'
 
 " Golang
-Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
 
 Plug 'godlygeek/tabular'
 

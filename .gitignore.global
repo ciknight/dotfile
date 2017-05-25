@@ -1,7 +1,10 @@
 # Python
 *.pyc
 __pycache__
+
+# Dir
 venv
+.cache
 
 # C & C++
 *.out
@@ -20,3 +23,9 @@ venv
 
 # JavaScript
 node_modules
+
+# Vagrant
+.vagrant
+
+# ansible
+playbook.retry

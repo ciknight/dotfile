@@ -19,7 +19,7 @@ if [ $SYSTEM = "Darwin" ] ; then
     # Python env
     brew install pyenv
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-    pyenv install 3.4.5
+    pyenv install 3.5.3
 elif [ $SYSTEM = "Linux" ] ; then
     echo 'updating apt and install software'
     sudo apt-get update
@@ -31,12 +31,12 @@ ln -s $PWD_DIR/.pip ~/
 ln -s $PWD_DIR/.ipython ~/
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py
 sudo pip install virtualenv
-mkdir -p ~/workspace
+mkdir -p ~/workspace/go
 virtualenv ~/workspace/python2.7
 
-pyenv global 3.4.5
+pyenv global 3.5.3
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py
-virtualenv -p `which python3` ~/workspace/python3.4
+virtualenv -p `which python3` ~/workspace/python3.5
 
 pyenv global system
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py

@@ -20,6 +20,8 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 export LESSCHARSET=utf-8
 # Fix python shell failed to write data to stream
 export PYTHONIOENCODING=UTF-8
+export GOPATH="$HOME/workspace/go"
+
 
 # system alias
 alias vi='vim'
