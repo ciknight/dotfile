@@ -42,20 +42,11 @@ endif
 
 
 "==========================================
-" Custome Plugin
+" Custom Plugin
 "==========================================
-"define BadWhitespace before using in a match
-highlight BadWhitespace ctermbg=red guibg=darkred
-" 标示不必要的空白字符
-autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-" 保存文件时删除多余空格
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-autocmd FileType vim,c,cpp,java,javascript,python,xml,yml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+if filereadable(expand("~/.vim/custom.vim"))
+    source ~/.vim/custom.vim
+endif
 
 
 "==========================================

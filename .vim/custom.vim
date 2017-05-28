@@ -1,4 +1,15 @@
-autocmd BufNewFile *.cpp,*.sh,*.rb,*.java,*.py,*.c,*.h,*.lua exec ":call SetTitle()"
+"define BadWhitespace before using in a match
+highlight BadWhitespace ctermbg=red guibg=darkred
+" 标示不必要的空白字符
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" 保存文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd FileType vim,c,cpp,java,javascript,python,xml,yml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " 定义函数SetTitle，自动插入文件头
 function! SetTitle()
@@ -46,5 +57,6 @@ function! SetTitle()
     endif
     " 新建文件后，自动定位到文件末尾
 endfunc
+autocmd BufNewFile *.cpp,*.sh,*.rb,*.java,*.py,*.c,*.h,*.lua exec ":call SetTitle()"
 
 autocmd BufNewFile * normal G
