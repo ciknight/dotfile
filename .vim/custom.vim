@@ -4,10 +4,9 @@ highlight BadWhitespace ctermbg=red guibg=darkred
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " 保存文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+    let cursor_pos = getpos('.')
+    silent! %s/\s\+$//
+    call setpos('.', cursor_pos)
 endfun
 autocmd FileType vim,c,cpp,java,javascript,python,xml,yml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
