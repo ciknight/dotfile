@@ -37,6 +37,7 @@ alias pong='ping -c 5 ' # ping，限制
 alias py='python'
 alias py27='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
 alias py34='source ~/.zshrc;source ~/workspace/python3.4/bin/activate'
+alias py35='source ~/.zshrc;source ~/workspace/python3.5/bin/activate'
 alias py36='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
 alias tl='tmux ls'
 alias tn='tmux -2 new -s'

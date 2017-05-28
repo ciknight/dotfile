@@ -64,6 +64,8 @@ Plug 'vim-scripts/DrawIt'
 
 Plug 'vimwiki/vimwiki'
 
+Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'}
+
 " Indent line
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 

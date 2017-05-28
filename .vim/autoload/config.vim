@@ -11,8 +11,8 @@ set tabpagemax=15 " Only show 15 tabs
 set tabstop=4 " An indentation every four columns"
 " set textwidth=140 " 140字符自动换行
 
-set autoindent " 与前一行同样等级缩进
-" set smartindent " 更加智能的缩进，当遇到缩进不为整数与上对齐
+" set autoindent " 与前一行同样等级缩进
+set smartindent " 更加智能的缩进，当遇到缩进不为整数与上对齐
 set backspace=indent,eol,start  " Backspace for dummies
 set expandtab " Tab转换为空格
 
