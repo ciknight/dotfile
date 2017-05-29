@@ -31,9 +31,6 @@ Plug 'mhinz/vim-startify'
 " http://www.wklken.me/posts/2015/06/07/vim-plugin-multiplecursors.html
 Plug 'terryma/vim-multiple-cursors'
 
-" % extend
-Plug 'vim-scripts/matchit.zip'
-
 " http://www.wklken.me/posts/2015/06/13/vim-plugin-quickrun.html
 Plug 'thinca/vim-quickrun'
 
@@ -73,7 +70,7 @@ Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 " Plug 'gcmt/wildfire.vim'
 
 " nerdtree nerdtreetabs
-Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Git integration
@@ -149,8 +146,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 " 自动补全html/xml标签
 Plug 'docunext/closetag.vim', {'for': ['html', 'xml']}
-" XML/HTML tags navigation
-Plug 'matchit.zip'
+" % extend
+Plug 'vim-scripts/matchit.zip'
 Plug 'elzr/vim-json'
 
 Plug 'vim-scripts/SQLComplete.vim'
