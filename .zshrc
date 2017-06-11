@@ -16,11 +16,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 export LANG=zh_CN.UTF-8
 export SSH_KEY_PATH="~/.ssh/id_rsa"
-# Fix linux git diff chinese 
+# Fix linux git diff and log chinese
 export LESSCHARSET=utf-8
 # Fix python shell failed to write data to stream
 export PYTHONIOENCODING=UTF-8
 export GOPATH="$HOME/workspace/go"
+export HOMEBREW_EDITOR=vim
 
 
 # system alias

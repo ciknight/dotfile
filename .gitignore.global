@@ -28,4 +28,4 @@ node_modules
 .vagrant
 
 # ansible
-playbook.retry
+*.retry

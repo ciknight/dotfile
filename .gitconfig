@@ -12,6 +12,7 @@
     safecrlf = true
     excludesfile = ~/.gitignore.global
     ignorecase = false
+    quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
 [push]
     default = current
 [user]
@@ -25,3 +26,5 @@
     insteadOf = http://github.com/
 [url "git@github.com:"]
     insteadOf = git://github.com/
+[i18n]
+    commitencoding = utf-8
