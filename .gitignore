@@ -5,6 +5,7 @@ zsh-cache
 bundle/
 plugged/
 plug.vim
+plug.vim.old
 
 # ipython
 .ipython/extensions/

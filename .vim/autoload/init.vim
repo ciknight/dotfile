@@ -64,7 +64,7 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'vim-scripts/DrawIt'
 
 " Indent line
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+Plug 'Yggdroot/indentLine'
 
 " Code and files fuzzy finder
 " Plug 'gcmt/wildfire.vim'
