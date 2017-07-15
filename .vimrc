@@ -122,24 +122,27 @@ let NERDChristmasTree=0
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize=32
 let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
+let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '__pycache__']
 let NERDTreeShowBookmarks=1
 " 设置NERDTree子窗口位置
 let NERDTreeWinPos="left"
-" 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nnoremap <Leader>fl :NERDTreeToggle<CR>
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " NERDTree 子窗口中不显示冗余帮助信息
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+" 显示书签
+let NERDTreeShowBookmarks=1
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
 " 打开文件后关闭File Tree
 " let NERDTreeQuitOnOpen=1
 " Automatically open a NERDTree if no files where specified
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 打开关闭 NERDTree
 nnoremap <Leader>f :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 fun! ToggleNERDTreeWithRefresh()
