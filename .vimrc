@@ -18,14 +18,6 @@ endif
 
 
 "==========================================
-" Plugin Setting
-"==========================================
-if filereadable(expand("~/.vim/autoload/plugin_config.vim"))
-    source ~/.vim/autoload/plugin_config.vim
-endif
-
-
-"==========================================
 " General Settings
 "==========================================
 if filereadable(expand("~/.vim/autoload/config.vim"))
@@ -54,4 +46,12 @@ endif
 "==========================================
 if filereadable(expand("~/.vim/language.vim"))
     source ~/.vim/language.vim
+endif
+
+
+"==========================================
+" Plugin Setting
+"==========================================
+if filereadable(expand("~/.vim/autoload/plugin_config.vim"))
+    source ~/.vim/autoload/plugin_config.vim
 endif

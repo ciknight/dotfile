@@ -122,6 +122,7 @@ Plug 'majutsushi/tagbar'
 " auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 Plug 'kien/ctrlp.vim'
 
+" python use jdei, pip install jedi
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
 
 " syntax
