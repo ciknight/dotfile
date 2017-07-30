@@ -2,15 +2,17 @@
 highlight BadWhitespace ctermbg=red guibg=darkred
 " 标示不必要的空白字符
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-" 保存文件时删除多余空格
+" 保存文件时删除多余空格 {{{
 fun! <SID>StripTrailingWhitespaces()
     let cursor_pos = getpos('.')
     silent! %s/\s\+$//
     call setpos('.', cursor_pos)
 endfun
+" }}}
 autocmd FileType vim,c,cpp,java,javascript,python,xml,yml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-" 定义函数SetTitle，自动插入文件头
+
+" 定义函数SetTitle，自动插入文件头 {{{
 function! SetTitle()
     " 如果文件类型为.sh文件
     if &filetype == 'sh'
@@ -56,6 +58,13 @@ function! SetTitle()
     endif
     " 新建文件后，自动定位到文件末尾
 endfunc
+" }}}
 autocmd BufNewFile *.cpp,*.sh,*.rb,*.java,*.py,*.c,*.h,*.lua exec ":call SetTitle()"
 
+" 保存文件最后编辑位置 {{{
 autocmd BufNewFile * normal G
+autocmd BufReadPost *
+            \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \   exe "normal! G`\"" |
+            \ endif
+" }}}

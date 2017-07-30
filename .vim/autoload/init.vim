@@ -18,7 +18,9 @@ call plug#begin('~/.vim/plugged')
 
 
 Plug 'junegunn/vim-plug'
+
 Plug 'junegunn/vim-emoji'
+
 " http://www.wklken.me/posts/2015/06/07/vim-plugin-easyalign.html
 Plug 'junegunn/vim-easy-align'
 
@@ -124,6 +126,9 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-
 
 " syntax
 Plug 'w0rp/ale', {'do': 'pip install flake8'}
+" Plug 'hdima/python-syntax'
+Plug 'ciknight/python-syntax'
+Plug 'evanmiller/nginx-vim-syntax'
 
 " about language
 Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'}
@@ -132,14 +137,8 @@ Plug 'fisadev/vim-isort', {'do': 'pip install isort'}
 
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
 
-" React native
-Plug 'mxw/vim-jsx'
-
 " shell
 Plug 'Shougo/vimshell.vim'
-
-" nginx
-Plug 'evanmiller/nginx-vim-syntax'
 
 " front end
 Plug 'pangloss/vim-javascript'
