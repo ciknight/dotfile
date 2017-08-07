@@ -1,2 +1,7 @@
 #!/bin/bash
-mv "$@" ~/.trash
+DATE=`date +%s`
+if [ -d ~/.trash/$@ ] || [ -f ~/.trash/$@ ]; then
+    mv $@ ~/.trash/$@.$DATE
+else
+    mv $@ ~/.trash
+fi
