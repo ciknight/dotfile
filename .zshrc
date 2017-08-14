@@ -45,7 +45,7 @@ alias tn='tmux -2 new -s'
 alias ta='tmux -2 attach -t' # -2 Force tmux to assume the terminal supports 256 colours.
 alias tinit=tmuxinit
 alias rm=safe_rm
-alias weather='curl wttr.in/shanghai'
+alias weather='curl wttr.in/~上海'
 alias myip='curl ip.cn' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
 # local alias
