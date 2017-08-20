@@ -51,11 +51,10 @@ ca w!! w !sudo tee "%"
 "==========================================
 " Display Setting
 "==========================================
-set numberwidth=4
 set showcmd " display incomplete commands"
 set gcr=a:block-blinkon0 " 禁止光标闪烁
 
-set number
+set number numberwidth=4
 set relativenumber
 set cursorline cursorcolumn
 " 插入模式下用绝对行号, 普通模式下用相对

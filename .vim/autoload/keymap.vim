@@ -1,8 +1,16 @@
+" map、nmap、vmap和imap命令分别指定映射仅在normal、visual、insert
+" noremap、nnoremap、vnoremap、inoremap、 非递归映射，只解析一次
+
+" leader mapping
+let mapleader = ","
+set timeoutlen=350  " wait leader
+
+"""""""""" Normal """"""""""""""
 " tab navigation
-map tn :tabn<CR>
-map tp :tabp<CR>
-map tm :tabm<CR>
-map tt :tabnew<CR>
+nnoremap tn :tabn<CR>
+nnoremap tp :tabp<CR>
+nnoremap tm :tabm<CR>
+nnoremap tt :tabnew<CR>
 
 " Quickfix
 nnoremap ]q :cnext<CR>zz
@@ -79,6 +87,7 @@ nnoremap <F4> :set wrap! wrap?<CR>
 set pastetoggle=<F5>
 " disbale paste mode when leaving insert mode
 au InsertLeave * set nopaste
+
 " Automatically set paste mode in Vim when pasting in insert mode
 function! XTermPasteBegin()
     set pastetoggle=<Esc>[201~
@@ -87,13 +96,14 @@ function! XTermPasteBegin()
 endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
-" leader mapping
-let mapleader = ","
-set timeoutlen=350  " wait leader
-
 " file operate
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
+
+"""""""""" Insert """"""""""""""
 inoremap <leader>w :w<CR>
 inoremap <leader>q :q<CR>
+inoremap <c-d> <esc>ddi
+inoremap <c-x> <esc>yypi
+inoremap <c-u> <esc>ui
