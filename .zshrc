@@ -23,6 +23,8 @@ export PYTHONIOENCODING=UTF-8
 export GOPATH="$HOME/workspace/go"
 export HOMEBREW_EDITOR=vim
 
+# git alias
+alias gpl='git pull'
 
 # system alias
 alias vi='vim'
