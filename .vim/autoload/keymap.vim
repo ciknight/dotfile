@@ -107,3 +107,5 @@ inoremap <leader>q :q<CR>
 inoremap <c-d> <esc>ddi
 inoremap <c-x> <esc>yypi
 inoremap <c-u> <esc>ui
+inoremap <c-c> <esc>
+inoremap <esc> <Nop>
