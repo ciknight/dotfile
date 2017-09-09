@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Thanks for https://github.com/liberize/alfred-dict-workflow
+Youdao Doc: http://ai.youdao.com/docs/api.s
+"""
+import sys
+import json
+from urllib import request, parse
+
+HOST = "fanyi.youdao.com"
+KEY = "19965805"
+BASE_URL = "http://%s/openapi.do?keyfrom=awf-Chinese-Dict&key=%s&version=1.1&type=data&doctype=json&q={}" % (HOST, KEY)
+
+
+query = parse.quote(' '.join(sys.argv[1:]))
+if not query:
+    raise Exception('query is none')
+
+resp = request.urlopen(BASE_URL.format(query))
+"""
+两个单词以上包括两个没有 phonetic
+
+{'basic': {'explains': ['adj. 这；本；这个；今',
+                        'pron. 这；这个；这里',
+                        'adv. 这样地；这么',
+                        'n. (This)人名；(法)蒂斯'],
+           'phonetic': 'ðɪs',
+           'uk-phonetic': 'ðɪs',
+           'us-phonetic': 'ðɪs'},
+ 'errorCode': 0,
+ 'query': 'this',
+ 'translation': ['这'],
+ 'web': [{'key': 'This', 'value': ['这个', '这', '关键字']},
+         {'key': 'this afternoon', 'value': ['今天下午', '何时可以得到信息', '什么时间答复她']},
+         {'key': 'This shows', 'value': ['由此可见', '这说明', '这表明']}]}
+"""
+
+if resp.code == 200:
+    result = json.loads(resp.read().decode('utf-8'))
+else:
+    raise Exception(resp.code)
+
+if result['basic'].get('phonetic'):
+    sys.stdout.write('-' * 15)
+    sys.stdout.write('音标')
+    sys.stdout.write('-' * 15)
+    sys.stdout.write('\n')
+
+    sys.stdout.write('英 [{}]'.format(result['basic'].get('uk-phonetic')))
+    sys.stdout.write('\t')
+    sys.stdout.write('美 [{}]'.format(result['basic'].get('phonetic')))
+    sys.stdout.write('\n')
+    sys.stdout.write('\n')
+
+content = '\n'.join(result['basic']['explains'])
+sys.stdout.write(content)
+sys.stdout.flush()
