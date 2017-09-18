@@ -41,7 +41,7 @@ if resp.code == 200:
 else:
     raise Exception(resp.code)
 
-if result['basic'].get('phonetic'):
+if result.get('basic', {}).get('phonetic'):
     sys.stdout.write('-' * 15)
     sys.stdout.write('音标')
     sys.stdout.write('-' * 15)
@@ -53,6 +53,9 @@ if result['basic'].get('phonetic'):
     sys.stdout.write('\n')
     sys.stdout.write('\n')
 
-content = '\n'.join(result['basic']['explains'])
+    content = '\n'.join(result['basic']['explains'])
+else:
+    content = '\n'.join(result['translation'])
+
 sys.stdout.write(content)
 sys.stdout.flush()

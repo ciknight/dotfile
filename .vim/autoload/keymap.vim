@@ -109,3 +109,9 @@ inoremap <c-x> <esc>yypi
 inoremap <c-u> <esc>ui
 inoremap <c-c> <esc>
 inoremap <esc> <Nop>
+
+"""""""""" Onoremap """"""""""""""
+onoremap p i(
+onoremap b /return<cr>
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap il( :<c-u>normal! F)vi(<cr>
