@@ -12,7 +12,10 @@ fi
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$HOME/bin:$PATH"; 
+export GOPATH="$HOME/workspace/go"
+
 source $ZSH/oh-my-zsh.sh
+
 # You may need to manually set your language environment
 export LANG=zh_CN.UTF-8
 export SSH_KEY_PATH="~/.ssh/id_rsa"
@@ -20,22 +23,24 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 export LESSCHARSET=utf-8
 # Fix python shell failed to write data to stream
 export PYTHONIOENCODING=UTF-8
-export GOPATH="$HOME/workspace/go"
 export HOMEBREW_EDITOR=vim
+
 
 # git alias
 alias gpl='git pull'
+alias gdc='git diff --cached'
 
 # system alias
 alias vi='vim'
 alias ssh='ssh -2'
 alias df='df -h'
-alias du='du -h'
+alias du='du -h -d 1' # deep
 alias last='last -n 10'
 alias now='date +"%Y-%m-%d %T"'
 alias pg='ps -ef | grep'
 alias ports='netstat -tulanp'
 alias pong='ping -c 5 ' # ping，限制
+
 # soft alias
 alias py='python'
 alias py27='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
