@@ -42,10 +42,10 @@ endif
 
 
 "==========================================
-" Code Language Setting
+" Ident
 "==========================================
-if filereadable(expand("~/.vim/language.vim"))
-    source ~/.vim/language.vim
+if filereadable(expand("~/.vim/autoload/ident.vim"))
+    source ~/.vim/autoload/ident.vim
 endif
 
 

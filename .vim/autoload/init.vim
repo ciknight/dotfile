@@ -128,8 +128,6 @@ Plug 'davidhalter/jedi-vim'
 
 " syntax
 Plug 'w0rp/ale', {'do': 'pip install flake8'}
-" Plug 'hdima/python-syntax'
-Plug 'ciknight/python-syntax'
 Plug 'evanmiller/nginx-vim-syntax'
 
 " about language
