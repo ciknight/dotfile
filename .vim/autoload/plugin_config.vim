@@ -59,14 +59,13 @@ function! ALEGetWarning()
         endif
     endif
 endfunction
-" "}}}
-"
-"
+" }}}
+
 
 " ====> gitgutter <====
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_max_signs = 200
-let g:gitgutter_async = 1
+let g:gitgutter_sign_column_always=1
+let g:gitgutter_max_signs=200
+let g:gitgutter_async=1
 
 " ====> Nerd Tree <====
 let NERDChristmasTree=0
@@ -166,20 +165,20 @@ nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion=['<c-p>', '<Up>']
-let g:ycm_filetype_blacklist = {
+let g:ycm_filetype_blacklist={
             \ 'tagbar' : 1,
             \ 'nerdtree' : 1,
             \}
 
 
 " ====> jedi-vim <====
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
+let g:jedi#goto_command="<leader>d"
+let g:jedi#goto_assignments_command="<leader>g"
+let g:jedi#goto_definitions_command=""
+let g:jedi#documentation_command="K"
+let g:jedi#usages_command="<leader>n"
+let g:jedi#completions_command="<C-Space>"
+let g:jedi#rename_command="<leader>r"
 
 
 " ====> Ultisnips <====
@@ -192,7 +191,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 
 " ====> Rainbow <====
-let g:rbpt_colorpairs = [
+let g:rbpt_colorpairs=[
             \ ['brown',       'RoyalBlue3'],
             \ ['Darkblue',    'SeaGreen3'],
             \ ['darkgray',    'DarkOrchid3'],
@@ -211,8 +210,8 @@ let g:rbpt_colorpairs = [
             \ ]
             " 不加入这行, 防止黑色括号出现, 很难识别
             " \ ['black',       'SeaGreen3'],
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
+let g:rbpt_max=16
+let g:rbpt_loadcmd_toggle=0
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
@@ -236,18 +235,18 @@ set selectmode=mouse,key
 vmap <Leader>a <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
-    let g:easy_align_delimiters = {}
+    let g:easy_align_delimiters={}
 endif
-let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+let g:easy_align_delimiters['#']={ 'pattern': '#', 'ignore_groups': ['String'] }
 
 
 " ====> quick run <====
-let g:quickrun_config = {
+let g:quickrun_config={
             \   "_" : {
             \       "outputter" : "message",
             \   },
             \}
-let g:quickrun_no_default_key_mappings = 1
+let g:quickrun_no_default_key_mappings=1
 nmap <Leader>r <Plug>(quickrun)
 map <F10> :QuickRun<CR>
 
@@ -270,34 +269,34 @@ vmap V <Plug>(expand_region_shrink)
 " 启动显示状态行(1),总是显示状态行(2)
 if !exists('g:airline_powerline_fonts')
     if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
+        let g:airline_symbols={}
     endif
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.whitespace = 'Ξ'
-    let g:airline_left_sep = '▶'
-    let g:airline_left_alt_sep = '❯'
-    let g:airline_right_sep = '◀'
-    let g:airline_right_alt_sep = '❮'
+    let g:airline_symbols.linenr='␊'
+    let g:airline_symbols.linenr='␤'
+    let g:airline_symbols.linenr='¶'
+    let g:airline_symbols.branch='⎇'
+    let g:airline_symbols.paste='Þ'
+    let g:airline_symbols.whitespace='Ξ'
+    let g:airline_left_sep='▶'
+    let g:airline_left_alt_sep='❯'
+    let g:airline_right_sep='◀'
+    let g:airline_right_alt_sep='❮'
 endif
 " 是否打开tabline
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='molokai'
-let g:airline_section_error = '%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
+let g:airline_section_error='%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 
 
 " ====> isort <====
 " Shift-V 上下选中, ctrl + i 规范化
-let g:vim_isort_map = '<C-i>'
+let g:vim_isort_map='<C-i>'
 
 
 " ====> Emmet <====
 let g:user_emmet_mode='inv'  "enable all functions, which is equal to
 " only use html,css
-let g:user_emmet_install_global = 0
+let g:user_emmet_install_global=0
 autocmd FileType html,css EmmetInstall
 " To remap the default <C-Y> leader:>
 " let g:user_emmet_leader_key='<C-Y>'

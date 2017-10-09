@@ -23,10 +23,10 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 
 " 关闭方向键, 强迫自己用 hjkl
-" map <Left> <Nop>
-" map <Right> <Nop>
-" map <Up> <Nop>
-" map <Down> <Nop>
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
 
 " arrow key map
 nnoremap h <Left>
@@ -34,9 +34,14 @@ nnoremap j <Up>
 nnoremap k <Down>
 nnoremap l <Right>
 
+vnoremap h <Left>
+vnoremap j <Up>
+vnoremap k <Down>
+vnoremap l <Right>
+
 " navigate window movement with C+arrows
-nnoremap <C-j> <C-w>k
-nnoremap <C-k> <C-w>j
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
@@ -44,8 +49,8 @@ nnoremap <C-l> <C-w>l
 nnoremap Q @q
 
 " 定义快捷键到行首和行尾
-nnoremap lt ^
-nnoremap le $
+" nnoremap lt ^
+" nnoremap le $
 
 " folding
 nnoremap <space> za

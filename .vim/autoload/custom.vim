@@ -1,7 +1,9 @@
-"define BadWhitespace before using in a match
+" define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
+
 " 标示不必要的空白字符
-autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.vim match BadWhitespace /\s\+$/
+
 " 保存文件时删除多余空格 {{{
 fun! <SID>StripTrailingWhitespaces()
     let cursor_pos = getpos('.')
