@@ -105,7 +105,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'tmhedberg/SimpylFold'
 
 " <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
-Plug 'yonchu/accelerated-smooth-scroll'
+" Plug 'yonchu/accelerated-smooth-scroll'
 
 " Track the engine.
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html

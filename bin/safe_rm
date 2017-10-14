@@ -1,5 +1,6 @@
 #!/bin/bash
 DATE=`date +%s`
+
 if [ -d ~/.trash/$@ ] || [ -f ~/.trash/$@ ]; then
     mv $@ ~/.trash/$@.$DATE
 else

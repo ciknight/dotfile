@@ -27,7 +27,6 @@ export HOMEBREW_EDITOR=vim
 
 
 # git alias
-alias gpl='git pull'
 alias gdc='git diff --cached'
 
 # system alias

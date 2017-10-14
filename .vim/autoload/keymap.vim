@@ -23,10 +23,10 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 
 " 关闭方向键, 强迫自己用 hjkl
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+"nnoremap <Left> :echo 'Do not use left~'<CR>
+"nnoremap <Right> :echo 'Do not use right~'<CR>
+"nnoremap <Up> :echo 'Do not use up~'<CR>
+"nnoremap <Down> :echo 'Do not use down~'<CR>
 
 " arrow key map
 nnoremap h <Left>
