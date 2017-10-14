@@ -9,35 +9,40 @@ if [ $SYSTEM = "Darwin" ] ; then
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
-    brew install git htop vim zsh tmux autojump python3 ctags clang golang
+    brew install git htop vim zsh tmux ctags python3 clang golang autojump 
+    # brew install Caskroom/cask/go2shell
     # ack, ag, pt or rg, support ctrlsf
     brew install ack
     brew install aria2, cloc
-    # brew install Caskroom/cask/go2shell
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
     # Python env
-    brew install pyenv
-    curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+    # brew install pyenv
 elif [ $SYSTEM = "Linux" ] ; then
     echo 'updating apt and install software'
-    sudo apt-get update
-    sudo apt-get install -y wget git htop vim zsh tmux ctags python-dev
+    apt-get update
+    apt-get install -y git htop vim zsh tmux ctags python3 python-dev curl
+    apt-get install -y cmake
 fi
+
+# pyenv
+curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 # python
 ln -s $PWD_DIR/.pip ~/
 ln -s $PWD_DIR/.ipython ~/
-wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py
-sudo pip install virtualenv
-mkdir -p ~/workspace/go
-virtualenv ~/workspace/python2.7
 
+# pip
+wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-pip.py
+
+# system python path
 pyenv global system
-wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python3 /tmp/get-pip.py
 virtualenv -p `which python3` ~/workspace/python3.6
 
 # pip install cheat, flake8
+
+# go workspace
+mkdir -p ~/workspace/go
 
 # vim
 ln -s $PWD_DIR/.vimrc ~/
@@ -66,3 +71,6 @@ ln -s $PWD_DIR/.ycm_extra_conf ~/.ycm_extra_conf.py
 
 # flake8
 ln -s $PWD_DIR/.flake8 ~/.flake8
+
+# npm mirrors
+ln -s $PWD_DIR/.npmrc ~/.npmrc
