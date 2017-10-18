@@ -3,7 +3,8 @@ export ZSH=~/.oh-my-zsh
 export SYSTEM=`uname -s`
 
 # Set name of the theme to load.
-ZSH_THEME="avit"
+# ZSH_THEME="avit"
+ZSH_THEME="af-magic"
 
 # Add wisely, as too many plugins slow down shell startup.
 if [ $SYSTEM = "Darwin" ] ; then
