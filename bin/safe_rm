@@ -1,8 +1,11 @@
 #!/bin/bash
 DATE=`date +%s`
 
-if [ -d ~/.trash/$@ ] || [ -f ~/.trash/$@ ]; then
-    mv $@ ~/.trash/$@.$DATE
-else
-    mv $@ ~/.trash
-fi
+for filename in $@
+do
+    if [ -d ~/.trash/$filename ] || [ -f ~/.trash/$filename ]; then
+        mv $filename ~/.trash/$filename.$DATE
+    else
+        mv $filename ~/.trash
+    fi
+done
