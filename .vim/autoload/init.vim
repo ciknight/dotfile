@@ -124,7 +124,7 @@ Plug 'kien/ctrlp.vim'
 
 " python use jdei, pip install jedi
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'}
 
 " syntax
 Plug 'w0rp/ale', {'do': 'pip install flake8'}

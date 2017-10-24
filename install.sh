@@ -36,10 +36,10 @@ ln -s $PWD_DIR/.ipython ~/
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-pip.py
 
 # system python path
+# pyenv mirrors set PYTHON_BUILD_MIRROR_URL env
 pyenv global system
-virtualenv -p `which python3` ~/workspace/python3.6
-
-# pip install cheat, flake8
+pip install flake8 autopep8 cheat isort jedi ipython ipdb
+# virtualenv -p `which python3` ~/workspace/python3.6
 
 # go workspace
 mkdir -p ~/workspace/go
@@ -74,3 +74,6 @@ ln -s $PWD_DIR/.flake8 ~/.flake8
 
 # npm mirrors
 ln -s $PWD_DIR/.npmrc ~/.npmrc
+
+# conda mirrors
+ln -s $PWD_DIR/.condarc ~/.condarc
