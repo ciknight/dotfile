@@ -16,73 +16,51 @@ endif
 set rtp+=~/.vim/autoload/plug.vim
 call plug#begin('~/.vim/plugged')
 
-
+" -- alphe plugin
 Plug 'junegunn/vim-plug'
 
-Plug 'junegunn/vim-emoji'
+" plugin help doc http://www.wklken.me
 
-" http://www.wklken.me/posts/2015/06/07/vim-plugin-easyalign.html
-Plug 'junegunn/vim-easy-align'
+" -- display plugins
+Plug 'junegunn/vim-emoji' " emoji plugin
+Plug 'junegunn/vim-easy-align' " quick align
+Plug 'mhinz/vim-startify' " 23333
+Plug 'terryma/vim-multiple-cursors' " multipie cursor
+Plug 'kien/rainbow_parentheses.vim' " rainbow pair
+Plug 'Yggdroot/indentLine' " Indent line
+" Plug 'kshenoy/vim-signature'  " vim mark
 
-" vim mark, http://www.wklken.me/posts/2015/06/07/vim-plugin-signature.html
-" Plug 'kshenoy/vim-signature'
 
-" 23333
-Plug 'mhinz/vim-startify'
+" -- windows plugins
+Plug 'scrooloose/nerdtree' " nerdtree nerdtreetabs
+Plug 'Xuyuanp/nerdtree-git-plugin' " nerdtree extend
+Plug 'motemen/git-vim' " Git integration
+Plug 'vim-airline/vim-airline' " airline
+Plug 'vim-airline/vim-airline-themes' " airline themes
+Plug 'tpope/vim-fugitive' " diff status
+Plug 'airblade/vim-gitgutter' " airline git status
+Plug 'tpope/vim-endwise' " https://github.com/tpope/vim-endwise
 
-" http://www.wklken.me/posts/2015/06/07/vim-plugin-multiplecursors.html
-Plug 'terryma/vim-multiple-cursors'
 
-" http://www.wklken.me/posts/2015/06/13/vim-plugin-quickrun.html
-Plug 'thinca/vim-quickrun'
+" -- function plugins
+Plug 'thinca/vim-quickrun' " quick run
+Plug 'vim-scripts/vimprj' " manage multipie project
+Plug 'vim-scripts/DfrankUtil' " Vimprj dependency
+Plug 'pbrisbin/vim-mkdir' " auto create not exists dir
+Plug 'scrooloose/nerdcommenter' " quick annotation
+Plug 'vim-scripts/DrawIt' " :DIstart or \di, Draw ascii paint  http://www.opstool.com/article/178
+Plug 'terryma/vim-expand-region' " use V or v, region selected
 
-" use V or v
-Plug 'terryma/vim-expand-region'
 
-" rainbow pair, http://www.wklken.me/posts/2015/06/07/vim-plugin-rainbowparentheses.html
-Plug 'kien/rainbow_parentheses.vim'
+" -- search plugins
+Plug 'dyng/ctrlsf.vim' " global seach, use :CtrlSF [pattern]
+Plug 'mileszs/ack.vim' " CtrlSF dependency
+Plug 'vim-scripts/matchit.zip' " % extend
 
-" manage multipie project
-Plug 'vim-scripts/vimprj'
-" Vimprj dependcy
-Plug 'vim-scripts/DfrankUtil'
-
-" ":CtrlSF [pattern]
-Plug 'dyng/ctrlsf.vim'
-
-Plug 'mileszs/ack.vim'
-
-" ctrlsf depend
-Plug 'terryma/vim-multiple-cursors'
-
-" quick annotation http://www.wklken.me/posts/2015/06/07/vim-plugin-nerdcommenter.html
-Plug 'scrooloose/nerdcommenter'
-
-" auto create not exists dir
-Plug 'pbrisbin/vim-mkdir'
-
-" Draw ascii paint  http://www.opstool.com/article/178
-" :DIstart or \di
-Plug 'vim-scripts/DrawIt'
-
-" Indent line
-Plug 'Yggdroot/indentLine'
 
 " Code and files fuzzy finder
 " Plug 'gcmt/wildfire.vim'
 
-" nerdtree nerdtreetabs
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" Git integration
-Plug 'motemen/git-vim'
-" powerline git status
-Plug 'tpope/vim-fugitive'
-" diff status
-Plug 'airblade/vim-gitgutter'
-" https://github.com/tpope/vim-endwise
-Plug 'tpope/vim-endwise'
 
 " TMUX
 Plug 'tpope/vim-tbone'
@@ -112,13 +90,9 @@ Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html
 " " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
-" airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
-
 " auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 Plug 'kien/ctrlp.vim'
 
@@ -145,8 +119,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 " 自动补全html/xml标签
 Plug 'docunext/closetag.vim', {'for': ['html', 'xml']}
-" % extend
-Plug 'vim-scripts/matchit.zip'
 Plug 'elzr/vim-json'
 
 Plug 'vim-scripts/SQLComplete.vim'
