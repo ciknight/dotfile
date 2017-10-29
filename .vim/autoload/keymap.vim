@@ -106,6 +106,9 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
 
+nnoremap <leader>o o<esc>
+
+
 """""""""" Insert """"""""""""""
 inoremap <leader>w :w<CR>
 inoremap <leader>q :q<CR>
@@ -120,3 +123,4 @@ onoremap p i(
 onoremap b /return<cr>
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap il( :<c-u>normal! F)vi(<cr>
+
