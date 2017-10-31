@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ $SYSTEM = "Darwin" ] ; then
-    uptime | awk -F 'load averages:' '{print $2}' | sed 's/^[][ ]*//g' 
+    uptime | awk -F 'load averages:' '{print $2}' | awk -F ',' '{print $1}' | sed 's/^[][ ]*//g'
 elif [ $SYSTEM = "Linux" ] ; then
-    uptime | awk -F 'load average:' '{print $2}' | sed 's/^[][ ]*//g' 
+    uptime | awk -F 'load average:' '{print $2}' | awk -F ',' '{print $1}' | sed 's/^[][ ]*//g'
 fi
 # uptime | cut -d":" -f4- | sed s/,//g | awk -F ' ' '{print $1,$2,$3}'
 # sysctl -n vm.loadavg
