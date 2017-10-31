@@ -1,3 +1,21 @@
+# NOTE Login shells read ~/.profile, normal and interactive shells read ~/.bashrc.
+
+# Source global profile.
+# NOTE resets PATH
+if [ -f /etc/profile ] && [ -r /etc/profile ]; then
+        source /etc/profile
+fi
+
+# Number lines to store in active bash session.
+export HISTSIZE=100000
+# Number lines to store in history file after session end.
+export HISTFILESIZE=100000
+# Don't put duplicate commands in the history.
+export HISTCONTROL="erasedups:ignoreboth"
+# Commands to ignore in history.
+# TODO poweroff logged somehow, why?
+export HISTIGNORE="&:[ ]*:exit:halt:poweroff:shutdown:reboot:xlogout:pm-hibernate:pm-suspend"
+
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 

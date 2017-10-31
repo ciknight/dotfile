@@ -27,13 +27,26 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 export PYTHONIOENCODING=UTF-8
 export HOMEBREW_EDITOR=vim
 
-# git alias
+# Git alias
 alias gdc='git diff --cached'
 
 # Golang Path
 export GOPATH="$HOME/workspace/go"
 
-# system alias
+# History
+export HISTFILE=~/.zsh_histfile     # Where to save history.
+export HISTSIZE=1000000             # How many lines in the current session to remember.
+export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
+# Patterns to exclue. Separate with |. *-matching.
+export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout"
+
+setopt appendhistory        # Append to history write on exit, don't overwrite.
+setopt histignoredups       # Don't save immediate duplicates lines in history.
+setopt histignorespace      # Ignore commands starting with space.
+setopt extendedhistory      # Save command time start and exec time in seconds.
+setopt histreduceblanks     # Strip redundant spaces.
+
+# System alias
 alias vi='vim'
 alias ssh='ssh -2'
 alias df='df -h'

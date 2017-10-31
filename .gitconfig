@@ -1,11 +1,17 @@
 [color]
+    diff = auto
+    status = auto
+    branch = auto
     ui = true
+    page = true
 [alias]
     st = status
     co = checkout
     br = branch
     ci = commit
     pl = pull
+    d = diff
+    dc = diff --cached
     lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
 [core]
     editor = vim
@@ -13,12 +19,15 @@
     excludesfile = ~/.gitignore.global
     ignorecase = false
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
+[credential]
+    helper = cache
 [push]
-    default = current
+    default = current # upstream
 [user]
     email = ci_knight@msn.cn
     name = ci_knight
 [merge]
+    log = true
     tool = vimdiff
 [url "git@github.com:"]
     insteadOf = https://github.com/

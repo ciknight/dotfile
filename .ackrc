@@ -1,8 +1,28 @@
 # Always sort the files
 --sort-files
+
 # Always color, even if piping to a another program
 --color
+
 # Use "less -r" as my pager
---pager=less -r
-# ignore
-#--noenv
+# --pager=less -r
+
+# Ignore files
+
+# No env
+--ignore-dir=venv/
+--ignore-dir=env/
+--ignore-dir=node_models/
+
+# Vim development
+--ignore-file=match:cscope.out
+--ignore-file=match:cscope.files
+--ignore-file=match:tags
+--ignore-file=match:Session.vim
+--ignore-file=match:.syntastic_javac_config
+
+--ignore-dir=.cache/
+
+## Intellij project files (old=fileformat).
+--ignore-file=match:.*.(ipr|iml)
+--ignore-dir=.idea/

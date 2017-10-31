@@ -9,11 +9,11 @@ if [ $SYSTEM = "Darwin" ] ; then
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
-    brew install git htop vim zsh tmux ctags python3 clang golang autojump 
+    brew install git htop vim zsh tmux ctags python3 clang golang autojump
     # brew install Caskroom/cask/go2shell
     # ack, ag, pt or rg, support ctrlsf
-    brew install ack
-    brew install aria2, cloc
+    brew install ack the_silver_searcher
+    brew install aria2 cloc tig jq
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
     # Python env
@@ -21,8 +21,8 @@ if [ $SYSTEM = "Darwin" ] ; then
 elif [ $SYSTEM = "Linux" ] ; then
     echo 'updating apt and install software'
     apt-get update
-    apt-get install -y git htop vim zsh tmux ctags python3 python-dev curl
-    apt-get install -y cmake
+    apt-get install -y git htop vim zsh tmux ctags python3 python-dev curl tig
+    apt-get install -y cmake silversearcher-ag jq ack-grep
 fi
 
 # pyenv
@@ -38,7 +38,7 @@ wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-
 # system python path
 # pyenv mirrors set PYTHON_BUILD_MIRROR_URL env
 pyenv global system
-pip install flake8 autopep8 cheat isort jedi ipython ipdb
+pip install flake8 autopep8 cheat isort jedi ipython ipdb mycli
 # virtualenv -p `which python3` ~/workspace/python3.6
 
 # go workspace
