@@ -1,5 +1,9 @@
 #!/bin/bash
 
-mkdir $1
-touch $1/__init__.py
-echo "# -*- coding: utf-8 -*-" > $1/__init__.py
+if [ ! $1 ]; then
+    echo 'please input package name!'
+else
+    mkdir $1
+    touch $1/__init__.py
+    echo "# -*- coding: utf-8 -*-" > $1/__init__.py
+fi
