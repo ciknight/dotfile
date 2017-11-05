@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+import sys
+
+try:
+    import requests
+except ImportError:
+    pass
+
+
+class Downloader(object):
+
+    HTTP_HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36'}
+
+    def __init__(self, url, name='', num=5):
+        self.url = url
+        self._name = name
+        self.num = num
+        assert self.url, 'not download url'
+
+        r = requests.head(self.url)
+        assert r.status_code == 200, 'http head request error'
+        self.total = int(r.headers['Content-Length'])  # Byte
+
+    def get_ranges(self):
+        ranges = []
+        offset  = self.total // self.num
+        for i in range(self.num):
+            if i == self.num - 1:
+                ranges.append((i * offset, ""))
+            else:
+                ranges.append((i * offset, (i + 1) * offset))
+
+        return ranges
+
+
+if __name__ == '__main__':
+    ranges = Downloader('https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png').get_ranges()
+    print(ranges)
+
