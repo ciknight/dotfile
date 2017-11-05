@@ -1,23 +1,35 @@
 #!/usr/bin/env python3
 import sys
-import json
-from urllib import request
 
-BASE_URL = "http://api.chbtc.com/data/v1/ticker?currency={}_cny"
+try:
+    from forex_python.bitcoin import BtcConverter
+    from forex_python.converter import CurrencyRates
+except ImportError:
+    pass
 
 
-currency = len(sys.argv) == 2 and sys.argv[1] or 'eth'
-resp = request.urlopen(BASE_URL.format(currency))
-if resp.code == 200:
-    result = json.loads(resp.read().decode('utf-8'))
-else:
-    raise Exception(resp.code)
+def get_rate(currencys):
+    if not currencys:
+        return 'null currencys'
+    if len(currencys) != 2:
+        return 'error currencys'
 
-if result.get('ticker'):
-    ticker = result['ticker']
-else:
-    raise Exception(result['error'])
+    if 'BTC' in currencys:
+        c = BtcConverter()
+        rate = c.convert_btc_to_cur(currencys[0], currencys[1])
+    else:
+        c = CurrencyRates()
+        rate = c.get_rate(currencys[0], currencys[1])
 
-content = 'B:{}￥|S:{}￥'.format(ticker['buy'], ticker['sell'])
-sys.stdout.write(content)
-sys.stdout.flush()
+    return rate
+
+
+currencys = sys.argv[1:]
+currencys = [currency.upper for currency in currencys]
+
+
+if __name__ == '__main__':
+    try:
+        print(get_rate(currencys))
+    except:
+        print('null')

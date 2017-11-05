@@ -38,7 +38,7 @@ wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-
 # system python path
 # pyenv mirrors set PYTHON_BUILD_MIRROR_URL env
 pyenv global system
-pip install flake8 autopep8 cheat isort jedi ipython ipdb mycli
+pip install flake8 autopep8 cheat isort jedi ipython ipdb mycli forex-python simplejson
 # virtualenv -p `which python3` ~/workspace/python3.6
 
 # go workspace
