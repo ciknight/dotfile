@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
+import threading
 import sys
+from urllib.parse import urlparse
 
 try:
     import requests
@@ -21,6 +23,10 @@ class Downloader(object):
         assert r.status_code == 200, 'http head request error'
         self.total = int(r.headers['Content-Length'])  # Byte
 
+    @property
+    def name(self):
+        return urlparse(self.url).path.split('/')[-1]
+
     def get_ranges(self):
         ranges = []
         offset  = self.total // self.num
@@ -32,8 +38,30 @@ class Downloader(object):
 
         return ranges
 
+    def download(self,start,end):
+        headers = {'Range': 'Bytes={}-{}'.format(start, end), 'Accept-Encoding': '*'}
+        r = requests.get(self.url, headers=headers)
+        print('{}-{} download success'.format(start, end))
+
+        self.fd.seek(start)
+        self.fd.write(r.content)
+
+    def run(self):
+        self.fd = open(self.name, 'wb')
+        threads = []
+        for r in self.get_ranges():
+            start, end = r
+            thread = threading.Thread(target=self.download, args=(start, end))
+            thread.start()
+            threads.append(thread)
+
+        print('downloading...')
+        for i in threads:
+            i.join()
+
+        self.fd.close()
+
 
 if __name__ == '__main__':
-    ranges = Downloader('https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png').get_ranges()
-    print(ranges)
-
+    url = sys.argv[1]
+    Downloader(url).run()
