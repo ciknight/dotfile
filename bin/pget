@@ -2,11 +2,51 @@
 import threading
 import sys
 from urllib.parse import urlparse
+from contextlib import closing
 
 try:
     import requests
 except ImportError:
     pass
+
+
+class ProgressBar(object):
+
+    def __init__(self, title,
+                 count=0.0,
+                 run_status=None,
+                 fin_status=None,
+                 total=100.0,
+                 unit='', sep='/',
+                 chunk_size=1.0):
+        super(ProgressBar, self).__init__()
+        self.info = "【%s】%s %.2f %s %s %.2f %s"
+        self.title = title
+        self.total = total
+        self.count = count
+        self.chunk_size = chunk_size
+        self.status = run_status or ""
+        self.fin_status = fin_status or " " * len(self.statue)
+        self.unit = unit
+        self.seq = sep
+
+    def __get_info(self):
+        # 【名称】状态 进度 单位 分割线 总数 单位
+        _info = self.info % (self.title, self.status,
+                             self.count / self.chunk_size, self.unit, self.seq, self.total / self.chunk_size, self.unit)
+        return _info
+
+    def refresh(self, count=1, status=None, thread=0):
+        self.count += count
+        # if status is not None:
+        self.status = status or self.status
+        if thread:
+            print('\n' * thread)
+        end_str = "\r"
+        if self.count >= self.total:
+            end_str = '\n'
+            self.status = status or self.fin_status
+        print(self.__get_info(), end=end_str)
 
 
 class Downloader(object):
@@ -22,6 +62,10 @@ class Downloader(object):
         r = requests.head(self.url)
         assert r.status_code == 200, 'http head request error'
         self.total = int(r.headers['Content-Length'])  # Byte
+        self.chunk_size = 1024
+        content_size = self.total
+        self.progress = ProgressBar(self.name, total=content_size,
+                               unit="KB", chunk_size=self.chunk_size, run_status="正在下载", fin_status="下载完成")
 
     @property
     def name(self):
@@ -29,7 +73,7 @@ class Downloader(object):
 
     def get_ranges(self):
         ranges = []
-        offset  = self.total // self.num
+        offset = self.total // self.num
         for i in range(self.num):
             if i == self.num - 1:
                 ranges.append((i * offset, ""))
@@ -38,13 +82,13 @@ class Downloader(object):
 
         return ranges
 
-    def download(self,start,end):
+    def download(self, start, end, thread=0):
         headers = {'Range': 'Bytes={}-{}'.format(start, end), 'Accept-Encoding': '*'}
-        r = requests.get(self.url, headers=headers)
-        print('{}-{} download success'.format(start, end))
-
-        self.fd.seek(start)
-        self.fd.write(r.content)
+        with closing(requests.get(self.url, headers=headers, stream=True)) as resp:
+            self.fd.seek(start)
+            for data in resp.iter_content(chunk_size=self.chunk_size):
+                self.fd.write(data)
+                self.progress.refresh(count=len(data))
 
     def run(self):
         self.fd = open(self.name, 'wb')
@@ -55,7 +99,6 @@ class Downloader(object):
             thread.start()
             threads.append(thread)
 
-        print('downloading...')
         for i in threads:
             i.join()
 
