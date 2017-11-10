@@ -106,7 +106,8 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
 
-nnoremap <leader>o o<esc>
+nnoremap <leader>o o<Esc>
+nnoremap <leader>m :nohl<CR>:echo 'clear search highlight'<CR>
 
 
 """""""""" Insert """"""""""""""
