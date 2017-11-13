@@ -102,7 +102,6 @@ Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'}
 
 " syntax
 Plug 'w0rp/ale', {'do': 'pip install flake8'}
-Plug 'evanmiller/nginx-vim-syntax'
 
 " about language
 Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'}
