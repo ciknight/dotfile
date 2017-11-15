@@ -4,7 +4,7 @@ export SYSTEM=`uname -s`
 
 # Set name of the theme to load.
 # ZSH_THEME="avit"
-ZSH_THEME="af-magic"
+ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
 
 # Add wisely, as too many plugins slow down shell startup.
 if [ $SYSTEM = "Darwin" ] ; then
@@ -13,25 +13,33 @@ elif [ $SYSTEM = "Linux" ] ; then
     plugins=(git autojump pip redis-cli ssh-agent sudo tmux)
 fi
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PATH"; 
-
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-export LANG=zh_CN.UTF-8
-# Fix linux git diff and log chinese
-export LESSCHARSET=utf-8
+if [ $SYSTEM = "Darwin" ] ; then
+    # brew cdn
+    export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
+    # autojump
+    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+    # JAVA_HOME
+    export JAVA_HOME=$(/usr/libexec/java_home)
+    export PATH=$JAVA_HOME/bin:$PATH
+elif [ $SYSTEM = "Linux" ] ; then
+    # TODO doing somthing
+fi
+
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$HOME/bin:$PATH"; 
+export LANG=zh_CN.UTF-8  # You may need to manually set your language environment
+export LESSCHARSET=utf-8  # Fix linux git diff and log chinese
 export SSH_KEY_PATH="~/.ssh/id_rsa"
-# Fix python shell failed to write data to stream
-export PYTHONIOENCODING=UTF-8
+export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
 export HOMEBREW_EDITOR=vim
+export GOPATH="$HOME/workspace/go"  # Golang Path
 
-# Git alias
-alias gdc='git diff --cached'
-
-# Golang Path
-export GOPATH="$HOME/workspace/go"
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # History
 export HISTFILE=~/.zsh_histfile     # Where to save history.
@@ -39,12 +47,14 @@ export HISTSIZE=1000000             # How many lines in the current session to r
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
 export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout"
+# setopt appendhistory        # Append to history write on exit, do not overwrite.
+# setopt histignoredups       # Do not save immediate duplicates lines in history.
+# setopt histignorespace      # Ignore commands starting with space.
+# setopt extendedhistory      # Save command time start and exec time in seconds.
+# setopt histreduceblanks     # Strip redundant spaces.
 
-setopt appendhistory        # Append to history write on exit, don't overwrite.
-setopt histignoredups       # Don't save immediate duplicates lines in history.
-setopt histignorespace      # Ignore commands starting with space.
-setopt extendedhistory      # Save command time start and exec time in seconds.
-setopt histreduceblanks     # Strip redundant spaces.
+# Git alias
+alias gdc='git diff --cached'
 
 # System alias
 alias vi='vim'
@@ -55,7 +65,7 @@ alias last='last -n 10'
 alias now='date +"%Y-%m-%d %T"'
 alias pg='ps -ef | grep'
 alias ports='netstat -tulanp'
-alias pong='ping -c 5 ' # ping，限制
+alias pong='ping -c 5 ' # ping, 限制
 
 # soft alias
 alias py34='source ~/.zshrc;source ~/workspace/python3.4/bin/activate'
@@ -69,10 +79,11 @@ alias weather='curl wttr.in/~上海'
 alias myip='curl ip.cn' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
 
-# local alias
-local_alias=~/.local_alias.sh
-if [ -f $local_alias ]; then
-    source $local_alias
+# local alias, default ptyhon venv set here
+# source ~/workspace/python3.6/bin/activate
+zsh_local=~/.zsh_local
+if [ -f $zsh_local ]; then
+    source $zsh_local
 fi
 
 # ^Z Toggle vim
@@ -87,26 +98,6 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
-
-if [ $SYSTEM = "Darwin" ] ; then
-    # brew cdn
-    export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
-    # autojump
-    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-    # JAVA_HOME
-    export JAVA_HOME=$(/usr/libexec/java_home)
-    export PATH=$JAVA_HOME/bin:$PATH
-elif [ $SYSTEM = "Linux" ] ; then
-    # TODO doing somthing
-fi
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# default ptyhon venv
-# source ~/workspace/python3.6/bin/activate
 
 # if [[ "$TERM" != "screen-256color" ]]
 # then
