@@ -66,6 +66,7 @@ alias now='date +"%Y-%m-%d %T"'
 alias pg='ps -ef | grep'
 alias ports='netstat -tulanp'
 alias pong='ping -c 5 ' # ping, 限制
+alias tailf='tail -f'
 
 # soft alias
 alias py34='source ~/.zshrc;source ~/workspace/python3.4/bin/activate'

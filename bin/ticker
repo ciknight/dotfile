@@ -2,10 +2,11 @@
 import sys
 
 try:
-    from forex_python.bitcoin import BtcConverter
+    # from forex_python.bitcoin import BtcConverter
     from forex_python.converter import CurrencyRates
+    import requests
 except ImportError:
-    pass
+    raise Exception('import error')
 
 
 def get_rate(currencys):
@@ -14,22 +15,24 @@ def get_rate(currencys):
     if len(currencys) != 2:
         return 'error currencys'
 
-    if 'BTC' in currencys:
-        c = BtcConverter()
-        rate = c.convert_btc_to_cur(currencys[0], currencys[1])
+    if currencys[0] in ['BTC', 'ETH', 'ETC', 'ZEC', 'BCH', 'LTC', 'MONA', 'DASH']:
+        # c = BtcConverter()
+        # rate = c.convert_btc_to_cur(currencys[0], currencys[1])
+        # source_cc, target_cc
+        rate = requests.get('https://min-api.cryptocompare.com/data/price?fsym={}&tsyms={}'.format(
+            currencys[0], currencys[1])).json()[currencys[1]]
     else:
         c = CurrencyRates()
+        # source_cc, target_cc
         rate = c.get_rate(currencys[0], currencys[1])
 
     return rate
 
 
-currencys = sys.argv[1:]
-currencys = [currency.upper for currency in currencys]
-
-
 if __name__ == '__main__':
     try:
+        currencys = sys.argv[1:]
+        currencys = [currency.upper() for currency in currencys]
         print(get_rate(currencys))
     except:
         print('null')
