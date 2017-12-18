@@ -79,6 +79,9 @@ alias rm=safe_rm
 alias weather='curl wttr.in/~上海'
 alias myip='curl myip.ipip.net' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
+alias resdns='dscacheutil -flushcache'
+alias netlisten='lsof -i -P | grep -i "listen"'
+alias seek='vim /tmp/`timestamp`.md'
 
 # local alias, default ptyhon venv set here
 # source ~/workspace/python3.6/bin/activate

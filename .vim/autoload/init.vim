@@ -40,6 +40,7 @@ Plug 'vim-airline/vim-airline-themes' " airline themes
 Plug 'tpope/vim-fugitive' " diff status
 Plug 'airblade/vim-gitgutter' " airline git status
 Plug 'tpope/vim-endwise' " https://github.com/tpope/vim-endwise
+Plug 'tmhedberg/SimpylFold' " Fold
 
 
 " -- function plugins
@@ -50,87 +51,53 @@ Plug 'pbrisbin/vim-mkdir' " auto create not exists dir
 Plug 'scrooloose/nerdcommenter' " quick annotation
 Plug 'vim-scripts/DrawIt' " :DIstart or \di, Draw ascii paint  http://www.opstool.com/article/178
 Plug 'terryma/vim-expand-region' " use V or v, region selected
+Plug 'tpope/vim-surround' " surroundings in pairs, cs => change surring cst => tag, ds => delete, csw => add
+Plug 'tpope/vim-repeat' " for repeat -> enhance surround.vim, use . to repeat command
+Plug 'Raimondi/delimitMate' " auto sign complate
+Plug 'tpope/vim-tbone' " TMUX
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'godlygeek/tabular' " Vim script for text filtering and alignment
 
 
 " -- search plugins
 Plug 'dyng/ctrlsf.vim' " global seach, use :CtrlSF [pattern]
 Plug 'mileszs/ack.vim' " CtrlSF dependency
 Plug 'vim-scripts/matchit.zip' " % extend
+Plug 'majutsushi/tagbar' " Class/module browser, ctag support, suppoer powerline
+Plug 'kien/ctrlp.vim' " auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 
 
-" Code and files fuzzy finder
-" Plug 'gcmt/wildfire.vim'
-
-
-" TMUX
-Plug 'tpope/vim-tbone'
-Plug 'christoomey/vim-tmux-navigator'
-
-" Handle Buffers with Duplicate Name
-" Plug 'fholgado/minibufexpl.vim'
-
-" surroundings in pairs
-" cs => change surring cst => tag, ds => delete, csw => add
-Plug 'tpope/vim-surround'
-
-" for repeat -> enhance surround.vim, use . to repeat command
-Plug 'tpope/vim-repeat'
-
-" auto sign complate
-Plug 'Raimondi/delimitMate'
-
-" Fold
-Plug 'tmhedberg/SimpylFold'
-
-" <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
-" Plug 'yonchu/accelerated-smooth-scroll'
-
-" Track the engine.
-Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html
-" " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-
-
-" Class/module browser, ctag support, suppoer powerline
-Plug 'majutsushi/tagbar'
-" auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
-Plug 'kien/ctrlp.vim'
-
-" python use jdei, pip install jedi
+" -- autocomplate plugin
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
-Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'}
+Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
 
-" syntax
-Plug 'w0rp/ale', {'do': 'pip install flake8'}
 
-" about language
-Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'}
-" isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
-Plug 'fisadev/vim-isort', {'do': 'pip install isort'}
-
+" -- syntax plugin
+Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
+Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " Python
+Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
-
-" shell
-Plug 'Shougo/vimshell.vim'
-
-" front end
-Plug 'pangloss/vim-javascript'
+Plug 'Shougo/vimshell.vim' " shell
+Plug 'pangloss/vim-javascript' " front end
 Plug 'mattn/emmet-vim'
-" 自动补全html/xml标签
-Plug 'docunext/closetag.vim', {'for': ['html', 'xml']}
+Plug 'docunext/closetag.vim', {'for': ['html', 'xml']} " 自动补全html/xml标签
 Plug 'elzr/vim-json'
-
+Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt
 Plug 'vim-scripts/SQLComplete.vim'
-Plug 'vim-scripts/dbext.vim'
+Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
+Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
+Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
 
-" Golang
-Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
 
-Plug 'godlygeek/tabular'
-
-" Theme
+" -- Theme plugin
 Plug 'tomasr/molokai'  " i like it
 Plug 'altercation/vim-colors-solarized'
+
+
+" -- closing plugins
+" Plug 'yonchu/accelerated-smooth-scroll' " <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
+" Plug 'fholgado/minibufexpl.vim' " Handle Buffers with Duplicate Name
+" Plug 'gcmt/wildfire.vim' " Code and files fuzzy finder
 
 
 " Initialize plugin system

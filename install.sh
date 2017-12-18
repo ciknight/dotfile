@@ -38,6 +38,7 @@ wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-
 # system python path
 # pyenv mirrors set PYTHON_BUILD_MIRROR_URL env
 pyenv global system
+/usr/local/bin/pip2 install isort
 pip install flake8 autopep8 cheat isort jedi ipython ipdb mycli forex-python simplejson
 # virtualenv -p `which python3` ~/workspace/python3.6
 
@@ -77,3 +78,6 @@ ln -s $PWD_DIR/.npmrc ~/.npmrc
 
 # conda mirrors
 ln -s $PWD_DIR/.condarc ~/.condarc
+
+# isort
+ln -s $PWD_DIR/.isort.cfg ~/.isort.cfg

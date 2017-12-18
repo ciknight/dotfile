@@ -61,8 +61,8 @@ set cursorline cursorcolumn
 autocmd InsertEnter * :set norelativenumber number
 autocmd InsertLeave * :set relativenumber
 " Highlight current line
-au WinEnter * set cursorline cursorcolumn
-au WinLeave * set nocursorline nocursorcolumn
+autocmd WinEnter * set cursorline cursorcolumn
+autocmd WinLeave * set nocursorline nocursorcolumn
 
 " 禁止显示滚动条
 set guioptions-=l
