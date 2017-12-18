@@ -308,3 +308,10 @@ autocmd FileType html,css EmmetInstall
 " To remap the default <C-Y> leader:>
 " let g:user_emmet_leader_key='<C-Y>'
 " scss support
+
+
+" ====> autopep8 <====
+" autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>)
+" let g:autopep8_select="E501,W293" " Fix only these errors/warnings
+let g:autopep8_max_line_length=110
+let g:autopep8_ignore="E501,E128,E301,E701,E126,E402"

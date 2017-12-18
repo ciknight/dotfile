@@ -74,7 +74,7 @@ Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip i
 
 " -- syntax plugin
 Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
-Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " Python
+Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " :Autopep8, fix syntax
 Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'plasticboy/vim-markdown', {'for': 'md'}
 Plug 'Shougo/vimshell.vim' " shell
