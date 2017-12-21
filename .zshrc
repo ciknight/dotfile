@@ -38,6 +38,7 @@ export GOPATH="$HOME/workspace/go"  # Golang Path
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
+export  PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
@@ -81,7 +82,7 @@ alias myip='curl myip.ipip.net' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
-alias seek='vim /tmp/`timestamp`.md'
+alias seed='vim /tmp/`timestamp`.md'
 
 # local alias, default ptyhon venv set here
 # source ~/workspace/python3.6/bin/activate

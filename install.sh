@@ -9,21 +9,25 @@ if [ $SYSTEM = "Darwin" ] ; then
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
-    brew install git htop vim zsh tmux ctags python3 clang golang autojump
+    brew install git htop vim neovim zsh tmux ctags clang golang autojump
     # brew install Caskroom/cask/go2shell
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
     brew install aria2 cloc tig jq
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
-    # Python env
-    # brew install pyenv
 elif [ $SYSTEM = "Linux" ] ; then
     echo 'updating apt and install software'
     apt-get update
     apt-get install -y git htop vim zsh tmux ctags python3 python-dev curl tig
     apt-get install -y cmake silversearcher-ag jq ack-grep
+else
+    echo 'Unsupport System!'
+    exit 0
 fi
+
+# mk workspace
+mkdir ~/workspace
 
 # pyenv
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
@@ -32,18 +36,22 @@ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-
 ln -s $PWD_DIR/.pip ~/
 ln -s $PWD_DIR/.ipython ~/
 
+# system python path
+pyenv global system
+
 # pip
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-pip.py
+pip install isort flake8 autopep8 cheat isort jedi ipython ipdb mycli forex-python simplejson
 
-# system python path
-# pyenv mirrors set PYTHON_BUILD_MIRROR_URL env
-pyenv global system
-/usr/local/bin/pip2 install isort
-pip install flake8 autopep8 cheat isort jedi ipython ipdb mycli forex-python simplejson
+# virtualenv
 # virtualenv -p `which python3` ~/workspace/python3.6
 
 # go workspace
-mkdir -p ~/workspace/go
+mkdir ~/workspace/go
+
+# install powerline fonts, set terminal font support powerline
+git clone https://github.com/powerline/fonts.git ~/.fonts
+sh ~/.fonts/install.sh
 
 # vim
 ln -s $PWD_DIR/.vimrc ~/

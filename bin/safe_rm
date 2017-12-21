@@ -1,11 +1,13 @@
 #!/bin/bash
 DATE=`date +%s`
 
-for filename in $@
+until [ $# -eq 0 ]
 do
-    if [ -d ~/.trash/$filename ] || [ -f ~/.trash/$filename ]; then
-        mv $filename ~/.trash/$filename.$DATE
+    file=$(echo $1|sed 's/ /?/g')
+    if [ -d ~/.trash/$file ] || [ -f ~/.trash/$file ]; then
+        mv -v $file ~/.trash/$file.$DATE
     else
-        mv $filename ~/.trash
+        mv -v $file ~/.trash/
     fi
+    shift
 done
