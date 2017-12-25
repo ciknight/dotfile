@@ -31,14 +31,14 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$HOME/bin:$PATH"; 
 export LANG=zh_CN.UTF-8  # You may need to manually set your language environment
 export LESSCHARSET=utf-8  # Fix linux git diff and log chinese
-export SSH_KEY_PATH="~/.ssh/id_rsa"
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
 export HOMEBREW_EDITOR=vim
 export GOPATH="$HOME/workspace/go"  # Golang Path
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-export  PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
@@ -47,7 +47,7 @@ export HISTFILE=~/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
-export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout"
+export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit"
 # setopt appendhistory        # Append to history write on exit, do not overwrite.
 # setopt histignoredups       # Do not save immediate duplicates lines in history.
 # setopt histignorespace      # Ignore commands starting with space.
@@ -83,6 +83,7 @@ alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # é€’å½
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
+alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
 
 # local alias, default ptyhon venv set here
 # source ~/workspace/python3.6/bin/activate
