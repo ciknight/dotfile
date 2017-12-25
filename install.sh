@@ -29,7 +29,7 @@ fi
 # mk workspace
 mkdir ~/workspace
 
-# pyenv
+# pyenv, https://github.com/pyenv/pyenv-installer.git
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
 # python

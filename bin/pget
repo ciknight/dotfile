@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import threading
 import sys
 from urllib.parse import urlparse
@@ -7,7 +8,24 @@ from contextlib import closing
 try:
     import requests
 except ImportError:
-    pass
+    raise
+
+
+def size_format(b):
+    if b < 1000:
+        amount, unit = '%i' % b, 'B'
+    elif 1000 <= b < 1000000:
+        amount, unit = '%.1f' % float(b / 1000), 'KB'
+    elif 1000000 <= b < 1000000000:
+        amount, unit = '%.1f' % float(b / 1000000), 'MB'
+    elif 1000000000 <= b < 1000000000000:
+        amount, unit = '%.1f' % float(b / 1000000000), 'GB'
+    elif 1000000000000 <= b:
+        amount, unit = '%.1f' % float(b / 1000000000000), 'TB'
+    else:
+        amount, unit = '0', 'B'
+
+    return float(amount), unit
 
 
 class ProgressBar(object):
@@ -17,7 +35,6 @@ class ProgressBar(object):
                  run_status=None,
                  fin_status=None,
                  total=100.0,
-                 unit='', sep='/',
                  chunk_size=1.0):
         super(ProgressBar, self).__init__()
         self.info = "【%s】%s %.2f %s %s %.2f %s"
@@ -27,13 +44,13 @@ class ProgressBar(object):
         self.chunk_size = chunk_size
         self.status = run_status or ""
         self.fin_status = fin_status or " " * len(self.statue)
-        self.unit = unit
-        self.seq = sep
 
     def __get_info(self):
+        total, total_unit = size_format(self.total)
+        chunk_size, chunk_unit = size_format(self.count)
+
         # 【名称】状态 进度 单位 分割线 总数 单位
-        _info = self.info % (self.title, self.status,
-                             self.count / self.chunk_size, self.unit, self.seq, self.total / self.chunk_size, self.unit)
+        _info = self.info % (self.title, self.status, chunk_size, chunk_unit, '/', total, total_unit)
         return _info
 
     def refresh(self, count=1, status=None, thread=0):
@@ -59,13 +76,14 @@ class Downloader(object):
         self.num = num
         assert self.url, 'not download url'
 
+        print('request url {} header info'.format(self.url))
         r = requests.head(self.url)
-        assert r.status_code == 200, 'http head request error'
+        assert r.status_code == 200, 'http response error, return code {}'.format(r.status_code)
         self.total = int(r.headers['Content-Length'])  # Byte
         self.chunk_size = 1024
         content_size = self.total
         self.progress = ProgressBar(self.name, total=content_size,
-                               unit="KB", chunk_size=self.chunk_size, run_status="正在下载", fin_status="下载完成")
+                               chunk_size=self.chunk_size, run_status="正在下载", fin_status="下载完成")
 
     @property
     def name(self):
