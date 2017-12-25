@@ -18,7 +18,7 @@ autocmd FileType vim,c,cpp,java,javascript,python,xml,yml,vim autocmd BufWritePr
 function! SetTitle()
     " 如果文件类型为.sh文件
     if &filetype == 'sh'
-        call setline(1,"\#!/bin/bash")
+        call setline(1,"\#!/usr/bin/env bash")
         call append(line("."), "")
     elseif &filetype == 'python'
         call setline(1,"#!/usr/bin/env python")
