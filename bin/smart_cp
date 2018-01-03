@@ -1,0 +1,15 @@
+#!/bin/bash
+
+file=$(echo $1|sed 's/ /?/g')
+target_file=$(echo $2|sed 's/ /?/g')
+
+if [ -d $file ]; then
+    /bin/cp -r $file $target_file
+elif [ -f $file ]; then
+    /bin/cp $file $target_file
+else
+    echo "can not copy"
+    exit 0
+fi
+
+echo "$file -> $target_file"
