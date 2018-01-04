@@ -1,3 +1,10 @@
+[user]
+    email = ci_knight@msn.cn
+    name = ci_knight
+[github]
+    user = ciknight
+[credential]
+    helper = cache --timeout=3600
 [color]
     diff = auto
     status = auto
@@ -5,30 +12,40 @@
     ui = true
     page = true
 [alias]
+    a = add
+    aa = add --all
     st = status
     co = checkout
     br = branch
-    ci = commit
+    ci = commit --verbose
     pl = pull
-    d = diff
+    di = diff
+    ds = diff --staged
     dc = diff --cached
-    lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    dt = difftool --no-prompt
+    wc = whatchanged -p --abbrev-commit --pretty=medium
+    ls = log --stat -n 5
+    lg = log --pretty=format:'%h | %cd | %an | %s' -n 15
+    lo = log --oneline -n 15
+    g1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%cr)%C(reset) %C(white)%s%C(reset) %C(bold white)— %cn%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    g2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%cD%C(reset) %C(bold green)(%cr)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(bold white)— %cn%C(reset)' --abbrev-commit
+    unstage = reset HEAD --
+    amend = commit --amend --verbose
 [core]
     editor = vim
     safecrlf = true
     excludesfile = ~/.gitignore.global
     ignorecase = false
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
-[credential]
-    helper = cache
 [push]
     default = current # upstream
-[user]
-    email = ci_knight@msn.cn
-    name = ci_knight
 [merge]
     log = true
     tool = vimdiff
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = 0
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [url "git@github.com:"]
