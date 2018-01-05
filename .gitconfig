@@ -37,6 +37,8 @@
     excludesfile = ~/.gitignore.global
     ignorecase = false
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
+[branch]
+    autosetuprebase = always
 [push]
     default = current # upstream
 [merge]

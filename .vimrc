@@ -9,8 +9,8 @@
 "==========================================
 " Initial Vim Plugin
 "==========================================
-if filereadable(expand("~/.vim/autoload/init.vim"))
-    source ~/.vim/autoload/init.vim
+if filereadable(expand("~/.vim/config/init.vim"))
+    source ~/.vim/config/init.vim
 endif
 
 " 编辑vimrc之后，重新加载 :source %
@@ -20,38 +20,38 @@ endif
 "==========================================
 " General Settings
 "==========================================
-if filereadable(expand("~/.vim/autoload/config.vim"))
-    source ~/.vim/autoload/config.vim
+if filereadable(expand("~/.vim/config/config.vim"))
+    source ~/.vim/config/config.vim
 endif
 
 
 "==========================================
 " Key Map
 "==========================================
-if filereadable(expand("~/.vim/autoload/keymap.vim"))
-    source ~/.vim/autoload/keymap.vim
+if filereadable(expand("~/.vim/config/keymap.vim"))
+    source ~/.vim/config/keymap.vim
 endif
 
 
 "==========================================
 " Custom Plugin
 "==========================================
-if filereadable(expand("~/.vim/autoload/custom.vim"))
-    source ~/.vim/autoload/custom.vim
+if filereadable(expand("~/.vim/config/custom.vim"))
+    source ~/.vim/config/custom.vim
 endif
 
 
 "==========================================
 " Ident
 "==========================================
-if filereadable(expand("~/.vim/autoload/ident.vim"))
-    source ~/.vim/autoload/ident.vim
+if filereadable(expand("~/.vim/config/ident.vim"))
+    source ~/.vim/config/ident.vim
 endif
 
 
 "==========================================
 " Plugin Setting
 "==========================================
-if filereadable(expand("~/.vim/autoload/plugin_config.vim"))
-    source ~/.vim/autoload/plugin_config.vim
+if filereadable(expand("~/.vim/config/plugin_config.vim"))
+    source ~/.vim/config/plugin_config.vim
 endif
