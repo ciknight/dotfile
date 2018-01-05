@@ -1,22 +1,21 @@
 " Setting up vim-plug - the vim plugin manager
 " http://vimawesome.com/
 
-let iCanHazPlugged=1
-let plug_readme=expand('~/.vim/plugged/vim-plug/README.md')
-if !filereadable(plug_readme)
-    echo "Installing vim-plug..."
-    echo ""
-    silent !mkdir -p ~/.vim/autoload
-    silent !mkdir -p ~/.vim/plugged
-    silent !git clone https://github.com/junegunn/vim-plug ~/.vim/plugged/vim-plug
-    silent !cp ~/.vim/plugged/vim-plug/plug.vim ~/.vim/autoload/plug.vim
-    let iCanHazPlugged=0
-endif
 
-set rtp+=~/.vim/autoload/plug.vim
+" Autoinstall {{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  augroup plug_install
+    autocmd VimEnter * PlugInstall
+  augroup END
+endif
+" }}}
+
+
 call plug#begin('~/.vim/plugged')
 
-" -- alphe plugin
+" -- plugin manager
 Plug 'junegunn/vim-plug'
 
 " plugin help doc http://www.wklken.me
@@ -102,10 +101,3 @@ Plug 'altercation/vim-colors-solarized'
 
 " Initialize plugin system
 call plug#end()
-
-" Installing plugins the first time
-if iCanHazPlugged == 0
-    echo "Installing vim-plug, please ignore key map error messages"
-    echo ""
-    :PlugInstall
-endif
