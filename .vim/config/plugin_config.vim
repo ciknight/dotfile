@@ -16,7 +16,7 @@ nnoremap <Leader>t :TagbarToggle<CR>
 
 " ====> ale <====
 let g:ale_sign_column_always = 1
-let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_text_changed = 'never'
 let g:ale_linters = {
 \   'vim' : ['vint'],
 \   'python' : ['flake8'],
@@ -173,6 +173,7 @@ let g:ycm_filetype_blacklist={
             \ 'tagbar' : 1,
             \ 'nerdtree' : 1,
             \}
+let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 
 " ====> jedi-vim <====
@@ -180,8 +181,8 @@ let g:jedi#completions_enabled=1
 let g:jedi#popup_on_dot=1
 let g:jedi#smart_auto_mappings=0 " auto from import
 let g:jedi#goto_command="<leader>d"
-let g:jedi#goto_assignments_command="<leader>g"
-let g:jedi#goto_definitions_command=""
+" let g:jedi#goto_assignments_command="<leader>g"
+" let g:jedi#goto_definitions_command=""
 let g:jedi#documentation_command="K"
 let g:jedi#usages_command="<leader>n"
 let g:jedi#completions_command="<C-Space>"

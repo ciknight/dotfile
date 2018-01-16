@@ -19,7 +19,7 @@ set expandtab " Tab转换为空格
 set shiftround
 set showmatch " 括号匹配
 set matchtime=2 " How many tenths of a second to blink when matching brackets
-set mouse-=a  " 鼠标暂不启用
+set mouse-=a  " 鼠标暂不启用，a 是所有模式下
 set nowrap " 不自动折行
 set clipboard+=unnamed "共享剪贴板
 set viminfo+=! " 保存全局变量

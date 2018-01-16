@@ -23,6 +23,9 @@ coverage.xml
 # Scrapy stuff:
 .scrapy
 
+# celery beat file
+celerybeat-schedule
+
 #----- SQL -----
 *.db
 *.sqlite

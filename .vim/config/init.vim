@@ -21,7 +21,6 @@ Plug 'junegunn/vim-plug'
 " plugin help doc http://www.wklken.me
 
 " -- display plugins
-Plug 'junegunn/vim-emoji' " emoji plugin
 Plug 'junegunn/vim-easy-align' " quick align
 Plug 'mhinz/vim-startify' " 23333
 Plug 'terryma/vim-multiple-cursors' " multipie cursor
@@ -33,7 +32,6 @@ Plug 'Yggdroot/indentLine' " Indent line
 " -- windows plugins
 Plug 'scrooloose/nerdtree' " nerdtree nerdtreetabs
 Plug 'Xuyuanp/nerdtree-git-plugin' " nerdtree extend
-Plug 'motemen/git-vim' " Git integration
 Plug 'vim-airline/vim-airline' " airline
 Plug 'vim-airline/vim-airline-themes' " airline themes
 Plug 'tpope/vim-fugitive' " diff status
@@ -61,7 +59,7 @@ Plug 'godlygeek/tabular' " Vim script for text filtering and alignment
 " -- search plugins
 Plug 'dyng/ctrlsf.vim' " global seach, use :CtrlSF [pattern]
 Plug 'mileszs/ack.vim' " CtrlSF dependency
-Plug 'vim-scripts/matchit.zip' " % extend
+Plug 'vim-scripts/matchit.zip' " improves % matching
 Plug 'majutsushi/tagbar' " Class/module browser, ctag support, suppoer powerline
 Plug 'kien/ctrlp.vim' " auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 
@@ -75,14 +73,10 @@ Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip i
 Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
 Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " :Autopep8, fix syntax
 Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
-Plug 'plasticboy/vim-markdown', {'for': 'md'}
 Plug 'Shougo/vimshell.vim' " shell
 Plug 'pangloss/vim-javascript' " front end
 Plug 'mattn/emmet-vim'
-Plug 'docunext/closetag.vim', {'for': ['html', 'xml']} " 自动补全html/xml标签
 Plug 'elzr/vim-json'
-Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt
-Plug 'vim-scripts/SQLComplete.vim'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
 Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
@@ -98,6 +92,13 @@ Plug 'altercation/vim-colors-solarized'
 " Plug 'fholgado/minibufexpl.vim' " Handle Buffers with Duplicate Name
 " Plug 'gcmt/wildfire.vim' " Code and files fuzzy finder
 
+" syntax plugin
+" Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt
+" Plug 'vim-scripts/SQLComplete.vim'
+" Plug 'plasticboy/vim-markdown', {'for': 'md'}
+
+" Plug 'motemen/git-vim' " Git integration, git command
+" Plug 'junegunn/vim-emoji' " emoji plugin
 
 " Initialize plugin system
 call plug#end()
