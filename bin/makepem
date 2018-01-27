@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo '** output cert.pem **'
+openssl pkcs12 -clcerts -nokeys -out cert.pem -in $1 # public.p12,cert.p12
+echo '** output key.pem **'
+openssl pkcs12 -nocerts -out key.pem -in $2 # private.p12,key.p12
+
+echo '** output key_nopwd **'
+openssl rsa -in key.pem -out key_nopwd.pem
+
+# Test
+openssl s_client -connect gateway.push.apple.com:2195 -cert cert.pem -key key_nopwd.pem
+
+echo '** output apns.pem **'
+# Make apns.pem
+cat cert.pem key_nopwd.pem > apns.pem
