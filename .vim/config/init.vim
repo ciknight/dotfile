@@ -67,6 +67,8 @@ Plug 'kien/ctrlp.vim' " auto filejump, support tagbar  http://www.wklken.me/post
 " -- autocomplate plugin
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
 Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
+Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
+Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
 
 
 " -- syntax plugin
@@ -74,12 +76,9 @@ Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
 Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " :Autopep8, fix syntax
 Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'Shougo/vimshell.vim' " shell
-Plug 'pangloss/vim-javascript' " front end
+Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
-Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
-Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
 
 
 " -- Theme plugin
@@ -96,6 +95,7 @@ Plug 'altercation/vim-colors-solarized'
 " Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt
 " Plug 'vim-scripts/SQLComplete.vim'
 " Plug 'plasticboy/vim-markdown', {'for': 'md'}
+" Plug 'elzr/vim-json'
 
 " Plug 'motemen/git-vim' " Git integration, git command
 " Plug 'junegunn/vim-emoji' " emoji plugin

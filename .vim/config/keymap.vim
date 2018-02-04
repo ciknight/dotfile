@@ -30,13 +30,13 @@ nnoremap [b :bprev<CR>
 
 " arrow key map
 nnoremap h <Left>
-nnoremap j <Up>
-nnoremap k <Down>
+nnoremap k <Up>
+nnoremap j <Down>
 nnoremap l <Right>
 
 vnoremap h <Left>
-vnoremap j <Up>
-vnoremap k <Down>
+vnoremap k <Up>
+vnoremap j <Down>
 vnoremap l <Right>
 
 " navigate window movement with C+arrows

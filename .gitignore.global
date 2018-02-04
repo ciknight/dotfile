@@ -39,6 +39,7 @@ celerybeat-schedule
 
 # ----- JavaScript -----
 node_modules/
+package-lock.json
 
 #----- Android & Java -----
 # Gradle files
