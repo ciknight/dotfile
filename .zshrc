@@ -42,6 +42,10 @@ export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# node nvm
+# export NVM_DIR="$HOME/.nvm"
+# . "/usr/local/opt/nvm/nvm.sh"
+
 # History
 export HISTFILE=~/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
@@ -70,6 +74,7 @@ alias pong='ping -c 5 ' # ping, 限制
 alias tailf='tail -f'
 
 # soft alias
+alias py27='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
 alias py34='source ~/.zshrc;source ~/workspace/python3.4/bin/activate'
 alias py36='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
 alias tl='tmux ls'

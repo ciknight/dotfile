@@ -9,7 +9,7 @@ if [ $SYSTEM = "Darwin" ]; then
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
-    brew install git htop vim neovim zsh tmux ctags clang golang autojump
+    brew install git htop vim neovim zsh tmux ctags clang golang autojump nvm
     # brew install Caskroom/cask/go2shell
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
@@ -40,6 +40,9 @@ mkdir ~/workspace
 
 # go workspace
 mkdir ~/workspace/go
+
+# nvm dir
+mkdir ~/.nvm
 
 # python
 ln -s $PWD_DIR/.pip ~/
