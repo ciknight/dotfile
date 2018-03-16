@@ -3,13 +3,39 @@
 file=$(echo $1|sed 's/ /?/g')
 target_file=$(echo $2|sed 's/ /?/g')
 
+
+function file_exist()
+{
+    read -r -p "$target_file exist, are you sure replace? [Y/n] " input
+    case $input in
+        [yY][eE][sS]|[yY])
+                ;;
+        [nN][oO]|[nN])
+            exit 0
+                ;;
+        *)
+        echo "Invalid input..."
+        exit 1
+        ;;
+    esac
+}
+
+
 if [ -d $file ]; then
-    /bin/cp -r $file $target_file
+    CP="/bin/cp -f"
 elif [ -f $file ]; then
-    /bin/cp $file $target_file
+    CP=/bin/cp
 else
-    echo "can not copy"
-    exit 0
+    echo "Error, Can Not Copy $file to $target_file"
+    exit 1
 fi
 
+if [ -d $target_file ]; then
+    file_exist;
+elif [ -f $target_file ]; then
+    file_exist;
+fi
+
+
+$CP $file $target_file
 echo "$file -> $target_file"
