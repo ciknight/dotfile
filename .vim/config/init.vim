@@ -66,7 +66,7 @@ Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if
 
 " -- syntax plugin
 Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
-Plug 'mindriot101/vim-yapf', {'do': 'pip install yapf'}
+Plug 'ciknight/vim-yapf', {'do': 'pip install yapf'}
 Plug 'Shougo/vimshell.vim' " shell
 Plug 'pangloss/vim-javascript'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang

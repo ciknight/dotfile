@@ -91,7 +91,7 @@ let NERDTreeShowBookmarks=1
 " 在终端启动vim时，共享NERDTree
 let g:nerdtree_tabs_open_on_console_startup=1
 " 打开文件后关闭File Tree
-" let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=1
 " Automatically open a NERDTree if no files where specified
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
@@ -291,10 +291,10 @@ if !exists('g:airline_powerline_fonts')
     let g:airline_right_alt_sep='❮'
 endif
 " 是否打开tabline
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='molokai'
 let g:airline_section_error='%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 
 
 " ====> vim-yapf <====
-let g:yapf_style = "pep8"
+let g:yapf_style_conf="~/.config/yapf/style"
