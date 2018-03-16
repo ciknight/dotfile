@@ -1,4 +1,3 @@
-# TODO
+## Dotfile
 
-- smart_cp override 
-- smart_cp copy *
+welcome to my dotfile
