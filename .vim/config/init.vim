@@ -18,11 +18,9 @@ call plug#begin('~/.vim/plugged')
 " -- plugin manager
 Plug 'junegunn/vim-plug'
 
-" plugin help doc http://www.wklken.me
 
 " -- display plugins
-Plug 'junegunn/vim-easy-align' " quick align
-Plug 'mhinz/vim-startify' " 23333
+Plug 'mhinz/vim-startify' " the fancy start screen or vim
 Plug 'terryma/vim-multiple-cursors' " multipie cursor
 Plug 'kien/rainbow_parentheses.vim' " rainbow pair
 Plug 'Yggdroot/indentLine' " Indent line
@@ -41,19 +39,14 @@ Plug 'tmhedberg/SimpylFold' " Fold
 
 
 " -- function plugins
-Plug 'thinca/vim-quickrun' " quick run
-Plug 'vim-scripts/vimprj' " manage multipie project
-Plug 'vim-scripts/DfrankUtil' " Vimprj dependency
 Plug 'pbrisbin/vim-mkdir' " auto create not exists dir
 Plug 'scrooloose/nerdcommenter' " quick annotation
 Plug 'vim-scripts/DrawIt' " :DIstart or \di, Draw ascii paint  http://www.opstool.com/article/178
 Plug 'terryma/vim-expand-region' " use V or v, region selected
-Plug 'tpope/vim-surround' " surroundings in pairs, cs => change surring cst => tag, ds => delete, csw => add
 Plug 'tpope/vim-repeat' " for repeat -> enhance surround.vim, use . to repeat command
 Plug 'Raimondi/delimitMate' " auto sign complate
-Plug 'tpope/vim-tbone' " TMUX
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'godlygeek/tabular' " Vim script for text filtering and alignment
+Plug 'tpope/vim-surround' " surroundings in pairs, cs => change surring cst => tag, ds => delete, csw => add
+Plug 'godlygeek/tabular' " Vim script for text filtering and alignment, # :Tab\"
 
 
 " -- search plugins
@@ -73,11 +66,9 @@ Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if
 
 " -- syntax plugin
 Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
-Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " :Autopep8, fix syntax
-Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
+Plug 'mindriot101/vim-yapf', {'do': 'pip install yapf'}
 Plug 'Shougo/vimshell.vim' " shell
 Plug 'pangloss/vim-javascript'
-Plug 'mattn/emmet-vim'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
 
 
@@ -87,15 +78,21 @@ Plug 'altercation/vim-colors-solarized'
 
 
 " -- closing plugins
+" Plug 'junegunn/vim-easy-align' " quick align
 " Plug 'yonchu/accelerated-smooth-scroll' " <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
 " Plug 'fholgado/minibufexpl.vim' " Handle Buffers with Duplicate Name
 " Plug 'gcmt/wildfire.vim' " Code and files fuzzy finder
+" Plug 'christoomey/vim-tmux-navigator'
+" Plug 'thinca/vim-quickrun' " quick run
 
 " syntax plugin
 " Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt
 " Plug 'vim-scripts/SQLComplete.vim'
 " Plug 'plasticboy/vim-markdown', {'for': 'md'}
 " Plug 'elzr/vim-json'
+" Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
+" Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " :Autopep8, fix syntax
+" Plug 'mattn/emmet-vim'
 
 " Plug 'motemen/git-vim' " Git integration, git command
 " Plug 'junegunn/vim-emoji' " emoji plugin

@@ -68,7 +68,7 @@ if exists('&signcolumn')  " Vim 7.4.2201
 else
   let g:gitgutter_sign_column_always=1
 endif
-let g:gitgutter_max_signs=200
+let g:gitgutter_max_signs=500
 let g:gitgutter_async=1
 
 " ====> Nerd Tree <====
@@ -296,25 +296,5 @@ let g:airline_theme='molokai'
 let g:airline_section_error='%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 
 
-" ====> isort <====
-" isort don't support python3 and venv
-" Shift-V 上下选中, ctrl + i 规范化
-let g:vim_isort_map='<C-i>'
-let g:vim_isort_python_version='python2'
-
-
-" ====> Emmet <====
-let g:user_emmet_mode='inv'  "enable all functions, which is equal to
-" only use html,css
-let g:user_emmet_install_global=0
-autocmd FileType html,css EmmetInstall
-" To remap the default <C-Y> leader:>
-" let g:user_emmet_leader_key='<C-Y>'
-" scss support
-
-
-" ====> autopep8 <====
-" autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>)
-" let g:autopep8_select="E501,W293" " Fix only these errors/warnings
-let g:autopep8_max_line_length=110
-let g:autopep8_ignore="E501,E128,E301,E701,E126,E402"
+" ====> vim-yapf <====
+let g:yapf_style = "pep8"
