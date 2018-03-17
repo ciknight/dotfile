@@ -59,24 +59,25 @@ fi
 ln -s $PWD_DIR/bin ~/
 ln -s $PWD_DIR/.tmux.conf ~/
 
-# git
+# git config
 ln -s $PWD_DIR/.gitconfig ~/
 ln -s $PWD_DIR/.gitignore.global ~/
 
-# ycm
+# ycm extra config
 ln -s $PWD_DIR/.ycm_extra_conf ~/.ycm_extra_conf.py
 
-# flake8
+# flake8 config
 ln -s $PWD_DIR/.flake8 ~/.flake8
 
-# npm mirrors
+# npm config
 ln -s $PWD_DIR/.npmrc ~/.npmrc
 
-# conda mirrors
+# conda config
 ln -s $PWD_DIR/.condarc ~/.condarc
 
-# isort
-ln -s $PWD_DIR/.isort.cfg ~/.isort.cfg
+# .config
+ln -s $PWD_DIR/.config ~/.config
+
 
 # install powerline fonts, set terminal font support powerline
 git clone https://github.com/powerline/fonts.git ~/.fonts
@@ -99,7 +100,7 @@ pyenv global system
 
 # pip
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-pip.py
-# pip install isort flake8 autopep8 cheat isort jedi ipython ipdb mycli forex-python simplejson
+# pip install flake8 autopep8 cheat jedi ipython ipdb mycli forex-python simplejson yapf
 
 # virtualenv
 # virtualenv -p `which python3` ~/workspace/python3.6
