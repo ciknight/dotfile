@@ -5,10 +5,13 @@ zsh-cache
 bundle/
 plugged/
 plug.vim
-plug.vim.old
 
 # ipython
 .ipython/extensions/
 .ipython/nbextensions/
 .ipython/profile_default/db/
 .ipython/profile_default/startup/README
+
+# .config
+.config/*
+!.config/yapf

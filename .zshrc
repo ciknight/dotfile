@@ -52,11 +52,6 @@ export HISTSIZE=1000000             # How many lines in the current session to r
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
 export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit"
-# setopt appendhistory        # Append to history write on exit, do not overwrite.
-# setopt histignoredups       # Do not save immediate duplicates lines in history.
-# setopt histignorespace      # Ignore commands starting with space.
-# setopt extendedhistory      # Save command time start and exec time in seconds.
-# setopt histreduceblanks     # Strip redundant spaces.
 
 # Git alias
 alias gdc='git diff --cached'
@@ -92,7 +87,6 @@ alias seed='vim /tmp/`timestamp`.md'
 alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
 
 # local alias, default ptyhon venv set here
-# source ~/workspace/python3.6/bin/activate
 zsh_local=~/.zsh_local
 if [ -f $zsh_local ]; then
     source $zsh_local
