@@ -75,6 +75,9 @@ ln -s $PWD_DIR/.npmrc ~/.npmrc
 # conda config
 ln -s $PWD_DIR/.condarc ~/.condarc
 
+# isort config
+ln -s $PWD_DIR/.isort ~/.isort
+
 # .config
 ln -s $PWD_DIR/.config ~/.config
 

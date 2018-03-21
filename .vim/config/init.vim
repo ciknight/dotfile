@@ -67,6 +67,7 @@ Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if
 " -- syntax plugin
 Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
 Plug 'ciknight/vim-yapf', {'do': 'pip install yapf'}
+Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'Shougo/vimshell.vim' " shell
 Plug 'pangloss/vim-javascript'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
@@ -90,7 +91,6 @@ Plug 'altercation/vim-colors-solarized'
 " Plug 'vim-scripts/SQLComplete.vim'
 " Plug 'plasticboy/vim-markdown', {'for': 'md'}
 " Plug 'elzr/vim-json'
-" Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 " Plug 'tell-k/vim-autopep8', {'do': 'pip install autopep8'} " :Autopep8, fix syntax
 " Plug 'mattn/emmet-vim'
 
