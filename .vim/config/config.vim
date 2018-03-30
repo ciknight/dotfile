@@ -58,8 +58,11 @@ set number numberwidth=4
 set relativenumber
 set cursorline cursorcolumn
 " 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
+augroup relative_numbser
+    autocmd!
+    autocmd InsertEnter * :set norelativenumber number
+    autocmd InsertLeave * :set relativenumber
+augroup END
 " Highlight current line
 autocmd WinEnter * set cursorline cursorcolumn
 autocmd WinLeave * set nocursorline nocursorcolumn

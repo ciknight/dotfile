@@ -22,7 +22,7 @@ function file_exist()
 
 
 if [ -d $file ]; then
-    CP="/bin/cp -f"
+    CP="/bin/cp -r"
 elif [ -f $file ]; then
     CP=/bin/cp
 else

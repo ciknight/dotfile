@@ -70,7 +70,6 @@ alias tailf='tail -f'
 
 # soft alias
 alias py27='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
-alias py34='source ~/.zshrc;source ~/workspace/python3.4/bin/activate'
 alias py36='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
 alias tl='tmux ls'
 alias tn='tmux -2 new -s'
@@ -87,9 +86,9 @@ alias seed='vim /tmp/`timestamp`.md'
 alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
 
 # local alias, default ptyhon venv set here
-zsh_local=~/.zsh_local
-if [ -f $zsh_local ]; then
-    source $zsh_local
+zshrc_local=~/.zshrc_local
+if [ -f $zshrc_local ]; then
+    source $zshrc_local
 fi
 
 # ^Z Toggle vim

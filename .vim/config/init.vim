@@ -47,6 +47,7 @@ Plug 'tpope/vim-repeat' " for repeat -> enhance surround.vim, use . to repeat co
 Plug 'Raimondi/delimitMate' " auto sign complate
 Plug 'tpope/vim-surround' " surroundings in pairs, cs => change surring cst => tag, ds => delete, csw => add
 Plug 'godlygeek/tabular' " Vim script for text filtering and alignment, # :Tab\"
+Plug 'vim-scripts/LargeFile'
 
 
 " -- search plugins

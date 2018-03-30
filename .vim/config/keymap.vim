@@ -3,7 +3,7 @@
 
 " leader mapping
 let mapleader = ","
-set timeoutlen=350  " wait leader
+set timeoutlen=500  " wait leader
 
 """""""""" Normal """"""""""""""
 " tab navigation
@@ -62,7 +62,7 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
-nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <C-n> :call NumberToggle()<CR>
 
 " F1 废弃这个键,防止调出系统帮助
 " I can type :help on my own, thanks.  Protect your fat fingers from the evils of <F1>
@@ -122,7 +122,6 @@ inoremap <esc> <Nop>
 
 """""""""" Onoremap """"""""""""""
 onoremap p i(
-onoremap b /return<cr>
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap il( :<c-u>normal! F)vi(<cr>
-
+onoremap b /return<CR>
+onoremap in( :<c-u>normal! f(vi(<CR>
+onoremap il( :<c-u>normal! F)vi(<CR>
