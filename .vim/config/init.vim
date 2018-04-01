@@ -77,6 +77,7 @@ Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
 " -- Theme plugin
 Plug 'tomasr/molokai'  " i like it
 Plug 'altercation/vim-colors-solarized'
+Plug 'icymind/NeoSolarized'
 
 
 " -- closing plugins

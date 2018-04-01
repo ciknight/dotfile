@@ -4,8 +4,27 @@ if has('gui_running')
     colorscheme solarized
 else
     set background=dark
-    colorscheme molokai
+    colorscheme NeoSolarized  " molokai
 endif
+" default value is "normal", Setting this option to "high" or "low" does use the
+" same Solarized palette but simply shifts some values up or down in order to
+" expand or compress the tonal range displayed.
+let g:neosolarized_contrast = "normal"
+
+" Special characters such as trailing whitespace, tabs, newlines, when displayed
+" using ":set list" can be set to one of three levels depending on your needs.
+" Default value is "normal". Provide "high" and "low" options.
+let g:neosolarized_visibility = "normal"
+
+" I make vertSplitBar a transparent background color. If you like the origin solarized vertSplitBar
+" style more, set this value to 0.
+let g:neosolarized_vertSplitBgTrans = 1
+
+" If you wish to enable/disable NeoSolarized from displaying bold, underlined or italicized
+" typefaces, simply assign 1 or 0 to the appropriate variable. Default values:
+let g:neosolarized_bold = 1
+let g:neosolarized_underline = 1
+let g:neosolarized_italic = 0
 
 
 " ====> Tagbar <====
@@ -66,32 +85,32 @@ endfunction
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
 else
-  let g:gitgutter_sign_column_always=1
+  let g:gitgutter_sign_column_always = 1
 endif
-let g:gitgutter_max_signs=500
-let g:gitgutter_async=1
+let g:gitgutter_max_signs = 300
+let g:gitgutter_async = 1
 
 " ====> Nerd Tree <====
-let NERDChristmasTree=0
+let NERDChristmasTree = 0
 " 设置NERDTree子窗口宽度
-let NERDTreeWinSize=32
-let NERDTreeChDirMode=2
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '__pycache__']
-let NERDTreeShowBookmarks=1
+let NERDTreeWinSize = 32
+let NERDTreeChDirMode = 2
+let NERDTreeIgnore = ['\~$', '\.pyc$', '\.swp$', '__pycache__']
+let NERDTreeShowBookmarks = 1
 " 设置NERDTree子窗口位置
-let NERDTreeWinPos="left"
+let NERDTreeWinPos = "left"
 " 显示隐藏文件
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
 " NERDTree 子窗口中不显示冗余帮助信息
-let NERDTreeMinimalUI=1
+let NERDTreeMinimalUI = 1
 " 删除文件时自动删除文件对应 buffer
-let NERDTreeAutoDeleteBuffer=1
+let NERDTreeAutoDeleteBuffer = 1
 " 显示书签
-let NERDTreeShowBookmarks=1
+let NERDTreeShowBookmarks = 1
 " 在终端启动vim时，共享NERDTree
-let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_open_on_console_startup = 1
 " 打开文件后关闭File Tree
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen = 1
 " Automatically open a NERDTree if no files where specified
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
@@ -113,7 +132,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
 " 显示折叠代码的文档字符串
-let g:SimpylFold_docstring_preview=1
+let g:SimpylFold_docstring_preview = 1
 
 
 " ====> Indent Guides <====
@@ -274,7 +293,11 @@ vmap V <Plug>(expand_region_shrink)
 
 " ====> airline <====
 " 启动显示状态行(1),总是显示状态行(2)
-let g:airline_powerline_fonts=1
+if filereadable("~/.fonts")
+  let g:airline_powerline_fonts=1
+else
+  let g:airline_powerline_fonts=0
+endif
 if !exists('g:airline_powerline_fonts')
     if !exists('g:airline_symbols')
         let g:airline_symbols={}
@@ -292,7 +315,7 @@ if !exists('g:airline_powerline_fonts')
 endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='molokai'
+let g:airline_theme='minimalist' " molokai
 let g:airline_section_error='%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 
 
