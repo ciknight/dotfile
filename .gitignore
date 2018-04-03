@@ -12,6 +12,9 @@ plug.vim
 .ipython/profile_default/db/
 .ipython/profile_default/startup/README
 
+# ignore
+.ssh
+
 # .config
 .config/*
 !.config/yapf

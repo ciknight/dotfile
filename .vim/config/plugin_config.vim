@@ -293,10 +293,10 @@ vmap V <Plug>(expand_region_shrink)
 
 " ====> airline <====
 " 启动显示状态行(1),总是显示状态行(2)
-if filereadable("~/.fonts")
-  let g:airline_powerline_fonts=1
-else
+if empty(glob('~/.fonts/README.rst'))
   let g:airline_powerline_fonts=0
+else
+  let g:airline_powerline_fonts=1
 endif
 if !exists('g:airline_powerline_fonts')
     if !exists('g:airline_symbols')
