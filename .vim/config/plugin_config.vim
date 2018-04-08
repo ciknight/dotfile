@@ -326,5 +326,5 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " ====> isort <====
 " isort don't support python3 and venv
 " Shift-V 上下选中, ctrl + i 规范化
-let g:vim_isort_map='<C-i>'
-let g:vim_isort_python_version='python2'
+" let g:vim_isort_map='<C-i>'
+" let g:vim_isort_python_version='python2'
