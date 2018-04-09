@@ -1,18 +1,17 @@
 filetype plugin indent on " Automatically detect file types.
 syntax on " Syntax highlighting
 
-set backspace=2 " Backspace deletes like most programs in insert mode"
 set history=2000
 set laststatus=2
-set linespace=0 " No extra spaces between rows
 set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4 " 设置格式化时制表符占用空格数
 set tabpagemax=15 " Only show 15 tabs
-set tabstop=4 " An indentation every four columns"
-" set textwidth=140 " 140字符自动换行
+set tabstop=4 " 每四行一个缩进
+"set textwidth=120 " 120字符自动换行
 
-" set autoindent " 与前一行同样等级缩进
+"set autoindent " 与前一行同样等级缩进
 set smartindent " 更加智能的缩进，当遇到缩进不为整数与上对齐
+"set backspace=2 " Backspace deletes like most programs in insert mode"
 set backspace=indent,eol,start  " Backspace for dummies
 set expandtab " Tab转换为空格
 
@@ -21,7 +20,7 @@ set showmatch " 括号匹配
 set matchtime=2 " How many tenths of a second to blink when matching brackets
 set mouse-=a  " 鼠标暂不启用，a 是所有模式下
 set nowrap " 不自动折行
-set clipboard+=unnamed "共享剪贴板
+set clipboard+=unnamed " 共享剪贴板
 set viminfo+=! " 保存全局变量
 
 set nocompatible " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限

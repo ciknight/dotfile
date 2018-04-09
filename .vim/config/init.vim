@@ -61,7 +61,7 @@ Plug 'kien/ctrlp.vim' " auto filejump, support tagbar  http://www.wklken.me/post
 
 " -- autocomplate plugin
 Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --gocode-completer --clang-completer --system-libclang' }
-Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
+" Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
 Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
 
@@ -71,7 +71,7 @@ Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
 Plug 'ciknight/vim-yapf', {'do': 'pip install yapf'}
 " Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'Shougo/vimshell.vim' " shell
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
 
 
