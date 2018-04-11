@@ -32,7 +32,7 @@ export PATH="$HOME/bin:$PATH";
 export LANG=zh_CN.UTF-8  # You may need to manually set your language environment
 export LESSCHARSET=utf-8  # Fix linux git diff and log chinese
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
-export HOMEBREW_EDITOR=vim
+export HOMEBREW_EDITOR=neovim
 export GOPATH="$HOME/workspace/go"  # Golang Path
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
@@ -57,7 +57,7 @@ export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit"
 alias gdc='git diff --cached'
 
 # System alias
-alias vi='vim'
+alias vi='nvim'
 alias ssh='ssh -2'
 alias df='df -h'
 alias du='du -h -d 1' # deep

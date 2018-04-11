@@ -7,6 +7,4 @@ blank_line_before_nested_class_or_def = true
 coalesce_brackets = true
 dedent_closing_brackets = true
 each_dict_entry_on_separate_line = true
-join_multiple_lines = true
-split_penalty_import_names = 0
 use_tabs = false
