@@ -31,27 +31,30 @@ call plug#begin('~/.config/nvim/plugged')
 " Language agnostic plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
 
-" Asynchronous maker and linter (needs linters to work)
-Plug 'benekastah/neomake', { 'on': ['Neomake'] }
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi', {'do': 'pip install jedi'}
 
 " Automatically closing pair stuff
 Plug 'cohama/lexima.vim'
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
 " Commenting support (gc)
 Plug 'tpope/vim-commentary'
+" Heuristically set indent settings
+Plug 'tpope/vim-sleuth'
 " CamelCase and snake_case motions
 "Plug 'bkad/CamelCaseMotion'
-" Heuristically set indent settings
-"Plug 'tpope/vim-sleuth'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Other languages {{{
 " ---------------------------------------------------------------------------------------------------------------------
 
+" Syntax check
+Plug 'w0rp/ale', {'do': 'pip install flake8'}
 " Modern JS support (indent, syntax, etc)
 Plug 'pangloss/vim-javascript'
 " Yaml indentation
@@ -62,8 +65,10 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-git'
 " Tmux syntax
 Plug 'keith/tmux.vim'
-" Dockerfile
-Plug 'honza/dockerfile.vim'
+" Shell syntax
+Plug 'Shougo/vimshell.vim'
+" Golang syntax
+Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -72,26 +77,46 @@ Plug 'honza/dockerfile.vim'
 
 " Nerdtree file browser
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+" Nerdtree git extend
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Lightline (simple status line)
 Plug 'itchyny/lightline.vim'
 " Buffers tabline
 Plug 'ap/vim-buftabline'
+" Matchit enhances jump motions
+Plug 'tmhedberg/matchit'
+" Improves % matching
+"Plug 'vim-scripts/matchit.zip'
+" Use V or v, easily expand region selected
+Plug 'terryma/vim-expand-region'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " External tools integration plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
 
-" Fuzzy searching/replacing/etc
-"Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+" Auto create not exists dir
+Plug 'pbrisbin/vim-mkdir'
+" Rainbow pair
+Plug 'kien/rainbow_parentheses.vim'
+" Indent line
+Plug 'Yggdroot/indentLine'
 " Ag wrapper search and edit
 Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }
+" rely CtrlSF
+Plug 'mileszs/ack.vim'
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
 " Git changes showed on line numbers
 Plug 'airblade/vim-gitgutter'
-" Color picker
-"Plug 'KabbAmine/vCoolor.vim', { 'on': ['VCoolor', 'VCase'] }
+" This is a simple plugin that helps to end certain structures automatically
+Plug 'tpope/vim-endwise'
+" Class/module browser, ctag support, suppoer powerline
+Plug 'majutsushi/tagbar'
+" Auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
+Plug 'kien/ctrlp.vim'
+" Quick annotation
+Plug 'scrooloose/nerdcommenter'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -100,14 +125,8 @@ Plug 'airblade/vim-gitgutter'
 
 " Surround (cs"')
 Plug 'tpope/vim-surround'
-" Easy alignment
+" Easy alignment, Use :Tab\"
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
-" Safely editing in isolation
-"Plug 'ferranpm/vim-isolate', { 'on':  ['Isolate', 'UnIsolate'] }
-" Cycling related words via C-a C-x (i.e. true/false)
-"Plug 'zef/vim-cycle'
-" Titlecase motion (gt)
-"Plug 'christoomey/vim-titlecase'
 " Show content of registers when pasting
 "Plug 'junegunn/vim-peekaboo'
 "}}}
@@ -155,8 +174,6 @@ Plug 'icymind/NeoSolarized'
 " Other {{{
 " ---------------------------------------------------------------------------------------------------------------------
 
-" Easily expand selected region
-Plug 'terryma/vim-expand-region'
 " Search for highlighted word with *
 "Plug 'thinca/vim-visualstar'
 " Improve star by not jumping immediately
@@ -165,8 +182,6 @@ Plug 'terryma/vim-expand-region'
 "Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " Iabbrev auto-correction library
 "Plug 'chip/vim-fat-finger'
-" Matchit enhances jump motions
-Plug 'tmhedberg/matchit'
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
 " Delete all but current buffer
@@ -727,16 +742,7 @@ let g:lightline = {
 " -----------------------------------------------------
 " 4.8 Neomake settings {{{
 " -----------------------------------------------------
-let g:neomake_verbose=0
-let g:neomake_warning_sign = {
-      \ 'text': '❯',
-      \ 'texthl': 'WarningMsg',
-      \ }
-let g:neomake_error_sign = {
-      \ 'text': '❯',
-      \ 'texthl': 'ErrorMsg',
-      \ }
-"}}}
+"  pass
 
 " -----------------------------------------------------
 " 4.9 Vim Markdown settings {{{
@@ -1101,30 +1107,30 @@ augroup END
 " 7.1 Run linters after save {{{
 " -----------------------------------------------------
 
-augroup linters
-  " npm install -g eslint
-  autocmd BufWritePost *.js Neomake eslint
-  " npm install -g jsonlint
-  autocmd BufWritePost *.json Neomake jsonlint
-  " npm install -g typescript
-  autocmd BufWritePost *.ts Neomake tsc
-  " gem install rubocop
-  autocmd BufWritePost *.rb Neomake rubocop
-  " sudo apt-get install elixir
-  autocmd BufWritePost *.ex Neomake elixir
-  " apt-get install tidy
-  autocmd BufWritePost *.html Neomake tidy
-  " gem install haml_lint
-  autocmd BufWritePost *.haml Neomake hamllint
-  " gem install scss-lint
-  autocmd BufWritePost *.scss Neomake sasslint
-  " gem install mdl
-  autocmd BufWritePost *.md Neomake mdl
-  " apt-get install shellcheck
-  autocmd BufWritePost *.sh Neomake shellcheck
-  " pip3 install vim-vint
-  autocmd BufWritePost *.vim Neomake vint
-augroup END
+"augroup linters
+"  " npm install -g eslint
+"  autocmd BufWritePost *.js Neomake eslint
+"  " npm install -g jsonlint
+"  autocmd BufWritePost *.json Neomake jsonlint
+"  " npm install -g typescript
+"  autocmd BufWritePost *.ts Neomake tsc
+"  " gem install rubocop
+"  autocmd BufWritePost *.rb Neomake rubocop
+"  " sudo apt-get install elixir
+"  autocmd BufWritePost *.ex Neomake elixir
+"  " apt-get install tidy
+"  autocmd BufWritePost *.html Neomake tidy
+"  " gem install haml_lint
+"  autocmd BufWritePost *.haml Neomake hamllint
+"  " gem install scss-lint
+"  autocmd BufWritePost *.scss Neomake sasslint
+"  " gem install mdl
+"  autocmd BufWritePost *.md Neomake mdl
+"  " apt-get install shellcheck
+"  autocmd BufWritePost *.sh Neomake shellcheck
+"  " pip3 install vim-vint
+"  autocmd BufWritePost *.vim Neomake vint
+"augroup END
 "}}}
 
 "}}}
