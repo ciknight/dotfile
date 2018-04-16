@@ -44,8 +44,6 @@ Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-commentary'
 " Heuristically set indent settings
 Plug 'tpope/vim-sleuth'
-" CamelCase and snake_case motions
-"Plug 'bkad/CamelCaseMotion'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -216,14 +214,14 @@ set relativenumber
 set cursorline cursorcolumn
 
 augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
-    autocmd!
-    autocmd InsertEnter * :set norelativenumber number
-    autocmd InsertLeave * :set relativenumber
+  autocmd!
+  autocmd InsertEnter * :set norelativenumber number
+  autocmd InsertLeave * :set relativenumber
 augroup END
 augroup relative_numbser                    " 高亮当前行
-    autocmd!
-    autocmd WinEnter * set cursorline cursorcolumn
-    autocmd WinLeave * set nocursorline nocursorcolumn
+  autocmd!
+  autocmd WinEnter * set cursorline cursorcolumn
+  autocmd WinLeave * set nocursorline nocursorcolumn
 augroup END
 "}}}
 
@@ -381,6 +379,8 @@ set timeoutlen=500  " wait leader
 " 3.2 Disabling arrow keys, space key, exmode enter {{{
 " with Q key, help with F1, etc.
 " -----------------------------------------------------
+inoremap <F1> <NOP>
+nnoremap <F1> <NOP>
 "nnoremap <up> <NOP>
 "nnoremap <down> <NOP>
 "nnoremap <left> <NOP>
@@ -392,8 +392,6 @@ set timeoutlen=500  " wait leader
 "inoremap <left> <NOP>
 "inoremap <right> <NOP>
 "nnoremap <Space> <NOP>
-"inoremap <F1> <NOP>
-"nnoremap <F1> <NOP>
 "nnoremap Q <NOP>
 "}}}
 
@@ -455,16 +453,6 @@ xnoremap c "xc
 vnoremap y y`]
 vnoremap p "_dP`]
 nnoremap p p`]
-
-" Use CamelCaseMotion instead of default motions
-"map <silent> w <Plug>CamelCaseMotion_w
-"map <silent> b <Plug>CamelCaseMotion_b
-"map <silent> e <Plug>CamelCaseMotion_e
-"map <silent> ge <Plug>CamelCaseMotion_ge
-"sunmap w
-"sunmap b
-"sunmap e
-"sunmap ge
 
 " Fix the cw at the end of line bug default vim has special treatment (:help cw)
 nmap cw ce
@@ -542,19 +530,22 @@ nnoremap J mzJ`z
 nnoremap S mzi<CR><ESC>`z
 
 " Start substitute on current word under the cursor
-nnoremap <leader>s :%s///gc<Left><Left><Left>
+"nnoremap <leader>s :%s///gc<Left><Left><Left>
 
 " Start search on current word under the cursor
-nnoremap <leader>/ /<CR>
+"nnoremap <leader>/ /<CR>
 
 " Start reverse search on current word under the cursor
-nnoremap <leader>? ?<CR>
+"nnoremap <leader>? ?<CR>
 
 " Faster sort
-vnoremap <leader>s :!sort<CR>
+"vnoremap <leader>s :!sort<CR>
 
 " Fix spelling error on the go
 inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
+
+" Toggle search highlight
+nnoremap <leader>/ :set nohlsearch!<CR> :set nohlsearch?<CR>
 "}}}
 
 " -----------------------------------------------------
@@ -569,16 +560,17 @@ nnoremap <silent> <F1> :call utils#nerdWrapper()<CR>
 " nnoremap <silent> <F3>
 " Toggle spelling
 nnoremap <silent> <F4> :set spell!<CR> :set spell?<CR>
-" Source (reload configuration)
-nnoremap <silent> <F5> :source $MYNVIMRC<CR>
-" Toggle search highlight
-nnoremap <silent> <F6> :set nohlsearch!<CR> :set nohlsearch?<CR>
+" Free
+" nnoremap <silent> <F5>
+" Free
+" nnoremap <silent> <F6>
 " Toggle white characters visibility
 nnoremap <silent> <F7> :set list!<CR> :set list?<CR>
 " New term buffer
 nnoremap <silent> <F8> :terminal<CR>
 " Fire REST Request
-nnoremap <silent> <F9> :call VrcQuery()<CR>
+" Free
+" nnoremap <silent> <F9>
 " Free
 " nnoremap <silent> <F10>
 " Free
@@ -615,15 +607,9 @@ cnoremap qq qall
 " 3.8 Custom commands and functions {{{
 " -----------------------------------------------------
 
-" Generate tags definitions
-command! GTags :call utils#generateCtags()
-
 " Reformat whole or selection from file
-command! Format :call utils#formatFile()
-nnoremap <silent> <leader>f :Format<CR>
-
-" Eslint fix current file
-command! ESFix :call utils#eslintFixFile()
+"command! Format :call utils#formatFile()
+"nnoremap <silent> <leader>f :Format<CR>
 
 " Profile
 command! Profile :call utils#profile()
@@ -649,31 +635,44 @@ let g:utils_autoswitch_kb_layout=0
 " -----------------------------------------------------
 " 4.2 FZF {{{
 " -----------------------------------------------------
-let $FZF_DEFAULT_OPTS='--reverse'
-let $FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores -g ""'
-let g:fzf_layout = { 'window': 'enew' }
+
 "}}}
 
 " -----------------------------------------------------
 " 4.3 NERDTree {{{
 " -----------------------------------------------------
+let g:NERDTreeWinSize=32
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '__pycache__']
+let g:NERDTreeWinPos="left"
 let g:NERDTreeMinimalUI=1
-let g:NERDTreeWinSize=60
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHighlightCursorline=0
 let g:NERDTreeRespectWildIgnore=1
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:NERDTreeQuitOnOpen=1
+" Automatically open a NERDTree if no files where specified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
+" Close vim if the only window left open is a NERDTree
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "}}}
 
 " -----------------------------------------------------
 " 4.4 Ultisnips settings {{{
 " -----------------------------------------------------
-let g:UltiSnipsUsePythonVersion=3
+"let g:UltiSnipsUsePythonVersion=3
 "}}}
 
 " -----------------------------------------------------
 " 4.5 Gitgutter settings {{{
 " -----------------------------------------------------
+if exists('&signcolumn')
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+let g:gitgutter_async=1
 let g:gitgutter_map_keys=0
 let g:gitgutter_max_signs=9999
 let g:gitgutter_sign_added='+'
@@ -718,12 +717,23 @@ let g:lightline = {
 " 4.8 Neomake settings {{{
 " -----------------------------------------------------
 "  pass
+"}}}
 
 " -----------------------------------------------------
 " 4.9 Vim Markdown settings {{{
 " -----------------------------------------------------
 let g:vim_markdown_no_default_key_mappings=1
 let g:vim_markdown_folding_disabled=1
+let g:markdown_fenced_languages=[
+      \'bash=sh',
+      \'git=gitconfig',
+      \'javascript',
+      \'lua',
+      \'ruby',
+      \'tmux',
+      \'viml=vim',
+      \'xdefaults',
+      \'zsh']
 "}}}
 
 " -----------------------------------------------------
@@ -764,16 +774,6 @@ let g:plug_timeout=20
 " -----------------------------------------------------
 " 4.13 Vim-markdown settings {{{
 " -----------------------------------------------------
-let g:markdown_fenced_languages=[
-      \'bash=sh',
-      \'git=gitconfig',
-      \'javascript',
-      \'lua',
-      \'ruby',
-      \'tmux',
-      \'viml=vim',
-      \'xdefaults',
-      \'zsh']
 "}}}
 
 " -----------------------------------------------------
@@ -785,16 +785,11 @@ let g:colorizer_nomap=1
 " -----------------------------------------------------
 " 4.15 Elm-vim settings {{{
 " -----------------------------------------------------
-let g:elm_format_autosave=0
-let g:elm_setup_keybindings=0
 "}}}
 
 " -----------------------------------------------------
 " 4.16 JsDoc settings {{{
 " -----------------------------------------------------
-let g:jsdoc_allow_input_prompt=1
-let g:jsdoc_input_description=1
-let g:jsdoc_enable_es6=1
 "}}}
 
 "" -----------------------------------------------------
@@ -814,8 +809,6 @@ let g:javascript_plugin_flow=1
 "" -----------------------------------------------------
 "" 4.19 vCoolor settings {{{
 "" -----------------------------------------------------
-let g:vcoolor_disable_mappings=1
-let g:vcoolor_lowercase=1
 ""}}}
 
 "" -----------------------------------------------------
@@ -834,48 +827,23 @@ let g:yankring_window_height=15
 " 5.1 FZF {{{
 " -----------------------------------------------------
 
-" Search files recursively ([o]pen file)
-nnoremap <silent> <leader>o :Files<CR>
-" Search git status (edited) [f]iles
-nnoremap <silent> <leader>f :GFiles?<CR>
-" Search in local buffer [c]ommits
-nnoremap <silent> <leader>c :BCommits<CR>
-" Search in all the project [C]ommits
-nnoremap <silent> <leader>C :Commits<CR>
-" Search between open files - [b]uffers
-nnoremap <silent> <leader>b :Buffers<CR>
-" Search in [l]ines on current buffer
-nnoremap <silent> <leader>l :BLines<CR>
-" Search in all the opened buffers [L]ines
-nnoremap <silent> <leader>L :Lines<CR>
-" Search in ultisnips [s]nippets
-nnoremap <silent> <leader>s :Snippets<CR>
-" Search in [m]arks
-nnoremap <silent> <leader>m :Marks<CR>
-" Search in edited files [h]istory
-nnoremap <silent> <leader>h :History<CR>
-" Search in search [/] history
-nnoremap <silent> <leader>/ :History/<CR>
-" Search in ag search
-nnoremap <silent> <leader>a :Ag
 "}}}
 
 " -----------------------------------------------------
 " 5.2 Ultisnips {{{
 " -----------------------------------------------------
 " Disable built-in cx-ck to be able to go backward
-inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger='<C-j>'
-let g:UltiSnipsListSnippets='<C-s>'
-let g:UltiSnipsJumpForwardTrigger='<C-j>'
-let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+"inoremap <C-x><C-k> <NOP>
+"let g:UltiSnipsExpandTrigger='<C-j>'
+"let g:UltiSnipsListSnippets='<C-s>'
+"let g:UltiSnipsJumpForwardTrigger='<C-j>'
+"let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 "}}}
 
 " -----------------------------------------------------
 " 5.3 Isolate {{{
 " -----------------------------------------------------
-vnoremap ,i :Isolate<CR>
-nnoremap ,u :UnIsolate<CR>
+
 "}}}
 
 " -----------------------------------------------------
@@ -962,31 +930,24 @@ let g:ctrlsf_mapping = {
       \ 'loclist' : '',
       \ }
 
-nnoremap <silent> ,g :call utils#searchCurrentWordWithAg()<CR>
+nnoremap <silent> <leader>g :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
 " 5.12 BufOnly -> [C]lose all {{{
 " -----------------------------------------------------
-nnoremap ,C :Bonly<CR>
+nnoremap <leader>C :Bonly<CR>
 "}}}
 
 " -----------------------------------------------------
 " 5.13 Tabularize -> [a]lign {{
 " -----------------------------------------------------
-vnoremap ,a :Tabularize /
+vnoremap <leader>a :Tabularize /
 "}}}
 
 " -----------------------------------------------------
 " 5.14 JsDoc {{
 " -----------------------------------------------------
-nnoremap ,d :JsDoc<CR>
-"}}}
-
-" -----------------------------------------------------
-" 5.15 YankRing {{
-" -----------------------------------------------------
-nnoremap <silent> <leader>y :YRShow<CR>
 "}}}
 
 "}}}

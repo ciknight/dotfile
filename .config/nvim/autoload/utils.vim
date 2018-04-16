@@ -1,6 +1,6 @@
 " Informative echo line
 function! g:utils#showToggles() abort
-  echom '<F1> NERDTree | <F2> Free | <F3> Free | <F4> Spellcheck | <F5> Reload rc | <F6> Search HL |' .
+  echom '<F1> NERDTree | <F2> Free | <F3> Free | <F4> SpellCheck | <F5> Free | <F6> Free |' .
         \' <F7> Whitechars | <F8> Built-in terminal | <F9> Free | <F10> Free  | <F11> Free |' .
         \' <F12> This message'
 endfunction
@@ -126,55 +126,35 @@ function! g:utils#useOmniTabWrapper() abort
   inoremap <buffer> <expr> <TAB> utils#insertTabOmniWrapper()
 endfunction
 
-" Format function
+" Format function, # NOT USED
 " Needs: `npm install js-beautify`, `gem install ruby-beautify`, `python`
-function! g:utils#formatFile() abort
-  let l:line = line('.')
-  let l:col = col('.')
-  let l:command_prefix = '%!'
+"function! g:utils#formatFile() abort
+"  let l:line = line('.')
+"  let l:col = col('.')
+"  let l:command_prefix = '%!'
 
-  if &filetype ==? 'javascript.jsx'
-    let l:command = 'js-beautify -X -f -'
-  elseif &filetype ==? 'html'
-    let l:command = 'html-beautify -f -'
-  elseif &filetype ==? 'css'
-    let l:command = 'css-beautify -f -'
-  elseif &filetype ==? 'json'
-    let l:command = 'python -m json.tool'
-  elseif &filetype ==? 'ruby'
-    let l:command = 'ruby-beautify -c 2 -s'
-  else
-    " Basic vim format fallback
-    normal! gg=G
-  endif
+"  if &filetype ==? 'javascript.jsx'
+"    let l:command = 'js-beautify -X -f -'
+"  elseif &filetype ==? 'html'
+"    let l:command = 'html-beautify -f -'
+"  elseif &filetype ==? 'css'
+"    let l:command = 'css-beautify -f -'
+"  elseif &filetype ==? 'json'
+"    let l:command = 'python -m json.tool'
+"  elseif &filetype ==? 'ruby'
+"    let l:command = 'ruby-beautify -c 2 -s'
+"  else
+"    " Basic vim format fallback
+"    normal! gg=G
+"  endif
 
-  if exists('l:command')
-    execute l:command_prefix . l:command
-  endif
+"  if exists('l:command')
+"    execute l:command_prefix . l:command
+"  endif
 
-  " Return back to where cursor was
-  call cursor(l:line, l:col)
-endfunction
-
-" NOTE: npm install -g eslint
-function! g:utils#eslintFixFile() abort
-  let l:line = line('.')
-  let l:col = col('.')
-  let l:command_prefix = '!'
-
-  if &filetype ==? 'javascript.jsx'
-    let l:command = 'eslint --fix %:p'
-  endif
-
-  if exists('l:command')
-    execute l:command_prefix . l:command
-  else
-    echom 'Only .js files are supported.'
-  endif
-
-  " Return back to where cursor was
-  call cursor(l:line, l:col)
-endfunction
+"  " Return back to where cursor was
+"  call cursor(l:line, l:col)
+"endfunction
 
 " Mode function for Lightline statusline
 function! g:utils#lightLineMode() abort
