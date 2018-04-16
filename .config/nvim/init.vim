@@ -33,14 +33,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi', {'do': 'pip install jedi'}
 
 " Automatically closing pair stuff
 Plug 'cohama/lexima.vim'
 " Snippet support (C-j)
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 " Commenting support (gc)
 Plug 'tpope/vim-commentary'
 " Heuristically set indent settings
@@ -135,22 +134,10 @@ Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 " Extra text objects {{{
 " ---------------------------------------------------------------------------------------------------------------------
 
-" Custom text objects creation (dependency for the latter)
-"Plug 'kana/vim-textobj-user'
-" Argument text object (via, >a)
-"Plug 'PeterRincker/vim-argumentative'
-" Indent text object (vii)
-"Plug 'kana/vim-textobj-indent'
-" Line text object (vil)
-"Plug 'kana/vim-textobj-line'
-" Entire buffer text object (vae)
-"Plug 'kana/vim-textobj-entire'
 " Comment text object (vac)
 "Plug 'glts/vim-textobj-comment'
-" XML attribute
-"Plug 'whatyouhide/vim-textobj-xmlattr'
 " Improved targets line cin) next parens
-"Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -158,10 +145,6 @@ Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 " ---------------------------------------------------------------------------------------------------------------------
 
 Plug 'icymind/NeoSolarized'
-" Hybrid
-"Plug 'w0ng/vim-hybrid'
-" Badwolf
-"Plug 'sjl/badwolf'
 " Molokai
 "Plug 'tomasr/molokai'
 " Iceberg
@@ -174,20 +157,12 @@ Plug 'icymind/NeoSolarized'
 " Other {{{
 " ---------------------------------------------------------------------------------------------------------------------
 
-" Search for highlighted word with *
-"Plug 'thinca/vim-visualstar'
-" Improve star by not jumping immediately
-"Plug 'ironhouzi/vim-stim'
-" Intelligent buffer closing
-"Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-" Iabbrev auto-correction library
-"Plug 'chip/vim-fat-finger'
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
 " Delete all but current buffer
 Plug 'vim-scripts/BufOnly.vim', { 'on': 'Bonly' }
 " Did you mean file open
-"Plug 'EinfachToll/DidYouMean'
+Plug 'EinfachToll/DidYouMean'
 "}}}
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
