@@ -33,6 +33,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 
 " Automatically closing pair stuff
 Plug 'cohama/lexima.vim'
@@ -56,8 +57,6 @@ Plug 'w0rp/ale', {'do': 'pip install flake8'}
 Plug 'pangloss/vim-javascript'
 " Yaml indentation
 Plug 'martin-svk/vim-yaml'
-" Markdown syntax
-Plug 'tpope/vim-markdown'
 " Git syntax
 Plug 'tpope/vim-git'
 " Tmux syntax
@@ -110,7 +109,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-endwise'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
-" Auto filejump, support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
+" Auto filejump, <C-p> support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 Plug 'kien/ctrlp.vim'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
@@ -627,19 +626,7 @@ command! Retab2 :call utils#retabToTwoSpaces()
 "{{{
 
 " -----------------------------------------------------
-" 4.1 Auto-switch sk -> en keyboard layouts {{{
-" -----------------------------------------------------
-let g:utils_autoswitch_kb_layout=0
-"}}}
-
-" -----------------------------------------------------
-" 4.2 FZF {{{
-" -----------------------------------------------------
-
-"}}}
-
-" -----------------------------------------------------
-" 4.3 NERDTree {{{
+" 4.1 NERDTree {{{
 " -----------------------------------------------------
 let g:NERDTreeWinSize=32
 let g:NERDTreeChDirMode=2
@@ -653,7 +640,7 @@ let g:NERDTreeRespectWildIgnore=1
 let g:nerdtree_tabs_open_on_console_startup=1
 let g:NERDTreeQuitOnOpen=1
 " Automatically open a NERDTree if no files where specified
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
 " Close vim if the only window left open is a NERDTree
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "}}}
@@ -716,24 +703,37 @@ let g:lightline = {
 " -----------------------------------------------------
 " 4.8 Neomake settings {{{
 " -----------------------------------------------------
-"  pass
+"
 "}}}
 
 " -----------------------------------------------------
-" 4.9 Vim Markdown settings {{{
+" 4.9 Rainbow settings {{{
 " -----------------------------------------------------
-let g:vim_markdown_no_default_key_mappings=1
-let g:vim_markdown_folding_disabled=1
-let g:markdown_fenced_languages=[
-      \'bash=sh',
-      \'git=gitconfig',
-      \'javascript',
-      \'lua',
-      \'ruby',
-      \'tmux',
-      \'viml=vim',
-      \'xdefaults',
-      \'zsh']
+let g:rbpt_colorpairs=[
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
+            " 不加入这行, 防止黑色括号出现, 很难识别
+            " \ ['black',       'SeaGreen3'],
+let g:rbpt_max=16
+let g:rbpt_loadcmd_toggle=0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
 " -----------------------------------------------------
@@ -744,11 +744,14 @@ let g:deoplete#enable_refresh_always=0
 let g:deoplete#enable_smart_case=1
 let g:deoplete#file#enable_buffer_path=1
 
+let g:deoplete#sources#jedi#server_timeout=10
+let g:deoplete#sources#jedi#enable_cache=1
+
 let g:deoplete#sources={}
 let g:deoplete#sources._    = ['around', 'buffer', 'file', 'ultisnips']
 let g:deoplete#sources.ruby = ['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.vim  = ['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources['javascript.jsx'] = ['around', 'buffer', 'file', 'ultisnips', 'ternjs']
+let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.css  = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
 let g:deoplete#sources.scss = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
 let g:deoplete#sources.html = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
@@ -841,9 +844,22 @@ let g:yankring_window_height=15
 "}}}
 
 " -----------------------------------------------------
-" 5.3 Isolate {{{
+" 5.3 ale {{{
 " -----------------------------------------------------
-
+"let g:ale_sign_column_always=1
+let g:ale_linters = {
+\   'vim' : ['vint'],
+\   'python' : ['flake8'],
+\   'markdown' : ['mdl'],
+\   'sh' : ['shellcheck'],
+\   'javascript' : ['eslint'],
+\}
+let g:ale_sign_error='•'
+let g:ale_sign_warning='•'
+let g:ale_echo_msg_error_str='✹ Error'
+let g:ale_echo_msg_warning_str='⚠ Warning'
+let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
+let g:ale_statusline_format=['⨉ %d', '⚠ %d', 'OK']
 "}}}
 
 " -----------------------------------------------------
@@ -865,23 +881,11 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " -----------------------------------------------------
 " 5.6 Vim Markdown {{{
 " -----------------------------------------------------
-nmap [[ <Plug>Markdown_MoveToPreviousHeader
-nmap ]] <Plug>Markdown_MoveToNextHeader
 "}}}
 
 " -----------------------------------------------------
 " 5.7 Argumentative (use a instead of ,) {{{
 " -----------------------------------------------------
-xmap ia <Plug>Argumentative_InnerTextObject
-xmap aa <Plug>Argumentative_OuterTextObject
-omap ia <Plug>Argumentative_OpPendingInnerTextObject
-omap aa <Plug>Argumentative_OpPendingOuterTextObject
-nmap [a <Plug>Argumentative_Prev
-nmap ]a <Plug>Argumentative_Next
-xmap [a <Plug>Argumentative_XPrev
-xmap ]a <Plug>Argumentative_XNext
-nmap <a <Plug>Argumentative_MoveLeft
-nmap >a <Plug>Argumentative_MoveRight
 "}}}
 
 " -----------------------------------------------------
@@ -903,15 +907,6 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 " -----------------------------------------------------
 nnoremap <leader>g :CtrlSF<Space>
 nnoremap <leader>G :CtrlSFToggle<Space>
-"}}}
-
-" -----------------------------------------------------
-" 5.10 Vim-Plug {{{
-" -----------------------------------------------------
-nnoremap <leader>pi :PlugInstall<CR>
-nnoremap <leader>pu :PlugUpdate<CR>
-nnoremap <leader>pU :PlugUpgrade<CR>
-nnoremap <leader>pc :PlugClean<CR>
 "}}}
 
 " -----------------------------------------------------
@@ -943,11 +938,6 @@ nnoremap <leader>C :Bonly<CR>
 " 5.13 Tabularize -> [a]lign {{
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
-"}}}
-
-" -----------------------------------------------------
-" 5.14 JsDoc {{
-" -----------------------------------------------------
 "}}}
 
 "}}}
@@ -997,9 +987,9 @@ augroup vim_man
 augroup END
 "}}}
 
-" Turn spellcheck on for markdown files {{{
+" Turn spellcheck on for text files {{{
 augroup auto_spellcheck
-  autocmd BufNewFile,BufRead *.md setlocal spell
+  autocmd BufNewFile,BufRead *.txt setlocal spell
 augroup END
 "}}}
 
@@ -1025,24 +1015,14 @@ augroup line_return
 augroup END
 "}}}
 
-" Keyboard layout switching {{{
-if g:utils_autoswitch_kb_layout == 1
-  augroup auto_kb_switch
-    autocmd InsertEnter * call utils#setSKKBLayout()
-    autocmd InsertLeave * call utils#setUSKBLayout()
-  augroup END
-end
-"}}}
-
 " Run checktime in buffers, but avoiding the "Command Line" (q:) window
 augroup prevent_q_colon
   autocmd CursorHold * if getcmdwintype() == '' | checktime | endif
 augroup END
 
 " -----------------------------------------------------
-" 7.1 Run linters after save {{{
+" 7.1 Run something after save {{{
 " -----------------------------------------------------
-
 "augroup linters
 "  " npm install -g eslint
 "  autocmd BufWritePost *.js Neomake eslint

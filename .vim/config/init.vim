@@ -87,7 +87,6 @@ Plug 'icymind/NeoSolarized'
 " Plug 'fholgado/minibufexpl.vim' " Handle Buffers with Duplicate Name
 " Plug 'gcmt/wildfire.vim' " Code and files fuzzy finder
 " Plug 'christoomey/vim-tmux-navigator'
-" Plug 'thinca/vim-quickrun' " quick run
 
 " syntax plugin
 " Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt

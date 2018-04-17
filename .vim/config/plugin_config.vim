@@ -266,17 +266,6 @@ endif
 let g:easy_align_delimiters['#']={ 'pattern': '#', 'ignore_groups': ['String'] }
 
 
-" ====> quick run <====
-let g:quickrun_config={
-            \   "_" : {
-            \       "outputter" : "message",
-            \   },
-            \}
-let g:quickrun_no_default_key_mappings=1
-nmap <Leader>r <Plug>(quickrun)
-map <F10> :QuickRun<CR>
-
-
 " ====> Vim expand region <====
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
