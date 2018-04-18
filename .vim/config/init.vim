@@ -61,7 +61,7 @@ Plug 'kien/ctrlp.vim' " auto filejump, support tagbar  http://www.wklken.me/post
 
 " -- autocomplate plugin
 Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --gocode-completer --clang-completer --system-libclang' }
-" Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
+Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
 Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
 
@@ -81,12 +81,14 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 
 
+
 " -- closing plugins
 " Plug 'junegunn/vim-easy-align' " quick align
 " Plug 'yonchu/accelerated-smooth-scroll' " <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
 " Plug 'fholgado/minibufexpl.vim' " Handle Buffers with Duplicate Name
 " Plug 'gcmt/wildfire.vim' " Code and files fuzzy finder
 " Plug 'christoomey/vim-tmux-navigator'
+" Plug 'mtth/cursorcross.vim'
 
 " syntax plugin
 " Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt

@@ -44,7 +44,7 @@ set autoread      " Set to auto read when a file is changed from the outside
 set autowriteall
 
 " save as sudo
-ca w!! w !sudo tee "%"
+cmap w!! w !sudo tee "%"
 
 
 "==========================================

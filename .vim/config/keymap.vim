@@ -96,8 +96,11 @@ nnoremap <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
 
 nnoremap <leader>o o<Esc>
-nnoremap <leader>/ :nohlsearch<CR>:echo 'clear search highlight'<CR>
-" nnoremap <leader>/ :let @/=""<CR>
+" nnoremap <leader>/ :nohlsearch<CR>:echo 'clear search highlight'<CR>
+nnoremap <leader>/ :let @/=""<CR>
+
+" Switch between the last two files
+nnoremap <leader><leader> <c-^>
 
 
 """""""""" Insert """"""""""""""

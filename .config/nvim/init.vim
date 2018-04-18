@@ -211,7 +211,6 @@ set number                                  " Line numbers on
 set numberwidth=4
 set relativenumber
 set cursorline cursorcolumn
-
 augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
   autocmd!
   autocmd InsertEnter * :set norelativenumber number
@@ -384,12 +383,12 @@ nnoremap <F1> <NOP>
 "nnoremap <down> <NOP>
 "nnoremap <left> <NOP>
 "nnoremap <right> <NOP>
+"vnoremap <up> <NOP>
+"vnoremap <down> <NOP>
+"vnoremap <left> <NOP>
+"vnoremap <right> <NOP>
 "nnoremap <bs> <NOP>
 "nnoremap <delete> <NOP>
-"inoremap <up> <NOP>
-"inoremap <down> <NOP>
-"inoremap <left> <NOP>
-"inoremap <right> <NOP>
 "nnoremap <Space> <NOP>
 "nnoremap Q <NOP>
 "}}}
@@ -456,6 +455,7 @@ nnoremap p p`]
 " Fix the cw at the end of line bug default vim has special treatment (:help cw)
 nmap cw ce
 nmap dw de
+nmap yw ye
 
 " Uppercase word in insert mode
 inoremap <C-u> <ESC>mzgUiw`za
@@ -472,9 +472,6 @@ xnoremap >  >gv
 " Stay down after creating fold
 vnoremap zf mzzf`zzz
 
-" Make . work with visually selected lines
-xnoremap . :norm.<CR>
-
 " Easier fold toggling
 nnoremap <space> za
 "}}}
@@ -485,8 +482,7 @@ nnoremap <space> za
 
 " Quick save and close buffer
 nnoremap <leader>w :w<CR>
-nnoremap <silent> <leader>c :Sayonara!<CR>
-nnoremap <silent> <leader>q :Sayonara<CR>
+nnoremap <silent> <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
 
 nnoremap <leader>o o<Esc>
@@ -544,7 +540,11 @@ nnoremap S mzi<CR><ESC>`z
 inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
 
 " Toggle search highlight
-nnoremap <leader>/ :set nohlsearch!<CR> :set nohlsearch?<CR>
+" nnoremap <leader>/ :set nohlsearch!<CR> :set nohlsearch?<CR>  " 取消高亮，再搜索会有bug
+nnoremap <leader>/ :let @/=""<CR>
+
+" allow saving file as sudo when forgot to start vim using sudo
+cmap w!! w !sudo tee > /dev/null %
 "}}}
 
 " -----------------------------------------------------
@@ -592,6 +592,9 @@ nnoremap <silent> <C-Down> :resize -1<CR>
 nnoremap <silent> + :bn<CR>
 nnoremap <silent> _ :bp<CR>
 "}}}
+
+" Switch alternate file, http://vim.wikia.com/wiki/Go_to_alternate_file_or_next_file_if_no_alternate
+nnoremap <silent> <leader>, <C-^>
 
 " -----------------------------------------------------
 " 3.7 Command abbreviations and mappings {{{
@@ -701,9 +704,9 @@ let g:lightline = {
 "}}}
 
 " -----------------------------------------------------
-" 4.8 Neomake settings {{{
+" 4.8 CtrlP settings {{{
 " -----------------------------------------------------
-"
+let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn|exe|so|dll)$'
 "}}}
 
 " -----------------------------------------------------

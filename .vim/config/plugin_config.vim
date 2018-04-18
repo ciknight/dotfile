@@ -131,8 +131,6 @@ nnoremap <silent> <Leader>r :call ToggleNERDTreeWithRefresh()<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
-" 显示折叠代码的文档字符串
-let g:SimpylFold_docstring_preview = 1
 
 
 " ====> Indent Guides <====
@@ -182,8 +180,6 @@ let g:ycm_collect_identifiers_from_comments_and_strings=0
 let g:ycm_complete_in_strings=1
 let g:syntastic_always_populate_loc_list=1
 let g:ycm_autoclose_preview_window_after_completion=1
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<c-n>', '<Down>']
@@ -196,16 +192,16 @@ let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 
 " ====> jedi-vim <====
-"let g:jedi#completions_enabled=1
-"let g:jedi#popup_on_dot=1
-"let g:jedi#smart_auto_mappings=0 " auto from import
-"let g:jedi#goto_command="<leader>d"
-"" let g:jedi#goto_assignments_command="<leader>g"
-"" let g:jedi#goto_definitions_command=""
-"let g:jedi#documentation_command="K"
-"let g:jedi#usages_command="<leader>n"
-"let g:jedi#completions_command="<C-Space>"
-"let g:jedi#rename_command="<leader>r"
+let g:jedi#completions_enabled=1
+let g:jedi#popup_on_dot=1
+let g:jedi#smart_auto_mappings=0 " auto from import
+let g:jedi#goto_command="<leader>d"
+" let g:jedi#goto_assignments_command="<leader>g"
+" let g:jedi#goto_definitions_command=""
+let g:jedi#documentation_command="K"
+let g:jedi#usages_command="<leader>n"
+let g:jedi#completions_command="<C-Space>"
+let g:jedi#rename_command="<leader>r"
 
 " ====> Ultisnips <====
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
