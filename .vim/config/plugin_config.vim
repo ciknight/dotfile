@@ -131,8 +131,6 @@ nnoremap <silent> <Leader>r :call ToggleNERDTreeWithRefresh()<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
-" 显示折叠代码的文档字符串
-let g:SimpylFold_docstring_preview = 1
 
 
 " ====> Indent Guides <====
@@ -182,8 +180,6 @@ let g:ycm_collect_identifiers_from_comments_and_strings=0
 let g:ycm_complete_in_strings=1
 let g:syntastic_always_populate_loc_list=1
 let g:ycm_autoclose_preview_window_after_completion=1
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " youcompleteme  默认tab  s-tab 和 ultisnips 冲突
 let g:ycm_key_list_select_completion=['<c-n>', '<Down>']
@@ -266,17 +262,6 @@ endif
 let g:easy_align_delimiters['#']={ 'pattern': '#', 'ignore_groups': ['String'] }
 
 
-" ====> quick run <====
-let g:quickrun_config={
-            \   "_" : {
-            \       "outputter" : "message",
-            \   },
-            \}
-let g:quickrun_no_default_key_mappings=1
-nmap <Leader>r <Plug>(quickrun)
-map <F10> :QuickRun<CR>
-
-
 " ====> Vim expand region <====
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
@@ -326,5 +311,5 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " ====> isort <====
 " isort don't support python3 and venv
 " Shift-V 上下选中, ctrl + i 规范化
-let g:vim_isort_map='<C-i>'
-let g:vim_isort_python_version='python2'
+" let g:vim_isort_map='<C-i>'
+" let g:vim_isort_python_version='python2'

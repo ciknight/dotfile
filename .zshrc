@@ -28,7 +28,7 @@ elif [ $SYSTEM = "Linux" ] ; then
 fi
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/bin:$PATH"; 
+export PATH="$HOME/bin:$PATH";
 export LANG=zh_CN.UTF-8  # You may need to manually set your language environment
 export LESSCHARSET=utf-8  # Fix linux git diff and log chinese
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
@@ -57,7 +57,13 @@ export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit"
 alias gdc='git diff --cached'
 
 # System alias
-alias vi='vim'
+if which nvim 2>&1 > /dev/null; then
+  alias vi=nvim
+elif which vim 2>&1 > /dev/null; then
+  alias vi=vim
+else
+  alias vi=vi
+fi
 alias ssh='ssh -2'
 alias df='df -h'
 alias du='du -h -d 1' # deep

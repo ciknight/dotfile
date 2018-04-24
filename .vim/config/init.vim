@@ -45,6 +45,7 @@ Plug 'vim-scripts/DrawIt' " :DIstart or \di, Draw ascii paint  http://www.opstoo
 Plug 'terryma/vim-expand-region' " use V or v, region selected
 Plug 'tpope/vim-repeat' " for repeat -> enhance surround.vim, use . to repeat command
 Plug 'Raimondi/delimitMate' " auto sign complate
+Plug 'cohama/lexima.vim'  " closing pairs
 Plug 'tpope/vim-surround' " surroundings in pairs, cs => change surring cst => tag, ds => delete, csw => add
 Plug 'godlygeek/tabular' " Vim script for text filtering and alignment, # :Tab\"
 Plug 'vim-scripts/LargeFile'
@@ -59,7 +60,7 @@ Plug 'kien/ctrlp.vim' " auto filejump, support tagbar  http://www.wklken.me/post
 
 
 " -- autocomplate plugin
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer --clang-completer --system-libclang' }
+Plug 'Valloric/YouCompleteMe', { 'do': 'python ./install.py --gocode-completer --clang-completer --system-libclang' }
 Plug 'davidhalter/jedi-vim', {'do': 'pip install jedi'} " python use jdei, pip install jedi
 Plug 'SirVer/ultisnips'  " http://mednoter.com/UltiSnips.html, Track the engine.
 Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if you want them:
@@ -68,9 +69,9 @@ Plug 'honza/vim-snippets'  " Snippets are separated from the engine. Add this if
 " -- syntax plugin
 Plug 'w0rp/ale', {'do': 'pip install flake8'} " syntax check
 Plug 'ciknight/vim-yapf', {'do': 'pip install yapf'}
-Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
+" Plug 'fisadev/vim-isort', {'do': 'pip install isort'} " isort  https://github.com/timothycrosley/isort#readme + https://github.com/fisadev/vim-isort#installation
 Plug 'Shougo/vimshell.vim' " shell
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'} " Golang
 
 
@@ -80,13 +81,14 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'icymind/NeoSolarized'
 
 
+
 " -- closing plugins
 " Plug 'junegunn/vim-easy-align' " quick align
 " Plug 'yonchu/accelerated-smooth-scroll' " <C-D>/<C-U> and <C-F>/<C-B> keys are replaced by default.
 " Plug 'fholgado/minibufexpl.vim' " Handle Buffers with Duplicate Name
 " Plug 'gcmt/wildfire.vim' " Code and files fuzzy finder
 " Plug 'christoomey/vim-tmux-navigator'
-" Plug 'thinca/vim-quickrun' " quick run
+" Plug 'mtth/cursorcross.vim'
 
 " syntax plugin
 " Plug 'vim-scripts/dbext.vim' " SQLComplete suporrt
