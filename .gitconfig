@@ -32,7 +32,7 @@
     unstage = reset HEAD --
     amend = commit --amend --verbose
 [core]
-    editor = nvim
+    editor = vim
     safecrlf = true
     excludesfile = ~/.gitignore.global
     ignorecase = false
