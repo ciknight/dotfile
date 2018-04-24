@@ -5,15 +5,6 @@ function! g:utils#showToggles() abort
         \' <F12> This message'
 endfunction
 
-" Copy and paste function using xclip
-function! g:utils#clipboardYank() abort
-  call system('xclip -i -selection clipboard', @@)
-endfunction
-
-function! g:utils#clipboardPaste() abort
-  let @@ = system('xclip -o -selection clipboard')
-endfunction
-
 " Profile neovim and save results to profile.log
 function! g:utils#profile() abort
   execute 'profile start profile.log'
@@ -78,13 +69,6 @@ function! g:utils#stripTrailingWhitespaces() abort
   " Clean up: restore previous search history, and cursor position
   let @/ = l:lastSearch
   call cursor(l:line, l:col)
-endfunction
-
-" Generate ctags and put them into tags directory
-" gem install starscope
-function! g:utils#generateCtags() abort
-  silent execute '!starscope -x node_modules/ -e ctags'
-  echom 'Tags generated into tags file!'
 endfunction
 
 " Tab wrapper

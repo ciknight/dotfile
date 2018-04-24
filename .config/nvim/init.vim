@@ -53,8 +53,6 @@ Plug 'tpope/vim-sleuth'
 
 " Syntax check
 Plug 'w0rp/ale', {'do': 'pip install flake8'}
-" Modern JS support (indent, syntax, etc)
-Plug 'pangloss/vim-javascript'
 " Yaml indentation
 Plug 'martin-svk/vim-yaml'
 " Git syntax
@@ -176,6 +174,7 @@ call plug#end()
 set encoding=utf-8                          " The encoding displayed.
 set fileencoding=utf-8                      " The encoding written to file.
 set helplang=cn
+set termencoding=utf-8
 scriptencoding utf-8                        " Set utf-8 as default script encoding
 
 set shell=/bin/zsh                          " Setting shell to zsh
@@ -197,7 +196,10 @@ set updatetime=1000                         " Update time used to create swap fi
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
 set synmaxcol=220                           " Don't try to syntax highlight minified files
 set expandtab                               " Tab转换为空格
-set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
+set smarttab
+"set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
+set autoindent
+set cindent
 set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
 set nowrap                                  " 不自动折行
 set viminfo+=!                              " 保存全局变量
@@ -649,13 +651,13 @@ let g:NERDTreeQuitOnOpen=1
 "}}}
 
 " -----------------------------------------------------
-" 4.4 Ultisnips settings {{{
+" 4.2 Ultisnips settings {{{
 " -----------------------------------------------------
 "let g:UltiSnipsUsePythonVersion=3
 "}}}
 
 " -----------------------------------------------------
-" 4.5 Gitgutter settings {{{
+" 4.3 Gitgutter settings {{{
 " -----------------------------------------------------
 if exists('&signcolumn')
   set signcolumn=yes
@@ -673,7 +675,7 @@ let g:gitgutter_sign_removed_first_line='-'
 "}}}
 
 " -----------------------------------------------------
-" 4.7 Lightline settings {{{
+" 4.4 Lightline settings {{{
 " -----------------------------------------------------
 let g:lightline = {
       \ 'colorscheme': 'powerline',
@@ -704,13 +706,13 @@ let g:lightline = {
 "}}}
 
 " -----------------------------------------------------
-" 4.8 CtrlP settings {{{
+" 4.4 CtrlP settings {{{
 " -----------------------------------------------------
 let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn|exe|so|dll)$'
 "}}}
 
 " -----------------------------------------------------
-" 4.9 Rainbow settings {{{
+" 4.5 Rainbow settings {{{
 " -----------------------------------------------------
 let g:rbpt_colorpairs=[
             \ ['brown',       'RoyalBlue3'],
@@ -740,7 +742,7 @@ au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
 " -----------------------------------------------------
-" 4.10 Deoplete autocomplete settings {{{
+" 4.6 Deoplete autocomplete settings {{{
 " -----------------------------------------------------
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_refresh_always=0
@@ -761,7 +763,7 @@ let g:deoplete#sources.html = ['around', 'buffer', 'member', 'file', 'omni', 'ul
 "}}}
 
 " -----------------------------------------------------
-" 4.11 Ctrl-SF settings {{{
+" 4.7 Ctrl-SF settings {{{
 " -----------------------------------------------------
 let g:ctrlsf_default_root='project'
 let g:ctrlsf_populate_qflist=0
@@ -772,55 +774,22 @@ let g:ctrlsf_regex_pattern=0
 "}}}
 
 " -----------------------------------------------------
-" 4.12 Plug settings {{{
+" 4.8 Plug settings {{{
 " -----------------------------------------------------
 let g:plug_timeout=20
 "}}}
 
 " -----------------------------------------------------
-" 4.13 Vim-markdown settings {{{
-" -----------------------------------------------------
-"}}}
-
-" -----------------------------------------------------
-" 4.14 Colorizer settings {{{
+" 4.9 Colorizer settings {{{
 " -----------------------------------------------------
 let g:colorizer_nomap=1
 "}}}
 
-" -----------------------------------------------------
-" 4.15 Elm-vim settings {{{
-" -----------------------------------------------------
-"}}}
-
-" -----------------------------------------------------
-" 4.16 JsDoc settings {{{
-" -----------------------------------------------------
-"}}}
-
 "" -----------------------------------------------------
-"" 4.17 Deoplete-tern settings {{{
+"" 4.10 Deoplete-tern settings {{{
 "" -----------------------------------------------------
 let g:tern_request_timeout=1
 let g:tern_show_signature_in_pum=1
-""}}}
-
-"" -----------------------------------------------------
-"" 4.18 vim-javascript settings {{{
-"" -----------------------------------------------------
-let g:javascript_plugin_jsdoc=1
-let g:javascript_plugin_flow=1
-""}}}
-
-"" -----------------------------------------------------
-"" 4.19 vCoolor settings {{{
-"" -----------------------------------------------------
-""}}}
-
-"" -----------------------------------------------------
-"" 4.20 YankRing settings {{{
-"" ------------------------------------------------------
-let g:yankring_window_height=15
 ""}}}
 
 "}}}
@@ -829,14 +798,9 @@ let g:yankring_window_height=15
 " 5.0 Plugin mappings
 " ======================================================================================================================
 "{{{
-" -----------------------------------------------------
-" 5.1 FZF {{{
-" -----------------------------------------------------
-
-"}}}
 
 " -----------------------------------------------------
-" 5.2 Ultisnips {{{
+" 5.1 Ultisnips {{{
 " -----------------------------------------------------
 " Disable built-in cx-ck to be able to go backward
 "inoremap <C-x><C-k> <NOP>
@@ -847,7 +811,7 @@ let g:yankring_window_height=15
 "}}}
 
 " -----------------------------------------------------
-" 5.3 ale {{{
+" 5.2 ale {{{
 " -----------------------------------------------------
 "let g:ale_sign_column_always=1
 let g:ale_linters = {
@@ -866,7 +830,7 @@ let g:ale_statusline_format=['⨉ %d', '⚠ %d', 'OK']
 "}}}
 
 " -----------------------------------------------------
-" 5.4 Gitgutter {{{
+" 5.3 Gitgutter {{{
 " -----------------------------------------------------
 nnoremap [h :GitGutterPrevHunk<CR>
 nnoremap ]h :GitGutterNextHunk<CR>
@@ -875,24 +839,14 @@ nnoremap ,hr :GitGutterRevertHunk<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.5 Expand region {{{
+" 5.4 Expand region {{{
 " -----------------------------------------------------
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.6 Vim Markdown {{{
-" -----------------------------------------------------
-"}}}
-
-" -----------------------------------------------------
-" 5.7 Argumentative (use a instead of ,) {{{
-" -----------------------------------------------------
-"}}}
-
-" -----------------------------------------------------
-" 5.8 Deoplete autocomplete {{{
+" 5.5 Deoplete autocomplete {{{
 " -----------------------------------------------------
 " Insert <TAB> or select next match
 inoremap <silent> <expr> <Tab> utils#tabComplete()
@@ -906,14 +860,14 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 "}}}
 
 " -----------------------------------------------------
-" 5.9 CtrlSF {{{
+" 5.6 CtrlSF {{{
 " -----------------------------------------------------
 nnoremap <leader>g :CtrlSF<Space>
 nnoremap <leader>G :CtrlSFToggle<Space>
 "}}}
 
 " -----------------------------------------------------
-" 5.11 Ctrl-SF {{{
+" 5.7 Ctrl-SF {{{
 " -----------------------------------------------------
 let g:ctrlsf_mapping = {
       \ 'next'    : 'n',
@@ -932,13 +886,13 @@ nnoremap <silent> <leader>g :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.12 BufOnly -> [C]lose all {{{
+" 5.8 BufOnly -> [C]lose all {{{
 " -----------------------------------------------------
 nnoremap <leader>C :Bonly<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.13 Tabularize -> [a]lign {{
+" 5.9 Tabularize -> [a]lign {{
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
 "}}}
@@ -1029,26 +983,6 @@ augroup END
 "augroup linters
 "  " npm install -g eslint
 "  autocmd BufWritePost *.js Neomake eslint
-"  " npm install -g jsonlint
-"  autocmd BufWritePost *.json Neomake jsonlint
-"  " npm install -g typescript
-"  autocmd BufWritePost *.ts Neomake tsc
-"  " gem install rubocop
-"  autocmd BufWritePost *.rb Neomake rubocop
-"  " sudo apt-get install elixir
-"  autocmd BufWritePost *.ex Neomake elixir
-"  " apt-get install tidy
-"  autocmd BufWritePost *.html Neomake tidy
-"  " gem install haml_lint
-"  autocmd BufWritePost *.haml Neomake hamllint
-"  " gem install scss-lint
-"  autocmd BufWritePost *.scss Neomake sasslint
-"  " gem install mdl
-"  autocmd BufWritePost *.md Neomake mdl
-"  " apt-get install shellcheck
-"  autocmd BufWritePost *.sh Neomake shellcheck
-"  " pip3 install vim-vint
-"  autocmd BufWritePost *.vim Neomake vint
 "augroup END
 "}}}
 

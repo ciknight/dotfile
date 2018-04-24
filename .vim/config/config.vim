@@ -52,6 +52,7 @@ cmap w!! w !sudo tee "%"
 "==========================================
 set showcmd " display incomplete commands"
 set gcr=a:block-blinkon0 " 禁止光标闪烁
+" set novisualbell  " 禁止闪烁
 
 set number numberwidth=4
 set relativenumber
