@@ -357,7 +357,6 @@ set autowrite                               " Automatically :write before runnin
 set autoread                                " Set to auto read when a file is changed from the outside
 set autowriteall
 ca w!! w !sudo tee "%"                      " save as sudo
-"set fileencodings=ucs-bom,utf-8,cp936,gbk,gb18030,big5,euc-jp,euc-kr,latin1
 "}}}
 
 "}}}
@@ -813,7 +812,6 @@ let g:tern_show_signature_in_pum=1
 " -----------------------------------------------------
 " 5.2 ale {{{
 " -----------------------------------------------------
-"let g:ale_sign_column_always=1
 let g:ale_linters = {
 \   'vim' : ['vint'],
 \   'python' : ['flake8'],
@@ -821,12 +819,13 @@ let g:ale_linters = {
 \   'sh' : ['shellcheck'],
 \   'javascript' : ['eslint'],
 \}
+"let g:ale_sign_column_always=1
+let g:ale_fix_on_save=1
 let g:ale_sign_error='•'
 let g:ale_sign_warning='•'
-let g:ale_echo_msg_error_str='✹ Error'
-let g:ale_echo_msg_warning_str='⚠ Warning'
-let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
-let g:ale_statusline_format=['⨉ %d', '⚠ %d', 'OK']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 "}}}
 
 " -----------------------------------------------------

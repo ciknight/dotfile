@@ -13,9 +13,9 @@ KEY = "19965805"
 BASE_URL = "http://%s/openapi.do?keyfrom=awf-Chinese-Dict&key=%s&version=1.1&type=data&doctype=json&q={}" % (HOST, KEY)
 
 
-query = parse.quote(' '.join(sys.argv[1:]))
-if not query:
+if not sys.argv[1:]:
     raise Exception('query is none')
+query = parse.quote(' '.join(sys.argv[1:]))
 
 resp = request.urlopen(BASE_URL.format(query))
 """
