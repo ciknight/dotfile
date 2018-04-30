@@ -63,6 +63,8 @@ Plug 'keith/tmux.vim'
 Plug 'Shougo/vimshell.vim'
 " Golang syntax
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
+" python automate format
+Plug 'ciknight/vim-yapf'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -896,6 +898,13 @@ nnoremap <leader>C :Bonly<CR>
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
 "}}}
+
+" -----------------------------------------------------
+" 5.10 Yapf {{
+" -----------------------------------------------------
+let g:yapf_style_conf="~/.config/yapf/style"
+"}}}
+
 
 "}}}
 
