@@ -1,6 +1,6 @@
 " Informative echo line
 function! g:utils#showToggles() abort
-  echom '<F1> NERDTree | <F2> Free | <F3> Free | <F4> SpellCheck | <F5> Free | <F6> Free |' .
+  echom '<F1> Free | <F2> NERDTree | <F3> Free | <F4> SpellCheck | <F5> Free | <F6> Free |' .
         \' <F7> Whitechars | <F8> Built-in terminal | <F9> Free | <F10> Free  | <F11> Free |' .
         \' <F12> This message'
 endfunction
@@ -43,17 +43,6 @@ function! g:utils#intelligentVerticalResize(direction) abort
   let l:modifier = l:current_window_is_last_window ? l:modifier_1 : l:modifier_2
   let l:command = 'vertical resize ' . l:modifier . l:window_resize_count . '<CR>'
   execute l:command
-endfunction
-
-" Run NERDTreeFind or Toggle based on current buffer
-function! g:utils#nerdWrapper() abort
-  if &filetype ==# '' " Empty buffer
-    :NERDTreeToggle
-  elseif expand('%:t') =~? 'NERD_tree' " In NERD_tree buffer
-    wincmd w
-  else " Normal file buffer
-    :NERDTreeFind
-  endif
 endfunction
 
 " Strip trailing spaces
@@ -130,35 +119,6 @@ endfunction
 "  call cursor(l:line, l:col)
 "endfunction
 
-" Mode function for Lightline statusline
-function! g:utils#lightLineMode() abort
-  let l:fname = expand('%:t')
-  return l:fname =~? 'NERD_tree' ? 'NT' :
-        \ winwidth(0) > 70 ? g:lightline#mode() : ''
-endfunction
-
-" File format function for Lightline statusline
-function! g:utils#lightLineFileformat() abort
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-" Filetype function for Lightline statusline
-function! g:utils#lightLineFiletype() abort
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-" File encoding function for Lightline statusline
-function! g:utils#lightLineFileencoding() abort
-  return winwidth(0) > 70 ? (strlen(&fileencoding) ? &fileencoding : &encoding) : ''
-endfunction
-
-" File name function for Lightline statusline
-function! g:utils#lightLineFilename() abort
-  let l:fname = expand('%:t')
-  return l:fname =~? 'NERD_tree' ? 'NERDTree' :
-        \ ('' !=# l:fname ? l:fname : '[No Name]')
-endfunction
-
 " Search current word with CtrlSF
 " Inspired by github.com/zenbro
 function! g:utils#searchCurrentWordWithAg() abort
@@ -176,3 +136,54 @@ function! g:utils#retabToTwoSpaces() abort
   setlocal tabstop=2 shiftwidth=2 expandtab
   retab
 endfunction
+
+" -----------------------------------------------------
+" Third Party {{{
+" -----------------------------------------------------
+" LinterStatus, use ale
+function! g:utils#LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
+" Run NERDTreeFind or Toggle based on current buffer
+function! g:utils#nerdWrapper() abort
+  if &filetype ==# '' " Empty buffer
+    :NERDTreeToggle
+  elseif expand('%:t') =~? 'NERD_tree' " In NERD_tree buffer
+    wincmd w
+  else " Normal file buffer
+    :NERDTreeFind
+  endif
+endfunction
+
+" Open Tagbar
+function! g:utils#TabBar() abort
+  :TagbarToggle
+endfunction
+
+" set python debug break point
+fun! g:utils#PyBreakPointOperate(lnum) abort "{{{
+    let py_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # ipdb breakpoint'
+
+    let line = getline(a:lnum)
+    let plnum = prevnonblank(a:lnum)
+    if &expandtab
+        let indents = repeat(' ', indent(plnum))
+    else
+        let indents = repeat("\t", plnum / &shiftwidth)
+    endif
+
+    call append(line('.')-1, indents.py_breakpoint_cmd)
+    normal k
+endfunction "}}}
+
+"}}}

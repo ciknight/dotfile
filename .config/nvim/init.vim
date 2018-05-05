@@ -52,7 +52,7 @@ Plug 'tpope/vim-sleuth'
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Syntax check
-Plug 'w0rp/ale', {'do': 'pip install flake8'}
+Plug 'w0rp/ale', {'do': 'pip install flake8 mypy isort yapf'}
 " Yaml indentation
 Plug 'martin-svk/vim-yaml'
 " Git syntax
@@ -75,8 +75,9 @@ Plug 'ciknight/vim-yapf'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 " Nerdtree git extend
 Plug 'Xuyuanp/nerdtree-git-plugin'
-" Lightline (simple status line)
-Plug 'itchyny/lightline.vim'
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Buffers tabline
 Plug 'ap/vim-buftabline'
 " Matchit enhances jump motions
@@ -85,6 +86,8 @@ Plug 'tmhedberg/matchit'
 "Plug 'vim-scripts/matchit.zip'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
+" Vim-Multiple-Cursors
+Plug 'terryma/vim-multiple-cursors'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -175,7 +178,6 @@ call plug#end()
 
 set encoding=utf-8                          " The encoding displayed.
 set fileencoding=utf-8                      " The encoding written to file.
-set helplang=cn
 set termencoding=utf-8
 scriptencoding utf-8                        " Set utf-8 as default script encoding
 
@@ -303,6 +305,7 @@ set nofoldenable                            " 启动 vim 时关闭折叠代码
 " ---------------------------------------------------------------------------------------------------------------------
 set completeopt-=preview                    " Don't show preview scratch buffers
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
+set laststatus=2
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
 set wildmode=list:longest,list:full
 set wildignore=*.o,*.obj,*~
@@ -345,7 +348,7 @@ endif
 " -----------------------------------------------------
 " 2.13 Language settings {{{
 " -----------------------------------------------------
-let $LANG = 'en_US'
+let $LANG="zh_CN"
 "}}}
 
 " -----------------------------------------------------
@@ -359,7 +362,6 @@ set autowrite                               " Automatically :write before runnin
 set autoread                                " Set to auto read when a file is changed from the outside
 set autowriteall
 ca w!! w !sudo tee "%"                      " save as sudo
-"set fileencodings=ucs-bom,utf-8,cp936,gbk,gb18030,big5,euc-jp,euc-kr,latin1
 "}}}
 
 "}}}
@@ -554,13 +556,12 @@ cmap w!! w !sudo tee > /dev/null %
 " -----------------------------------------------------
 " 3.5 F-key actions {{{
 " -----------------------------------------------------
-
+" Free
+" nnoremap <silent> <F1>
 " NERDTree wrapper
-nnoremap <silent> <F1> :call utils#nerdWrapper()<CR>
+nnoremap <silent> <F2> :call utils#nerdWrapper()<CR>
 " Free
-" nnoremap <silent> <F2>
-" Free
-" nnoremap <silent> <F3>
+nnoremap <silent> <F3> :call utils#TabBar()<CR>
 " Toggle spelling
 nnoremap <silent> <F4> :set spell!<CR> :set spell?<CR>
 " Free
@@ -623,6 +624,9 @@ command! Profile :call utils#profile()
 " Retab
 command! Retab :call utils#retabToFourSpaces()
 command! Retab2 :call utils#retabToTwoSpaces()
+
+command! PyBreakPoint :call utils#PyBreakPointOperate(line('.'))
+nnoremap <silent> <buffer> <leader>b :PyBreakPoint<CR>
 "}}}
 
 "}}}
@@ -677,40 +681,37 @@ let g:gitgutter_sign_removed_first_line='-'
 "}}}
 
 " -----------------------------------------------------
-" 4.4 Lightline settings {{{
+" 4.4 airline settings {{{
 " -----------------------------------------------------
-let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'tab': {
-      \   'active': [ 'filename' ],
-      \   'inactive': [ 'filename' ]
-      \ },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding', 'fileformat' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"HELP":&readonly?"RO":""}'
-      \ },
-      \ 'component_function': {
-      \   'mode': 'utils#lightLineMode',
-      \   'filename': 'utils#lightLineFilename',
-      \   'filetype': 'utils#lightLineFiletype',
-      \   'fileformat': 'utils#lightLineFileformat',
-      \   'fileencoding': 'utils#lightLineFileencoding'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&readonly)'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+if empty(glob('~/.fonts/README.rst'))
+  let g:airline_powerline_fonts=0
+else
+  let g:airline_powerline_fonts=1
+endif
+if !exists('g:airline_powerline_fonts')
+    if !exists('g:airline_symbols')
+        let g:airline_symbols={}
+    endif
+    let g:airline_symbols.linenr='␊'
+    let g:airline_symbols.linenr='␤'
+    let g:airline_symbols.linenr='¶'
+    let g:airline_symbols.branch='⎇'
+    let g:airline_symbols.paste='Þ'
+    let g:airline_symbols.whitespace='Ξ'
+    let g:airline_left_sep='▶'
+    let g:airline_left_alt_sep='❯'
+    let g:airline_right_sep='◀'
+    let g:airline_right_alt_sep='❮'
+endif
+" 是否打开tabline
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='minimalist' " molokai
 "}}}
 
 " -----------------------------------------------------
 " 4.4 CtrlP settings {{{
 " -----------------------------------------------------
-let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn|exe|so|dll)$'
+let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn|exe|so|dll|pyc)$'
 "}}}
 
 " -----------------------------------------------------
@@ -770,7 +771,7 @@ let g:deoplete#sources.html = ['around', 'buffer', 'member', 'file', 'omni', 'ul
 let g:ctrlsf_default_root='project'
 let g:ctrlsf_populate_qflist=0
 let g:ctrlsf_position='bottom'
-let g:ctrlsf_winsize = '30%'
+let g:ctrlsf_winsize='30%'
 let g:ctrlsf_auto_close=0
 let g:ctrlsf_regex_pattern=0
 "}}}
@@ -787,12 +788,46 @@ let g:plug_timeout=20
 let g:colorizer_nomap=1
 "}}}
 
-"" -----------------------------------------------------
-"" 4.10 Deoplete-tern settings {{{
-"" -----------------------------------------------------
+" -----------------------------------------------------
+" 4.10 Deoplete-tern settings {{{
+" -----------------------------------------------------
 let g:tern_request_timeout=1
 let g:tern_show_signature_in_pum=1
-""}}}
+"}}}
+
+" -----------------------------------------------------
+" 4.11 ale {{{
+" -----------------------------------------------------
+let g:ale_linters = {
+\   'vim' : ['vint'],
+\   'python' : ['flake8', 'isort', 'mypy'],
+\   'markdown' : ['mdl'],
+\   'sh' : ['shellcheck'],
+\   'javascript' : ['eslint'],
+\}
+"let g:ale_sign_column_always=1
+let g:ale_fix_on_save=1
+let g:ale_sign_error='•'
+let g:ale_sign_warning='•'
+set statusline=%{utils#LinterStatus()}
+
+"}}}
+
+" -----------------------------------------------------
+" 4.12 Yapf {{{
+" -----------------------------------------------------
+let g:yapf_style_conf="~/.config/yapf/style"
+"}}}
+
+" -----------------------------------------------------
+" 4.13 Nerdcommenter {{{
+" -----------------------------------------------------
+" <leader>cc   加注释
+" <leader>cu   解开注释
+" <leader>c<space>  加上/解开注释, 智能判断
+" 注释的时候自动加个空格, 强迫症必配
+let g:NERDSpaceDelims=1
+"}}}
 
 "}}}
 
@@ -813,26 +848,7 @@ let g:tern_show_signature_in_pum=1
 "}}}
 
 " -----------------------------------------------------
-" 5.2 ale {{{
-" -----------------------------------------------------
-"let g:ale_sign_column_always=1
-let g:ale_linters = {
-\   'vim' : ['vint'],
-\   'python' : ['flake8'],
-\   'markdown' : ['mdl'],
-\   'sh' : ['shellcheck'],
-\   'javascript' : ['eslint'],
-\}
-let g:ale_sign_error='•'
-let g:ale_sign_warning='•'
-let g:ale_echo_msg_error_str='✹ Error'
-let g:ale_echo_msg_warning_str='⚠ Warning'
-let g:ale_echo_msg_format='[%linter%] %s [%severity%]'
-let g:ale_statusline_format=['⨉ %d', '⚠ %d', 'OK']
-"}}}
-
-" -----------------------------------------------------
-" 5.3 Gitgutter {{{
+" 5.2 Gitgutter {{{
 " -----------------------------------------------------
 nnoremap [h :GitGutterPrevHunk<CR>
 nnoremap ]h :GitGutterNextHunk<CR>
@@ -841,14 +857,14 @@ nnoremap ,hr :GitGutterRevertHunk<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.4 Expand region {{{
+" 5.3 Expand region {{{
 " -----------------------------------------------------
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.5 Deoplete autocomplete {{{
+" 5.4 Deoplete autocomplete {{{
 " -----------------------------------------------------
 " Insert <TAB> or select next match
 inoremap <silent> <expr> <Tab> utils#tabComplete()
@@ -862,14 +878,14 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 "}}}
 
 " -----------------------------------------------------
-" 5.6 CtrlSF {{{
+" 5.5 CtrlSF {{{
 " -----------------------------------------------------
 nnoremap <leader>g :CtrlSF<Space>
 nnoremap <leader>G :CtrlSFToggle<Space>
 "}}}
 
 " -----------------------------------------------------
-" 5.7 Ctrl-SF {{{
+" 5.6 Ctrl-SF {{{
 " -----------------------------------------------------
 let g:ctrlsf_mapping = {
       \ 'next'    : 'n',
@@ -888,23 +904,32 @@ nnoremap <silent> <leader>g :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.8 BufOnly -> [C]lose all {{{
+" 5.7 BufOnly -> [C]lose all {{{
 " -----------------------------------------------------
 nnoremap <leader>C :Bonly<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.9 Tabularize -> [a]lign {{
+" 5.8 Tabularize -> [a]lign {{
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
 "}}}
 
 " -----------------------------------------------------
-" 5.10 Yapf {{
+" 5.9 vim-multiple-cursors {{
 " -----------------------------------------------------
-let g:yapf_style_conf="~/.config/yapf/style"
-"}}}
+let g:multi_cursor_use_default_mapping=1
 
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+"}}}
 
 "}}}
 
@@ -930,7 +955,7 @@ highlight TermCursor ctermfg=green guifg=green
 "}}}
 
 " Remove underline in folded lines {{{
-hi! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
+highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
 "}}}
 
 " Link highlight groups to improve buftabline colors {{{
