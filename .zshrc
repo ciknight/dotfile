@@ -109,9 +109,3 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
-
-# if [[ "$TERM" != "screen-256color" ]]
-# then
-#     tmux attach-session -t "$USER" || tmux new-session -s "$USER"
-#     exit
-# fi

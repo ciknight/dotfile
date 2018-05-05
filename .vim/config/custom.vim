@@ -11,7 +11,7 @@ fun! <SID>StripTrailingWhitespaces()
     call setpos('.', cursor_pos)
 endfun
 " }}}
-autocmd FileType vim,c,cpp,java,javascript,python,xml,yml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd FileType c,cpp,java,python,xml,yml,vim autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 
 " 定义函数SetTitle，自动插入文件头 {{{
