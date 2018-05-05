@@ -4,6 +4,7 @@
 *$py.class
 *.pyc
 __pycache__/
+.mypy_cache
 
 # Installer logs
 pip-log.txt

@@ -86,6 +86,8 @@ Plug 'tmhedberg/matchit'
 "Plug 'vim-scripts/matchit.zip'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
+" Vim-Multiple-Cursors
+Plug 'terryma/vim-multiple-cursors'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -704,7 +706,6 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
-let g:airline_section_error='%{exists("ALEGetStatusLine") ? ALEGetStatusLine() : ""}'
 "}}}
 
 " -----------------------------------------------------
@@ -808,8 +809,6 @@ let g:ale_linters = {
 let g:ale_fix_on_save=1
 let g:ale_sign_error='•'
 let g:ale_sign_warning='•'
-let g:ale_echo_msg_error_str = '✹ Error'
-let g:ale_echo_msg_warning_str = '⚠ Warning'
 set statusline=%{utils#LinterStatus()}
 
 "}}}
@@ -916,6 +915,21 @@ nnoremap <leader>C :Bonly<CR>
 vnoremap <leader>a :Tabularize /
 "}}}
 
+" -----------------------------------------------------
+" 5.9 vim-multiple-cursors {{
+" -----------------------------------------------------
+let g:multi_cursor_use_default_mapping=1
+
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-n>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-n>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+"}}}
 
 "}}}
 
