@@ -5,5 +5,9 @@ if [ ! $1 ]; then
 else
     # -I ignore binary
     # -i ignore case
-    grep -FIrni --color --exclude-dir=".git" --exclude-dir="venv" "$*" *
+    grep -FIrni --color \
+		--exclude-dir=".git" \
+		--exclude-dir=".mypy_cache" \
+		--exclude-dir="__pycache__" \
+		--exclude-dir="venv" "$*" *
 fi
