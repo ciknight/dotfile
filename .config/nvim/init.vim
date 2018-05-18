@@ -323,7 +323,7 @@ set wildignore+=tmp/**,*/tmp/*
 if has('nvim')
   let g:loaded_python_provider=1                        " Disable python 2 interface
   let g:python_host_skip_check=1                        " Skip python 2 host check
-  let g:python3_host_prog='python'                      " Set python 3 host program
+  let g:python3_host_prog='/data/vimvenv/bin/python3'                      " Set python 3 host program
   set inccommand=nosplit                                " Live preview of substitutes and other similar commands
 endif
 "}}}
@@ -800,7 +800,7 @@ let g:tern_show_signature_in_pum=1
 " -----------------------------------------------------
 let g:ale_linters = {
 \   'vim' : ['vint'],
-\   'python' : ['flake8', 'isort', 'mypy'],
+\   'python' : ['flake8', 'isort'],
 \   'markdown' : ['mdl'],
 \   'sh' : ['shellcheck'],
 \   'javascript' : ['eslint'],
@@ -826,7 +826,7 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " <leader>cu   解开注释
 " <leader>c<space>  加上/解开注释, 智能判断
 " 注释的时候自动加个空格, 强迫症必配
-let g:NERDSpaceDelims=1
+" let g:NERDSpaceDelims=1
 "}}}
 
 "}}}

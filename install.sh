@@ -44,6 +44,9 @@ fi
 # make workspace
 mkdir ~/workspace
 
+# make data
+mkdir /data
+
 # make go workspace
 mkdir ~/workspace/go
 
@@ -115,9 +118,12 @@ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-
 # system python path
 pyenv global system
 
+virtualenv -p `which python3` /data/vimvenv
+source /data/vimvenv/bin/activate
+
 # pip
 wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-pip.py
-# pip install flake8 autopep8 cheat jedi ipython ipdb mycli forex-python simplejson yapf isort mypy neovim
+pip install flake8 autopep8 cheat jedi ipython ipdb mycli forex-python simplejson yapf isort mypy neovim pyre
 
 # virtualenv
-# virtualenv -p `which python3` ~/workspace/python3.6
+virtualenv -p `which python3` ~/workspace/python3.6

@@ -8,9 +8,9 @@ ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
 
 # Add wisely, as too many plugins slow down shell startup.
 if [ $SYSTEM = "Darwin" ] ; then
-    plugins=(git autojump pip redis-cli ssh-agent sudo tmux brew osx)
+    plugins=(git autojump pip redis-cli ssh-agent sudo tmux brew osx docker)
 elif [ $SYSTEM = "Linux" ] ; then
-    plugins=(git autojump pip redis-cli ssh-agent sudo tmux)
+    plugins=(git autojump pip redis-cli ssh-agent sudo tmux docker)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -90,6 +90,8 @@ alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
 alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
+alias cvenv='python3 -m venv venv; source venv/bin/activate'
+alias avenv='source venv/bin/activate'
 
 # local alias, default ptyhon venv set here
 zshrc_local=~/.zshrc_local
