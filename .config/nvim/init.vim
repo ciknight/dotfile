@@ -1011,6 +1011,11 @@ augroup prevent_q_colon
   autocmd CursorHold * if getcmdwintype() == '' | checktime | endif
 augroup END
 
+" Auto Set File Title
+augroup set_file_title
+  autocmd BufNewFile *.cpp,*.sh,*.rb,*.java,*.py,*.c,*.h,*.lua call utils#SetFileTitle()
+augroup END
+
 " -----------------------------------------------------
 " 7.1 Run something after save {{{
 " -----------------------------------------------------
