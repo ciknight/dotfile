@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if hash python 2>/dev/null; then
     port=$1

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 hexdump -C $1 | less
 
 # -C 规范的十六进制和ASCII码显示

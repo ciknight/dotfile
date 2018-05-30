@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 file=$(echo $1|sed 's/ /?/g')
 target_file=$(echo $2|sed 's/ /?/g')

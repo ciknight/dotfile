@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 if [ $SYSTEM = "Darwin" ] ; then
     top -l 1 | head -n 10 | grep PhysMem
 elif [ $SYSTEM = "Linux" ] ; then
