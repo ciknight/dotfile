@@ -65,6 +65,8 @@ Plug 'Shougo/vimshell.vim'
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
 " python automate format
 Plug 'ciknight/vim-yapf'
+" solidity syntax
+Plug 'tomlion/vim-solidity'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------

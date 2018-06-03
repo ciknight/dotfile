@@ -10,7 +10,7 @@ ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
 if [ $SYSTEM = "Darwin" ] ; then
     plugins=(git autojump pip redis-cli ssh-agent sudo tmux brew osx docker)
 elif [ $SYSTEM = "Linux" ] ; then
-    plugins=(git autojump pip redis-cli ssh-agent sudo tmux docker)
+    plugins=(git autojump pip redis-cli ssh-agent sudo tmux docker apt yum systemd)
 fi
 
 source $ZSH/oh-my-zsh.sh
