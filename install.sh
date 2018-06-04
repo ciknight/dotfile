@@ -50,9 +50,6 @@ mkdir /data
 # make go workspace
 mkdir ~/workspace/go
 
-# make nvm
-mkdir ~/.nvm
-
 # user bin
 ln -s $PWD_DIR/bin ~/
 
@@ -118,6 +115,7 @@ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-
 # system python path
 pyenv global system
 
+# create vim python env
 virtualenv -p `which python3` /data/vimvenv
 source /data/vimvenv/bin/activate
 

@@ -63,10 +63,12 @@ Plug 'keith/tmux.vim'
 Plug 'Shougo/vimshell.vim'
 " Golang syntax
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
-" python automate format
+" Python automate format
 Plug 'ciknight/vim-yapf'
-" solidity syntax
+" Solidity syntax
 Plug 'tomlion/vim-solidity'
+" Python sort import
+Plug 'fisadev/vim-isort'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------

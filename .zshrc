@@ -24,7 +24,8 @@ if [ $SYSTEM = "Darwin" ] ; then
     export JAVA_HOME=$(/usr/libexec/java_home)
     export PATH=$JAVA_HOME/bin:$PATH
 elif [ $SYSTEM = "Linux" ] ; then
-    # TODO doing somthing
+    # Fix Home/END key not working in Tmux  https://github.com/neovim/neovim/issues/8032
+    export TERM=tmux
 fi
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -41,10 +42,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
-# node nvm
-# export NVM_DIR="$HOME/.nvm"
-# . "/usr/local/opt/nvm/nvm.sh"
 
 # History
 export HISTFILE=~/.zsh_histfile     # Where to save history.
