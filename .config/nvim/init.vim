@@ -33,7 +33,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+" Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
 
 " Automatically closing pair stuff
 Plug 'cohama/lexima.vim'
@@ -69,6 +70,8 @@ Plug 'ciknight/vim-yapf'
 Plug 'tomlion/vim-solidity'
 " Python sort import
 Plug 'fisadev/vim-isort'
+" TypeScript syntax
+Plug 'leafgarland/typescript-vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -835,6 +838,18 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " let g:NERDSpaceDelims=1
 "}}}
 
+" -----------------------------------------------------
+" 4.13 vim-jedi {{{
+" -----------------------------------------------------
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>gn"
+let g:jedi#rename_command = "<leader>gr"
+let g:jedi#completions_enabled = 1
+"}}}
+
 "}}}
 
 " ======================================================================================================================
@@ -886,8 +901,8 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 " -----------------------------------------------------
 " 5.5 CtrlSF {{{
 " -----------------------------------------------------
-nnoremap <leader>g :CtrlSF<Space>
-nnoremap <leader>G :CtrlSFToggle<Space>
+"nnoremap <leader>g :CtrlSF<Space>
+"nnoremap <leader>G :CtrlSFToggle<Space>
 "}}}
 
 " -----------------------------------------------------
