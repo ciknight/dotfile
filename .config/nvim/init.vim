@@ -330,7 +330,7 @@ set wildignore+=tmp/**,*/tmp/*
 if has('nvim')
   let g:loaded_python_provider=1                        " Disable python 2 interface
   let g:python_host_skip_check=1                        " Skip python 2 host check
-  let g:python3_host_prog='/data/vimvenv/bin/python3'                      " Set python 3 host program
+  let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python3'    " Set python 3 host program
   set inccommand=nosplit                                " Live preview of substitutes and other similar commands
 endif
 "}}}
@@ -763,13 +763,12 @@ let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
 
 let g:deoplete#sources={}
-let g:deoplete#sources._    = ['around', 'buffer', 'file', 'ultisnips']
-let g:deoplete#sources.ruby = ['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.vim  = ['around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources._       = ['around', 'buffer', 'file', 'ultisnips']
+let g:deoplete#sources.ruby    = ['around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.vim     = ['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.css  = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.scss = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.html = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.css     = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources.html    = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
 "}}}
 
 " -----------------------------------------------------

@@ -6,6 +6,8 @@ SYSTEM=`uname -s`
 
 echo 'OS: ' $SYSTEM
 if [ $SYSTEM = "Darwin" ]; then
+    # disable command + q
+    # first, install git and initial ssh key
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
@@ -14,11 +16,12 @@ if [ $SYSTEM = "Darwin" ]; then
     brew install ctags autojump ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
-    brew install aria2 cloc tig jq curl
+    brew install aria2 cloc tig jq wget
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
     # install powerline fonts, set terminal font support powerline
     git clone https://github.com/powerline/fonts.git ~/.fonts
+    # wget https://gist.github.com/baopham/1838072/raw/616d338cea8b9dcc3a5b17c12fe3070df1b738c0/Monaco%2520for%2520Powerline.otf
     sh ~/.fonts/install.sh
 elif [ $SYSTEM = "Linux" ]; then
     echo 'updating apt and install software'
@@ -43,9 +46,6 @@ fi
 
 # make workspace
 mkdir ~/workspace
-
-# make data
-mkdir /data
 
 # make go workspace
 mkdir ~/workspace/go
@@ -115,13 +115,17 @@ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-
 # system python path
 pyenv global system
 
-# create vim python env
-virtualenv -p `which python3` /data/vimvenv
-source /data/vimvenv/bin/activate
-
 # pip
-wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && python /tmp/get-pip.py
-pip install flake8 autopep8 cheat jedi ipython ipdb mycli forex-python simplejson yapf isort mypy neovim pyre
+wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py && sudo python3 install /tmp/get-pip.py
+
+sudo pip install virtualenv
+
+# create vim python env
+virtualenv -p `which python3` ~/workspace/neovim3
+source ~/workspace/neovim3/bin/activate
+pip install neovim flake8 autopep8 jedi ipython ipdb yapf isort mypy
 
 # virtualenv
 virtualenv -p `which python3` ~/workspace/python3.6
+source ~/workspace/python3.6/bin/activate
+pip install mycli ipython ipdb cheat forex-python
