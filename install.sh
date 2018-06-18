@@ -71,6 +71,7 @@ fi
 ln -s $PWD_DIR/.vim ~/
 
 # tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 if [ -f ~/.tmux.conf ] ; then
     mv ~/.tmux.conf ~/.tmux.conf.old
 fi
