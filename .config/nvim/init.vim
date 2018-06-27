@@ -39,9 +39,9 @@ Plug 'davidhalter/jedi-vim'
 " Automatically closing pair stuff
 Plug 'cohama/lexima.vim'
 " Snippet support (C-j)
-"Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-"Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 " Commenting support (gc)
 Plug 'tpope/vim-commentary'
 " Heuristically set indent settings

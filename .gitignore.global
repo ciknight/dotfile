@@ -6,6 +6,9 @@
 __pycache__/
 .mypy_cache
 
+# pyenv virtualenv
+.python-version
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
