@@ -12,8 +12,8 @@ if [ $SYSTEM = "Darwin" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
     brew install zsh git htop tmux vim neovim
-    brew install python3 golang clang npm
-    brew install ctags autojump ncdu
+    brew install python3 golang clang npm pipenv
+    brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
     brew install aria2 cloc tig jq wget
@@ -124,9 +124,6 @@ sudo pip install virtualenv
 # create vim python env
 virtualenv -p `which python3` ~/workspace/neovim3
 source ~/workspace/neovim3/bin/activate
-pip install neovim flake8 autopep8 jedi ipython ipdb yapf isort mypy
+pip install neovim flake8 autopep8 jedi ipdb yapf isort mypy
 
-# virtualenv
-virtualenv -p `which python3` ~/workspace/python3.6
-source ~/workspace/python3.6/bin/activate
-pip install mycli ipython ipdb cheat forex-python
+#pip install mycli ipython ipdb cheat forex-python

@@ -8,9 +8,9 @@ ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
 
 # Add wisely, as too many plugins slow down shell startup.
 if [ $SYSTEM = "Darwin" ] ; then
-    plugins=(git autojump pip redis-cli ssh-agent sudo tmux brew osx docker pyenv)
+    plugins=(git ssh-agent tmux brew pipenv)
 elif [ $SYSTEM = "Linux" ] ; then
-    plugins=(git autojump pip redis-cli ssh-agent sudo tmux docker apt yum systemd pyenv)
+    plugins=(git ssh-agent tmux systemd pipenv)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -18,8 +18,6 @@ source $ZSH/oh-my-zsh.sh
 if [ $SYSTEM = "Darwin" ] ; then
     # brew cdn
     export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
-    # autojump
-    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
     # JAVA_HOME
     export JAVA_HOME=$(/usr/libexec/java_home)
     export PATH=$PATH:$JAVA_HOME/bin
@@ -36,10 +34,14 @@ export GOPATH="$HOME/workspace/go"  # Golang Path
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+#export PATH="$PYENV_ROOT/bin:$PATH"
+#eval "$(pyenv init -)"
+
+# pipenv, fix lang
+export LC_ALL=zh_CN.UTF-8
+eval "$(pipenv --completion)"
 
 # History
 export HISTFILE=~/.zsh_histfile     # Where to save history.
@@ -70,8 +72,6 @@ alias tailf='tail -f'
 alias gdc='git diff --cached'
 
 # soft alias
-alias py27='source ~/.zshrc;source ~/workspace/python2.7/bin/activate'
-alias py36='source ~/.zshrc;source ~/workspace/python3.6/bin/activate'
 alias tn='tmux -2 new -s'
 alias ta='tmux -2 attach -t' # -2 Force tmux to assume the terminal supports 256 colours.
 alias rm=safe_rm
@@ -83,7 +83,7 @@ alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
 alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
-alias cvenv='python3 -m venv venv; source venv/bin/activate'
+alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 
 # local alias, default ptyhon venv set here

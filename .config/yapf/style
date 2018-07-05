@@ -1,10 +1,15 @@
 [style]
 based_on_style = pep8
-spaces_before_comment = 4
-column_limit = 110
-split_before_logical_operator = true
 blank_line_before_nested_class_or_def = true
+blank_lines_around_top_level_definition = 2
 coalesce_brackets = true
+column_limit = 120
 dedent_closing_brackets = true
 each_dict_entry_on_separate_line = true
+indent_width = 4
+space_between_ending_comma_and_closing_bracket = true
+spaces_before_comment = 4
+split_arguments_when_comma_terminated = false
+split_before_dict_set_generator = true
+split_before_logical_operator = true
 use_tabs = false
