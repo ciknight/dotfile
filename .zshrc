@@ -34,13 +34,12 @@ export GOPATH="$HOME/workspace/go"  # Golang Path
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Pyenv
-#export PYENV_ROOT="$HOME/.pyenv"
-#export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-#eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
 
 # pipenv, fix lang
 export LC_ALL=zh_CN.UTF-8
+export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple/"
 eval "$(pipenv --completion)"
 
 # History
@@ -85,6 +84,7 @@ alias seed='vim /tmp/`timestamp`.md'
 alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
+alias piprun='pipenv run python'
 
 # local alias, default ptyhon venv set here
 zshrc_local=~/.zshrc_local

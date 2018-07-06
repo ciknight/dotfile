@@ -806,7 +806,7 @@ let g:tern_show_signature_in_pum=1
 " -----------------------------------------------------
 let g:ale_linters = {
 \   'vim' : ['vint'],
-\   'python' : ['flake8', 'isort'],
+\   'python' : ['flake8', 'isort', 'mypy'],
 \   'markdown' : ['mdl'],
 \   'sh' : ['shellcheck'],
 \   'javascript' : ['eslint'],
