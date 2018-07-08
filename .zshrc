@@ -106,6 +106,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+# Load Z jump around
+. $HOME/.z.sh
+
 # Load local zshrc
 zshrc_local=~/.zshrc_local
 if [ -f $zshrc_local ]; then

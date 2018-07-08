@@ -113,6 +113,9 @@ fi
 ln -s $PWD_DIR/.zshrc ~/.zshrc
 source ~/.zshrc
 
+# z jump around
+wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
+
 # pyenv, https://github.com/pyenv/pyenv-installer.git
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
