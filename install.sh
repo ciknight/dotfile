@@ -96,6 +96,9 @@ ln -s $PWD_DIR/.condarc ~/.condarc
 # isort config
 ln -s $PWD_DIR/.isort ~/.isort
 
+# mypy config
+ln -s $PWD_DIR/.mypy.ini ~/
+
 # .config
 if [ -f ~/.config ] ; then
     mv ~/.config ~/.config.old

@@ -36,13 +36,16 @@ export LC_ALL=zh_CN.UTF-8  # Fix pipenv LC
 export LESSCHARSET=utf-8  # Fix linux git diff and log chinese
 
 # Pyenv
-export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons/"
+export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Fix neo vim mypy flake8 yapf bin path
+export PATH=$PATH:/root/workspace/neovim3/bin
+
 # Pipenv
-export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple/"
+export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
 export PYPI_MIRROR=$PIPENV_PYPI_MIRROR
 eval "$(pipenv --completion)"
 
