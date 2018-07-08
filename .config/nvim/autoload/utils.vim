@@ -198,7 +198,6 @@ fun! g:utils#SetFileTitle()
         call append(line(".")+1, "")
     elseif &filetype == 'ruby'
         call setline(1,"#!/usr/bin/env ruby")
-        call append(line("."),"# encoding: utf-8")
         call append(line(".")+1, "")
     elseif &filetype == 'lua'
         call setline(1,"#!/usr/local/bin lua")

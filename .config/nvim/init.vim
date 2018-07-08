@@ -53,15 +53,7 @@ Plug 'tpope/vim-sleuth'
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Syntax check
-Plug 'w0rp/ale', {'do': 'pip install flake8 mypy isort yapf'}
-" Yaml indentation
-Plug 'martin-svk/vim-yaml'
-" Git syntax
-Plug 'tpope/vim-git'
-" Tmux syntax
-Plug 'keith/tmux.vim'
-" Shell syntax
-Plug 'Shougo/vimshell.vim'
+Plug 'w0rp/ale' ", {'do': 'pip install flake8 mypy isort yapf'}
 " Golang syntax
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
 " Python automate format
@@ -154,10 +146,6 @@ Plug 'wellle/targets.vim'
 Plug 'icymind/NeoSolarized'
 " Molokai
 "Plug 'tomasr/molokai'
-" Iceberg
-"Plug 'cocopon/iceberg.vim'
-" Tender
-"Plug 'jacoborus/tender.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -336,16 +324,7 @@ endif
 "}}}
 
 " -----------------------------------------------------
-" 2.11 Ctags settings {{{
-" -----------------------------------------------------
-" For Ruby STD ctags use tpope/rbenv-ctags + vim-ruby
-" For gem ctags use tpope/gem-ctags + vim-bundler
-" For project tags generation use gem install starscope
-" -----------------------------------------------------
-"}}}
-
-" -----------------------------------------------------
-" 2.12 True colors settings {{{
+" 2.11 True colors settings {{{
 " -----------------------------------------------------
 if has('termguicolors')
   set termguicolors " Turn on true colors support
@@ -353,13 +332,13 @@ endif
 "}}}
 
 " -----------------------------------------------------
-" 2.13 Language settings {{{
+" 2.12 Language settings {{{
 " -----------------------------------------------------
-let $LANG="zh_CN"
+let $LANG="zh_CN.utf-8"
 "}}}
 
 " -----------------------------------------------------
-" 2.14 File settings {{{
+" 2.13 File settings {{{
 " -----------------------------------------------------
 set fileformat=unix
 set nobackup                                " no file backup
@@ -368,7 +347,7 @@ set confirm                                 " Need confrimation while exit
 set autowrite                               " Automatically :write before running commands
 set autoread                                " Set to auto read when a file is changed from the outside
 set autowriteall
-ca w!! w !sudo tee "%"                      " save as sudo
+cmap w!! w !sudo tee > /dev/null %          " Allow saving file as sudo when forgot to start vim using sudo
 "}}}
 
 "}}}
@@ -555,9 +534,6 @@ inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
 " Toggle search highlight
 " nnoremap <leader>/ :set nohlsearch!<CR> :set nohlsearch?<CR>  " 取消高亮，再搜索会有bug
 nnoremap <leader>/ :let @/=""<CR>
-
-" allow saving file as sudo when forgot to start vim using sudo
-cmap w!! w !sudo tee > /dev/null %
 "}}}
 
 " -----------------------------------------------------
@@ -666,7 +642,7 @@ let g:NERDTreeQuitOnOpen=1
 " -----------------------------------------------------
 " 4.2 Ultisnips settings {{{
 " -----------------------------------------------------
-"let g:UltiSnipsUsePythonVersion=3
+let g:UltiSnipsUsePythonVersion=3
 "}}}
 
 " -----------------------------------------------------
@@ -804,9 +780,9 @@ let g:tern_show_signature_in_pum=1
 " -----------------------------------------------------
 " 4.11 ale {{{
 " -----------------------------------------------------
-let g:ale_linters = {
+let g:ale_linters={
 \   'vim' : ['vint'],
-\   'python' : ['flake8', 'isort'],
+\   'python' : ['flake8', 'isort', 'mypy'],
 \   'markdown' : ['mdl'],
 \   'sh' : ['shellcheck'],
 \   'javascript' : ['eslint'],
@@ -840,13 +816,13 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " -----------------------------------------------------
 " 4.13 vim-jedi {{{
 " -----------------------------------------------------
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>gn"
-let g:jedi#rename_command = "<leader>gr"
-let g:jedi#completions_enabled = 1
+let g:jedi#goto_command="<leader>d"
+let g:jedi#goto_assignments_command="<leader>g"
+let g:jedi#goto_definitions_command=""
+let g:jedi#documentation_command="K"
+let g:jedi#usages_command="<leader>gn"
+let g:jedi#rename_command="<leader>gr"
+let g:jedi#completions_enabled=1
 "}}}
 
 "}}}

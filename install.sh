@@ -7,13 +7,13 @@ SYSTEM=`uname -s`
 echo 'OS: ' $SYSTEM
 if [ $SYSTEM = "Darwin" ]; then
     # disable command + q
-    # first, install git and initial ssh key
+    # first, install git and initialize ssh key
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
     brew install zsh git htop tmux vim neovim
-    brew install python3 golang clang npm
-    brew install ctags autojump ncdu
+    brew install python3 golang clang npm pipenv
+    brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
     brew install aria2 cloc tig jq wget
@@ -28,7 +28,7 @@ elif [ $SYSTEM = "Linux" ]; then
     if which apt 2>&1 > /dev/null; then
         apt update
         apt install -y git htop vim zsh tmux neovim
-        apt install -y gcc python3 python-dev curl tig
+        apt install -y gcc python3 python-dev curl tig pipenv
         apt install -y ctags cmake silversearcher-ag jq ack-grep
     elif which yum 2>&1 > /dev/null; then
         yum update
@@ -96,6 +96,9 @@ ln -s $PWD_DIR/.condarc ~/.condarc
 # isort config
 ln -s $PWD_DIR/.isort ~/.isort
 
+# mypy config
+ln -s $PWD_DIR/.mypy.ini ~/
+
 # .config
 if [ -f ~/.config ] ; then
     mv ~/.config ~/.config.old
@@ -109,6 +112,9 @@ if [ -f ~/.zshrc ] ; then
 fi
 ln -s $PWD_DIR/.zshrc ~/.zshrc
 source ~/.zshrc
+
+# z jump around
+wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
 
 # pyenv, https://github.com/pyenv/pyenv-installer.git
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
@@ -124,9 +130,6 @@ sudo pip install virtualenv
 # create vim python env
 virtualenv -p `which python3` ~/workspace/neovim3
 source ~/workspace/neovim3/bin/activate
-pip install neovim flake8 autopep8 jedi ipython ipdb yapf isort mypy
+pip install neovim flake8 autopep8 jedi ipdb yapf isort mypy
 
-# virtualenv
-virtualenv -p `which python3` ~/workspace/python3.6
-source ~/workspace/python3.6/bin/activate
-pip install mycli ipython ipdb cheat forex-python
+#pip install mycli ipython ipdb cheat forex-python

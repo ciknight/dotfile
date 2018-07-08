@@ -19,7 +19,10 @@ welcome to my dotfile
 sh install.sh
 
 
-### TODO
+### Test your zsh speed
 
-- nvim 执行 shell command, 不能打印中文
-- nvim 切换 python 环境找不到 nvim
+```
+\time zsh -i -c exit
+```
+
+### TODO
