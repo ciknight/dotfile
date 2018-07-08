@@ -3,13 +3,12 @@ export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
-
 export SYSTEM=`uname -s`
 # Add wisely, as too many plugins slow down shell startup.
 if [ $SYSTEM = "Darwin" ] ; then
-    plugins=(git ssh-agent tmux brew pipenv)
+    plugins=(git brew)
 elif [ $SYSTEM = "Linux" ] ; then
-    plugins=(git ssh-agent tmux systemd pipenv)
+    plugins=(git systemd)
 fi
 
 source $ZSH/oh-my-zsh.sh
