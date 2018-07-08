@@ -7,7 +7,7 @@ SYSTEM=`uname -s`
 echo 'OS: ' $SYSTEM
 if [ $SYSTEM = "Darwin" ]; then
     # disable command + q
-    # first, install git and initial ssh key
+    # first, install git and initialize ssh key
     echo 'install brew...'
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
@@ -28,7 +28,7 @@ elif [ $SYSTEM = "Linux" ]; then
     if which apt 2>&1 > /dev/null; then
         apt update
         apt install -y git htop vim zsh tmux neovim
-        apt install -y gcc python3 python-dev curl tig
+        apt install -y gcc python3 python-dev curl tig pipenv
         apt install -y ctags cmake silversearcher-ag jq ack-grep
     elif which yum 2>&1 > /dev/null; then
         yum update
