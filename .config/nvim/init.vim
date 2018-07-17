@@ -303,10 +303,10 @@ set nocompatible                            " 禁用Vi的兼容模式,去掉讨�
 set laststatus=2
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
 set wildmode=list:longest,list:full
-set wildignore=*.o,*.obj,*~
-set wildignore+=*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif
+set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
+set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
+set wildignore+=*.pyc,
 set wildignore+=*DS_Store*
 set wildignore+=*.gem
 set wildignore+=tmp/**,*/tmp/*
@@ -478,6 +478,7 @@ nnoremap <silent> <leader>q :q<CR>
 nnoremap <Leader>Q :qa!<CR>
 
 nnoremap <leader>o o<Esc>
+nnoremap <leader>O o<Esc>o<Esc>
 
 " Yank and paste from clipboard
 nnoremap <leader>y "+y
@@ -837,10 +838,10 @@ let g:jedi#completions_enabled=1
 " -----------------------------------------------------
 " Disable built-in cx-ck to be able to go backward
 "inoremap <C-x><C-k> <NOP>
-"let g:UltiSnipsExpandTrigger='<C-j>'
-"let g:UltiSnipsListSnippets='<C-s>'
-"let g:UltiSnipsJumpForwardTrigger='<C-j>'
-"let g:UltiSnipsJumpBackwardTrigger='<C-k>'
+let g:UltiSnipsExpandTrigger="<C-j>"  " do not use tab
+let g:UltiSnipsListSnippets="<C-s>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 "}}}
 
 " -----------------------------------------------------

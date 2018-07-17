@@ -130,6 +130,6 @@ sudo pip install virtualenv
 # create vim python env
 virtualenv -p `which python3` ~/workspace/neovim3
 source ~/workspace/neovim3/bin/activate
-pip install neovim flake8 autopep8 jedi ipdb yapf isort mypy
+pip install neovim flake8 autopep8 jedi yapf isort mypy
 
 #pip install mycli ipython ipdb cheat forex-python
