@@ -36,8 +36,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 
-" Automatically closing pair stuff
-Plug 'cohama/lexima.vim'
+" Automatically pair stuff
+Plug 'jiangmiao/auto-pairs'
+"Plug 'cohama/lexima.vim'
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -100,9 +101,7 @@ Plug 'kien/rainbow_parentheses.vim'
 " Indent line
 Plug 'Yggdroot/indentLine'
 " Ag wrapper search and edit
-Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }
-" rely CtrlSF
-Plug 'mileszs/ack.vim'
+Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }  " similar to ack.vim
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
 " Git changes showed on line numbers
@@ -113,6 +112,8 @@ Plug 'tpope/vim-endwise'
 Plug 'majutsushi/tagbar'
 " Auto filejump, <C-p> support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 Plug 'kien/ctrlp.vim'
+" crtlp plugin
+Plug 'tacahiroy/ctrlp-funky'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 "}}}
@@ -306,9 +307,8 @@ set wildmode=list:longest,list:full
 set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
 set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
-set wildignore+=*.pyc,
+set wildignore+=*.pyc,                      " include __pycache__
 set wildignore+=*DS_Store*
-set wildignore+=*.gem
 set wildignore+=tmp/**,*/tmp/*
 "}}}
 
@@ -695,7 +695,18 @@ let g:airline_theme='minimalist' " molokai
 " -----------------------------------------------------
 " 4.4 CtrlP settings {{{
 " -----------------------------------------------------
-let g:ctrlp_custom_ignore='\v[\/]\.(git|hg|svn|exe|so|dll|pyc)$'
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_funky_syntax_highlight=1
+let g:ctrlp_extensions=['funky']
 "}}}
 
 " -----------------------------------------------------
@@ -817,13 +828,9 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " -----------------------------------------------------
 " 4.13 vim-jedi {{{
 " -----------------------------------------------------
-let g:jedi#goto_command="<leader>d"
-let g:jedi#goto_assignments_command="<leader>g"
-let g:jedi#goto_definitions_command=""
-let g:jedi#documentation_command="K"
-let g:jedi#usages_command="<leader>gn"
-let g:jedi#rename_command="<leader>gr"
 let g:jedi#completions_enabled=1
+let g:jedi#popup_on_dot=1
+let g:jedi#smart_auto_mappings=1 " auto from import
 "}}}
 
 "}}}
@@ -926,6 +933,29 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
+"}}}
+
+
+" -----------------------------------------------------
+" 5.10 jedi-vim {{
+" -----------------------------------------------------
+let g:jedi#goto_command="<leader>gd"
+let g:jedi#goto_assignments_command="<leader>gg"
+let g:jedi#goto_definitions_command=""
+let g:jedi#documentation_command="K"
+let g:jedi#usages_command="<leader>gn"
+let g:jedi#rename_command="<leader>gr"
+"}}}
+
+" -----------------------------------------------------
+" 5.11 CtrlP {{
+" -----------------------------------------------------
+"let g:ctrlp_map='<leader>p'
+"let g:ctrlp_cmd='CtrlP'
+"map <leader>f :CtrlPMRU<CR>
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 "}}}
 
 "}}}
