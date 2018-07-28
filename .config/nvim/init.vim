@@ -34,10 +34,11 @@ call plug#begin('~/.config/nvim/plugged')
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+" Automatically pair stuff
+"Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 " Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
-" Automatically pair stuff
-Plug 'jiangmiao/auto-pairs'  "Plug 'cohama/lexima.vim'
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
