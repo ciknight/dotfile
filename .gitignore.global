@@ -105,3 +105,6 @@ venv/
 
 # IntelliJ IDEA
 .idea/
+
+# VSCode
+.vscode

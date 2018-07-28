@@ -116,6 +116,10 @@ source ~/.zshrc
 # z jump around
 wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
 
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
 # pyenv, https://github.com/pyenv/pyenv-installer.git
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 

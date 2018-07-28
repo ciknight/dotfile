@@ -48,6 +48,12 @@ export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
 export PYPI_MIRROR=$PIPENV_PYPI_MIRROR
 eval "$(pipenv --completion)"
 
+# Fzf
+export FZF_DEFAULT_OPTS="--height 40% --reverse --border --prompt '>>>' \
+    --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
+    --header 'A-j/k: preview down/up, A-v: open in vim, C-y: copy, ?: toggle preview' \
+    --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null'"
+
 # History
 export HISTFILE=~/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
@@ -91,6 +97,7 @@ alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias piprun='pipenv run python'
+alias fz='vi $(fzf)'
 
 # Toggle vim, usage ^z
 fancy-ctrl-z () {

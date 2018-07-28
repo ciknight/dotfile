@@ -39,8 +39,12 @@
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
 [branch]
     autosetuprebase = always
+[pull]
+    rebase = true
+[rebase]
+    autoStash = true
 [push]
-    default = current # upstream
+    default = current  # set current branch upstream
 [merge]
     log = true
     tool = vimdiff

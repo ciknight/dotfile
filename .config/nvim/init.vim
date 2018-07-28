@@ -33,19 +33,16 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 " Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
-
 " Automatically pair stuff
-Plug 'jiangmiao/auto-pairs'
-"Plug 'cohama/lexima.vim'
+Plug 'jiangmiao/auto-pairs'  "Plug 'cohama/lexima.vim'
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-" Commenting support (gc)
-Plug 'tpope/vim-commentary'
-" Heuristically set indent settings
+" Heuristically set indent settings, open smarttab
 Plug 'tpope/vim-sleuth'
 "}}}
 
@@ -59,12 +56,14 @@ Plug 'w0rp/ale' ", {'do': 'pip install flake8 mypy isort yapf'}
 Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
 " Python automate format
 Plug 'ciknight/vim-yapf'
-" Solidity syntax
-Plug 'tomlion/vim-solidity'
 " Python sort import
 Plug 'fisadev/vim-isort'
+" Solidity syntax
+Plug 'tomlion/vim-solidity'
 " TypeScript syntax
 Plug 'leafgarland/typescript-vim'
+" Rust
+Plug 'rust-lang/rust.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -197,9 +196,9 @@ set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
 set synmaxcol=220                           " Don't try to syntax highlight minified files
 set expandtab                               " Tab转换为空格
 set smarttab
-"set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set autoindent
-set cindent
+set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
+"set autoindent
+"set cindent
 set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
 set nowrap                                  " 不自动折行
 set viminfo+=!                              " 保存全局变量
@@ -350,6 +349,14 @@ set autowriteall
 cmap w!! w !sudo tee > /dev/null %          " Allow saving file as sudo when forgot to start vim using sudo
 "}}}
 
+" ---------------------------------------------------------------------------------------------------------------------
+" 2.14 Ident settings {{{
+" ---------------------------------------------------------------------------------------------------------------------
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd FileType go setlocal shiftwidth=4 tabstop=4
+autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml setlocal shiftwidth=2 tabstop=2 expandtab
+"}}}
+
 "}}}
 
 " ======================================================================================================================
@@ -440,9 +447,9 @@ nnoremap c "xc
 xnoremap c "xc
 
 " After block yank and paste, move cursor to the end of operated text and don't override register
-vnoremap y y`]
-vnoremap p "_dP`]
-nnoremap p p`]
+"vnoremap y y`]
+"vnoremap p "_dP`]
+"nnoremap p p`]
 
 " Fix the cw at the end of line bug default vim has special treatment (:help cw)
 nmap cw ce
@@ -481,10 +488,10 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O o<Esc>o<Esc>
 
 " Yank and paste from clipboard
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nnoremap <leader>yy "+yy
-nnoremap <leader>p "+p
+"nnoremap <leader>y "+y
+"vnoremap <leader>y "+y
+"nnoremap <leader>yy "+yy
+"nnoremap <leader>p "+p
 
 " Move visual block
 vnoremap J :m '>+1<CR>gv=gv
@@ -743,20 +750,16 @@ au Syntax * RainbowParenthesesLoadBraces
 " 4.6 Deoplete autocomplete settings {{{
 " -----------------------------------------------------
 let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_refresh_always=0
 let g:deoplete#enable_smart_case=1
+let g:deoplete#enable_refresh_always=0
 let g:deoplete#file#enable_buffer_path=1
 
 let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
 
 let g:deoplete#sources={}
-let g:deoplete#sources._       = ['around', 'buffer', 'file', 'ultisnips']
-let g:deoplete#sources.ruby    = ['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.vim     = ['around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
 let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.css     = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.html    = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
 "}}}
 
 " -----------------------------------------------------
@@ -826,11 +829,12 @@ let g:yapf_style_conf="~/.config/yapf/style"
 "}}}
 
 " -----------------------------------------------------
-" 4.13 vim-jedi {{{
+" 4.13 jedi-vim {{{
 " -----------------------------------------------------
 let g:jedi#completions_enabled=1
+let g:jedi#smart_auto_mappings=1
 let g:jedi#popup_on_dot=1
-let g:jedi#smart_auto_mappings=1 " auto from import
+let g:jedi#auto_close_doc=1
 "}}}
 
 "}}}
