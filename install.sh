@@ -16,7 +16,7 @@ if [ $SYSTEM = "Darwin" ]; then
     brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
-    brew install aria2 cloc tig jq wget
+    brew install aria2 cloc tig jq wget fzf fd
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
     # install powerline fonts, set terminal font support powerline
@@ -29,13 +29,15 @@ elif [ $SYSTEM = "Linux" ]; then
         apt update
         apt install -y git htop vim zsh tmux neovim
         apt install -y gcc python3 python-dev curl tig pipenv
-        apt install -y ctags cmake silversearcher-ag jq ack-grep
+        apt install -y ctags cmake silversearcher-ag jq ack-grep fzf
     elif which yum 2>&1 > /dev/null; then
         yum update
         yum install -y git htop vim zsh tmux neovim
         yum install -y gcc gcc-c++ python3.6 golang npm
         yum install -y ctags python-devel curl tig
-        yum install -y cmake jq # ack-grep silversearcher-ag
+        yum install -y cmake jq  # ack-grep silversearcher-ag
+        yum install -y fd-find  # fzf
+
     else
         exit 0
     fi
@@ -117,8 +119,8 @@ source ~/.zshrc
 wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
 
 # fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+#git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#~/.fzf/install
 
 # pyenv, https://github.com/pyenv/pyenv-installer.git
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
