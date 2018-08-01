@@ -580,10 +580,10 @@ nnoremap <F12> :call utils#showToggles()<CR>
 " -----------------------------------------------------
 
 " Intelligent windows resizing using ctrl + arrow keys
-nnoremap <silent> <C-Right> :call utils#intelligentVerticalResize('right')<CR>
-nnoremap <silent> <C-Left> :call utils#intelligentVerticalResize('left')<CR>
-nnoremap <silent> <C-Up> :resize +1<CR>
-nnoremap <silent> <C-Down> :resize -1<CR>
+"nnoremap <silent> <C-Right> :call utils#intelligentVerticalResize('right')<CR>
+"nnoremap <silent> <C-Left> :call utils#intelligentVerticalResize('left')<CR>
+"nnoremap <silent> <C-Up> :resize +1<CR>
+"nnoremap <silent> <C-Down> :resize -1<CR>
 
 " Buffers navigation and management
 nnoremap <silent> + :bn<CR>
@@ -772,6 +772,8 @@ let g:ctrlsf_position='bottom'
 let g:ctrlsf_winsize='30%'
 let g:ctrlsf_auto_close=0
 let g:ctrlsf_regex_pattern=0
+let g:ctrlsf_search_mode='async'
+"let g:ctrlsf_extra_root_markers=['.root']
 "}}}
 
 " -----------------------------------------------------
@@ -891,11 +893,6 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 " -----------------------------------------------------
 "nnoremap <leader>g :CtrlSF<Space>
 "nnoremap <leader>G :CtrlSFToggle<Space>
-"}}}
-
-" -----------------------------------------------------
-" 5.6 Ctrl-SF {{{
-" -----------------------------------------------------
 let g:ctrlsf_mapping = {
       \ 'next'    : 'n',
       \ 'prev'    : 'N',
@@ -908,24 +905,23 @@ let g:ctrlsf_mapping = {
       \ 'pquit'   : '',
       \ 'loclist' : '',
       \ }
-
-nnoremap <silent> <leader>g :call utils#searchCurrentWordWithAg()<CR>
+nnoremap <silent> <leader>gs :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.7 BufOnly -> [C]lose all {{{
+" 5.6 BufOnly -> [C]lose all {{{
 " -----------------------------------------------------
 nnoremap <leader>C :Bonly<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.8 Tabularize -> [a]lign {{
+" 5.7 Tabularize -> [a]lign {{
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
 "}}}
 
 " -----------------------------------------------------
-" 5.9 vim-multiple-cursors {{
+" 5.8 vim-multiple-cursors {{
 " -----------------------------------------------------
 let g:multi_cursor_use_default_mapping=1
 
@@ -942,7 +938,7 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 
 " -----------------------------------------------------
-" 5.10 jedi-vim {{
+" 5.9 jedi-vim {{
 " -----------------------------------------------------
 let g:jedi#goto_command="<leader>gd"
 let g:jedi#goto_assignments_command="<leader>gg"
@@ -953,10 +949,8 @@ let g:jedi#rename_command="<leader>gr"
 "}}}
 
 " -----------------------------------------------------
-" 5.11 CtrlP {{
+" 5.10 CtrlP {{
 " -----------------------------------------------------
-"let g:ctrlp_map='<leader>p'
-"let g:ctrlp_cmd='CtrlP'
 "map <leader>f :CtrlPMRU<CR>
 nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
