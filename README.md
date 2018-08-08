@@ -1,4 +1,4 @@
-## Dotfile
+# Dotfile
 
 welcome to my dotfile
 
@@ -23,6 +23,13 @@ sh install.sh
 
 ```
 \time zsh -i -c exit
+```
+
+### Clean `/usr/local/bin`
+
+```shell
+cd /usr/local/bin/
+rm flake8 yapf mypy pyflake
 ```
 
 ### TODO

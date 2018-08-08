@@ -41,7 +41,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # Fix neo vim mypy flake8 yapf bin path
-export PATH=$PATH:/root/workspace/neovim3/bin
+export PATH=$PATH:~/workspace/neovim3/bin
 
 # Pipenv
 export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"

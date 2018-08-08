@@ -33,6 +33,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
 
 " Automatically pair stuff
 "Plug 'jiangmiao/auto-pairs'
