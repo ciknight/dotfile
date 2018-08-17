@@ -34,18 +34,18 @@ call plug#begin('~/.config/nvim/plugged')
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
-
-" Automatically pair stuff
-"Plug 'jiangmiao/auto-pairs'
-Plug 'cohama/lexima.vim'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+" Complete parameter after select the completion
+"Plug 'tenfyzhong/CompleteParameter.vim'
 " Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
-" Heuristically set indent settings, open smarttab
-Plug 'tpope/vim-sleuth'
+" Automatically pair stuff
+"Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -62,8 +62,6 @@ Plug 'ciknight/vim-yapf'
 Plug 'fisadev/vim-isort'
 " Solidity syntax
 Plug 'tomlion/vim-solidity'
-" TypeScript syntax
-Plug 'leafgarland/typescript-vim'
 " Rust
 Plug 'rust-lang/rust.vim'
 "}}}
@@ -81,10 +79,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Buffers tabline
 Plug 'ap/vim-buftabline'
-" Matchit enhances jump motions
+" Matchit enhances jump motions, Improved % matching
 Plug 'tmhedberg/matchit'
-" Improves % matching
-"Plug 'vim-scripts/matchit.zip'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
 " Vim-Multiple-Cursors
@@ -117,6 +113,11 @@ Plug 'kien/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
+" motions on speed
+"Plug 'easymotion/vim-easymotion'
+" Wrapper of some vim/neovim's :terminal functions.
+Plug 'kassio/neoterm'
+"Plug 'myusuf3/numbers.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -211,7 +212,7 @@ set tabstop=4                               " 每四行一个缩进
 set shiftround
 
 set number                                  " Line numbers on
-set numberwidth=4
+"set numberwidth=4
 set relativenumber
 set cursorline cursorcolumn
 augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
@@ -219,7 +220,7 @@ augroup relative_numbser                    " 插入模式下用绝对行号, �
   autocmd InsertEnter * :set norelativenumber number
   autocmd InsertLeave * :set relativenumber
 augroup END
-augroup relative_numbser                    " 高亮当前行
+augroup auto_hightlight                     " 高亮当前行
   autocmd!
   autocmd WinEnter * set cursorline cursorcolumn
   autocmd WinLeave * set nocursorline nocursorcolumn
@@ -759,9 +760,13 @@ let g:deoplete#file#enable_buffer_path=1
 let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
 
+let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
+
 let g:deoplete#sources={}
 let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
 let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.go  = ['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
 "}}}
 
 " -----------------------------------------------------

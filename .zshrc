@@ -24,8 +24,8 @@ elif [ $SYSTEM = "Linux" ] ; then
 fi
 
 # Path
-export PATH="$HOME/bin:$PATH";
 export GOPATH="$HOME/workspace/go"  # Golang Path
+export PATH="$HOME/bin:$GOPATH/bin:$PATH";
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # Lang
@@ -41,11 +41,10 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # Fix neo vim mypy flake8 yapf bin path
-export PATH=$PATH:~/workspace/neovim3/bin
+export PATH="$PATH:~/workspace/neovim3/bin"
 
 # Pipenv
 export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
-export PYPI_MIRROR=$PIPENV_PYPI_MIRROR
 eval "$(pipenv --completion)"
 
 # Fzf
