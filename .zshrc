@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
@@ -25,8 +25,8 @@ fi
 
 # Path
 export GOPATH="$HOME/workspace/go"  # Golang Path
-export PATH="$HOME/bin:$GOPATH/bin:$PATH";
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export PATH="$HOME/bin:$GOPATH/bin:$PATH"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 # Lang
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
@@ -40,8 +40,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Fix neo vim mypy flake8 yapf bin path
-export PATH="$PATH:~/workspace/neovim3/bin"
+# Fix neo vim mypy flake8 yapf isort bin path
+export PATH="$PATH:$HOME/workspace/neovim3/bin"
 
 # Pipenv
 export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
@@ -55,7 +55,7 @@ export FZF_DEFAULT_OPTS="--height 40% --reverse --border --prompt '>>>' \
     --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null'"
 
 # History
-export HISTFILE=~/.zsh_histfile     # Where to save history.
+export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
@@ -93,11 +93,11 @@ alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # é€’å½
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
-alias mobi-agent='ssh-add ~/.ssh/mobi_rsa' # ssh-agent zsh
+alias mobi-agent='ssh-add $HOME/.ssh/mobi_rsa' # ssh-agent zsh
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias piprun='pipenv run python'
-alias fz='vi $(fzf)'
+#alias fz='vi $(fzf)'
 
 # Toggle vim, usage ^z
 fancy-ctrl-z () {
@@ -116,7 +116,7 @@ bindkey '^Z' fancy-ctrl-z
 . $HOME/.z.sh
 
 # Load local zshrc
-zshrc_local=~/.zshrc_local
+zshrc_local=$HOME/.zshrc_local
 if [ -f $zshrc_local ]; then
     source $zshrc_local
 fi

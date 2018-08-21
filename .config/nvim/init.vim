@@ -35,9 +35,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-" Complete parameter after select the completion
-"Plug 'tenfyzhong/CompleteParameter.vim'
-" Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
@@ -320,7 +318,7 @@ set wildignore+=tmp/**,*/tmp/*
 if has('nvim')
   let g:loaded_python_provider=1                        " Disable python 2 interface
   let g:python_host_skip_check=1                        " Skip python 2 host check
-  let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python3'    " Set python 3 host program
+  let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program
   set inccommand=nosplit                                " Live preview of substitutes and other similar commands
 endif
 "}}}
@@ -764,7 +762,7 @@ let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
 
 let g:deoplete#sources={}
-let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go  = ['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
 "}}}
