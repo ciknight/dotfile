@@ -74,8 +74,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Buffers tabline
-Plug 'ap/vim-buftabline'
 " Matchit enhances jump motions, Improved % matching
 Plug 'tmhedberg/matchit'
 " Use V or v, easily expand region selected
@@ -106,11 +104,11 @@ Plug 'tpope/vim-endwise'
 Plug 'majutsushi/tagbar'
 " Auto filejump, <C-p> support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
 Plug 'kien/ctrlp.vim'
-" crtlp plugin
+" Crtlp plugin
 Plug 'tacahiroy/ctrlp-funky'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
-" motions on speed
+" Motions on speed
 "Plug 'easymotion/vim-easymotion'
 " Wrapper of some vim/neovim's :terminal functions.
 Plug 'kassio/neoterm'
@@ -134,8 +132,6 @@ Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 " ---------------------------------------------------------------------------------------------------------------------
 
 Plug 'icymind/NeoSolarized'
-" Molokai
-"Plug 'tomasr/molokai'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -169,7 +165,7 @@ scriptencoding utf-8                        " Set utf-8 as default script encodi
 set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
-"set textwidth=120                           " Text width is 120 characters
+"set textwidth=100                          " Text width is 100 characters
 set cmdheight=1                             " Command line height
 set pumheight=10                            " Completion window max size
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
@@ -187,8 +183,6 @@ set synmaxcol=220                           " Don't try to syntax highlight mini
 set expandtab                               " Tab转换为空格
 set smarttab
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-"set autoindent
-"set cindent
 set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
 set nowrap                                  " 不自动折行
 set viminfo+=!                              " 保存全局变量
@@ -199,7 +193,7 @@ set tabstop=4                               " 每四行一个缩进
 set shiftround
 
 set number                                  " Line numbers on
-"set numberwidth=4
+set numberwidth=1
 set relativenumber
 set cursorline cursorcolumn
 augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
@@ -244,7 +238,6 @@ set nospell                                 " Disable checking by default (use <
 set ignorecase                              " Ignore case by default
 set smartcase                               " Make search case sensitive only if it contains uppercase letters
 set wrapscan                                " Search again from top when reached the bottom
-"set nohlsearch                              " Don't highlight after search
 set incsearch                               " do incremental searching
 set hlsearch                                " 检索时高亮显示匹配项
 "}}}
@@ -363,30 +356,33 @@ set timeoutlen=500  " wait leader
 "}}}
 
 " -----------------------------------------------------
-" 3.2 Disabling arrow keys, space key, exmode enter {{{
-" with Q key, help with F1, etc.
+" 3.2 Disabling arrow keys, space key {{{
+" with Q key, help with F1.
 " -----------------------------------------------------
 inoremap <F1> <NOP>
 nnoremap <F1> <NOP>
-"nnoremap <up> <NOP>
-"nnoremap <down> <NOP>
-"nnoremap <left> <NOP>
-"nnoremap <right> <NOP>
-"vnoremap <up> <NOP>
-"vnoremap <down> <NOP>
-"vnoremap <left> <NOP>
-"vnoremap <right> <NOP>
 "nnoremap <bs> <NOP>
 "nnoremap <delete> <NOP>
 "nnoremap <Space> <NOP>
 "nnoremap Q <NOP>
+
+"nnoremap <up> <NOP>
+"nnoremap <down> <NOP>
+"nnoremap <left> <NOP>
+"nnoremap <right> <NOP>
+
+"vnoremap <up> <NOP>
+"vnoremap <down> <NOP>
+"vnoremap <left> <NOP>
+"vnoremap <right> <NOP>
+
 "}}}
 
 " -----------------------------------------------------
 " 3.3 Vim defaults overriding {{{
 " -----------------------------------------------------
 
-" Easier window switching
+" Easier window switching NerdTree, TagBar, Terminal.
 nmap <silent> <C-w><C-w> :call utils#intelligentCycling()<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -487,15 +483,13 @@ nnoremap <leader>O o<Esc>o<Esc>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-" CTags generation / navigation (:tselect to select from menu)
-nnoremap ]t :tn<CR>
-nnoremap [t :tp<CR>
-nnoremap <leader>ts :ts<CR>
-nnoremap <leader>tg :GTags<CR>
+" Tab navigation
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
 
 " QuickFix navigation
-nnoremap ]q :cnext<CR>
-nnoremap [q :cprevious<CR>
+"nnoremap ]q :cnext<CR>
+"nnoremap [q :cprevious<CR>
 
 " Location list navigation
 nnoremap ]l :lnext<CR>
@@ -517,14 +511,14 @@ nnoremap S mzi<CR><ESC>`z
 " Start substitute on current word under the cursor
 "nnoremap <leader>s :%s///gc<Left><Left><Left>
 
+" Faster sort
+"vnoremap <leader>s :!sort<CR>
+
 " Start search on current word under the cursor
 "nnoremap <leader>/ /<CR>
 
 " Start reverse search on current word under the cursor
 "nnoremap <leader>? ?<CR>
-
-" Faster sort
-"vnoremap <leader>s :!sort<CR>
 
 " Fix spelling error on the go
 inoremap <C-l> <C-g>u<ESC>[s1z=`]a<C-g>u
@@ -538,7 +532,7 @@ nnoremap <leader>/ :let @/=""<CR>
 " 3.5 F-key actions {{{
 " -----------------------------------------------------
 " Free
-" nnoremap <silent> <F1>
+"nnoremap <silent> <F1>
 " NERDTree wrapper
 nnoremap <silent> <F2> :call utils#nerdWrapper()<CR>
 " Free
@@ -586,7 +580,7 @@ nnoremap <silent> <leader>, <C-^>
 " 3.7 Command abbreviations and mappings {{{
 " -----------------------------------------------------
 
-" Quiting and saving all
+" Quiting and saving all, command :
 cnoremap ww wqall
 cnoremap qq qall
 "}}}
@@ -606,8 +600,9 @@ command! Profile :call utils#profile()
 command! Retab :call utils#retabToFourSpaces()
 command! Retab2 :call utils#retabToTwoSpaces()
 
+" Python breakpoint
 command! PyBreakPoint :call utils#PyBreakPointOperate(line('.'))
-nnoremap <silent> <buffer> <leader>b :PyBreakPoint<CR>
+nnoremap <silent> <leader>b :PyBreakPoint<CR>
 "}}}
 
 "}}}

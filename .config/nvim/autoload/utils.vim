@@ -232,8 +232,6 @@ fun! g:utils#SetFileTitle()
 
     " 新建文件后，自动定位到文件末尾
     normal G
-    normal o
-    normal o
 
 endfunc
 "}}}
