@@ -42,8 +42,7 @@ Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 " Automatically pair stuff
-"Plug 'jiangmiao/auto-pairs'
-Plug 'cohama/lexima.vim'
+Plug 'jiangmiao/auto-pairs'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -128,16 +127,6 @@ Plug 'tpope/vim-surround'
 Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
 " Show content of registers when pasting
 "Plug 'junegunn/vim-peekaboo'
-"}}}
-
-" ---------------------------------------------------------------------------------------------------------------------
-" Extra text objects {{{
-" ---------------------------------------------------------------------------------------------------------------------
-
-" Comment text object (vac)
-"Plug 'glts/vim-textobj-comment'
-" Improved targets line cin) next parens
-Plug 'wellle/targets.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -316,10 +305,10 @@ set wildignore+=tmp/**,*/tmp/*
 " 2.10 Neovim specific settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
 if has('nvim')
-  let g:loaded_python_provider=1                        " Disable python 2 interface
-  let g:python_host_skip_check=1                        " Skip python 2 host check
+  let g:loaded_python_provider=1                                   " Disable python 2 interface
+  let g:python_host_skip_check=1                                   " Skip python 2 host check
   let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program
-  set inccommand=nosplit                                " Live preview of substitutes and other similar commands
+  set inccommand=nosplit                                           " Live preview of substitutes and other similar commands
 endif
 "}}}
 
@@ -757,6 +746,8 @@ let g:deoplete#file#enable_buffer_path=1
 
 let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
+"let deoplete#sources#jedi#python_path=''  TODO pipenv auto set
+"leg g:deoplete#sources#jedi#extra_path=''  sys.path
 
 let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
@@ -804,19 +795,33 @@ let g:tern_show_signature_in_pum=1
 " -----------------------------------------------------
 let g:ale_linters={
 \   'vim' : ['vint'],
-\   'python' : ['flake8', 'isort', 'mypy'],
+\   'python' : ['flake8', 'mypy'],
 \   'markdown' : ['mdl'],
 \   'sh' : ['shellcheck'],
 \   'javascript' : ['eslint'],
 \}
-let g:ale_sign_column_always=1
-"let g:ale_fix_on_save=1
-let g:ale_lint_on_save=1
+let g:ale_fixers = {
+\  'python': [
+\    'remove_trailing_lines',
+\    'isort',
+\    'yapf'
+\   ]
+\}
 let g:ale_lint_on_text_changed='always'
+let g:ale_lint_on_save=1
+"let g:ale_fix_on_save=1
+let g:ale_sign_column_always=1
 let g:ale_sign_error='•'
 let g:ale_sign_warning='•'
-set statusline=%{utils#LinterStatus()}
 
+let g:ale_echo_msg_error_str='E'
+let g:ale_echo_msg_warning_str='W'
+let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
+
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter=1
+
+set statusline=%{utils#LinterStatus()}
 "}}}
 
 " -----------------------------------------------------
@@ -838,9 +843,9 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " -----------------------------------------------------
 " 4.13 jedi-vim {{{
 " -----------------------------------------------------
-let g:jedi#completions_enabled=1
-let g:jedi#smart_auto_mappings=1
-let g:jedi#popup_on_dot=1
+let g:jedi#completions_enabled=0
+let g:jedi#smart_auto_mappings=0
+let g:jedi#popup_on_dot=0
 let g:jedi#auto_close_doc=1
 "}}}
 

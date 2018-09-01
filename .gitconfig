@@ -32,7 +32,7 @@
     unstage = reset HEAD --
     amend = commit --amend --verbose
 [core]
-    editor = vim
+    editor = 'nvim'
     safecrlf = true
     excludesfile = ~/.gitignore.global
     ignorecase = false
@@ -45,6 +45,10 @@
     autoStash = true
 [push]
     default = current  # set current branch upstream
+[mergetool "vimdiff"]
+    cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+    prompt = false
 [merge]
     log = true
     tool = vimdiff
