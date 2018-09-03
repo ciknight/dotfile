@@ -34,7 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
 " Snippet support (C-j)
@@ -50,11 +50,13 @@ Plug 'jiangmiao/auto-pairs'
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Syntax check
-Plug 'w0rp/ale' ", {'do': 'pip install flake8 mypy isort yapf'}
+Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
 " Golang syntax
-Plug 'fatih/vim-go', {'for': 'go', 'on': 'GoInstallBinaries'}
+Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries' }
 " Python automate format
 Plug 'ciknight/vim-yapf'
+" Python auto breakpoint
+Plug 'sillybun/setbreakpoints_python'
 " Python sort import
 Plug 'fisadev/vim-isort'
 " Solidity syntax
@@ -601,8 +603,9 @@ command! Retab :call utils#retabToFourSpaces()
 command! Retab2 :call utils#retabToTwoSpaces()
 
 " Python breakpoint
-command! PyBreakPoint :call utils#PyBreakPointOperate(line('.'))
-nnoremap <silent> <leader>b :PyBreakPoint<CR>
+"command! PyBreakPoint :call utils#PyBreakPointOperate(line('.'))
+"nnoremap <silent> <leader>b :PyBreakPoint<CR>
+autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr><Paste>
 "}}}
 
 "}}}
@@ -831,8 +834,16 @@ let g:yapf_style_conf="~/.config/yapf/style"
 " <leader>cc   加注释
 " <leader>cu   解开注释
 " <leader>c<space>  加上/解开注释, 智能判断
-" 注释的时候自动加个空格, 强迫症必配
-" let g:NERDSpaceDelims=1
+" Add spaces after comment delimiters by default
+"let g:NERDSpaceDelims=1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs=1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign='left'
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters={ 'c': { 'left': '/**','right': '*/' } }
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines=1
 "}}}
 
 " -----------------------------------------------------
