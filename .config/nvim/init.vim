@@ -100,8 +100,6 @@ Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }  " similar to ack.v
 Plug 'tpope/vim-fugitive'
 " Git changes showed on line numbers
 Plug 'airblade/vim-gitgutter'
-" This is a simple plugin that helps to end certain structures automatically
-Plug 'tpope/vim-endwise'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
 " Auto filejump, <C-p> support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
@@ -111,7 +109,7 @@ Plug 'tacahiroy/ctrlp-funky'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
-"Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 " Wrapper of some vim/neovim's :terminal functions.
 Plug 'kassio/neoterm'
 "Plug 'myusuf3/numbers.vim'
@@ -122,9 +120,9 @@ Plug 'kassio/neoterm'
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Surround (cs"')
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'  " yss, cs, ysiw
 " Easy alignment, Use :Tab\"
-Plug 'godlygeek/tabular', { 'on':  'Tabularize' }
+Plug 'godlygeek/tabular', { 'on':  'Tabularize' }  " junegunn/vim-easy-align
 " Show content of registers when pasting
 "Plug 'junegunn/vim-peekaboo'
 "}}}
@@ -142,10 +140,8 @@ Plug 'icymind/NeoSolarized'
 
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
-" Delete all but current buffer
-Plug 'vim-scripts/BufOnly.vim', { 'on': 'Bonly' }
 " Did you mean file open
-Plug 'EinfachToll/DidYouMean'
+Plug 'EinfachToll/DidYouMean'  " TODO Brekon
 "}}}
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -809,15 +805,15 @@ let g:ale_lint_on_text_changed='always'
 let g:ale_lint_on_save=1
 "let g:ale_fix_on_save=1
 let g:ale_sign_column_always=1
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter=1
+let g:ale_set_highlights=1
+
 let g:ale_sign_error='•'
 let g:ale_sign_warning='•'
-
 let g:ale_echo_msg_error_str='E'
 let g:ale_echo_msg_warning_str='W'
 let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
-
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter=1
 
 set statusline=%{utils#LinterStatus()}
 "}}}
@@ -825,7 +821,7 @@ set statusline=%{utils#LinterStatus()}
 " -----------------------------------------------------
 " 4.12 Yapf {{{
 " -----------------------------------------------------
-let g:yapf_style_conf="~/.config/yapf/style"
+let g:yapf_style_conf=$HOME."/.config/yapf/style"
 "}}}
 
 " -----------------------------------------------------
@@ -924,9 +920,10 @@ nnoremap <silent> <leader>gs :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.6 BufOnly -> [C]lose all {{{
+" 5.6 ale {{{
 " -----------------------------------------------------
-nnoremap <leader>C :Bonly<CR>
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "}}}
 
 " -----------------------------------------------------
@@ -941,11 +938,11 @@ vnoremap <leader>a :Tabularize /
 let g:multi_cursor_use_default_mapping=1
 
 " Default mapping
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_start_word_key      = '<C-m>'
+let g:multi_cursor_select_all_word_key = '<A-m>'
+let g:multi_cursor_start_key           = 'g<C-m>'
+let g:multi_cursor_select_all_key      = 'g<A-m>'
+let g:multi_cursor_next_key            = '<C-m>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
@@ -966,10 +963,29 @@ let g:jedi#rename_command="<leader>gr"
 " -----------------------------------------------------
 " 5.10 CtrlP {{
 " -----------------------------------------------------
-"map <leader>f :CtrlPMRU<CR>
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <Leader>pf :CtrlPFunky<Cr>
+"}}}
+
+
+" -----------------------------------------------------
+" 5.11 easymotion {{
+" -----------------------------------------------------
+map <Leader> <Plug>(easymotion-prefix)
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 "}}}
 
 "}}}
