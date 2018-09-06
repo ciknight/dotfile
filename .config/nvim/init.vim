@@ -102,10 +102,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
-" Auto filejump, <C-p> support tagbar  http://www.wklken.me/posts/2015/06/07/vim-plugin-tagbar.html
-Plug 'kien/ctrlp.vim'
-" Crtlp plugin
-Plug 'tacahiroy/ctrlp-funky'
+" Auto filejump
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
@@ -684,20 +683,44 @@ let g:airline_theme='minimalist' " molokai
 "}}}
 
 " -----------------------------------------------------
-" 4.4 CtrlP settings {{{
+" 4.4 FZF {{{
 " -----------------------------------------------------
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_funky_syntax_highlight=1
-let g:ctrlp_extensions=['funky']
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '10split enew' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 "}}}
 
 " -----------------------------------------------------
@@ -961,9 +984,9 @@ let g:jedi#rename_command="<leader>gr"
 "}}}
 
 " -----------------------------------------------------
-" 5.10 CtrlP {{
+" 5.10 FZF {{
 " -----------------------------------------------------
-nnoremap <Leader>pf :CtrlPFunky<Cr>
+nnoremap <Leader>p :FZF<Cr>
 "}}}
 
 
