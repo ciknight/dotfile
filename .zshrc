@@ -97,6 +97,7 @@ alias mobi-agent='ssh-add $HOME/.ssh/mobi_rsa' # ssh-agent zsh
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias piprun='pipenv run python'
+alias vo='vim -o$#'
 #alias fz='vi $(fzf)'
 
 # Toggle vim, usage ^z
