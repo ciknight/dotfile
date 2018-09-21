@@ -5,6 +5,7 @@
 *.pyc
 __pycache__/
 .mypy_cache
+.pytest_cache
 
 # pyenv virtualenv
 .python-version

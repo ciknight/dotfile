@@ -22,6 +22,7 @@
 --ignore-file=match:.syntastic_javac_config
 
 --ignore-dir=.cache/
+--ignore-dir=.mypy_cache/
 
 ## Intellij project files (old=fileformat).
 --ignore-file=match:.*.(ipr|iml)

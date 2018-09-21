@@ -598,8 +598,7 @@ command! Retab :call utils#retabToFourSpaces()
 command! Retab2 :call utils#retabToTwoSpaces()
 
 " Python breakpoint
-"autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr><Paste>
-autocmd! FileType python nnoremap <leader>b :call SetBreakPoint()<Cr><Paste>
+autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 "}}}
