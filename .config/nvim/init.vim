@@ -56,7 +56,7 @@ Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries' }
 " Python automate format
 Plug 'ciknight/vim-yapf'
 " Python auto breakpoint
-Plug 'sillybun/setbreakpoints_python'
+Plug 'ciknight/setbreakpoint'
 " Python sort import
 Plug 'fisadev/vim-isort'
 " Solidity syntax
@@ -334,7 +334,7 @@ cmap w!! w !sudo tee > /dev/null %          " Allow saving file as sudo when for
 " ---------------------------------------------------------------------------------------------------------------------
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
 "}}}
 
 "}}}
@@ -598,9 +598,7 @@ command! Retab :call utils#retabToFourSpaces()
 command! Retab2 :call utils#retabToTwoSpaces()
 
 " Python breakpoint
-"command! PyBreakPoint :call utils#PyBreakPointOperate(line('.'))
-"nnoremap <silent> <leader>b :PyBreakPoint<CR>
-autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr><Paste>
+autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 "}}}

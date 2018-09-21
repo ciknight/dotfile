@@ -171,7 +171,7 @@ function! g:utils#TabBar() abort
 endfunction
 
 " set python debug break point
-fun! g:utils#PyBreakPointOperate(lnum) abort "{{{
+fun! g:utils#PySetBreakPoint(lnum) abort "{{{
     let py_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # ipdb breakpoint'
 
     let line = getline(a:lnum)
