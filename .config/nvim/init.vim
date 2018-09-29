@@ -36,7 +36,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'  " Usage goto jump
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -57,6 +57,8 @@ Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries' }
 Plug 'ciknight/vim-yapf'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
+" Python auth set venv
+Plug 'ciknight/python-venv'
 " Python sort import
 Plug 'fisadev/vim-isort'
 " Solidity syntax
@@ -297,7 +299,7 @@ set wildignore+=tmp/**,*/tmp/*
 if has('nvim')
   let g:loaded_python_provider=1                                   " Disable python 2 interface
   let g:python_host_skip_check=1                                   " Skip python 2 host check
-  let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program
+  let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program, using virtualenv
   set inccommand=nosplit                                           " Live preview of substitutes and other similar commands
 endif
 "}}}
@@ -553,6 +555,7 @@ nnoremap <silent> <F8> :terminal<CR>
 " nnoremap <silent> <F11>
 " Informative echo
 nnoremap <F12> :call utils#showToggles()<CR>
+
 "}}}
 
 " -----------------------------------------------------
@@ -761,8 +764,11 @@ let g:deoplete#file#enable_buffer_path=1
 
 let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
-"let deoplete#sources#jedi#python_path=''  TODO pipenv auto set
-"leg g:deoplete#sources#jedi#extra_path=''  sys.path
+let g:deoplete#sources#jedi#statement_length=60
+let g:deoplete#sources#jedi#enable_typeinfo=1
+let g:deoplete#sources#jedi#show_docstring=1
+"let deoplete#sources#jedi#python_path=''  # jedi server python path
+"let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
 
 let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
@@ -866,10 +872,10 @@ let g:NERDToggleCheckAllLines=1
 " -----------------------------------------------------
 " 4.13 jedi-vim {{{
 " -----------------------------------------------------
+let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled=0
 let g:jedi#smart_auto_mappings=0
 let g:jedi#popup_on_dot=0
-let g:jedi#auto_close_doc=1
 "}}}
 
 "}}}

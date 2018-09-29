@@ -122,3 +122,7 @@ zshrc_local=$HOME/.zshrc_local
 if [ -f $zshrc_local ]; then
     source $zshrc_local
 fi
+
+function pvim {
+    PYTHONPATH=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"` /usr/bin/vim "$@"
+}
