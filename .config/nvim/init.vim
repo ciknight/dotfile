@@ -444,6 +444,8 @@ nmap yw ye
 " Uppercase word in insert mode
 inoremap <C-u> <ESC>mzgUiw`za
 
+inoremap <C-c> <C-[>
+
 " Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
 map <TAB> %
 silent! unmap [%

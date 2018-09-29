@@ -101,6 +101,9 @@ ln -s $PWD_DIR/.isort ~/.isort
 # mypy config
 ln -s $PWD_DIR/.mypy.ini ~/
 
+# mypy config
+ln -s $PWD_DIR/.ackrc ~/
+
 # .config
 if [ -f ~/.config ] ; then
     mv ~/.config ~/.config.old
