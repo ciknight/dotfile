@@ -29,14 +29,14 @@ elif [ $SYSTEM = "Linux" ]; then
         apt update
         apt install -y git htop vim zsh tmux neovim
         apt install -y gcc python3 python-dev curl tig pipenv
-        apt install -y ctags cmake silversearcher-ag jq ack-grep fzf
+        apt install -y ctags cmake silversearcher-ag jq ack-grep fzf fd-find
     elif which yum 2>&1 > /dev/null; then
         yum update
         yum install -y git htop vim zsh tmux neovim
         yum install -y gcc gcc-c++ python3.6 golang npm
         yum install -y ctags python-devel curl tig
-        yum install -y cmake jq  # ack-grep silversearcher-ag
-        yum install -y fd-find  # fzf
+        yum install -y cmake jq  ack-grep silversearcher-ag
+        yum install -y fd-find  fzf
 
     else
         exit 0

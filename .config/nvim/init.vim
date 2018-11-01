@@ -57,7 +57,7 @@ Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries' }
 Plug 'ciknight/vim-yapf'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
-" Python auth set venv
+" Python auto set venv
 Plug 'ciknight/python-venv'
 " Python sort import
 Plug 'fisadev/vim-isort'
@@ -65,6 +65,8 @@ Plug 'fisadev/vim-isort'
 Plug 'tomlion/vim-solidity'
 " Rust
 Plug 'rust-lang/rust.vim'
+" Kotlin
+Plug 'udalov/kotlin-vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -84,6 +86,7 @@ Plug 'tmhedberg/matchit'
 Plug 'terryma/vim-expand-region'
 " Vim-Multiple-Cursors
 Plug 'terryma/vim-multiple-cursors'
+Plug 'bfredl/nvim-miniyank'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -168,7 +171,7 @@ set showcmd                                 " Show commands as you type them
 set cmdheight=1                             " Command line height
 set pumheight=10                            " Completion window max size
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
-set clipboard+=unnamed                      " Allow to use system clipboard
+set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
 set lazyredraw                              " Don't redraw while executing macros (better performance)
 set showmatch                               " Show matching brackets when text indicator is over them
 set matchtime=2                             " How many tenths of a second to blink when matching brackets
@@ -178,7 +181,7 @@ set nojoinspaces                            " No extra space when joining a line
 set scrolloff=5                             " Scroll when closing to top or bottom of the screen
 set updatetime=1000                         " Update time used to create swap file or other things
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
-set synmaxcol=220                           " Don't try to syntax highlight minified files
+set synmaxcol=200                           " Don't try to syntax highlight minified files
 set expandtab                               " Tab转换为空格
 set smarttab
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
@@ -284,7 +287,7 @@ set completeopt-=preview                    " Don't show preview scratch buffers
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 set laststatus=2
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
-set wildmode=list:longest,list:full
+set wildmode=longest,list
 set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
 set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
@@ -995,7 +998,6 @@ let g:jedi#rename_command="<leader>gr"
 nnoremap <Leader>p :FZF<Cr>
 "}}}
 
-
 " -----------------------------------------------------
 " 5.11 easymotion {{
 " -----------------------------------------------------
@@ -1017,7 +1019,15 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 "}}}
 
+" -----------------------------------------------------
+" 5.12 vim-miniyank {{
+" -----------------------------------------------------
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
 "}}}
+
+"}}}
+
 
 " ======================================================================================================================
 " 6.0 Color and highlighting settings
