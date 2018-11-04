@@ -35,7 +35,7 @@ elif [ $SYSTEM = "Linux" ]; then
         yum install -y git htop vim zsh tmux neovim
         yum install -y gcc gcc-c++ python3.6 golang npm
         yum install -y ctags python-devel curl tig
-        yum install -y cmake jq  ack-grep silversearcher-ag
+        yum install -y cmake jq ack-grep the_silversearcher_ag
         yum install -y fd-find  fzf
 
     else
