@@ -5,7 +5,11 @@
 *.pyc
 __pycache__/
 .mypy_cache
-.pytest_cache
+pytestdebug.log
+.Python
+wheels/
+*.egg-info/
+*.egg
 
 # pyenv virtualenv
 .python-version
@@ -24,6 +28,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Scrapy stuff:
 .scrapy
