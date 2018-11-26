@@ -46,6 +46,11 @@ else
     exit 0
 fi
 
+# ssh
+if [ ! -f ~/.ssh/id_rsa ] ; then
+    ssh-keygen -t rsa -b 4096 -C "ci_knight@msn.cn"
+fi
+
 # make workspace
 mkdir ~/workspace
 
@@ -56,11 +61,29 @@ mkdir ~/workspace/go
 ln -s $PWD_DIR/bin ~/
 
 # python
-if [ -f ~/.pip ] ; then
+if [ -d ~/.pip ] ; then
     mv ~/.pip ~/.pip.old
 fi
 ln -s $PWD_DIR/.pip ~/
 ln -s $PWD_DIR/.ipython ~/
+
+# pyenv, https://github.com/pyenv/pyenv-installer.git
+curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+
+# system python path
+pyenv global system
+
+# pip
+wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py && sudo python3 install /tmp/get-pip.py
+
+pip install virtualenv
+
+# create vim python env
+virtualenv -p `which python3` ~/workspace/neovim3
+source ~/workspace/neovim3/bin/activate
+pip install neovim flake8 flake8-isort flake8-bugbear jedi yapf isort mypy
+
+#pip install mycli ipython ipdb cheat forex-python
 
 # vim
 if [ -f ~/.vimrc ] ; then
@@ -72,7 +95,18 @@ if [ -f ~/.vim ] ; then
 fi
 ln -s $PWD_DIR/.vim ~/
 
+# zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+if [ -f ~/.zshrc ] ; then
+    mv ~/.zshrc ~/.zsh.old
+fi
+ln -s $PWD_DIR/.zshrc ~/.zshrc
+source ~/.zshrc
+
 # tmux
+if [ -d ~/.tmux/plugins/tpm ] ; then
+    mv ~/.tmux/plugins/tpm ~/.tmux/plugins/tpm.old
+fi
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 if [ -f ~/.tmux.conf ] ; then
     mv ~/.tmux.conf ~/.tmux.conf.old
@@ -108,37 +142,11 @@ ln -s $PWD_DIR/.ackrc ~/
 if [ -f ~/.config ] ; then
     mv ~/.config ~/.config.old
 fi
-ln -s $PWD_DIR/.config ~/.config
-
-# zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-if [ -f ~/.zshrc ] ; then
-    mv ~/.zshrc ~/.zsh.old
-fi
-ln -s $PWD_DIR/.zshrc ~/.zshrc
-source ~/.zshrc
+ln -s $PWD_DIR/.config ~/
 
 # z jump around
 wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
 
 # fzf
-#git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-#~/.fzf/install
-
-# pyenv, https://github.com/pyenv/pyenv-installer.git
-curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-
-# system python path
-pyenv global system
-
-# pip
-wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py && sudo python3 install /tmp/get-pip.py
-
-sudo pip install virtualenv
-
-# create vim python env
-virtualenv -p `which python3` ~/workspace/neovim3
-source ~/workspace/neovim3/bin/activate
-pip install neovim flake8 autopep8 jedi yapf isort mypy
-
-#pip install mycli ipython ipdb cheat forex-python
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
