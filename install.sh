@@ -12,11 +12,11 @@ if [ $SYSTEM = "Darwin" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     # vim tagbar need ctags
     brew install zsh git htop tmux vim neovim
-    brew install python3 golang clang npm pipenv
+    brew install python3 golang clang npm
     brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
-    brew install aria2 cloc tig jq wget fzf fd
+    brew install aria2 cloc tig jq wget fd
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
     # install powerline fonts, set terminal font support powerline
@@ -28,16 +28,19 @@ elif [ $SYSTEM = "Linux" ]; then
     if which apt 2>&1 > /dev/null; then
         apt update
         apt install -y git htop vim zsh tmux neovim
-        apt install -y gcc python3 python-dev curl tig pipenv
-        apt install -y ctags cmake silversearcher-ag jq ack-grep fzf fd-find
+        apt install -y gcc python3 python-dev curl tig
+        apt install -y ctags cmake silversearcher-ag jq ack-grep fd-find
     elif which yum 2>&1 > /dev/null; then
+        #yum -y install https://centos7.iuscommunity.org/ius-release.rpm
         yum update
         yum install -y git htop vim zsh tmux neovim
-        yum install -y gcc gcc-c++ python3.6 golang npm
+        yum install -y gcc gcc-c++ golang npm
+        #yum install -y python36
+        #yum install -y python3.6
+        #yum -y install python36u
         yum install -y ctags python-devel curl tig
         yum install -y cmake jq ack-grep the_silversearcher_ag
-        yum install -y fd-find  fzf
-
+        yum install -y fd-find
     else
         exit 0
     fi
@@ -66,23 +69,26 @@ if [ -d ~/.pip ] ; then
 fi
 ln -s $PWD_DIR/.pip ~/
 ln -s $PWD_DIR/.ipython ~/
+PYTHON=`which python`
+PYTHON3=`which python3.6`
 
 # pyenv, https://github.com/pyenv/pyenv-installer.git
 curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 
+# pip
+if [ ! -f /tmp/get-pip.py ] ; then
+    wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && $PYTHON /tmp/get-pip.py && $PYTHON3 install /tmp/get-pip.py
+fi
 # system python path
 pyenv global system
-
-# pip
-wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && sudo python /tmp/get-pip.py && sudo python3 install /tmp/get-pip.py
-
-pip install virtualenv
+pip install virtualenv pipenv
 
 # create vim python env
-virtualenv -p `which python3` ~/workspace/neovim3
-source ~/workspace/neovim3/bin/activate
-pip install neovim flake8 flake8-isort flake8-bugbear jedi yapf isort mypy
-
+if [ ! -d ~/workspace/neovim3 ] ; then
+    virtualenv -p $PYTHON3 ~/workspace/neovim3
+    source ~/workspace/neovim3/bin/activate
+    pip install neovim flake8 flake8-isort flake8-bugbear jedi yapf isort mypy
+fi
 #pip install mycli ipython ipdb cheat forex-python
 
 # vim
