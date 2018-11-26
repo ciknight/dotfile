@@ -83,7 +83,7 @@ fi
 pyenv global system
 pip install virtualenv pipenv
 
-# create vim python env
+# create neovim python env
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p $PYTHON3 ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
@@ -110,18 +110,20 @@ ln -s $PWD_DIR/.zshrc ~/.zshrc
 source ~/.zshrc
 
 # tmux
-if [ -d ~/.tmux/plugins/tpm ] ; then
-    mv ~/.tmux/plugins/tpm ~/.tmux/plugins/tpm.old
+if [ ! -d ~/.tmux/plugins/tpm ] ; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 fi
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 if [ -f ~/.tmux.conf ] ; then
     mv ~/.tmux.conf ~/.tmux.conf.old
 fi
 ln -s $PWD_DIR/.tmux.conf ~/
 
-# git config
-ln -s $PWD_DIR/.gitconfig ~/
-ln -s $PWD_DIR/.gitignore.global ~/
+# z jump around
+wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
+
+# fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # ycm extra config
 ln -s $PWD_DIR/.ycm_extra_conf ~/.ycm_extra_conf.py
@@ -145,14 +147,11 @@ ln -s $PWD_DIR/.mypy.ini ~/
 ln -s $PWD_DIR/.ackrc ~/
 
 # .config
-if [ -f ~/.config ] ; then
+if [ -d ~/.config ] ; then
     mv ~/.config ~/.config.old
 fi
 ln -s $PWD_DIR/.config ~/
 
-# z jump around
-wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
-
-# fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+# git config
+ln -s $PWD_DIR/.gitconfig ~/
+ln -s $PWD_DIR/.gitignore.global ~/

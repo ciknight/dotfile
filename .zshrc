@@ -19,8 +19,6 @@ if [ $SYSTEM = "Darwin" ] ; then
     # JAVA_HOME
     export JAVA_HOME=$(/usr/libexec/java_home)
     export PATH=$PATH:$JAVA_HOME/bin
-elif [ $SYSTEM = "Linux" ] ; then
-    # None
 fi
 
 # Path
