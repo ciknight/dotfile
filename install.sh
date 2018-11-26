@@ -87,7 +87,7 @@ pip install virtualenv pipenv
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p $PYTHON3 ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install neovim flake8 flake8-isort flake8-bugbear jedi yapf isort mypy
+    pip install pynvim flake8 flake8-isort flake8-bugbear jedi yapf isort mypy
 fi
 #pip install mycli ipython ipdb cheat forex-python
 
