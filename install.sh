@@ -39,7 +39,7 @@ elif [ $SYSTEM = "Linux" ]; then
         #yum install -y python3.6
         #yum -y install python36u
         yum install -y ctags python-devel curl tig
-        yum install -y cmake jq ack-grep the_silversearcher_ag
+        yum install -y cmake jq ack-grep the_silver_searcher
         yum install -y fd-find
     else
         exit 0
@@ -106,7 +106,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 if [ -f ~/.zshrc ] ; then
     mv ~/.zshrc ~/.zsh.old
 fi
-ln -s $PWD_DIR/.zshrc ~/.zshrc
+ln -s $PWD_DIR/.zshrc ~/
 source ~/.zshrc
 
 # tmux
@@ -126,19 +126,19 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
 # ycm extra config
-ln -s $PWD_DIR/.ycm_extra_conf ~/.ycm_extra_conf.py
+ln -s $PWD_DIR/.ycm_extra_conf ~/
 
 # flake8 config
-ln -s $PWD_DIR/.flake8 ~/.flake8
+ln -s $PWD_DIR/.flake8 ~/
 
 # npm config
-ln -s $PWD_DIR/.npmrc ~/.npmrc
+ln -s $PWD_DIR/.npmrc ~/
 
 # conda config
-ln -s $PWD_DIR/.condarc ~/.condarc
+ln -s $PWD_DIR/.condarc ~/
 
 # isort config
-ln -s $PWD_DIR/.isort ~/.isort
+ln -s $PWD_DIR/.isort.cfg ~/
 
 # mypy config
 ln -s $PWD_DIR/.mypy.ini ~/
