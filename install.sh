@@ -33,6 +33,7 @@ elif [ $SYSTEM = "Linux" ]; then
     elif which yum 2>&1 > /dev/null; then
         #yum -y install https://centos7.iuscommunity.org/ius-release.rpm
         yum update
+        yum install openssl-devel readline-devel sqlite-devel
         yum install -y git htop vim zsh tmux neovim
         yum install -y gcc gcc-c++ golang npm
         #yum install -y python36
