@@ -340,6 +340,7 @@ cmap w!! w !sudo tee > /dev/null %          " Allow saving file as sudo when for
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType markdown setlocal fo-=t wrap
 "}}}
 
 "}}}
