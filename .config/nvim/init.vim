@@ -331,7 +331,7 @@ set confirm                                 " Need confrimation while exit
 set autowrite                               " Automatically :write before running commands
 set autoread                                " Set to auto read when a file is changed from the outside
 set autowriteall
-cmap w!! w !sudo tee > /dev/null %          " Allow saving file as sudo when forgot to start vim using sudo
+cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when forgot to start vim using sudo
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
