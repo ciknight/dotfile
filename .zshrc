@@ -48,7 +48,7 @@ eval "$(pipenv --completion)"
 # Fzf
 #export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_OPTS="--height 40% --reverse --border --prompt '>>>' \
+export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --border --prompt '>>>' \
     --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
     --header 'A-j/k: preview down/up, C-v: open in nvim, C-y: copy, ?: toggle preview' \
     --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
