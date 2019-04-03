@@ -4,25 +4,36 @@ PWD_DIR=`pwd`
 echo 'installing..., current dir: ' $PWD_DIR
 SYSTEM=`uname -s`
 
+# first, initialize ssh key
+if [ ! -f ~/.ssh/id_rsa ] ; then
+    ssh-keygen -t rsa -b 4096 -C "ci_knight@msn.cn"
+fi
+
 echo 'OS: ' $SYSTEM
 if [ $SYSTEM = "Darwin" ]; then
     # disable command + q
-    # first, install git and initialize ssh key
-    echo 'install brew...'
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    if hash brew 2> /dev/null; then
+    echo 'Already Install homebrew'
+    else
+        echo 'Install homebrew...'
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
     # vim tagbar need ctags
-    brew install zsh git htop tmux vim neovim
-    brew install python3 golang clang npm
+    brew install zsh git htop tmux neovim
+    brew install python3 golang npm
     brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
     brew install aria2 cloc tig jq wget fd
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
+
+    # brew cask install java
+
     # install powerline fonts, set terminal font support powerline
-    git clone https://github.com/powerline/fonts.git ~/.fonts
+    # git clone https://github.com/powerline/fonts.git ~/.fonts
     # wget https://gist.github.com/baopham/1838072/raw/616d338cea8b9dcc3a5b17c12fe3070df1b738c0/Monaco%2520for%2520Powerline.otf
-    sh ~/.fonts/install.sh
+    # sh ~/.fonts/install.sh
 elif [ $SYSTEM = "Linux" ]; then
     echo 'updating apt and install software'
     if which apt 2>&1 > /dev/null; then
@@ -50,39 +61,71 @@ else
     exit 0
 fi
 
-# ssh
-if [ ! -f ~/.ssh/id_rsa ] ; then
-    ssh-keygen -t rsa -b 4096 -C "ci_knight@msn.cn"
+PYTHON=`which python`
+PYTHON3=`which python3`
+
+if [ ! -d ~/workspace ]; then
+    # make workspace
+    mkdir ~/workspace
+    # make go workspace
+    mkdir ~/workspace/go
 fi
 
-# make workspace
-mkdir ~/workspace
+# home bin
+if [ ! -d ~/workspace ]; then
+    ln -s $PWD_DIR/bin ~/
+fi
 
-# make go workspace
-mkdir ~/workspace/go
+# ipython
+if [ -d ~/.ipython ]; then
+    mv ~/.ipython ~/.ipyton.old
+fi
+ln -s $PWD_DIR/.ipython ~/
 
-# user bin
-ln -s $PWD_DIR/bin ~/
-
-# python
+# pip
 if [ -d ~/.pip ] ; then
     mv ~/.pip ~/.pip.old
 fi
 ln -s $PWD_DIR/.pip ~/
-ln -s $PWD_DIR/.ipython ~/
-PYTHON=`which python`
-PYTHON3=`which python3.6`
 
-# pyenv, https://github.com/pyenv/pyenv-installer.git
-curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-
-# pip
 if [ ! -f /tmp/get-pip.py ] ; then
     wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && $PYTHON /tmp/get-pip.py && $PYTHON3 install /tmp/get-pip.py
 fi
-# system python path
-pyenv global system
-pip install virtualenv pipenv
+
+# system python util
+\pip install virtualenv pipenv
+
+# pyenv
+if hash pyenv 2>/dev/null; then
+    echo 'Already install pyenv'
+else
+    if [ -d ~/.pyenv ] ; then
+        mv ~/.pyenv~/.pyenv.old
+    fi
+    # pyenv, https://github.com/pyenv/pyenv-installer.git
+    curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+fi
+
+# z jump around
+if hash z 2>/dev/null; then
+    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
+fi
+
+# fzf
+if hash fzf 2>/dev/null; then
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+fi
+
+# zsh
+if [ ! -d ~/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+if [ ! -f ~/.zshrc ] ; then
+    mv ~/.zshrc ~/.zsh.old
+fi
+ln -s $PWD_DIR/.zshrc ~/.zshrc
+#source ~/.zshrc
 
 # create neovim python env
 if [ ! -d ~/workspace/neovim3 ] ; then
@@ -118,13 +161,6 @@ if [ -f ~/.tmux.conf ] ; then
     mv ~/.tmux.conf ~/.tmux.conf.old
 fi
 ln -s $PWD_DIR/.tmux.conf ~/
-
-# z jump around
-wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
-
-# fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
 
 # ycm extra config
 ln -s $PWD_DIR/.ycm_extra_conf ~/
