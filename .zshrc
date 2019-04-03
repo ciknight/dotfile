@@ -17,8 +17,10 @@ if [ $SYSTEM = "Darwin" ] ; then
     # brew cdn
     export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
     # JAVA_HOME
-    export JAVA_HOME=$(/usr/libexec/java_home)
-    export PATH=$PATH:$JAVA_HOME/bin
+    if hash jre 2>/dev/null; then
+        export JAVA_HOME=$(/usr/libexec/java_home)
+        export PATH=$PATH:$JAVA_HOME/bin
+    fi
 fi
 
 # Path
@@ -42,8 +44,10 @@ eval "$(pyenv init -)"
 export PATH="$PATH:$HOME/workspace/neovim3/bin"
 
 # Pipenv
-export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
-eval "$(pipenv --completion)"
+if hash pipenv 2>/dev/null; then
+    export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
+    eval "$(pipenv --completion)"
+fi
 
 # Fzf
 #export FZF_DEFAULT_COMMAND='fd --type f'
