@@ -46,6 +46,8 @@ export PATH="$PATH:$HOME/workspace/neovim3/bin"
 # Pipenv
 if hash pipenv 2>/dev/null; then
     export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
+    export PIPENV_IGNORE_VIRTUALENVS=1
+    export PIPENV_VERBOSITY=-1
     eval "$(pipenv --completion)"
 fi
 

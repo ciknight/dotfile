@@ -448,6 +448,7 @@ nmap yw ye
 " Uppercase word in insert mode
 inoremap <C-u> <ESC>mzgUiw`za
 
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <C-c> <C-[>
 
 " Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
