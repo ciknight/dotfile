@@ -102,7 +102,10 @@ alias avenv='source venv/bin/activate'
 alias pip=pipenv
 alias piprun='pipenv run python'
 alias vo='vi -o$#'
-#alias fz='vi $(fzf)'
+#alias vifz='vi $(fzf)'
+
+# docker
+alias dorkrmall='docker ps --all | tail -n 8 | awk -F ' ' '{print $1}' | xargs docker rm'
 
 # Toggle vim, usage ^z
 fancy-ctrl-z () {
