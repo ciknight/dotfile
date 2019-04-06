@@ -43,6 +43,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Automatically pair stuff
 Plug 'jiangmiao/auto-pairs'
+if has('nvim-0.4.0')
+  Plug 'ncm2/float-preview.nvim'
+endif
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -784,6 +787,8 @@ let g:deoplete#sources={}
 let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go  = ['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+
+let g:float_preview#docked = 0
 "}}}
 
 " -----------------------------------------------------
