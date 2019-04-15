@@ -66,8 +66,6 @@ Plug 'ciknight/python-venv'
 Plug 'fisadev/vim-isort'
 " Solidity syntax
 Plug 'tomlion/vim-solidity'
-" Rust
-Plug 'rust-lang/rust.vim'
 " Kotlin
 Plug 'udalov/kotlin-vim'
 "}}}
@@ -148,7 +146,7 @@ Plug 'icymind/NeoSolarized'
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
 " Did you mean file open
-Plug 'EinfachToll/DidYouMean'  " TODO Brekon
+Plug 'EinfachToll/DidYouMean'
 "}}}
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -696,6 +694,38 @@ let g:airline_theme='minimalist' " molokai
 " -----------------------------------------------------
 " 4.4 FZF {{{
 " -----------------------------------------------------
+
+" Floating Windows function
+function! OpenFloatingWin()
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  " 设置浮动窗口打开的位置，大小等。
+  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': height * 0.3,
+        \ 'col': col + 30,
+        \ 'width': width * 2 / 3,
+        \ 'height': height / 2
+        \ }
+
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+
+  " 设置浮动窗口高亮
+  call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+  setlocal
+        \ buftype=nofile
+        \ nobuflisted
+        \ bufhidden=hide
+        \ nonumber
+        \ norelativenumber
+        \ signcolumn=no
+endfunction
+
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -710,6 +740,7 @@ let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10split enew' }
+let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -772,7 +803,7 @@ let g:deoplete#enable_smart_case=1
 let g:deoplete#enable_refresh_always=0
 let g:deoplete#file#enable_buffer_path=1
 
-let g:deoplete#sources#jedi#server_timeout=10
+let g:deoplete#sources#jedi#server_timeout=5
 let g:deoplete#sources#jedi#enable_cache=1
 let g:deoplete#sources#jedi#statement_length=60
 let g:deoplete#sources#jedi#enable_typeinfo=1
@@ -886,6 +917,7 @@ let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled=0
 let g:jedi#smart_auto_mappings=0
 let g:jedi#popup_on_dot=0
+let g:jedi#auto_close_doc=1
 "}}}
 
 "}}}
@@ -993,7 +1025,7 @@ let g:jedi#goto_command="<leader>gd"
 let g:jedi#goto_assignments_command="<leader>gg"
 let g:jedi#goto_definitions_command=""
 let g:jedi#documentation_command="K"
-let g:jedi#usages_command="<leader>gn"
+let g:jedi#usages_command="<leader>gu"
 let g:jedi#rename_command="<leader>gr"
 "}}}
 
