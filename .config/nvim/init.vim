@@ -1021,9 +1021,9 @@ let g:multi_cursor_quit_key            = '<Esc>'
 " -----------------------------------------------------
 " 5.9 jedi-vim {{
 " -----------------------------------------------------
-let g:jedi#goto_command="<leader>gd"
-let g:jedi#goto_assignments_command="<leader>gg"
-let g:jedi#goto_definitions_command=""
+let g:jedi#goto_command="<leader>gg"
+let g:jedi#goto_assignments_command="<leader>ga"
+let g:jedi#goto_definitions_command="<leader>gd"
 let g:jedi#documentation_command="K"
 let g:jedi#usages_command="<leader>gu"
 let g:jedi#rename_command="<leader>gr"
