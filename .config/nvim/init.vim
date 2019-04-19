@@ -740,7 +740,9 @@ let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10split enew' }
-let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+if has('nvim-0.4.0')
+  let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+endif
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =

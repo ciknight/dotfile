@@ -104,6 +104,7 @@ else
     fi
     # pyenv, https://github.com/pyenv/pyenv-installer.git
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+    mkdir $(pyenv root)/cache
 fi
 
 # z jump around
