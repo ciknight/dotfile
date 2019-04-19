@@ -24,7 +24,6 @@ if [ $SYSTEM = "Darwin" ] ; then
 fi
 
 # Path
-export GOPATH="$HOME/workspace/go"  # Golang Path
 export PATH="$HOME/bin:$GOPATH/bin:$PATH"
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
@@ -39,6 +38,10 @@ export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# Golang
+export GOPATH="$HOME/workspace/go"  # Golang Path
+export GOPROXY=https://athens.azurefd.net
 
 # Fix neo vim mypy flake8 yapf isort bin path
 export PATH="$PATH:$HOME/workspace/neovim3/bin"
@@ -58,6 +61,7 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --border --prompt '>>
     --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
     --header 'A-j/k: preview down/up, C-v: open in nvim, C-y: copy, ?: toggle preview' \
     --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # History
 export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
@@ -87,7 +91,7 @@ alias tailf='tail -f'
 # Git alias
 alias gdc='git diff --cached'
 
-# Soft alias
+# Other alias
 alias tn='tmux -2 new -s'
 alias ta='tmux -2 attach -t' # -2 Force tmux to assume the terminal supports 256 colours.
 alias rm=safe_rm
@@ -104,9 +108,8 @@ alias avenv='source venv/bin/activate'
 alias pip=pipenv
 alias piprun='pipenv run python'
 alias vo='vi -o$#'
-#alias vifz='vi $(fzf)'
 
-# docker
+# Docker
 alias dorkrmall='docker ps --all | tail -n 8 | awk -F ' ' '{print $1}' | xargs docker rm'
 
 # Toggle vim, usage ^z
@@ -123,7 +126,7 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # Load Z jump around
-. $HOME/.z.sh
+source $HOME/.z.sh
 
 # Load local zshrc
 zshrc_local=$HOME/.zshrc_local
@@ -134,6 +137,3 @@ fi
 function pvim {
     PYTHONPATH=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"` /usr/bin/vim "$@"
 }
-
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
