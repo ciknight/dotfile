@@ -802,12 +802,12 @@ au Syntax * RainbowParenthesesLoadBraces
 " -----------------------------------------------------
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_smart_case=1
-let g:deoplete#enable_refresh_always=0
+let g:deoplete#enable_refresh_always=1
 let g:deoplete#file#enable_buffer_path=1
 
-let g:deoplete#sources#jedi#server_timeout=5
+let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
-let g:deoplete#sources#jedi#statement_length=60
+let g:deoplete#sources#jedi#statement_length=70
 let g:deoplete#sources#jedi#enable_typeinfo=1
 let g:deoplete#sources#jedi#show_docstring=1
 "let deoplete#sources#jedi#python_path=''  # jedi server python path
