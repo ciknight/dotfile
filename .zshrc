@@ -24,7 +24,6 @@ if [ $SYSTEM = "Darwin" ] ; then
 fi
 
 # Path
-export PATH="$HOME/bin:$GOPATH/bin:$PATH"
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 # Lang
@@ -41,6 +40,7 @@ eval "$(pyenv init -)"
 
 # Golang
 export GOPATH="$HOME/workspace/go"  # Golang Path
+export PATH="$HOME/bin:$GOPATH/bin:$PATH"
 export GOPROXY=https://athens.azurefd.net
 
 # Fix neo vim mypy flake8 yapf isort bin path
