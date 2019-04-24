@@ -810,16 +810,17 @@ let g:deoplete#sources#jedi#enable_cache=1
 let g:deoplete#sources#jedi#statement_length=70
 let g:deoplete#sources#jedi#enable_typeinfo=1
 let g:deoplete#sources#jedi#show_docstring=1
+
 "let deoplete#sources#jedi#python_path=''  # jedi server python path
 "let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
 
-let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+"let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
 
 let g:deoplete#sources={}
-let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.go  = ['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
 
 let g:float_preview#docked = 0
 "}}}
