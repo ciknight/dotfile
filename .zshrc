@@ -14,8 +14,8 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 if [ $SYSTEM = "Darwin" ] ; then
-    # brew cdn
-    export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
+    # HomeBrew mirror, https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
+
     # JAVA_HOME
     if hash jre 2>/dev/null; then
         export JAVA_HOME=$(/usr/libexec/java_home)
@@ -42,6 +42,7 @@ eval "$(pyenv init -)"
 export GOPATH="$HOME/workspace/go"  # Golang Path
 export PATH="$HOME/bin:$GOPATH/bin:$PATH"
 export GOPROXY=https://athens.azurefd.net
+export GO111MODULE=on
 
 # Fix neo vim mypy flake8 yapf isort bin path
 export PATH="$PATH:$HOME/workspace/neovim3/bin"
