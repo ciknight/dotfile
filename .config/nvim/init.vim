@@ -814,8 +814,12 @@ let g:deoplete#sources#jedi#show_docstring=1
 "let deoplete#sources#jedi#python_path=''  # jedi server python path
 "let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
 
-"let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
+"let g:deoplete#sources#go#auto_goos=1
+"let g:deoplete#sources#go#builtin_objects=1
+"let g:deoplete#sources#go#source_importer=1
+"let g:deoplete#sources#go#unimported_packages=1
 
 let g:deoplete#sources={}
 let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
