@@ -33,10 +33,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'  " Usage goto jump
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -55,7 +54,7 @@ endif
 " Syntax check
 Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
 " Golang syntax
-Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
 " Python automate format
 Plug 'ciknight/vim-yapf'
 " Python auto breakpoint
@@ -855,8 +854,11 @@ let g:colorizer_nomap=1
 "}}}
 
 " -----------------------------------------------------
-" 4.10 settings {{{
+" 4.10 vim-go settings {{{
 " -----------------------------------------------------
+let g:go_def_mode = 'gopls'
+let g:go_autodetect_gopath = 1
+let g:go_version_warning = 1
 "}}}
 
 " -----------------------------------------------------

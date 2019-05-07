@@ -68,7 +68,7 @@ if [ ! -d ~/workspace ]; then
     # make workspace
     mkdir ~/workspace
     # make go workspace
-    mkdir ~/workspace/go
+    mkdir -p $HOME/go/{bin,pkg,src}
 fi
 
 # home bin
