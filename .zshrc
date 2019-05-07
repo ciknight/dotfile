@@ -57,7 +57,7 @@ fi
 
 # Fzf
 #export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='ag -a -u -g ""'
 export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --border --prompt '>>>' \
     --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
     --header 'A-j/k: preview down/up, C-v: open in nvim, C-y: copy, ?: toggle preview' \
