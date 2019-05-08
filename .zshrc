@@ -69,7 +69,7 @@ export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
-export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit|who"
+export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf"
 
 # System alias
 if which nvim 2>&1 > /dev/null; then

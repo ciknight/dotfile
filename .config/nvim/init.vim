@@ -33,9 +33,11 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+" Deoplete Plugins
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+
 Plug 'davidhalter/jedi-vim'  " Usage goto jump
-Plug 'zchee/deoplete-go', { 'do': 'make' }
 " Snippet support (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
@@ -813,8 +815,9 @@ let g:deoplete#sources#jedi#show_docstring=1
 "let deoplete#sources#jedi#python_path=''  # jedi server python path
 "let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
 
-let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#pointer=1
 "let g:deoplete#sources#go#auto_goos=1
 "let g:deoplete#sources#go#builtin_objects=1
 "let g:deoplete#sources#go#source_importer=1
@@ -825,7 +828,7 @@ let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
 
-let g:float_preview#docked = 0
+let g:float_preview#docked=0
 "}}}
 
 " -----------------------------------------------------
