@@ -58,7 +58,7 @@ Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
 " Golang syntax
 Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
 " Python automate format
-Plug 'ciknight/vim-yapf'
+Plug 'mindriot101/vim-yapf'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
 " Python auto set venv
@@ -859,9 +859,8 @@ let g:colorizer_nomap=1
 " -----------------------------------------------------
 " 4.10 vim-go settings {{{
 " -----------------------------------------------------
-let g:go_def_mode = 'gopls'
-let g:go_autodetect_gopath = 1
-let g:go_version_warning = 1
+let g:go_autodetect_gopath=1
+let g:go_version_warning=1
 "}}}
 
 " -----------------------------------------------------
@@ -875,10 +874,13 @@ let g:ale_linters={
 \   'javascript' : ['eslint'],
 \}
 let g:ale_fixers = {
-\  'python': [
-\    'remove_trailing_lines',
-\    'isort',
-\    'yapf'
+\   '*': [
+\     'trim_whitespace',
+\     'remove_trailing_lines',
+\   ],
+\   'python': [
+\     'isort',
+\     'yapf'
 \   ]
 \}
 let g:ale_lint_on_text_changed='always'  " never,always
@@ -901,7 +903,7 @@ set statusline=%{utils#LinterStatus()}
 " -----------------------------------------------------
 " 4.12 Yapf {{{
 " -----------------------------------------------------
-let g:yapf_style_conf=$HOME."/.config/yapf/style"
+let g:yapf_style=$HOME."/.config/yapf/style"
 "}}}
 
 " -----------------------------------------------------
@@ -1125,14 +1127,15 @@ augroup END
 
 " Turn spellcheck on for text files {{{
 augroup auto_spellcheck
-  autocmd BufNewFile,BufRead *.txt setlocal spell
+  autocmd BufNewFile,BufRead *.txt,*.md setlocal spell
 augroup END
 "}}}
 
 " Remove trailing whitespaces automatically before save {{{
-augroup strip_ws
-  autocmd BufWritePre * call utils#stripTrailingWhitespaces()
-augroup END
+" use ale
+"augroup strip_ws
+"  autocmd BufWritePre * call utils#stripTrailingWhitespaces()
+"augroup END
 "}}}
 
 " Resize splits when the window is resized {{{
