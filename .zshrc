@@ -25,6 +25,7 @@ fi
 
 # Path
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 # Lang
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
@@ -57,7 +58,7 @@ fi
 
 # Fzf
 #export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_COMMAND='ag -a -u -g ""'
+export FZF_DEFAULT_COMMAND='ag -a -i -U -g ""'
 export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --border --prompt '>>>' \
     --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
     --header 'A-j/k: preview down/up, C-v: open in nvim, C-y: copy, ?: toggle preview' \
@@ -69,7 +70,10 @@ export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
-export HISTORY_IGNORE="poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf"
+export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb)"
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+setopt SHARE_HISTORY
 
 # System alias
 if which nvim 2>&1 > /dev/null; then
@@ -79,7 +83,7 @@ elif which vim 2>&1 > /dev/null; then
 else
   alias vi=vi
 fi
-alias ssh='ssh -2'
+alias ssh='ssh -A'
 alias df='df -h'
 alias du='du -h -d 1' # Path Deep
 alias last='last -n 10'
@@ -88,6 +92,7 @@ alias pg='ps -ef | grep'
 alias ports='netstat -tulanp'
 alias pong='ping -c 5 ' # Ping limited
 alias tailf='tail -f'
+alias reload='source ~/.zshrc'
 
 # Git alias
 alias gdc='git diff --cached'
@@ -103,7 +108,7 @@ alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # é€’å½
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
-alias mobi-agent='ssh-add $HOME/.ssh/mobi_rsa' # ssh-agent zsh
+alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv
@@ -134,7 +139,3 @@ zshrc_local=$HOME/.zshrc_local
 if [ -f $zshrc_local ]; then
     source $zshrc_local
 fi
-
-function pvim {
-    PYTHONPATH=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"` /usr/bin/vim "$@"
-}
