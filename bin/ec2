@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+ssh -i ${WORKER_SSH_KEY_PATH} ec2-user@${1}

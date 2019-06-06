@@ -36,6 +36,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Deoplete Plugins
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+Plug 'fszymanski/deoplete-emoji'
+Plug 'ujihisa/neco-look'
 
 Plug 'davidhalter/jedi-vim'  " Usage goto jump
 " Snippet support (C-j)
@@ -119,6 +121,7 @@ Plug 'easymotion/vim-easymotion'
 " Wrapper of some vim/neovim's :terminal functions.
 Plug 'kassio/neoterm'
 "Plug 'myusuf3/numbers.vim'
+Plug 'junegunn/goyo.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -654,14 +657,16 @@ if exists('&signcolumn')
 else
   let g:gitgutter_sign_column_always = 1
 endif
-let g:gitgutter_async=1
-let g:gitgutter_map_keys=0
-let g:gitgutter_max_signs=9999
+
 let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='~'
 let g:gitgutter_sign_removed='-'
 let g:gitgutter_sign_modified_removed='~'
 let g:gitgutter_sign_removed_first_line='-'
+
+let g:gitgutter_async=1
+let g:gitgutter_map_keys=0
+let g:gitgutter_max_signs=9999
 "}}}
 
 " -----------------------------------------------------
@@ -827,6 +832,7 @@ let g:deoplete#sources={}
 let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+call deoplete#custom#source('emoji', 'filetypes', ['rst', 'gitcommit', 'markdown'])
 
 let g:float_preview#docked=0
 "}}}

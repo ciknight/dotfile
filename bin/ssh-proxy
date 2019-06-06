@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+LOCAL_PORT=8888
+REMOTE_PORT=$1
+REMOTE_SERVER=$2
+
+ssh -nNT -L $LOCAL_PORT:localhost:$1 $2
