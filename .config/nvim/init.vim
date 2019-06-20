@@ -288,6 +288,7 @@ set nofoldenable                            " 启动 vim 时关闭折叠代码
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.9 Omni completion settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
+setlocal omnifunc=                          " disable omnifunc
 set completeopt-=preview                    " Don't show preview scratch buffers
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 set laststatus=2
@@ -455,6 +456,7 @@ inoremap <C-u> <ESC>mzgUiw`za
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <C-c> <C-[>
+inoremap <Esc> <C-[>
 
 " Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
 map <TAB> %
@@ -823,6 +825,7 @@ let g:deoplete#sources#jedi#show_docstring=1
 let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#pointer=1
+let g:deoplete#sources#go#use_cache=1
 "let g:deoplete#sources#go#auto_goos=1
 "let g:deoplete#sources#go#builtin_objects=1
 "let g:deoplete#sources#go#source_importer=1
@@ -933,11 +936,13 @@ let g:NERDToggleCheckAllLines=1
 " -----------------------------------------------------
 " 4.13 jedi-vim {{{
 " -----------------------------------------------------
+let g:jedi#auto_initialization=1
 let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled=0
 let g:jedi#smart_auto_mappings=0
 let g:jedi#popup_on_dot=0
 let g:jedi#auto_close_doc=1
+let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi-vim/issues/744
 "}}}
 
 "}}}
