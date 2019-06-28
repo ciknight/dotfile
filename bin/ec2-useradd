@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ $# != 3 ]; then
+    echo ./ec2-useradd ip name pkey_file_path
+    exit 1
+fi
+
 KEY=$(cat ${3})
 ssh -t -i ${WORKER_SSH_KEY_PATH} ec2-user@${1} \
     "sudo su -c 'useradd -m -N -G wheel ${2} && su - ${2} -c \"mkdir ~/.ssh && chmod 700 ~/.ssh && touch ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && echo ${KEY} > ~/.ssh/authorized_keys\"'"
