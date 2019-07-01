@@ -457,6 +457,8 @@ inoremap <C-u> <ESC>mzgUiw`za
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <C-c> <C-[>
 inoremap <Esc> <C-[>
+nnoremap <C-c> <C-[>
+nnoremap <Esc> <C-[>
 
 " Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
 map <TAB> %

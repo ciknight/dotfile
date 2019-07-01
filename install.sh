@@ -132,7 +132,7 @@ ln -s $PWD_DIR/.zshrc ~/.zshrc
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p $PYTHON3 ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install pynvim flake8 flake8-isort flake8-bugbear jedi yapf isort mypy
+    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy
 fi
 #pip install mycli ipython ipdb cheat forex-python
 
