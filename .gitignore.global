@@ -114,3 +114,10 @@ venv/
 
 # VSCode
 .vscode
+
+# SSH
+.ssh/
+ssh/
+*.pub
+id_rsa
+*.pem

@@ -1,0 +1,60 @@
+#----- Python  -----
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+*.pyc
+__pycache__/
+.mypy_cache
+.Python
+wheels/
+*.egg-info/
+*.egg
+
+# pyenv virtualenv
+.python-version
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Scrapy stuff:
+.scrapy
+
+# ----- JavaScript -----
+node_modules/
+package-lock.json
+
+# Java-gen
+app/src/main/java-gen/
+
+# Dir
+env/
+.env/
+.venv/
+venv/
+.cache/
+
+# Max OS
+.DS_Store
+
+# Ansible
+*.retry
+
+# IntelliJ IDEA
+.idea/
+
+# VSCode
+.vscode
+
+# Git
+.git/
+
+# Vim
+bundle/
+plugged/

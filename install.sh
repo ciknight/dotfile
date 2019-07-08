@@ -146,12 +146,16 @@ if [ -f ~/.vim ] ; then
 fi
 ln -s $PWD_DIR/.vim ~/
 
+
 # zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 if [ -f ~/.zshrc ] ; then
     mv ~/.zshrc ~/.zsh.old
 fi
 ln -s $PWD_DIR/.zshrc ~/
+
+# zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 source ~/.zshrc
 
 # tmux
@@ -181,8 +185,11 @@ ln -s $PWD_DIR/.isort.cfg ~/
 # mypy config
 ln -s $PWD_DIR/.mypy.ini ~/
 
-# mypy config
+# ack config
 ln -s $PWD_DIR/.ackrc ~/
+
+# ag config
+ln -s $PWD_DIR/.agignore ~/
 
 # .config
 if [ -d ~/.config ] ; then
