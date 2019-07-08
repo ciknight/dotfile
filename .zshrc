@@ -6,10 +6,11 @@ ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
 export SYSTEM=`uname -s`
 # Add wisely, as too many plugins slow down shell startup.
 if [ $SYSTEM = "Darwin" ] ; then
-    plugins=(git brew)
+    plugins=(git brew zsh-autosuggestions)
 elif [ $SYSTEM = "Linux" ] ; then
-    plugins=(git systemd)
+    plugins=(git systemd zsh-autosuggestions)
 fi
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -29,8 +30,8 @@ export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 # Lang
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
-export LANG=zh_CN.UTF-8  # You may need to manually set your language environment
-export LC_ALL=zh_CN.UTF-8  # Fix pipenv LC
+export LANG=en_US.UTF-8  # You may need to manually set your language environment, include remote server
+export LC_ALL=en_US.UTF-8  # Fix pipenv LC
 export LESSCHARSET=utf-8  # Fix linux git diff and log chinese
 
 # Pyenv
@@ -57,12 +58,12 @@ if hash pipenv 2>/dev/null; then
 fi
 
 # Fzf
-#export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_COMMAND='ag -a -i -U -g ""'
+export FZF_DEFAULT_COMMAND='ag -i -U --hidden -g ""'
 export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --border --prompt '>>>' \
     --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
     --header 'A-j/k: preview down/up, C-v: open in nvim, C-y: copy, ?: toggle preview' \
     --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
+# ctrl-t:fzf-file-widget
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # History
