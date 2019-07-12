@@ -4,6 +4,15 @@ if hash python 2>/dev/null; then
     PORT=$1
     [[ $PATH =~ "python2" ]] && python -m SimpleHTTPServer $PORT
     [[ $PATH =~ "python3" ]] && python -m http.server $PORT
+    if [[ $PATH =~ "pyenv" ]]; then
+        VERSION=$(python -c "import sys; print(sys.version_info.major)")
+        if [[ $VERSION == 3 ]]; then
+            python -m http.server $PORT
+        fi
+        if [[ $VERSION == 2 ]]; then
+            python -m SimpleHTTPServer $PORT
+        fi
+    fi
 else
     echo 'please install python!'
 fi

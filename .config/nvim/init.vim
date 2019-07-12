@@ -943,6 +943,7 @@ let g:jedi#auto_vim_configuration=0
 let g:jedi#completions_enabled=0
 let g:jedi#smart_auto_mappings=0
 let g:jedi#popup_on_dot=0
+let g:jedi#popup_select_first=0
 let g:jedi#auto_close_doc=1
 let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi-vim/issues/744
 "}}}
