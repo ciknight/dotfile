@@ -24,7 +24,7 @@ if [ $SYSTEM = "Darwin" ]; then
     brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
-    brew install aria2 cloc tig jq wget fd
+    brew install aria2 cloc tig jq wget
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
 
@@ -40,7 +40,7 @@ elif [ $SYSTEM = "Linux" ]; then
         apt update
         apt install -y git htop vim zsh tmux neovim
         apt install -y gcc python3 python-dev curl tig
-        apt install -y ctags cmake silversearcher-ag jq ack-grep fd-find
+        apt install -y ctags cmake silversearcher-ag jq ack-grep
     elif which yum 2>&1 > /dev/null; then
         #yum -y install https://centos7.iuscommunity.org/ius-release.rpm
         yum update
@@ -107,10 +107,10 @@ else
     mkdir $(pyenv root)/cache
 fi
 
-# z jump around
-if hash z 2>/dev/null; then
-    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
-fi
+# z jump around, use zsh plugin
+#if hash z 2>/dev/null; then
+#    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
+#fi
 
 # fzf
 if hash fzf 2>/dev/null; then
@@ -126,13 +126,14 @@ if [ ! -f ~/.zshrc ] ; then
     mv ~/.zshrc ~/.zsh.old
 fi
 ln -s $PWD_DIR/.zshrc ~/.zshrc
+ln -s $PWD/.zshenv ~/.zshenv
 #source ~/.zshrc
 
 # create neovim python env
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p $PYTHON3 ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy
+    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb
 fi
 #pip install mycli ipython ipdb cheat forex-python
 
