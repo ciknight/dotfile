@@ -40,9 +40,9 @@ Plug 'fszymanski/deoplete-emoji'
 Plug 'ujihisa/neco-look'
 
 Plug 'davidhalter/jedi-vim'  " Usage goto jump
-" Snippet support (C-j)
+" Snippet engine (C-j)
 Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
+" Snippets are separated from the engine.
 Plug 'honza/vim-snippets'
 " Automatically pair stuff
 Plug 'jiangmiao/auto-pairs'
@@ -651,6 +651,8 @@ let g:NERDTreeQuitOnOpen=1
 " 4.2 Ultisnips settings {{{
 " -----------------------------------------------------
 let g:UltiSnipsUsePythonVersion=3
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 "}}}
 
 " -----------------------------------------------------
@@ -960,7 +962,7 @@ let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi
 " -----------------------------------------------------
 " Disable built-in cx-ck to be able to go backward
 "inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger="<C-j>"  " do not use tab
+let g:UltiSnipsExpandTrigger="<C-j>"  " do not use tab, if you use deoplete and ycm
 let g:UltiSnipsListSnippets="<C-s>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
