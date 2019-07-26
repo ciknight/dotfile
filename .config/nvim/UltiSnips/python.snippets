@@ -15,3 +15,36 @@ class RequestsTestSuite(unittest.TestCase):
         """Teardown."""
         pass
 endsnippet
+
+snippet docdef "python def docstring"
+"""Summary of def here.
+
+Description.
+
+Args:
+    arg (str): The arg is used for...
+    *args: The variable arguments are used for...
+    **kwargs: The keyword arguments are used for...
+
+Returns:
+    Description.
+    example:
+         (1, 2, 3)
+
+Raises:
+    Error: An error occurred.
+"""
+endsnippet
+
+snippet doccls "python class docstring"
+"""Summary of class here.
+
+Longer class information....
+Args:
+    arg (str): The arg is used for...
+    *args: The variable arguments are used for...
+    **kwargs: The keyword arguments are used for...
+Attributes:
+    arg (str): This is where we store arg,
+"""
+endsnippet

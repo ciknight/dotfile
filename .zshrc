@@ -126,6 +126,7 @@ alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv
 alias vo='vi -o$#'
+alias clntrash='\rm -rf ~/.trash/*'
 
 # Docker alias
 alias dorkrmall='docker ps --all | tail -n 8 | awk -F ' ' '{print $1}' | xargs docker rm'
