@@ -17,10 +17,18 @@ if [ $SYSTEM = "Darwin" ] ; then
     # HomeBrew mirror, https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
 
     # JAVA_HOME
-    if hash jre 2>/dev/null; then
+    if command -v java > /dev/null 2>&1; then
+        # use java jdk, do not use openjdk
         export JAVA_HOME=$(/usr/libexec/java_home)
         export PATH=$PATH:$JAVA_HOME/bin
+
+        # Android_SDK_HOME
+        if [ -d "/opt/sdk" ]; then
+            export ANDROID_SDK_HOME=/opt/sdk
+            export PATH=$PATH:$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools/bin
+        fi
     fi
+
 fi
 
 # Path
