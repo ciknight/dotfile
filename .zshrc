@@ -15,6 +15,7 @@ source $ZSH/oh-my-zsh.sh
 
 if [ $SYSTEM = "Darwin" ] ; then
     # HomeBrew mirror, https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
+    export HOMEBREW_NO_AUTO_UPDATE=1
 
     # JAVA_HOME
     if command -v java > /dev/null 2>&1; then
@@ -123,6 +124,7 @@ alias tn='tmux -2 new -s'
 alias ta='tmux -2 attach -t' # -2 Force tmux to assume the terminal supports 256 colours.
 alias rm=safe_rm
 alias cp=smart_cp
+alias sed=super_sed
 alias weather='curl wttr.in/~上海'
 alias myip='curl myip.ipip.net' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc

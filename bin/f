@@ -6,8 +6,8 @@ else
     # -I ignore binary
     # -i ignore case
     grep -FIrni --color \
-		--exclude-dir=".git" \
-		--exclude-dir=".mypy_cache" \
-		--exclude-dir="__pycache__" \
-		--exclude-dir="venv" "$*" *
+        --exclude-dir=".git" \
+        --exclude-dir=".mypy_cache" \
+        --exclude-dir="__pycache__" \
+        --exclude-dir="venv" "$*" *
 fi
