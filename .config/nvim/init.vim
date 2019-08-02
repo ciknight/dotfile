@@ -81,6 +81,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 " Nerdtree git extend
 Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'ryanoasis/vim-devicons'  " Icon
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
