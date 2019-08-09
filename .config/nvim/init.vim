@@ -342,6 +342,9 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.14 Ident settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
+" indentLine will overwrite your "concealcursor" and "conceallevel" with default value
+let g:indentLine_concealcursor='inc'
+let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
