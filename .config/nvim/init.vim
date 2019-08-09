@@ -36,8 +36,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Deoplete Plugins
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plug 'fszymanski/deoplete-emoji'
-Plug 'ujihisa/neco-look'
 
 Plug 'davidhalter/jedi-vim'  " Usage goto jump
 " Snippet engine (C-j)
@@ -67,8 +65,6 @@ Plug 'ciknight/setbreakpoint'
 Plug 'ciknight/python-venv'
 " Python sort import
 Plug 'fisadev/vim-isort'
-" Solidity syntax
-Plug 'tomlion/vim-solidity'
 " Kotlin
 Plug 'udalov/kotlin-vim'
 "}}}
@@ -173,7 +169,9 @@ scriptencoding utf-8                        " Set utf-8 as default script encodi
 set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
-"set textwidth=100                          " Text width is 100 characters
+"set textwidth=100                          " Text width is 100 characters, Auto wrap
+set cc=100                                  " hit 100 characters
+"set formatoptions=tcqmM                    " format ggvg=
 set cmdheight=1                             " Command line height
 set pumheight=10                            " Completion window max size
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
@@ -187,7 +185,7 @@ set nojoinspaces                            " No extra space when joining a line
 set scrolloff=5                             " Scroll when closing to top or bottom of the screen
 set updatetime=1000                         " Update time used to create swap file or other things
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
-set synmaxcol=200                           " Don't try to syntax highlight minified files
+set synmaxcol=200                           " Don't try to syntax highlight minified files, highlight max column
 set expandtab                               " Tab转换为空格
 set smarttab
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
@@ -840,7 +838,6 @@ let g:deoplete#sources={}
 let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
-call deoplete#custom#source('emoji', 'filetypes', ['rst', 'gitcommit', 'markdown'])
 
 let g:float_preview#docked=0
 "}}}
