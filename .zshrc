@@ -118,6 +118,7 @@ alias reload='source ~/.zshrc'
 
 # Git alias
 alias gdc='git diff --cached'
+alias gll="git stash && git pull origin $(git_current_branch) && git stash pop"
 
 # Other alias
 alias tn='tmux -2 new -s'
