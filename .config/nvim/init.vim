@@ -33,11 +33,14 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
 " Deoplete Plugins
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 
-Plug 'davidhalter/jedi-vim'  " Usage goto jump
+Plug 'davidhalter/jedi-vim'  " Only Usage goto jump
 " Snippet engine (C-j)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine.
@@ -46,6 +49,7 @@ Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 if has('nvim-0.4.0')
   Plug 'ncm2/float-preview.nvim'
+  "Plug 'wsdjeg/notifications.vim' " float windows notification, Use Echo, Echoerr
 endif
 "}}}
 
@@ -111,6 +115,7 @@ Plug 'majutsushi/tagbar'
 " Auto filejump
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+"Plug 'fszymanski/fzf-gitignore'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
@@ -172,7 +177,7 @@ set showcmd                                 " Show commands as you type them
 "set textwidth=100                          " Text width is 100 characters, Auto wrap
 set cc=100                                  " hit 100 characters
 "set formatoptions=tcqmM                    " format ggvg=
-set cmdheight=1                             " Command line height
+set cmdheight=1                             " Command line height, Better display for messages
 set pumheight=10                            " Completion window max size
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
@@ -183,7 +188,7 @@ set nostartofline                           " Prevent cursor from moving to begi
 set virtualedit=block                       " To be able to select past EOL in visual block mode
 set nojoinspaces                            " No extra space when joining a line which ends with . ? !
 set scrolloff=5                             " Scroll when closing to top or bottom of the screen
-set updatetime=1000                         " Update time used to create swap file or other things
+set updatetime=300                          " Update time used to create swap file or other things, You will have bad experience for diagnostic messages when it's default 4000.
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
 set synmaxcol=200                           " Don't try to syntax highlight minified files, highlight max column
 set expandtab                               " Tab转换为空格
@@ -197,6 +202,8 @@ set shiftwidth=4                            " 设置格式化时制表符占用�
 set tabpagemax=15                           " Only show 15 tabs
 set tabstop=4                               " 每四行一个缩进
 set shiftround
+set shortmess+=c                            " don't give |ins-completion-menu| messages.
+set signcolumn=yes                          " always show signcolumns
 
 set number                                  " Line numbers on
 set numberwidth=1
@@ -289,6 +296,7 @@ set nofoldenable                            " 启动 vim 时关闭折叠代码
 " ---------------------------------------------------------------------------------------------------------------------
 setlocal omnifunc=                          " disable omnifunc
 set completeopt-=preview                    " Don't show preview scratch buffers
+"autocmd FileType python setlocal completeopt-=preview
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 set laststatus=2
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
@@ -841,8 +849,19 @@ let g:deoplete#sources={}
 let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+"}}}
 
+" -----------------------------------------------------
+" 4.6.1 float-preview settings {{{
+" -----------------------------------------------------
 let g:float_preview#docked=0
+function! DisableExtras()
+  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+endfunction
+
+autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
@@ -910,8 +929,6 @@ let g:ale_sign_warning='•'
 let g:ale_echo_msg_error_str='E'
 let g:ale_echo_msg_warning_str='W'
 let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
-
-set statusline=%{utils#LinterStatus()}
 "}}}
 
 " -----------------------------------------------------
@@ -943,6 +960,7 @@ let g:NERDToggleCheckAllLines=1
 " -----------------------------------------------------
 let g:jedi#auto_initialization=1
 let g:jedi#auto_vim_configuration=0
+let g:jedi#show_call_signatures="0"
 let g:jedi#completions_enabled=0
 let g:jedi#smart_auto_mappings=0
 let g:jedi#popup_on_dot=0
@@ -963,7 +981,7 @@ let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi
 " -----------------------------------------------------
 " Disable built-in cx-ck to be able to go backward
 "inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger="<C-j>"  " do not use tab, if you use deoplete and ycm
+let g:UltiSnipsExpandTrigger="<C-h>"  " do not use tab, if you use deoplete and ycm
 let g:UltiSnipsListSnippets="<C-s>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
