@@ -260,7 +260,7 @@ set hlsearch                                " 检索时高亮显示匹配项
 " ---------------------------------------------------------------------------------------------------------------------
 if has('persistent_undo')
   set undofile
-  set undodir=~/.config/nvim/tmp/undo//
+  set undodir=~/.local/share/nvim/tmp/undo//
 endif
 "}}}
 
@@ -1082,6 +1082,7 @@ let g:jedi#rename_command="<leader>gr"
 " 5.10 FZF {{{
 " -----------------------------------------------------
 nnoremap <Leader>p :FZF<Cr>
+nnoremap <Leader>a :Ag<Cr>
 "}}}
 
 " -----------------------------------------------------

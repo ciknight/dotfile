@@ -20,7 +20,7 @@ if [ $SYSTEM = "Darwin" ]; then
     fi
     # vim tagbar need ctags
     brew install zsh git htop tmux neovim
-    brew install python3 golang npm
+    brew install python3 golang nodejs npm yarn
     brew install ctags ncdu
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
