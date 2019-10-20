@@ -5,7 +5,7 @@ DATE=`date +%s`
 until [ $# -eq 0 ]
 do
     file=$(echo $1|sed 's/ /?/g')
-    if [ -d ~/.trash/$file ] || [ -f ~/.trash/$file ]; then
+    if [ -d ~/.trash/$file ] || [ -f ~/.trash/$file ] || [ -L ~/.trash/$file ] ; then
         mv -v $file ~/.trash/$file.$DATE
     else
         mv -v $file ~/.trash/

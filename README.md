@@ -32,4 +32,10 @@ cd /usr/local/bin/
 rm flake8 yapf mypy pyflake isort
 ```
 
+### Upgrade neovim virtualenv
+
+```shell
+pip freeze | awk -F '=' '{print $1}' | xargs pip install --upgrade
+```
+
 ### TODO

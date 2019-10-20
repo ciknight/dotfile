@@ -26,6 +26,8 @@ call plug#begin('~/.config/nvim/plugged')
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " 1.1 Plugin list
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+filetype plugin indent off
+syntax off
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Language agnostic plugins {{{
@@ -33,16 +35,24 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'sebastianmarkow/deoplete-rust', { 'do': 'cargo install racer' }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'  " Usage goto jump
-" Snippet support (C-j)
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+" Deoplete Plugins
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+
+Plug 'davidhalter/jedi-vim'  " Only Usage goto jump
+" Snippet engine (C-j)
 Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
+" Snippets are separated from the engine.
 Plug 'honza/vim-snippets'
 " Automatically pair stuff
 Plug 'jiangmiao/auto-pairs'
+if has('nvim-0.4.0')
+  Plug 'ncm2/float-preview.nvim'
+  "Plug 'wsdjeg/notifications.vim' " float windows notification, Use Echo, Echoerr
+endif
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -52,19 +62,15 @@ Plug 'jiangmiao/auto-pairs'
 " Syntax check
 Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
 " Golang syntax
-Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
 " Python automate format
-Plug 'ciknight/vim-yapf'
+Plug 'mindriot101/vim-yapf'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
 " Python auto set venv
 Plug 'ciknight/python-venv'
 " Python sort import
 Plug 'fisadev/vim-isort'
-" Solidity syntax
-Plug 'tomlion/vim-solidity'
-" Rust
-Plug 'rust-lang/rust.vim'
 " Kotlin
 Plug 'udalov/kotlin-vim'
 "}}}
@@ -77,6 +83,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 " Nerdtree git extend
 Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'ryanoasis/vim-devicons'  " Icon
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -110,6 +117,7 @@ Plug 'majutsushi/tagbar'
 " Auto filejump
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+"Plug 'fszymanski/fzf-gitignore'
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
@@ -117,6 +125,7 @@ Plug 'easymotion/vim-easymotion'
 " Wrapper of some vim/neovim's :terminal functions.
 Plug 'kassio/neoterm'
 "Plug 'myusuf3/numbers.vim'
+Plug 'junegunn/goyo.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -145,12 +154,15 @@ Plug 'icymind/NeoSolarized'
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
 " Did you mean file open
-Plug 'EinfachToll/DidYouMean'  " TODO Brekon
+Plug 'EinfachToll/DidYouMean'
 "}}}
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 " 1.2 End of plugin declaration
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+filetype plugin indent on
+syntax on
+
 call plug#end()
 "}}}
 
@@ -167,8 +179,10 @@ scriptencoding utf-8                        " Set utf-8 as default script encodi
 set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
-"set textwidth=100                          " Text width is 100 characters
-set cmdheight=1                             " Command line height
+"set textwidth=100                          " Text width is 100 characters, Auto wrap
+set cc=100                                  " hit 100 characters
+"set formatoptions=tcqmM                    " format ggvg=
+set cmdheight=1                             " Command line height, Better display for messages
 set pumheight=10                            " Completion window max size
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
@@ -179,9 +193,9 @@ set nostartofline                           " Prevent cursor from moving to begi
 set virtualedit=block                       " To be able to select past EOL in visual block mode
 set nojoinspaces                            " No extra space when joining a line which ends with . ? !
 set scrolloff=5                             " Scroll when closing to top or bottom of the screen
-set updatetime=1000                         " Update time used to create swap file or other things
+set updatetime=300                          " Update time used to create swap file or other things, You will have bad experience for diagnostic messages when it's default 4000.
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
-set synmaxcol=200                           " Don't try to syntax highlight minified files
+set synmaxcol=200                           " Don't try to syntax highlight minified files, highlight max column
 set expandtab                               " Tab转换为空格
 set smarttab
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
@@ -193,6 +207,8 @@ set shiftwidth=4                            " 设置格式化时制表符占用�
 set tabpagemax=15                           " Only show 15 tabs
 set tabstop=4                               " 每四行一个缩进
 set shiftround
+set shortmess+=c                            " don't give |ins-completion-menu| messages.
+set signcolumn=yes                          " always show signcolumns
 
 set number                                  " Line numbers on
 set numberwidth=1
@@ -249,7 +265,7 @@ set hlsearch                                " 检索时高亮显示匹配项
 " ---------------------------------------------------------------------------------------------------------------------
 if has('persistent_undo')
   set undofile
-  set undodir=~/.config/nvim/tmp/undo//
+  set undodir=~/.local/share/nvim/tmp/undo//
 endif
 "}}}
 
@@ -283,7 +299,9 @@ set nofoldenable                            " 启动 vim 时关闭折叠代码
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.9 Omni completion settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
+setlocal omnifunc=                          " disable omnifunc
 set completeopt-=preview                    " Don't show preview scratch buffers
+"autocmd FileType python setlocal completeopt-=preview
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 set laststatus=2
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
@@ -331,15 +349,19 @@ set confirm                                 " Need confrimation while exit
 set autowrite                               " Automatically :write before running commands
 set autoread                                " Set to auto read when a file is changed from the outside
 set autowriteall
-cmap w!! w !sudo tee > /dev/null %          " Allow saving file as sudo when forgot to start vim using sudo
+cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when forgot to start vim using sudo
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.14 Ident settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
+" indentLine will overwrite your "concealcursor" and "conceallevel" with default value
+let g:indentLine_concealcursor='inc'
+let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType markdown setlocal fo-=t wrap
 "}}}
 
 "}}}
@@ -447,7 +469,11 @@ nmap yw ye
 " Uppercase word in insert mode
 inoremap <C-u> <ESC>mzgUiw`za
 
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <C-c> <C-[>
+inoremap <Esc> <C-[>
+nnoremap <C-c> <C-[>
+nnoremap <Esc> <C-[>
 
 " Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
 map <TAB> %
@@ -640,6 +666,8 @@ let g:NERDTreeQuitOnOpen=1
 " 4.2 Ultisnips settings {{{
 " -----------------------------------------------------
 let g:UltiSnipsUsePythonVersion=3
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 "}}}
 
 " -----------------------------------------------------
@@ -650,14 +678,16 @@ if exists('&signcolumn')
 else
   let g:gitgutter_sign_column_always = 1
 endif
-let g:gitgutter_async=1
-let g:gitgutter_map_keys=0
-let g:gitgutter_max_signs=9999
+
 let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='~'
 let g:gitgutter_sign_removed='-'
 let g:gitgutter_sign_modified_removed='~'
 let g:gitgutter_sign_removed_first_line='-'
+
+let g:gitgutter_async=1
+let g:gitgutter_map_keys=0
+let g:gitgutter_max_signs=9999
 "}}}
 
 " -----------------------------------------------------
@@ -691,6 +721,38 @@ let g:airline_theme='minimalist' " molokai
 " -----------------------------------------------------
 " 4.4 FZF {{{
 " -----------------------------------------------------
+
+" Floating Windows function
+function! OpenFloatingWin()
+  let height = &lines - 3
+  let width = float2nr(&columns - (&columns * 2 / 10))
+  let col = float2nr((&columns - width) / 2)
+
+  " 设置浮动窗口打开的位置，大小等。
+  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': height * 0.3,
+        \ 'col': col + 30,
+        \ 'width': width * 2 / 3,
+        \ 'height': height / 2
+        \ }
+
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+
+  " 设置浮动窗口高亮
+  call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+  setlocal
+        \ buftype=nofile
+        \ nobuflisted
+        \ bufhidden=hide
+        \ nonumber
+        \ norelativenumber
+        \ signcolumn=no
+endfunction
+
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -705,6 +767,9 @@ let g:fzf_layout = { 'down': '~40%' }
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10split enew' }
+if has('nvim-0.4.0')
+  let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+endif
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
@@ -764,24 +829,44 @@ au Syntax * RainbowParenthesesLoadBraces
 " -----------------------------------------------------
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_smart_case=1
-let g:deoplete#enable_refresh_always=0
+let g:deoplete#enable_refresh_always=1
 let g:deoplete#file#enable_buffer_path=1
 
 let g:deoplete#sources#jedi#server_timeout=10
 let g:deoplete#sources#jedi#enable_cache=1
-let g:deoplete#sources#jedi#statement_length=60
+let g:deoplete#sources#jedi#statement_length=70
 let g:deoplete#sources#jedi#enable_typeinfo=1
 let g:deoplete#sources#jedi#show_docstring=1
+
 "let deoplete#sources#jedi#python_path=''  # jedi server python path
 "let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
 
-let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#pointer=1
+let g:deoplete#sources#go#use_cache=1
+"let g:deoplete#sources#go#auto_goos=1
+"let g:deoplete#sources#go#builtin_objects=1
+"let g:deoplete#sources#go#source_importer=1
+"let g:deoplete#sources#go#unimported_packages=1
 
 let g:deoplete#sources={}
-let g:deoplete#sources._       = ['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.python  = ['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.go  = ['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+"}}}
+
+" -----------------------------------------------------
+" 4.6.1 float-preview settings {{{
+" -----------------------------------------------------
+let g:float_preview#docked=0
+function! DisableExtras()
+  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+endfunction
+
+autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
@@ -810,10 +895,10 @@ let g:colorizer_nomap=1
 "}}}
 
 " -----------------------------------------------------
-" 4.10 Deoplete-tern settings {{{
+" 4.10 vim-go settings {{{
 " -----------------------------------------------------
-let g:tern_request_timeout=1
-let g:tern_show_signature_in_pum=1
+let g:go_autodetect_gopath=1
+let g:go_version_warning=1
 "}}}
 
 " -----------------------------------------------------
@@ -827,10 +912,13 @@ let g:ale_linters={
 \   'javascript' : ['eslint'],
 \}
 let g:ale_fixers = {
-\  'python': [
-\    'remove_trailing_lines',
-\    'isort',
-\    'yapf'
+\   '*': [
+\     'trim_whitespace',
+\     'remove_trailing_lines',
+\   ],
+\   'python': [
+\     'isort',
+\     'yapf'
 \   ]
 \}
 let g:ale_lint_on_text_changed='always'  " never,always
@@ -846,14 +934,12 @@ let g:ale_sign_warning='•'
 let g:ale_echo_msg_error_str='E'
 let g:ale_echo_msg_warning_str='W'
 let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
-
-set statusline=%{utils#LinterStatus()}
 "}}}
 
 " -----------------------------------------------------
 " 4.12 Yapf {{{
 " -----------------------------------------------------
-let g:yapf_style_conf=$HOME."/.config/yapf/style"
+let g:yapf_style=$HOME."/.config/yapf/style"
 "}}}
 
 " -----------------------------------------------------
@@ -877,10 +963,15 @@ let g:NERDToggleCheckAllLines=1
 " -----------------------------------------------------
 " 4.13 jedi-vim {{{
 " -----------------------------------------------------
+let g:jedi#auto_initialization=1
 let g:jedi#auto_vim_configuration=0
+let g:jedi#show_call_signatures="0"
 let g:jedi#completions_enabled=0
 let g:jedi#smart_auto_mappings=0
 let g:jedi#popup_on_dot=0
+let g:jedi#popup_select_first=0
+let g:jedi#auto_close_doc=1
+let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi-vim/issues/744
 "}}}
 
 "}}}
@@ -895,7 +986,7 @@ let g:jedi#popup_on_dot=0
 " -----------------------------------------------------
 " Disable built-in cx-ck to be able to go backward
 "inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger="<C-j>"  " do not use tab
+let g:UltiSnipsExpandTrigger="<C-h>"  " do not use tab, if you use deoplete and ycm
 let g:UltiSnipsListSnippets="<C-s>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
@@ -959,13 +1050,13 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "}}}
 
 " -----------------------------------------------------
-" 5.7 Tabularize -> [a]lign {{
+" 5.7 Tabularize -> [a]lign {{{
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
 "}}}
 
 " -----------------------------------------------------
-" 5.8 vim-multiple-cursors {{
+" 5.8 vim-multiple-cursors {{{
 " -----------------------------------------------------
 let g:multi_cursor_use_default_mapping=1
 
@@ -982,24 +1073,25 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 
 " -----------------------------------------------------
-" 5.9 jedi-vim {{
+" 5.9 jedi-vim {{{
 " -----------------------------------------------------
-let g:jedi#goto_command="<leader>gd"
-let g:jedi#goto_assignments_command="<leader>gg"
-let g:jedi#goto_definitions_command=""
+let g:jedi#goto_command="<leader>gg"
+let g:jedi#goto_assignments_command="<leader>ga"
+let g:jedi#goto_definitions_command="<leader>gd"
 let g:jedi#documentation_command="K"
-let g:jedi#usages_command="<leader>gn"
+let g:jedi#usages_command="<leader>gu"
 let g:jedi#rename_command="<leader>gr"
 "}}}
 
 " -----------------------------------------------------
-" 5.10 FZF {{
+" 5.10 FZF {{{
 " -----------------------------------------------------
 nnoremap <Leader>p :FZF<Cr>
+nnoremap <Leader>a :Ag<Cr>
 "}}}
 
 " -----------------------------------------------------
-" 5.11 easymotion {{
+" 5.11 easymotion {{{
 " -----------------------------------------------------
 map <Leader> <Plug>(easymotion-prefix)
 
@@ -1020,14 +1112,22 @@ nmap <Leader>f <Plug>(easymotion-overwin-w)
 "}}}
 
 " -----------------------------------------------------
-" 5.12 vim-miniyank {{
+" 5.12 vim-miniyank {{{
 " -----------------------------------------------------
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
 "}}}
 
+" -----------------------------------------------------
+" 5.13 vim-surround {{{
+" -----------------------------------------------------
+" ysiwb
+" yssb
+" dsb
+" csb
 "}}}
 
+"}}}
 
 " ======================================================================================================================
 " 6.0 Color and highlighting settings
@@ -1076,14 +1176,15 @@ augroup END
 
 " Turn spellcheck on for text files {{{
 augroup auto_spellcheck
-  autocmd BufNewFile,BufRead *.txt setlocal spell
+  autocmd BufNewFile,BufRead *.txt,*.md setlocal spell
 augroup END
 "}}}
 
 " Remove trailing whitespaces automatically before save {{{
-augroup strip_ws
-  autocmd BufWritePre * call utils#stripTrailingWhitespaces()
-augroup END
+" use ale
+"augroup strip_ws
+"  autocmd BufWritePre * call utils#stripTrailingWhitespaces()
+"augroup END
 "}}}
 
 " Resize splits when the window is resized {{{

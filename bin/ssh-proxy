@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ $# != 3 ]; then
+    echo ./ssh-proxy LOCAL_PORT REMOTE_PORT REMOTE_SERVER
+    exit 1
+fi
+
+LOCAL_PORT=$1
+REMOTE_PORT=$2
+REMOTE_SERVER=$3
+
+ssh -nNT -L $LOCAL_PORT:localhost:$REMOTE_PORT $REMOTE_SERVER
