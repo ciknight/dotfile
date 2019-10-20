@@ -13,20 +13,33 @@ echo 'OS: ' $SYSTEM
 if [ $SYSTEM = "Darwin" ]; then
     # disable command + q
     if hash brew 2> /dev/null; then
-    echo 'Already Install homebrew'
+        echo 'Already install homebrew'
     else
         echo 'Install homebrew...'
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+    brew install zsh git htop tmux
+
+    brew install golang nodejs npm yarn
     # vim tagbar need ctags
-    brew install zsh git htop tmux neovim
-    brew install python3 golang nodejs npm yarn
     brew install ctags ncdu
+
     # ack, ag, pt or rg, support ctrlsf
     brew install ack the_silver_searcher
-    brew install aria2 cloc tig jq wget
+    brew install cloc tig jq wget
+
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
+
+    # Install neovim
+    if hash nvim 2> /dev/null; then
+        echo 'Already install neovim'
+    else
+        wget -O $PWD_DIR/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.2/nvim-macos.tar.gz
+        tar xzvf $PWD_DIR/opt/nvim-macos.tar.gz -C $PWD_DIR/opt/
+        echo 'Input passwd, link neovim'
+        sudo ln -s $PWD_DIR/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
+    fi
 
     # brew cask install java
 
@@ -62,25 +75,13 @@ else
 fi
 
 PYTHON=`which python`
-PYTHON3=`which python3`
 
 if [ ! -d ~/workspace ]; then
     # make workspace
     mkdir ~/workspace
     # make go workspace
-    mkdir -p $HOME/go/{bin,pkg,src}
+    mkdir -p $HOME/workspace/go/{bin,pkg,src}
 fi
-
-# home bin
-if [ ! -d ~/workspace ]; then
-    ln -s $PWD_DIR/bin ~/
-fi
-
-# ipython
-if [ -d ~/.ipython ]; then
-    mv ~/.ipython ~/.ipyton.old
-fi
-ln -s $PWD_DIR/.ipython ~/
 
 # pip
 if [ -d ~/.pip ] ; then
@@ -88,76 +89,58 @@ if [ -d ~/.pip ] ; then
 fi
 ln -s $PWD_DIR/.pip ~/
 
-if [ ! -f /tmp/get-pip.py ] ; then
-    wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && $PYTHON /tmp/get-pip.py && $PYTHON3 install /tmp/get-pip.py
+if [ ! -f $PWD_DIR/opt/get-pip.py ] ; then
+    echo 'Input passwd, install pip'
+    wget https://bootstrap.pypa.io/get-pip.py -O $PWD_DIR/opt/get-pip.py && sudo $PYTHON $PWD_DIR/opt/get-pip.py
+    # python util
+    sudo pip install virtualenv pipenv
 fi
-
-# system python util
-\pip install virtualenv pipenv
 
 # pyenv
 if hash pyenv 2>/dev/null; then
     echo 'Already install pyenv'
 else
     if [ -d ~/.pyenv ] ; then
-        mv ~/.pyenv~/.pyenv.old
+        mv ~/.pyenv ~/.pyenv.old
     fi
     # pyenv, https://github.com/pyenv/pyenv-installer.git
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
     mkdir $(pyenv root)/cache
+    # enable pyenv
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
+    eval "$(pyenv init -)"
+    # Install python3.7
+    pyenv install 3.7.4
+    pyenv global 3.7.4
 fi
-
-# z jump around, use zsh plugin
-#if hash z 2>/dev/null; then
-#    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
-#fi
 
 # fzf
 if hash fzf 2>/dev/null; then
+    echo 'Already install fzf'
+else
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 fi
 
-# zsh
-if [ ! -d ~/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-if [ ! -f ~/.zshrc ] ; then
-    mv ~/.zshrc ~/.zsh.old
-fi
-ln -s $PWD_DIR/.zshrc ~/.zshrc
-ln -s $PWD/.zshenv ~/.zshenv
-#source ~/.zshrc
-
 # create neovim python env
 if [ ! -d ~/workspace/neovim3 ] ; then
-    virtualenv -p $PYTHON3 ~/workspace/neovim3
+    virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
     pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb
 fi
 #pip install mycli ipython ipdb cheat forex-python
 
 # vim
-if [ -f ~/.vimrc ] ; then
-    mv ~/.vimrc ~/.vimrc.old
-fi
-ln -s $PWD_DIR/.vimrc ~/
-if [ -f ~/.vim ] ; then
-    mv ~/.vim ~/.vimrc.old
-fi
-ln -s $PWD_DIR/.vim ~/
-
-
-# zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-if [ -f ~/.zshrc ] ; then
-    mv ~/.zshrc ~/.zsh.old
-fi
-ln -s $PWD_DIR/.zshrc ~/
-
-# zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-source ~/.zshrc
+#if [ -f ~/.vimrc ] ; then
+#    mv ~/.vimrc ~/.vimrc.old
+#fi
+#ln -s $PWD_DIR/.vimrc ~/
+#if [ -f ~/.vim ] ; then
+#    mv ~/.vim ~/.vimrc.old
+#fi
+#ln -s $PWD_DIR/.vim ~/
 
 # tmux
 if [ ! -d ~/.tmux/plugins/tpm ] ; then
@@ -180,7 +163,21 @@ ln -s $PWD_DIR/.npmrc ~/
 # conda config
 ln -s $PWD_DIR/.condarc ~/
 
+# home bin
+if [ ! -d ~/bin ]; then
+    ln -s $PWD_DIR/bin ~/
+fi
+
+# ipython
+if [ -d ~/.ipython ]; then
+    mv ~/.ipython ~/.ipython.old
+fi
+ln -s $PWD_DIR/.ipython ~/
+
 # isort config
+if [ -d ~/.isort.cfg ]; then
+    mv ~/.isort.cfg ~/.isort.cfg.old
+fi
 ln -s $PWD_DIR/.isort.cfg ~/
 
 # mypy config
@@ -201,3 +198,22 @@ ln -s $PWD_DIR/.config ~/
 # git config
 ln -s $PWD_DIR/.gitconfig ~/
 ln -s $PWD_DIR/.gitignore.global ~/
+
+# zsh
+if [ ! -d ~/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+if [ ! -f ~/.zshrc ] ; then
+    mv ~/.zshrc ~/.zsh.old
+fi
+ln -s $PWD_DIR/.zshrc ~/.zshrc
+ln -s $PWD/.zshenv ~/.zshenv
+
+# z jump around, use zsh plugin
+#if hash z 2>/dev/null; then
+#    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
+#fi
+
+# zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+source ~/.zshrc
