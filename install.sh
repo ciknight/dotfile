@@ -66,7 +66,10 @@ elif [ $SYSTEM = "Linux" ]; then
         yum install -y ctags python-devel curl tig
         yum install -y cmake jq ack-grep the_silver_searcher
         yum install -y fd-find
+        curl -sL install-node.now.sh/lts | bash
+        curl -o- -L https://yarnpkg.com/install.sh | bash
     else
+        echo 'Unsupport Linux System'
         exit 0
     fi
 else
@@ -128,7 +131,7 @@ fi
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb
+    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb pylint
 fi
 #pip install mycli ipython ipdb cheat forex-python
 

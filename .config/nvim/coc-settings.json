@@ -1,1 +1,12 @@
-{}
+{
+  "coc.preferences.rootPatterns": [".vim-coc", ".git",".vim", ".vscode"],
+  "coc.preferences.jumpCommand": "drop",
+  "python.jediEnabled": true,
+  "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/jedi",
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "~/workspace/neovim3/bin/yapf",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "~/workspace/neovim3/bin/flake8"
+}

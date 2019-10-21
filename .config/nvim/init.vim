@@ -34,9 +34,9 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " Deoplete Plugins
 Plug 'deoplete-plugins/deoplete-jedi'
@@ -60,7 +60,7 @@ endif
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Syntax check
-Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
+"Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
 " Golang syntax
 Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
 " Python automate format
@@ -322,6 +322,7 @@ if has('nvim')
   let g:python_host_skip_check=1                                   " Skip python 2 host check
   let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program, using virtualenv
   set inccommand=nosplit                                           " Live preview of substitutes and other similar commands
+  set pyxversion=3
 endif
 "}}}
 
