@@ -60,7 +60,7 @@ endif
 " ---------------------------------------------------------------------------------------------------------------------
 
 " Syntax check
-"Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
+"Plug 'w0rp/ale'
 " Golang syntax
 Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
 " Python automate format
@@ -718,7 +718,12 @@ endif
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
 
-set statusline^=%{coc#status()}
+let airline#extensions#coc#error_symbol = 'E:'
+let g:airline#extensions#coc#enabled = 1
+let airline#extensions#coc#warning_symbol = 'W:'
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
 "}}}
 
 " -----------------------------------------------------

@@ -1,7 +1,12 @@
 {
   "coc.preferences.rootPatterns": [".vim-coc", ".git",".vim", ".vscode"],
   "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.formatOnSaveFiletypes": ["python"],
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "diagnostic.displayByAle": false,
+  "suggest.snippetIndicator": "►",
+  "suggest.autoTrigger": "trigger",
+  "python.autoComplete.addBrackets": true,
   "python.jediEnabled": true,
   "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/",
   "python.formatting.provider": "yapf",
