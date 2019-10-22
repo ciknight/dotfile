@@ -717,6 +717,8 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
+
+set statusline^=%{coc#status()}
 "}}}
 
 " -----------------------------------------------------
