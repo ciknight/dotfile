@@ -27,3 +27,5 @@
 ## Intellij project files (old=fileformat).
 --ignore-file=match:.*.(ipr|iml)
 --ignore-dir=.idea/
+
+--ignore-dir=undo/

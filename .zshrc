@@ -33,10 +33,17 @@ if [ $SYSTEM = "Darwin" ] ; then
 fi
 
 # Path
+if [ -z $ORIGIN_PATH ]; then
+    ORIGIN_PATH=$PATH
+else
+    PATH=$ORIGIN_PATH
+fi
+
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 # Fix Neovim mypy flake8 yapf isort bin path
-export PATH="$HOME/bin:$PATH:$HOME/workspace/neovim3/bin"
+# $HOME/workspace/neovim3/bin
+export PATH="$HOME/bin:$PATH"
 
 # Language setting
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
@@ -71,8 +78,13 @@ fi
 if command -v go >/dev/null 2>&1; then
     export GOPATH="$HOME/workspace/go"  # Golang Path
     export PATH="$GOPATH/bin:$PATH"
-    export GOPROXY=https://athens.azurefd.net
+    export GOPROXY=https://goproxy.cn
     export GO111MODULE=on
+fi
+
+if command -v rustc >/dev/null 2>&1; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+    export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
 fi
 
 # Pipenv
@@ -133,7 +145,7 @@ alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # é€’å½
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
-alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh
+alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh, eval `ssh-agent -s`
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv

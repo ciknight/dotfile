@@ -41,6 +41,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Deoplete Plugins
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
+Plug 'sebastianmarkow/deoplete-rust'
 
 Plug 'davidhalter/jedi-vim'  " Only Usage goto jump
 " Snippet engine (C-j)
@@ -62,17 +63,19 @@ endif
 " Syntax check
 Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
 " Golang syntax
-Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
+"Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
 " Python automate format
 Plug 'mindriot101/vim-yapf'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
-" Python auto set venv
+" Python auto set python venv
 Plug 'ciknight/python-venv'
 " Python sort import
 Plug 'fisadev/vim-isort'
 " Kotlin
 Plug 'udalov/kotlin-vim'
+" Rust
+"Plug 'rust-lang/rust.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -321,6 +324,7 @@ if has('nvim')
   let g:loaded_python_provider=1                                   " Disable python 2 interface
   let g:python_host_skip_check=1                                   " Skip python 2 host check
   let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program, using virtualenv
+  let g:python3_host_skip_check=1                                  " Skip python 3 host check neovim module
   set inccommand=nosplit                                           " Live preview of substitutes and other similar commands
 endif
 "}}}
@@ -716,6 +720,7 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
+let g:airline#extensions#ale#enabled=1
 "}}}
 
 " -----------------------------------------------------
@@ -832,7 +837,7 @@ let g:deoplete#enable_smart_case=1
 let g:deoplete#enable_refresh_always=1
 let g:deoplete#file#enable_buffer_path=1
 
-let g:deoplete#sources#jedi#server_timeout=10
+let g:deoplete#sources#jedi#server_timeout=5
 let g:deoplete#sources#jedi#enable_cache=1
 let g:deoplete#sources#jedi#statement_length=70
 let g:deoplete#sources#jedi#enable_typeinfo=1
@@ -843,17 +848,22 @@ let g:deoplete#sources#jedi#show_docstring=1
 
 let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
 let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#pointer=1
 let g:deoplete#sources#go#use_cache=1
-"let g:deoplete#sources#go#auto_goos=1
-"let g:deoplete#sources#go#builtin_objects=1
-"let g:deoplete#sources#go#source_importer=1
-"let g:deoplete#sources#go#unimported_packages=1
+let g:deoplete#sources#go#package_dot=1
+let g:deoplete#sources#go#pointer=1
+let g:deoplete#sources#go#builtin_objects=1
+let g:deoplete#sources#go#source_importer=1
+let g:deoplete#sources#go#unimported_packages=1
+
+let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path=$HOME.'/workspace/rust/src'
+let g:deoplete#sources#rust#show_duplicates=1
 
 let g:deoplete#sources={}
 let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
 let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
+let g:deoplete#sources.rust=['rust', 'around', 'buffer', 'member', 'file', 'ultisnips']
 "}}}
 
 " -----------------------------------------------------
@@ -910,18 +920,21 @@ let g:ale_linters={
 \   'markdown' : ['mdl'],
 \   'sh' : ['shellcheck'],
 \   'javascript' : ['eslint'],
+\   'go': ['golint', 'gopls'],
+\   'rust': ['rustc'],
 \}
 let g:ale_fixers = {
 \   '*': [
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\   'python': [
-\     'isort',
-\     'yapf'
-\   ]
+\   'python': ['isort', 'yapf'],
+\   'go': ['gofmt'],
+\   'rust': ['rustfmt'],
 \}
 let g:ale_lint_on_text_changed='always'  " never,always
+let g:ale_lint_on_enter=1
+let g:ale_lint_on_insert_leave=1
 let g:ale_lint_on_save=1
 let g:ale_fix_on_save=1
 " if you don't want linters to run on opening a file
@@ -1020,6 +1033,8 @@ inoremap <silent> <expr> <C-]> utils#manualTagComplete()
 " <C-h>, <BS>: close popup and delete backword char
 inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
+nmap <buffer> K  <plug>DeopleteRustShowDocumentation
 "}}}
 
 " -----------------------------------------------------

@@ -58,3 +58,8 @@ venv/
 # Vim
 bundle/
 plugged/
+
+tmp/
+
+target/
+build/
