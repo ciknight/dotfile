@@ -1,4 +1,13 @@
 # Path to your oh-my-zsh installation.
+if [ -f "/tmp/MYPATH" ]; then
+    # init /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+    # cleanup -/etc/paths -.zshrc -.zprofile -.bash_profile -.bashrc -.profile -/etc/profile -.zshenv
+    # typeset -U PATH
+    PATH=`cat /tmp/MYPATH`
+else
+    echo $PATH > "/tmp/MYPATH"
+fi
+
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -33,17 +42,10 @@ if [ $SYSTEM = "Darwin" ] ; then
 fi
 
 # Path
-if [ -z $ORIGIN_PATH ]; then
-    ORIGIN_PATH=$PATH
-else
-    PATH=$ORIGIN_PATH
-fi
-
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 # Fix Neovim mypy flake8 yapf isort bin path
-# $HOME/workspace/neovim3/bin
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$PATH:$HOME/workspace/neovim3/bin"
 
 # Language setting
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
