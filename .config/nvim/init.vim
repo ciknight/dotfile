@@ -837,7 +837,7 @@ let g:deoplete#enable_smart_case=1
 let g:deoplete#enable_refresh_always=1
 let g:deoplete#file#enable_buffer_path=1
 
-let g:deoplete#sources#jedi#server_timeout=5
+let g:deoplete#sources#jedi#server_timeout=8
 let g:deoplete#sources#jedi#enable_cache=1
 let g:deoplete#sources#jedi#statement_length=70
 let g:deoplete#sources#jedi#enable_typeinfo=1
@@ -857,7 +857,6 @@ let g:deoplete#sources#go#unimported_packages=1
 
 let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path=$HOME.'/workspace/rust/src'
-let g:deoplete#sources#rust#show_duplicates=1
 
 let g:deoplete#sources={}
 let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
@@ -915,14 +914,11 @@ let g:go_version_warning=1
 " 4.11 ale {{{
 " -----------------------------------------------------
 let g:ale_linters={
-\   'vim' : ['vint'],
 \   'python' : ['flake8', 'mypy'],
-\   'markdown' : ['mdl'],
 \   'sh' : ['shellcheck'],
-\   'javascript' : ['eslint'],
 \   'go': ['golint', 'gopls'],
-\   'rust': ['rustc'],
 \}
+"\   'rust': ['cargo', 'rustc']
 let g:ale_fixers = {
 \   '*': [
 \     'trim_whitespace',
@@ -930,23 +926,25 @@ let g:ale_fixers = {
 \   ],
 \   'python': ['isort', 'yapf'],
 \   'go': ['gofmt'],
-\   'rust': ['rustfmt'],
 \}
+"\   'rust': ['rustfmt']
 let g:ale_lint_on_text_changed='always'  " never,always
-let g:ale_lint_on_enter=1
-let g:ale_lint_on_insert_leave=1
-let g:ale_lint_on_save=1
-let g:ale_fix_on_save=1
 " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter=1
+let g:ale_lint_on_insert_leave=1
+
+let g:ale_lint_on_save=1
+let g:ale_fix_on_save=1
+
 let g:ale_sign_column_always=1
 let g:ale_set_highlights=1
-
 let g:ale_sign_error='•'
 let g:ale_sign_warning='•'
 let g:ale_echo_msg_error_str='E'
 let g:ale_echo_msg_warning_str='W'
 let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
+
+let g:ale_rust_cargo_use_check=1
 "}}}
 
 " -----------------------------------------------------

@@ -84,7 +84,7 @@ if command -v go >/dev/null 2>&1; then
     export GO111MODULE=on
 fi
 
-if command -v rustc >/dev/null 2>&1; then
+if [ -d "$HOME/.cargo" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
     export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
 fi
