@@ -207,6 +207,7 @@ ln -s $PWD_DIR/.config ~/
 
 # git config
 ln -s $PWD_DIR/.gitconfig ~/
+ln -s $PWD_DIR/.gitmessage ~/
 ln -s $PWD_DIR/.gitignore.global ~/
 
 # zsh

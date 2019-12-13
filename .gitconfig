@@ -64,3 +64,5 @@
     insteadOf = git://github.com/
 [i18n]
     commitencoding = utf-8
+[commit]
+    template = ~/.gitmessage

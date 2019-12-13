@@ -916,7 +916,7 @@ let g:go_version_warning=1
 let g:ale_linters={
 \   'python' : ['flake8', 'mypy'],
 \   'sh' : ['shellcheck'],
-\   'go': ['golint', 'gopls'],
+\   'go': ['golint'],
 \}
 "\   'rust': ['cargo', 'rustc']
 let g:ale_fixers = {
@@ -1189,7 +1189,7 @@ augroup END
 
 " Turn spellcheck on for text files {{{
 augroup auto_spellcheck
-  autocmd BufNewFile,BufRead *.txt,*.md setlocal spell
+  autocmd BufNewFile,BufRead *.txt setlocal spell
 augroup END
 "}}}
 
