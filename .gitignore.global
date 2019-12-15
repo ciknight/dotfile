@@ -122,5 +122,5 @@ ssh/
 id_rsa
 *.pem
 
-# vim-coc
-.vim-coc/
+# coc
+.coc/

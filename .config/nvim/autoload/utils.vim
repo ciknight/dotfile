@@ -45,80 +45,6 @@ function! g:utils#intelligentVerticalResize(direction) abort
   execute l:command
 endfunction
 
-" Strip trailing spaces
-function! g:utils#stripTrailingWhitespaces() abort
-  " Preparation: save last search, and cursor position.
-  let l:lastSearch = @/
-  let l:line = line('.')
-  let l:col = col('.')
-
-  " Do the business:
-  execute '%s/\s\+$//e'
-
-  " Clean up: restore previous search history, and cursor position
-  let @/ = l:lastSearch
-  call cursor(l:line, l:col)
-endfunction
-
-" Tab wrapper
-function! g:utils#tabComplete() abort
-  let l:col = col('.') - 1
-
-  if pumvisible()
-    return "\<C-n>"
-  else
-    if !l:col || getline('.')[l:col - 1] !~# '\k'
-      return "\<TAB>"
-    else
-      return "\<C-n>"
-    endif
-  endif
-endfunction
-
-" Manual Tag complete
-function! g:utils#manualTagComplete() abort
-  if pumvisible()
-    return g:deoplete#mappings#close_popup()
-  else
-    return g:deoplete#mappings#manual_complete('tag')
-  endif
-endfunction
-
-" Use omni complete source as default
-function! g:utils#useOmniTabWrapper() abort
-  inoremap <buffer> <expr> <TAB> utils#insertTabOmniWrapper()
-endfunction
-
-" Format function, # NOT USED
-" Needs: `npm install js-beautify`, `gem install ruby-beautify`, `python`
-"function! g:utils#formatFile() abort
-"  let l:line = line('.')
-"  let l:col = col('.')
-"  let l:command_prefix = '%!'
-
-"  if &filetype ==? 'javascript.jsx'
-"    let l:command = 'js-beautify -X -f -'
-"  elseif &filetype ==? 'html'
-"    let l:command = 'html-beautify -f -'
-"  elseif &filetype ==? 'css'
-"    let l:command = 'css-beautify -f -'
-"  elseif &filetype ==? 'json'
-"    let l:command = 'python -m json.tool'
-"  elseif &filetype ==? 'ruby'
-"    let l:command = 'ruby-beautify -c 2 -s'
-"  else
-"    " Basic vim format fallback
-"    normal! gg=G
-"  endif
-
-"  if exists('l:command')
-"    execute l:command_prefix . l:command
-"  endif
-
-"  " Return back to where cursor was
-"  call cursor(l:line, l:col)
-"endfunction
-
 " Search current word with CtrlSF
 " Inspired by github.com/zenbro
 function! g:utils#searchCurrentWordWithAg() abort
@@ -140,20 +66,6 @@ endfunction
 " -----------------------------------------------------
 " Third Party {{{
 " -----------------------------------------------------
-" LinterStatus, use ale
-function! g:utils#LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
 " Run NERDTreeFind or Toggle based on current buffer
 function! g:utils#nerdWrapper() abort
   if &filetype ==# '' " Empty buffer

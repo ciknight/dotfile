@@ -41,12 +41,6 @@ if [ $SYSTEM = "Darwin" ] ; then
 
 fi
 
-# Path
-export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-# Fix Neovim mypy flake8 yapf isort bin path
-export PATH="$HOME/bin:$PATH:$HOME/workspace/neovim3/bin"
-
 # Language setting
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
 export LANG=en_US.UTF-8  # You may need to manually set your language environment, include remote server
@@ -65,8 +59,12 @@ setopt HIST_IGNORE_SPACE  # ignore duplicated commands history list
 # Zsh Autosuggest
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=110,underline"
 
-# Load Z jump around, use zsh plugin
-# source $HOME/.z.sh
+# Path
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+# Fix Neovim mypy flake8 yapf isort bin path
+export PATH="$HOME/bin:$HOME/workspace/neovim3/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Pyenv
 if [ -d "$HOME/.pyenv" ]; then
@@ -178,5 +176,3 @@ if [ -f $zshrc_local ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -1,7 +1,5 @@
 #!/bin/bash
-
-PWD_DIR=`pwd`
-echo 'installing..., current dir: ' $PWD_DIR
+echo 'installing..., current dir: ' $PWD
 SYSTEM=`uname -s`
 
 # first, initialize ssh key
@@ -36,10 +34,10 @@ if [ $SYSTEM = "Darwin" ]; then
     if hash nvim 2> /dev/null; then
         echo 'Already install neovim'
     else
-        wget -O $PWD_DIR/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.2/nvim-macos.tar.gz
-        tar xzvf $PWD_DIR/opt/nvim-macos.tar.gz -C $PWD_DIR/opt/
+        wget -O $PWD/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.2/nvim-macos.tar.gz
+        tar xzvf $PWD/opt/nvim-macos.tar.gz -C $PWD/opt/
         echo 'Input passwd, link neovim'
-        sudo ln -s $PWD_DIR/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
+        sudo ln -s $PWD/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
     fi
 
     # brew cask install java
@@ -100,11 +98,11 @@ go get -u github.com/stamblerre/gocode
 if [ -d ~/.pip ] ; then
     mv ~/.pip ~/.pip.old
 fi
-ln -s $PWD_DIR/.pip ~/
+ln -s $PWD/.pip ~/
 
-if [ ! -f $PWD_DIR/opt/get-pip.py ] ; then
+if [ ! -f $PWD/opt/get-pip.py ] ; then
     echo 'Input passwd, install pip'
-    wget https://bootstrap.pypa.io/get-pip.py -O $PWD_DIR/opt/get-pip.py && sudo $PYTHON $PWD_DIR/opt/get-pip.py
+    wget https://bootstrap.pypa.io/get-pip.py -O $PWD/opt/get-pip.py && sudo $PYTHON $PWD/opt/get-pip.py
     # python util
     sudo pip install virtualenv pipenv
 fi
@@ -150,11 +148,11 @@ fi
 #if [ -f ~/.vimrc ] ; then
 #    mv ~/.vimrc ~/.vimrc.old
 #fi
-#ln -s $PWD_DIR/.vimrc ~/
+#ln -s $PWD/.vimrc ~/
 #if [ -f ~/.vim ] ; then
 #    mv ~/.vim ~/.vimrc.old
 #fi
-#ln -s $PWD_DIR/.vim ~/
+#ln -s $PWD/.vim ~/
 
 # tmux
 if [ ! -d ~/.tmux/plugins/tpm ] ; then
@@ -163,56 +161,56 @@ fi
 if [ -f ~/.tmux.conf ] ; then
     mv ~/.tmux.conf ~/.tmux.conf.old
 fi
-ln -s $PWD_DIR/.tmux.conf ~/
+ln -s $PWD/.tmux.conf ~/
 
 # ycm extra config
-ln -s $PWD_DIR/.ycm_extra_conf ~/
+ln -s $PWD/.ycm_extra_conf ~/
 
 # flake8 config
-ln -s $PWD_DIR/.flake8 ~/
+ln -s $PWD/.flake8 ~/
 
 # npm config
-ln -s $PWD_DIR/.npmrc ~/
+ln -s $PWD/.npmrc ~/
 
 # conda config
-ln -s $PWD_DIR/.condarc ~/
+ln -s $PWD/.condarc ~/
 
 # home bin
 if [ ! -d ~/bin ]; then
-    ln -s $PWD_DIR/bin ~/
+    ln -s $PWD/bin ~/
 fi
 
 # ipython
 if [ -d ~/.ipython ]; then
     mv ~/.ipython ~/.ipython.old
 fi
-ln -s $PWD_DIR/.ipython ~/
+ln -s $PWD/.ipython ~/
 
 # isort config
 if [ -d ~/.isort.cfg ]; then
     mv ~/.isort.cfg ~/.isort.cfg.old
 fi
-ln -s $PWD_DIR/.isort.cfg ~/
+ln -s $PWD/.isort.cfg ~/
 
 # mypy config
-ln -s $PWD_DIR/.mypy.ini ~/
+ln -s $PWD/.mypy.ini ~/
 
 # ack config
-ln -s $PWD_DIR/.ackrc ~/
+ln -s $PWD/.ackrc ~/
 
 # ag config
-ln -s $PWD_DIR/.agignore ~/
+ln -s $PWD/.agignore ~/
 
 # .config
 if [ -d ~/.config ] ; then
     mv ~/.config ~/.config.old
 fi
-ln -s $PWD_DIR/.config ~/
+ln -s $PWD/.config ~/
 
 # git config
-ln -s $PWD_DIR/.gitconfig ~/
-ln -s $PWD_DIR/.gitmessage ~/
-ln -s $PWD_DIR/.gitignore.global ~/
+ln -s $PWD/.gitconfig ~/
+ln -s $PWD/.gitmessage ~/
+ln -s $PWD/.gitignore.global ~/
 
 # zsh
 if [ ! -d ~/.oh-my-zsh ]; then
@@ -221,13 +219,10 @@ fi
 if [ ! -f ~/.zshrc ] ; then
     mv ~/.zshrc ~/.zsh.old
 fi
-ln -s $PWD_DIR/.zshrc ~/.zshrc
-ln -s $PWD/.zshenv ~/.zshenv
+ln -s $PWD/.zshrc ~/
+ln -s $PWD/.zshenv ~/
 
-# z jump around, use zsh plugin
-#if hash z 2>/dev/null; then
-#    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
-#fi
+ln -s $PWD/pyrightconfig.json ~/
 
 # zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

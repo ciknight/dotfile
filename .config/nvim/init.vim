@@ -7,10 +7,8 @@
 " ######################################################################################################################
 
 " ======================================================================================================================
-" 1.0 Plugin manager (Plug) settings
+" 1.0 Plugin manager (Plug) settings {{{
 " ======================================================================================================================
-"{{{
-
 " Autoinstall {{{
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -21,69 +19,35 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 " }}}
 
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+" 1.1 Plugin list {{{
+" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 call plug#begin('~/.config/nvim/plugged')
-
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" 1.1 Plugin list
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 filetype plugin indent off
 syntax off
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Language agnostic plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
-" Autocomplete
-
-"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
-" Deoplete Plugins
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plug 'sebastianmarkow/deoplete-rust'
-
-
-Plug 'davidhalter/jedi-vim'  " Only Usage goto jump
-" Snippet engine (C-j)
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine.
-Plug 'honza/vim-snippets'
-" Automatically pair stuff
-Plug 'jiangmiao/auto-pairs'
 if has('nvim-0.4.0')
   Plug 'ncm2/float-preview.nvim'
-  "Plug 'wsdjeg/notifications.vim' " float windows notification, Use Echo, Echoerr
 endif
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Other languages {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " Syntax check
-"Plug 'w0rp/ale'
-" Golang syntax
-"Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
-" Python automate format
-Plug 'mindriot101/vim-yapf'
+Plug 'w0rp/ale'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
-" Python auto set python venv
-Plug 'ciknight/python-venv'
-" Python sort import
-Plug 'fisadev/vim-isort'
-" Kotlin
-Plug 'udalov/kotlin-vim'
-" Rust
-"Plug 'rust-lang/rust.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Interface improving {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " Nerdtree file browser
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 " Nerdtree git extend
@@ -96,15 +60,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tmhedberg/matchit'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
-" Vim-Multiple-Cursors
-Plug 'terryma/vim-multiple-cursors'
 Plug 'bfredl/nvim-miniyank'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " External tools integration plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " Auto create not exists dir
 Plug 'pbrisbin/vim-mkdir'
 " Rainbow pair
@@ -136,7 +97,6 @@ Plug 'junegunn/goyo.vim'
 " ---------------------------------------------------------------------------------------------------------------------
 " Text insertion/manipulation {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " Surround (cs"')
 Plug 'tpope/vim-surround'  " yss, cs, ysiw
 " Easy alignment, Use :Tab\"
@@ -148,14 +108,12 @@ Plug 'godlygeek/tabular', { 'on':  'Tabularize' }  " junegunn/vim-easy-align
 " ---------------------------------------------------------------------------------------------------------------------
 " Colorschemes {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 Plug 'icymind/NeoSolarized'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Other {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
 " Did you mean file open
@@ -163,7 +121,7 @@ Plug 'EinfachToll/DidYouMean'
 "}}}
 
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" 1.2 End of plugin declaration
+" 1.2 End of plugin declaration {{{
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 filetype plugin indent on
 syntax on
@@ -174,8 +132,6 @@ call plug#end()
 " ======================================================================================================================
 " 2.0 Basic settings (Neovim defaults: https://neovim.io/doc/user/vim_diff.html#nvim-option-defaults) {{{
 " ======================================================================================================================
-"{{{
-
 set encoding=utf-8                          " The encoding displayed.
 set fileencoding=utf-8                      " The encoding written to file.
 set termencoding=utf-8
@@ -374,16 +330,15 @@ autocmd FileType markdown setlocal fo-=t wrap
 "}}}
 
 " ======================================================================================================================
-" 3.0 Mapping settings
+" 3.0 Mapping settings {{{
 " ======================================================================================================================
-"{{{
 
 " -----------------------------------------------------
 " 3.1 Setting leader {{{
 " -----------------------------------------------------
 "let g:mapleader="\<space>"
 let mapleader = ","
-set timeoutlen=500  " wait leader
+set timeoutlen=400  " wait leader
 "}}}
 
 " -----------------------------------------------------
@@ -572,7 +527,7 @@ nnoremap <leader>/ :let @/=""<CR>
 "nnoremap <silent> <F1>
 " NERDTree wrapper
 nnoremap <silent> <F2> :call utils#nerdWrapper()<CR>
-" Free
+" TabBar
 nnoremap <silent> <F3> :call utils#TabBar()<CR>
 " Toggle spelling
 nnoremap <silent> <F4> :set spell!<CR> :set spell?<CR>
@@ -599,7 +554,6 @@ nnoremap <F12> :call utils#showToggles()<CR>
 " -----------------------------------------------------
 " 3.6 Window / Buffer management {{{
 " -----------------------------------------------------
-
 " Intelligent windows resizing using ctrl + arrow keys
 "nnoremap <silent> <C-Right> :call utils#intelligentVerticalResize('right')<CR>
 "nnoremap <silent> <C-Left> :call utils#intelligentVerticalResize('left')<CR>
@@ -645,9 +599,8 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 " ======================================================================================================================
-" 4.0 Plugins settings
+" 4.0 Plugins settings {{{
 " ======================================================================================================================
-"{{{
 
 " -----------------------------------------------------
 " 4.1 NERDTree {{{
@@ -670,11 +623,8 @@ let g:NERDTreeQuitOnOpen=1
 "}}}
 
 " -----------------------------------------------------
-" 4.2 Ultisnips settings {{{
+" 4.2 settings {{{
 " -----------------------------------------------------
-let g:UltiSnipsUsePythonVersion=3
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 "}}}
 
 " -----------------------------------------------------
@@ -683,7 +633,7 @@ let g:UltiSnipsEditSplit="vertical"
 if exists('&signcolumn')
   set signcolumn=yes
 else
-  let g:gitgutter_sign_column_always = 1
+  let g:gitgutter_sign_column_always=1
 endif
 
 let g:gitgutter_sign_added='+'
@@ -723,15 +673,8 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
-
-let airline#extensions#coc#error_symbol = 'E:'
-let g:airline#extensions#coc#enabled = 1
-let airline#extensions#coc#warning_symbol = 'W:'
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-
-let g:airline#extensions#ale#enabled=1
-
+let g:airline#extensions#coc#enabled=1
+"let g:airline#extensions#ale#enabled=1
 "}}}
 
 " -----------------------------------------------------
@@ -841,54 +784,30 @@ au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
 " -----------------------------------------------------
-" 4.6 Deoplete autocomplete settings {{{
+" 4.6 coc settings {{{
 " -----------------------------------------------------
-let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_smart_case=1
-let g:deoplete#enable_refresh_always=1
-let g:deoplete#file#enable_buffer_path=1
+let g:coc_global_extensions = [
+\  'coc-tsserver',
+\  'coc-pairs',
+\  'coc-json',
+\  'coc-python',
+\  'coc-rls',
+\  'coc-vimlsp',
+\  'coc-snippets',
+\  'coc-highlight',
+\]
 
-let g:deoplete#sources#jedi#server_timeout=8
-let g:deoplete#sources#jedi#enable_cache=1
-let g:deoplete#sources#jedi#statement_length=70
-let g:deoplete#sources#jedi#enable_typeinfo=1
-let g:deoplete#sources#jedi#show_docstring=1
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-"let deoplete#sources#jedi#python_path=''  # jedi server python path
-"let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
-
-let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
-let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#use_cache=1
-let g:deoplete#sources#go#package_dot=1
-let g:deoplete#sources#go#pointer=1
-let g:deoplete#sources#go#builtin_objects=1
-let g:deoplete#sources#go#source_importer=1
-let g:deoplete#sources#go#unimported_packages=1
-
-let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path=$HOME.'/workspace/rust/src'
-
-
-let g:deoplete#sources={}
-let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.rust=['rust', 'around', 'buffer', 'member', 'file', 'ultisnips']
-
-"}}}
-
-" -----------------------------------------------------
-" 4.6.1 float-preview settings {{{
-" -----------------------------------------------------
-let g:float_preview#docked=0
-function! DisableExtras()
-  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
-
-autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
@@ -917,56 +836,39 @@ let g:colorizer_nomap=1
 "}}}
 
 " -----------------------------------------------------
-" 4.10 vim-go settings {{{
+" 4.10 float-preview settings {{{
 " -----------------------------------------------------
-let g:go_autodetect_gopath=1
-let g:go_version_warning=1
+let g:float_preview#docked=0
+function! DisableExtras()
+  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+endfunction
+
+autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
 " 4.11 ale {{{
 " -----------------------------------------------------
-let g:ale_linters={
-\   'python' : ['flake8', 'mypy'],
-\   'sh' : ['shellcheck'],
-\   'go': ['golint'],
-\}
-"\   'rust': ['cargo', 'rustc']
+let g:ale_fix_on_save=1
 let g:ale_fixers = {
 \   '*': [
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\   'python': ['isort', 'yapf'],
-\   'go': ['gofmt'],
+\  'python': ['isort', 'yapf']
 \}
-"\   'rust': ['rustfmt']
-let g:ale_lint_on_text_changed='always'  " never,always
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter=1
-let g:ale_lint_on_insert_leave=1
 
-let g:ale_lint_on_save=1
-let g:ale_fix_on_save=1
-
-let g:ale_sign_column_always=1
-let g:ale_set_highlights=1
-let g:ale_sign_error='•'
-let g:ale_sign_warning='•'
-let g:ale_echo_msg_error_str='E'
-let g:ale_echo_msg_warning_str='W'
-let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
-let g:ale_rust_cargo_use_check=1
+"" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'  " never,always
+let g:ale_lint_on_insert_leave=0
+let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
-" 4.12 Yapf {{{
-" -----------------------------------------------------
-let g:yapf_style=$HOME."/.config/yapf/style"
-"}}}
-
-" -----------------------------------------------------
-" 4.13 Nerdcommenter {{{
+" 4.12 Nerdcommenter {{{
 " -----------------------------------------------------
 " <leader>cc   加注释
 " <leader>cu   解开注释
@@ -983,36 +885,15 @@ let g:NERDCustomDelimiters={ 'c': { 'left': '/**','right': '*/' } }
 let g:NERDToggleCheckAllLines=1
 "}}}
 
-" -----------------------------------------------------
-" 4.13 jedi-vim {{{
-" -----------------------------------------------------
-let g:jedi#auto_initialization=1
-let g:jedi#auto_vim_configuration=0
-let g:jedi#show_call_signatures="0"
-let g:jedi#completions_enabled=0
-let g:jedi#smart_auto_mappings=0
-let g:jedi#popup_on_dot=0
-let g:jedi#popup_select_first=0
-let g:jedi#auto_close_doc=1
-let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi-vim/issues/744
-"}}}
-
 "}}}
 
 " ======================================================================================================================
-" 5.0 Plugin mappings
+" 5.0 Plugin mappings {{{
 " ======================================================================================================================
-"{{{
 
 " -----------------------------------------------------
-" 5.1 Ultisnips {{{
+" 5.1 {{{
 " -----------------------------------------------------
-" Disable built-in cx-ck to be able to go backward
-"inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger="<C-h>"  " do not use tab, if you use deoplete and ycm
-let g:UltiSnipsListSnippets="<C-s>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 "}}}
 
 " -----------------------------------------------------
@@ -1032,23 +913,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.4 Deoplete autocomplete {{{
-" -----------------------------------------------------
-" Insert <TAB> or select next match
-inoremap <silent> <expr> <Tab> utils#tabComplete()
-
-" Manually trigger tag autocomplete
-inoremap <silent> <expr> <C-]> utils#manualTagComplete()
-
-" <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
-nmap <buffer> K  <plug>DeopleteRustShowDocumentation
-"}}}
-
-" -----------------------------------------------------
-" 5.5 CtrlSF {{{
+" 5.4 CtrlSF {{{
 " -----------------------------------------------------
 "nnoremap <leader>g :CtrlSF<Space>
 "nnoremap <leader>G :CtrlSFToggle<Space>
@@ -1068,55 +933,47 @@ nnoremap <silent> <leader>gs :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.6 ale {{{
+" 5.5 Coc {{{
 " -----------------------------------------------------
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" Use `M-j` and `M-k` to navigate diagnostics
+nmap <silent> <M-j> <Plug>(coc-diagnostic-next)
+nmap <silent> <M-k> <Plug>(coc-diagnostic-prev)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 "}}}
 
 " -----------------------------------------------------
-" 5.7 Tabularize -> [a]lign {{{
+" 5.6 Tabularize -> [a]lign {{{
 " -----------------------------------------------------
 vnoremap <leader>a :Tabularize /
 "}}}
 
 " -----------------------------------------------------
-" 5.8 vim-multiple-cursors {{{
-" -----------------------------------------------------
-let g:multi_cursor_use_default_mapping=1
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-m>'
-let g:multi_cursor_select_all_word_key = '<A-m>'
-let g:multi_cursor_start_key           = 'g<C-m>'
-let g:multi_cursor_select_all_key      = 'g<A-m>'
-let g:multi_cursor_next_key            = '<C-m>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-"}}}
-
-
-" -----------------------------------------------------
-" 5.9 jedi-vim {{{
-" -----------------------------------------------------
-let g:jedi#goto_command="<leader>gg"
-let g:jedi#goto_assignments_command="<leader>ga"
-let g:jedi#goto_definitions_command="<leader>gd"
-let g:jedi#documentation_command="K"
-let g:jedi#usages_command="<leader>gu"
-let g:jedi#rename_command="<leader>gr"
-"}}}
-
-" -----------------------------------------------------
-" 5.10 FZF {{{
+" 5.7 FZF {{{
 " -----------------------------------------------------
 nnoremap <Leader>p :FZF<Cr>
 nnoremap <Leader>a :Ag<Cr>
 "}}}
 
 " -----------------------------------------------------
-" 5.11 easymotion {{{
+" 5.8 easymotion {{{
 " -----------------------------------------------------
 map <Leader> <Plug>(easymotion-prefix)
 
@@ -1137,14 +994,14 @@ nmap <Leader>f <Plug>(easymotion-overwin-w)
 "}}}
 
 " -----------------------------------------------------
-" 5.12 vim-miniyank {{{
+" 5.9 vim-miniyank {{{
 " -----------------------------------------------------
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
 "}}}
 
 " -----------------------------------------------------
-" 5.13 vim-surround {{{
+" 5.10 vim-surround {{{
 " -----------------------------------------------------
 " ysiwb
 " yssb
@@ -1155,9 +1012,8 @@ map P <Plug>(miniyank-autoPut)
 "}}}
 
 " ======================================================================================================================
-" 6.0 Color and highlighting settings
+" 6.0 Color and highlighting settings {{{
 " ======================================================================================================================
-"{{{
 " Syntax highlighting {{{
 syntax on
 "}}}
@@ -1201,15 +1057,10 @@ augroup END
 
 " Turn spellcheck on for text files {{{
 augroup auto_spellcheck
-  autocmd BufNewFile,BufRead *.txt,*.md setlocal spell
+  autocmd BufNewFile,BufRead *.txt setlocal spell
 augroup END
 "}}}
 
-" Remove trailing whitespaces automatically before save {{{
-" use ale
-"augroup strip_ws
-"  autocmd BufWritePre * call utils#stripTrailingWhitespaces()
-"augroup END
 "}}}
 
 " Resize splits when the window is resized {{{
