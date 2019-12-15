@@ -808,6 +808,7 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
+let g:coc_snippet_next='<tab>'
 "}}}
 
 " -----------------------------------------------------
@@ -955,8 +956,19 @@ function! s:show_documentation()
   endif
 endfunction
 
+" ---- snippet ----
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 "}}}
 
 " -----------------------------------------------------
