@@ -32,19 +32,7 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 " Language agnostic plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
-" Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
-" Deoplete Plugins
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plug 'sebastianmarkow/deoplete-rust'
-
-Plug 'davidhalter/jedi-vim'  " Only Usage goto jump
-" Snippet engine (C-j)
+" Snippet engine (C-h complete)
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine.
 Plug 'honza/vim-snippets'
@@ -697,6 +685,8 @@ let g:gitgutter_max_signs=9999
 " -----------------------------------------------------
 " 4.4 airline settings {{{
 " -----------------------------------------------------
+let g:ale_completion_enabled=1
+let g:ale_completion_tsserver_autoimport=1
 if empty(glob('~/.fonts/README.rst'))
   let g:airline_powerline_fonts=0
 else
@@ -830,39 +820,8 @@ au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
 " -----------------------------------------------------
-" 4.6 Deoplete autocomplete settings {{{
+" 4.6  settings {{{
 " -----------------------------------------------------
-let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_smart_case=1
-let g:deoplete#enable_refresh_always=1
-let g:deoplete#file#enable_buffer_path=1
-
-let g:deoplete#sources#jedi#server_timeout=8
-let g:deoplete#sources#jedi#enable_cache=1
-let g:deoplete#sources#jedi#statement_length=70
-let g:deoplete#sources#jedi#enable_typeinfo=1
-let g:deoplete#sources#jedi#show_docstring=1
-
-"let deoplete#sources#jedi#python_path=''  # jedi server python path
-"let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
-
-let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
-let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#use_cache=1
-let g:deoplete#sources#go#package_dot=1
-let g:deoplete#sources#go#pointer=1
-let g:deoplete#sources#go#builtin_objects=1
-let g:deoplete#sources#go#source_importer=1
-let g:deoplete#sources#go#unimported_packages=1
-
-let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path=$HOME.'/workspace/rust/src'
-
-let g:deoplete#sources={}
-let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.rust=['rust', 'around', 'buffer', 'member', 'file', 'ultisnips']
 "}}}
 
 " -----------------------------------------------------
@@ -914,7 +873,7 @@ let g:go_version_warning=1
 " 4.11 ale {{{
 " -----------------------------------------------------
 let g:ale_linters={
-\   'python' : ['flake8', 'mypy'],
+\   'python' : ['flake8', 'mypy', 'pyls'],
 \   'sh' : ['shellcheck'],
 \   'go': ['golint'],
 \}
@@ -972,17 +931,8 @@ let g:NERDToggleCheckAllLines=1
 "}}}
 
 " -----------------------------------------------------
-" 4.13 jedi-vim {{{
+" 4.13 {{{
 " -----------------------------------------------------
-let g:jedi#auto_initialization=1
-let g:jedi#auto_vim_configuration=0
-let g:jedi#show_call_signatures="0"
-let g:jedi#completions_enabled=0
-let g:jedi#smart_auto_mappings=0
-let g:jedi#popup_on_dot=0
-let g:jedi#popup_select_first=0
-let g:jedi#auto_close_doc=1
-let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi-vim/issues/744
 "}}}
 
 "}}}
@@ -1086,14 +1036,8 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 
 " -----------------------------------------------------
-" 5.9 jedi-vim {{{
+" 5.9 {{{
 " -----------------------------------------------------
-let g:jedi#goto_command="<leader>gg"
-let g:jedi#goto_assignments_command="<leader>ga"
-let g:jedi#goto_definitions_command="<leader>gd"
-let g:jedi#documentation_command="K"
-let g:jedi#usages_command="<leader>gu"
-let g:jedi#rename_command="<leader>gr"
 "}}}
 
 " -----------------------------------------------------
