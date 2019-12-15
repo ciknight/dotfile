@@ -85,7 +85,6 @@ fi
 if [ -d "$HOME/.cargo" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
     export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
-
 fi
 
 # Pipenv
