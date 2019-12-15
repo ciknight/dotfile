@@ -20,13 +20,14 @@ if [ $SYSTEM = "Darwin" ]; then
     fi
     brew install zsh git htop tmux
 
-    brew install golang nodejs npm yarn
-    # vim tagbar need ctags
-    brew install ctags ncdu
+    brew install golang
+    curl -sL install-node.now.sh/lts | bash
+    curl -o- -L https://yarnpkg.com/install.sh | bash
+    curl https://sh.rustup.rs -sSf | bash
 
-    # ack, ag, pt or rg, support ctrlsf
-    brew install ack the_silver_searcher
-    brew install cloc tig jq wget
+    # ack, ag, pt or rg, support vim ctrlsf and tagbar
+    brew install ack the_silver_searcher ctags
+    brew install cloc tig jq wget ncdu
 
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
@@ -55,14 +56,12 @@ elif [ $SYSTEM = "Linux" ]; then
         apt install -y gcc python3 python-dev curl tig
         apt install -y ctags cmake silversearcher-ag jq ack-grep
     elif which yum 2>&1 > /dev/null; then
-        #yum -y install https://centos7.iuscommunity.org/ius-release.rpm
+        # yum -y install epel-release
+        # yum -y install https://centos7.iuscommunity.org/ius-release.rpm  # CentOS 7,
         yum update
         yum install openssl-devel readline-devel sqlite-devel
         yum install -y git htop vim zsh tmux neovim
         yum install -y gcc gcc-c++ golang npm
-        #yum install -y python36
-        #yum install -y python3.6
-        #yum -y install python36u
         yum install -y ctags python-devel curl tig
         yum install -y cmake jq ack-grep the_silver_searcher
         yum install -y fd-find
@@ -85,6 +84,17 @@ if [ ! -d ~/workspace ]; then
     # make go workspace
     mkdir -p $HOME/workspace/go/{bin,pkg,src}
 fi
+
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+rustup toolchain install nightly
+cargo +nightly install racer
+git clone --depth=1 https://github.com/rust-lang/rust.git ~/workspace/rust
+
+# golang
+go get -u golang.org/x/tools/gopls@latest
+go get -u golang.org/x/lint/golint
+go get -u github.com/stamblerre/gocode
 
 # pip
 if [ -d ~/.pip ] ; then
@@ -131,7 +141,8 @@ fi
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb pylint
+    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb
+
 fi
 #pip install mycli ipython ipdb cheat forex-python
 
@@ -200,6 +211,7 @@ ln -s $PWD_DIR/.config ~/
 
 # git config
 ln -s $PWD_DIR/.gitconfig ~/
+ln -s $PWD_DIR/.gitmessage ~/
 ln -s $PWD_DIR/.gitignore.global ~/
 
 # zsh

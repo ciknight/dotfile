@@ -1,4 +1,13 @@
 # Path to your oh-my-zsh installation.
+if [ -f "/tmp/MYPATH" ]; then
+    # init /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+    # cleanup -/etc/paths -.zshrc -.zprofile -.bash_profile -.bashrc -.profile -/etc/profile -.zshenv
+    # typeset -U PATH
+    PATH=`cat /tmp/MYPATH`
+else
+    echo $PATH > "/tmp/MYPATH"
+fi
+
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -71,8 +80,14 @@ fi
 if command -v go >/dev/null 2>&1; then
     export GOPATH="$HOME/workspace/go"  # Golang Path
     export PATH="$GOPATH/bin:$PATH"
-    export GOPROXY=https://athens.azurefd.net
+    export GOPROXY=https://goproxy.cn
     export GO111MODULE=on
+fi
+
+if [ -d "$HOME/.cargo" ]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+    export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
+
 fi
 
 # Pipenv
@@ -133,7 +148,7 @@ alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # é€’å½
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
 alias seed='vim /tmp/`timestamp`.md'
-alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh
+alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh, eval `ssh-agent -s`
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv
