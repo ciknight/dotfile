@@ -130,7 +130,7 @@ alias tailf='tail -f'
 alias reload='source ~/.zshrc'
 
 # Git alias
-alias gdc='git diff --cached'
+alias up="git branch | awk '/^\\* / { print \$2 }' | xargs -I {} git branch --set-upstream-to=origin/{} {}"
 alias gll="git stash && git pull origin $(git_current_branch) && git stash pop"
 
 # Other alias

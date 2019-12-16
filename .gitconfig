@@ -12,7 +12,7 @@
     ui = true
     page = true
 [alias]
-    a = add
+    a  = add
     aa = add --all
     st = status
     co = checkout
