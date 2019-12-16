@@ -80,7 +80,9 @@ if [ ! -d ~/workspace ]; then
     # make workspace
     mkdir ~/workspace
     # make go workspace
-    mkdir -p $HOME/workspace/go/{bin,pkg,src}
+    mkdir -p ~/workspace/go/{bin,pkg,src}
+    # coc-vim typings path
+    mkdir -p ~/.cache/typings
 fi
 
 # rust
@@ -140,8 +142,8 @@ if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
     pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb
-
 fi
+
 #pip install mycli ipython ipdb cheat forex-python
 
 # vim

@@ -60,6 +60,7 @@ setopt HIST_IGNORE_SPACE  # ignore duplicated commands history list
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=110,underline"
 
 # Path
+export XDG_CACHE_HOME="$HOME/.cache/Microsoft/Python Language Server"
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 # Fix Neovim mypy flake8 yapf isort bin path
@@ -127,7 +128,7 @@ alias pg='ps -ef | grep'
 alias ports='netstat -tulanp'
 alias pong='ping -c 5 ' # Ping limited
 alias tailf='tail -f'
-alias reload='source ~/.zshrc'
+alias reload='source $HOME/.zshrc'
 
 # Git alias
 alias up="git branch | awk '/^\\* / { print \$2 }' | xargs -I {} git branch --set-upstream-to=origin/{} {}"
@@ -150,7 +151,7 @@ alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv
 alias vo='vi -o$#'
-alias clntrash='\rm -rf ~/.trash/*'
+alias clntrash='\rm -rf $HOME/.trash/*'
 
 # Docker alias
 alias dorkrmall='docker ps --all | tail -n 8 | awk -F ' ' '{print $1}' | xargs docker rm'
