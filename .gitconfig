@@ -40,7 +40,9 @@
 [branch]
     autosetuprebase = always
 [pull]
+    autoStash = true
     rebase = true
+    default = current  # set current branch upstream
 [rebase]
     autoStash = true
 [push]
