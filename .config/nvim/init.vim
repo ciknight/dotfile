@@ -787,15 +787,17 @@ au Syntax * RainbowParenthesesLoadBraces
 " 4.6 coc settings {{{
 " -----------------------------------------------------
 let g:coc_global_extensions = [
-\  'coc-tsserver',
-\  'coc-pairs',
 \  'coc-json',
+\  'coc-pairs',
 \  'coc-python',
 \  'coc-rls',
 \  'coc-vimlsp',
 \  'coc-snippets',
 \  'coc-highlight',
+\  'coc-marketplace',
+\  'coc-yaml',
 \]
+"\  'coc-pyright', " very slow, and has a logs of bugs)
 
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :

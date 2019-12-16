@@ -2,8 +2,10 @@
   "coc.preferences.rootPatterns": [".coc", ".git",".vim", ".vscode"],
   "coc.preferences.formatOnSaveFiletypes": ["go", "rust"],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.jumpCommand": "drop",
 
   "suggest.snippetIndicator": "►",
+  "suggest.enablePreview": true,
   "suggest.timeout": 5000,
 
   "diagnostic.displayByAle": false,
@@ -17,5 +19,9 @@
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "~/workspace/neovim3/bin/flake8",
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyPath": "~/workspace/neovim3/bin/mypy",
   "python.sortImports.path": "~/workspace/neovim3/bin/isort",
+  "python.autoComplete.extraPaths": ["src"],
+  "python.analysis.typeshedPaths": ["~/.cache/typings"],
 }
