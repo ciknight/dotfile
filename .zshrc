@@ -131,8 +131,9 @@ alias tailf='tail -f'
 alias reload='source $HOME/.zshrc'
 
 # Git alias
-alias up="git branch | awk '/^\\* / { print \$2 }' | xargs -I {} git branch --set-upstream-to=origin/{} {}"
+alias gup="git branch | awk '/^\\* / { print \$2 }' | xargs -I {} git branch --set-upstream-to=origin/{} {}"
 alias gll="git stash && git pull origin $(git_current_branch) && git stash pop"
+alias gdc="git dc"
 
 # Other alias
 alias tn='tmux -2 new -s'

@@ -4,16 +4,20 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.preferences.jumpCommand": "drop",
 
+  "suggest.autoTrigger": "always",
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.noselect": true,
+  "suggest.minTriggerInputLength": 1,
   "suggest.snippetIndicator": "►",
   "suggest.enablePreview": true,
-  "suggest.timeout": 5000,
+  "suggest.timeout": 4000,
 
   "diagnostic.displayByAle": false,
   "diagnostic.virtualText": false,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
 
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
   "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
