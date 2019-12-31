@@ -140,8 +140,8 @@ scriptencoding utf-8                        " Set utf-8 as default script encodi
 set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
-"set textwidth=100                          " Text width is 100 characters, Auto wrap
-set cc=100                                  " hit 100 characters
+set textwidth=100                           " Text width is 100 characters, Auto wrap
+set cc=100                                  " hit 100 characters, alias cc=colorcolumn
 "set formatoptions=tcqmM                    " format ggvg=
 set cmdheight=1                             " Command line height, Better display for messages
 set pumheight=10                            " Completion window max size
@@ -324,7 +324,7 @@ let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
-autocmd FileType markdown setlocal fo-=t wrap
+autocmd FileType markdown setlocal fo-=t " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
 "}}}
