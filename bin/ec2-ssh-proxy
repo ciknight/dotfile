@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ $# != 3 ]; then
+    echo ./ec2-ssh-proxy LOCAL_PORT REMOTE_PORT REMOTE_SERVER
+    exit 1
+fi
+
+LOCAL_PORT=$1
+REMOTE_PORT=$2
+REMOTE_SERVER=$3
+
+ssh -i ${WORKER_SSH_KEY_PATH} -nNT -L $LOCAL_PORT:localhost:$REMOTE_PORT ec2-user@$REMOTE_SERVER
