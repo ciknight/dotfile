@@ -72,6 +72,7 @@ if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
     export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
+    export PYTHON_BUILD_MIRROR_URL="http://140.143.140.234"
     eval "$(pyenv init -)"
 fi
 

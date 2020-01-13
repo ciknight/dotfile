@@ -848,7 +848,7 @@ let g:ale_fixers = {
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\  'python': ['isort', 'yapf']
+\  'python': ['isort', 'black']
 \}
 
 "" if you don't want linters to run on opening a file

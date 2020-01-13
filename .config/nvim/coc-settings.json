@@ -26,6 +26,7 @@
   "python.linting.mypyEnabled": true,
   "python.linting.mypyPath": "~/workspace/neovim3/bin/mypy",
   "python.sortImports.path": "~/workspace/neovim3/bin/isort",
+  "python.formatting.blackPath": "~/workspace/neovim3/bin/black",
   "python.autoComplete.extraPaths": ["src"],
   "python.analysis.typeshedPaths": ["~/.cache/typings"],
 }
