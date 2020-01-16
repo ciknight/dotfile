@@ -141,7 +141,12 @@ fi
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi black isort mypy ipdb
+    pip install pynvim flake8 \
+        mccabe flake8-isort flake8-bugbear \
+        flake8-comprehensions \
+        flake8-black \
+        flake8-todo \
+        jedi black isort mypy
 fi
 
 #pip install mycli ipython ipdb cheat forex-python

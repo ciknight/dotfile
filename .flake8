@@ -1,6 +1,16 @@
 [flake8]
-ignore = C901
-max-line-length = 100
-exclude = .git,__pycache__,docs/source/conf.py,old,build,dist
-ignore = E508
-max-complexity = 10
+ignore=E203,W503,E501
+select=C,E,F,W,B,B950
+exclude=
+  .git,
+  __pycache__,
+  .tox,
+  .mypy_cache,
+  build,
+  dist,
+  *.pyc,
+  *migrations*,
+  .venv
+max-complexity=12
+format=black
+max-line-length=100

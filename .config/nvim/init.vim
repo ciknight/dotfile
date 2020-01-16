@@ -142,6 +142,7 @@ set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
 set textwidth=100                           " Text width is 100 characters, Auto wrap
 set cc=100                                  " hit 100 characters, alias cc=colorcolumn
+set nowrap                                  " 不自动折行
 "set formatoptions=tcqmM                    " format ggvg=
 set cmdheight=1                             " Command line height, Better display for messages
 set pumheight=10                            " Completion window max size
@@ -161,7 +162,6 @@ set expandtab                               " Tab转换为空格
 set smarttab
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
 set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
-set nowrap                                  " 不自动折行
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
@@ -323,7 +323,7 @@ let g:indentLine_concealcursor='inc'
 let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType markdown setlocal fo-=t " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
@@ -852,6 +852,7 @@ let g:ale_fixers = {
 \}
 
 "" if you don't want linters to run on opening a file
+let g:ale_linters={}
 let g:ale_lint_on_enter=0
 let g:ale_lint_on_text_changed='never'  " never,always
 let g:ale_lint_on_insert_leave=0
