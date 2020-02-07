@@ -324,7 +324,7 @@ let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2 expandtab
-autocmd FileType markdown setlocal fo-=t " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
+autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
 "}}}
