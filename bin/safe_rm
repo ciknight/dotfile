@@ -5,10 +5,13 @@ DATE=`date +%s`
 until [ $# -eq 0 ]
 do
     file=$(echo $1|sed 's/ /?/g')
-    if [ -d ~/.trash/$file ] || [ -f ~/.trash/$file ] || [ -L ~/.trash/$file ] ; then
-        mv -v $file ~/.trash/$file.$DATE
+    base_name=$(basename $file)
+    dir_name=$(dirname $file)
+    file_name="$dir_name/$base_name"
+    if [ -d ~/.trash/$base_name ] || [ -f ~/.trash/$base_name ] || [ -L ~/.trash/$base_name ] ; then
+        mv -v $file_name ~/.trash/$base_name.$DATE
     else
-        mv -v $file ~/.trash/
+        mv -v $file_name ~/.trash/$base_name
     fi
     shift
 done

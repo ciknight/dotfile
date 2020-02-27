@@ -25,6 +25,7 @@
   "python.linting.flake8Path": "~/workspace/neovim3/bin/flake8",
   "python.linting.mypyEnabled": true,
   "python.linting.mypyPath": "~/workspace/neovim3/bin/mypy",
+  "python.linting.pylamaArgs": ["--ignore-missing-imports","--follow-imports=silent","--show-column-numbers", "--disallow_untyped_defs"],
   "python.sortImports.path": "~/workspace/neovim3/bin/isort",
   "python.formatting.blackPath": "~/workspace/neovim3/bin/black",
   "python.autoComplete.extraPaths": ["src"],
