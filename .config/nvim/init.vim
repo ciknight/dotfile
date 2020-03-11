@@ -29,6 +29,7 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 " Language agnostic plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
+Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 if has('nvim-0.4.0')
@@ -39,8 +40,6 @@ endif
 " ---------------------------------------------------------------------------------------------------------------------
 " Other languages {{{
 " ---------------------------------------------------------------------------------------------------------------------
-" Syntax check
-Plug 'w0rp/ale'
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
 "}}}
@@ -141,8 +140,10 @@ set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
 set textwidth=100                           " Text width is 100 characters, Auto wrap
+"set wrapmargin=0
 set cc=100                                  " hit 100 characters, alias cc=colorcolumn
 set nowrap                                  " 不自动折行
+set linebreak
 "set formatoptions=tcqmM                    " format ggvg=
 set cmdheight=1                             " Command line height, Better display for messages
 set pumheight=10                            " Completion window max size
@@ -170,6 +171,7 @@ set tabstop=4                               " 每四行一个缩进
 set shiftround
 set shortmess+=c                            " don't give |ins-completion-menu| messages.
 set signcolumn=yes                          " always show signcolumns
+set whichwrap+=<,>,h,l                      " 箭头键可以跳到下一行
 
 set number                                  " Line numbers on
 set numberwidth=1
@@ -233,9 +235,9 @@ endif
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.6 White characters settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-set list                                  " Show listchars by default
-set listchars=tab:»·,trail:·              " Display extra whitespace
-set iskeyword+=_,$,@,%,#,-                " 带有如下符号的单词不要被换行分割
+set list                                        " Show listchars by default
+set listchars=tab:»·,trail:·                    ",eol:↵,nbsp:␣  " Display extra whitespace
+set iskeyword+=_,$,@,%,#,-                      " 带有如下符号的单词不要被换行分割
 "set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:·
 "set showbreak=↪
 "}}}
@@ -321,7 +323,7 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " indentLine will overwrite your "concealcursor" and "conceallevel" with default value
 let g:indentLine_concealcursor='inc'
 let g:indentLine_conceallevel=0
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
@@ -573,8 +575,8 @@ nnoremap <silent> <leader>, <C-^>
 " -----------------------------------------------------
 
 " Quiting and saving all, command :
-cnoremap ww wqall
-cnoremap qq qall
+"cnoremap ww wqall
+"cnoremap qq qall
 "}}}
 
 " -----------------------------------------------------
@@ -623,8 +625,23 @@ let g:NERDTreeQuitOnOpen=1
 "}}}
 
 " -----------------------------------------------------
-" 4.2 settings {{{
+" 4.2 ale settings {{{
 " -----------------------------------------------------
+let g:ale_fix_on_save=1
+let g:ale_fixers = {
+\   '*': [
+\     'trim_whitespace',
+\     'remove_trailing_lines',
+\   ],
+\  'python': ['isort', 'black']
+\}
+
+"" if you don't want linters to run on opening a file
+let g:ale_linters={}
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'  " never,always
+let g:ale_lint_on_insert_leave=0
+let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
@@ -840,23 +857,8 @@ autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
-" 4.11 ale {{{
+" 4.11 settings {{{
 " -----------------------------------------------------
-let g:ale_fix_on_save=1
-let g:ale_fixers = {
-\   '*': [
-\     'trim_whitespace',
-\     'remove_trailing_lines',
-\   ],
-\  'python': ['isort', 'black']
-\}
-
-"" if you don't want linters to run on opening a file
-let g:ale_linters={}
-let g:ale_lint_on_enter=0
-let g:ale_lint_on_text_changed='never'  " never,always
-let g:ale_lint_on_insert_leave=0
-let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
