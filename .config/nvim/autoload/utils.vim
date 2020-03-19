@@ -1,7 +1,7 @@
 " Informative echo line
 function! g:utils#showToggles() abort
   echom '<F1> Free | <F2> NERDTree | <F3> Free | <F4> SpellCheck | <F5> Free | <F6> Free |' .
-        \' <F7> Whitechars | <F8> Built-in terminal | <F9> Free | <F10> Free  | <F11> Free |' .
+        \' <F7> Whitechars | <F8> Free | <F9> Free | <F10> Free  | <F11> Free |' .
         \' <F12> This message'
 endfunction
 

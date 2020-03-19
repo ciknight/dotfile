@@ -47,7 +47,7 @@ Plug 'ciknight/setbreakpoint'
 " ---------------------------------------------------------------------------------------------------------------------
 " Interface improving {{{
 " ---------------------------------------------------------------------------------------------------------------------
-" Nerdtree file browser
+" Nerdtree file browser, TODO: replace by coc-explorer
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 " Nerdtree git extend
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -75,7 +75,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }  " similar to ack.vim
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
-" Git changes showed on line numbers
+" Git changes showed on line numbers, TODO: replace by coc-git
 Plug 'airblade/vim-gitgutter'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -87,10 +87,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
 Plug 'easymotion/vim-easymotion'
-" Wrapper of some vim/neovim's :terminal functions.
-Plug 'kassio/neoterm'
 "Plug 'myusuf3/numbers.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'voldikss/vim-floaterm'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -539,8 +538,8 @@ nnoremap <silent> <F4> :set spell!<CR> :set spell?<CR>
 " nnoremap <silent> <F6>
 " Toggle white characters visibility
 nnoremap <silent> <F7> :set list!<CR> :set list?<CR>
-" New term buffer
-nnoremap <silent> <F8> :terminal<CR>
+" Free
+" nnoremap <silent> <F8>
 " Fire REST Request
 " Free
 " nnoremap <silent> <F9>
@@ -633,7 +632,7 @@ let g:ale_fixers = {
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\  'python': ['isort', 'black']
+\  'python': ['isort']
 \}
 
 "" if you don't want linters to run on opening a file
@@ -813,9 +812,16 @@ let g:coc_global_extensions = [
 \  'coc-highlight',
 \  'coc-marketplace',
 \  'coc-yaml',
+\  'coc-sql',
+\  'coc-emoji',
+\  'coc-go',
+\  'coc-ci',
+\  'coc-lists',
+\  'coc-spell-checker',
 \]
 "\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
+
 "}}}
 
 " -----------------------------------------------------
@@ -954,6 +960,8 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+
+" use <tab> for trigger completion and navigate next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -1035,33 +1043,33 @@ map P <Plug>(miniyank-autoPut)
 " ======================================================================================================================
 " 6.0 Color and highlighting settings {{{
 " ======================================================================================================================
-" Syntax highlighting {{{
+" Syntax highlighting
 syntax on
-"}}}
 
-" Color scheme {{{
+" Color scheme
 set background=dark
 colorscheme NeoSolarized
-"}}}
 
-" Highlight VCS conflict markers {{{
+" Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-"}}}
 
-" Highlight term cursor differently {{{
+" Highlight term cursor differently
 highlight TermCursor ctermfg=green guifg=green
-"}}}
 
-" Remove underline in folded lines {{{
+" Remove underline in folded lines
 highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
-"}}}
 
-" Link highlight groups to improve buftabline colors {{{
+" Use transparent background color
+highlight Quote ctermbg=109 guifg=#83a598
+
+" Fix jsonc comment highlight
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" Link highlight groups to improve buftabline colors
 hi! link BufTabLineCurrent Identifier
 hi! link BufTabLineActive Comment
 hi! link BufTabLineHidden Comment
 hi! link BufTabLineFill Comment
-"}}}
 
 "}}}
 
