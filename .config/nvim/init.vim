@@ -145,7 +145,7 @@ set nowrap                                  " 不自动折行
 set linebreak
 "set formatoptions=tcqmM                    " format ggvg=
 set cmdheight=1                             " Command line height, Better display for messages
-set pumheight=10                            " Completion window max size
+set pumheight=15                            " Completion window max size
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
 set lazyredraw                              " Don't redraw while executing macros (better performance)
@@ -155,13 +155,15 @@ set nostartofline                           " Prevent cursor from moving to begi
 set virtualedit=block                       " To be able to select past EOL in visual block mode
 set nojoinspaces                            " No extra space when joining a line which ends with . ? !
 set scrolloff=5                             " Scroll when closing to top or bottom of the screen
-set updatetime=300                          " Update time used to create swap file or other things, You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=200                          " Update time used to create swap file or other things, You will have bad experience for diagnostic messages when it's default 4000.
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
 set synmaxcol=200                           " Don't try to syntax highlight minified files, highlight max column
 set expandtab                               " Tab转换为空格
 set smarttab
+set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
 set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
+set selectmode=mouse
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
@@ -171,9 +173,16 @@ set shiftround
 set shortmess+=c                            " don't give |ins-completion-menu| messages.
 set signcolumn=yes                          " always show signcolumns
 set whichwrap+=<,>,h,l                      " 箭头键可以跳到下一行
+set backspace=2
+set backspace=eol,start,indent
+set title
+set laststatus=2
+set showtabline=2
+set display=lastline
 
 set number                                  " Line numbers on
 set numberwidth=1
+set ruler
 set relativenumber
 set cursorline cursorcolumn
 augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
@@ -265,15 +274,30 @@ setlocal omnifunc=                          " disable omnifunc
 set completeopt-=preview                    " Don't show preview scratch buffers
 "autocmd FileType python setlocal completeopt-=preview
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
-set laststatus=2
+"}}}
+
+" ---------------------------------------------------------------------------------------------------------------------
+" 2.9.1 Command Window settings {{{
+" ---------------------------------------------------------------------------------------------------------------------
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
-set wildmode=longest,list
+set wildignorecase
+set wildmode=longest,full                   " longest,list
 set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
 set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
-set wildignore+=*.pyc,                      " include __pycache__
+set wildignore+=*.pyc,__pycache__,
 set wildignore+=*DS_Store*
 set wildignore+=tmp/**,*/tmp/*
+set cpoptions+=I
+" neovim only
+if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
+  set shada='20,<50,s10
+  set inccommand=nosplit
+  set wildoptions+=pum
+  set signcolumn=yes:2
+  set pumblend=10
+endif
+
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -312,6 +336,7 @@ set noswapfile                              " New buffers will be loaded without
 set confirm                                 " Need confrimation while exit
 set autowrite                               " Automatically :write before running commands
 set autoread                                " Set to auto read when a file is changed from the outside
+set nowritebackup
 set autowriteall
 cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when forgot to start vim using sudo
 "}}}
@@ -322,9 +347,9 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " indentLine will overwrite your "concealcursor" and "conceallevel" with default value
 let g:indentLine_concealcursor='inc'
 let g:indentLine_conceallevel=0
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab fo-=t nowrap
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 

@@ -146,7 +146,8 @@ if [ ! -d ~/workspace/neovim3 ] ; then
         flake8-comprehensions \
         flake8-black \
         flake8-todo \
-        jedi black isort mypy
+        jedi black isort mypy \
+        neovim-remote
 fi
 
 #pip install mycli ipython ipdb cheat forex-python
