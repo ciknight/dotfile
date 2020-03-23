@@ -190,7 +190,7 @@ augroup relative_numbser                    " 插入模式下用绝对行号, �
   autocmd InsertEnter * :set norelativenumber number
   autocmd InsertLeave * :set relativenumber
 augroup END
-augroup auto_hightlight                     " 高亮当前行
+augroup auto_highlight                     " 高亮当前行
   autocmd!
   autocmd WinEnter * set cursorline cursorcolumn
   autocmd WinLeave * set nocursorline nocursorcolumn
@@ -843,6 +843,7 @@ let g:coc_global_extensions = [
 \  'coc-ci',
 \  'coc-lists',
 \  'coc-spell-checker',
+\  'coc-floaterm',
 \]
 "\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
@@ -888,8 +889,10 @@ autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
-" 4.11 settings {{{
+" 4.11 Floaterm settings {{{
 " -----------------------------------------------------
+let g:floaterm_keymap_new = 'T'
+let g:floaterm_position = 'center'
 "}}}
 
 " -----------------------------------------------------
@@ -1086,6 +1089,11 @@ highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
 
 " Use transparent background color
 highlight Quote ctermbg=109 guifg=#83a598
+
+" Set floaterm window's background to black
+hi FloatermNF guibg=#002b36
+" Set floating window border line color to cyan, and background to orange
+hi FloatermBorderNF guibg=#002b36 guifg=cyan
 
 " Fix jsonc comment highlight
 autocmd FileType json syntax match Comment +\/\/.\+$+
