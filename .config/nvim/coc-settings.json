@@ -24,7 +24,7 @@
   "diagnostic.enableMessage": "always",
   "diagnostic.messageTarget": "float",
 
-  "python.jediEnabled": true,
+  "python.jediEnabled": false,
   "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
@@ -39,6 +39,7 @@
   "python.autoComplete.addBrackets": true,
   "python.autoComplete.extraPaths": ["src"],
   "python.analysis.typeshedPaths": ["~/.cache/typings"],
+  "python.analysis.diagnosticEnabled": true,
   "cSpell.language": "en",
   "cSpell.enabledLanguageIds": [
     "git-commit",

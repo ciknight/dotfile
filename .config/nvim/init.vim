@@ -32,7 +32,7 @@ syntax off
 Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-if has('nvim-0.4.0')
+if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
   Plug 'ncm2/float-preview.nvim'
 endif
 "}}}
@@ -48,7 +48,7 @@ Plug 'ciknight/setbreakpoint'
 " Interface improving {{{
 " ---------------------------------------------------------------------------------------------------------------------
 " Nerdtree file browser, TODO: replace by coc-explorer
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+Plug 'preservim/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 " Nerdtree git extend
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'ryanoasis/vim-devicons'  " Icon
@@ -714,7 +714,7 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
-let g:airline#extensions#coc#enabled=1
+let g:airline#extensions#coc#enabled=1  " set statusline^=%{coc#status()}
 "let g:airline#extensions#ale#enabled=1
 "}}}
 

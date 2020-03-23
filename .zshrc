@@ -115,10 +115,8 @@ fi
 #if which nvim 2>&1 > /dev/null; then
 if command -v nvim >/dev/null 2>&1; then
   alias vi=nvim
-  alias floaterm=nvim
 elif command -v vim >/dev/null 2>&1; then
   alias vi=vim
-  alias floaterm=vim
 else
   alias vi=vi
 fi
