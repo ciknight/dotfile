@@ -91,7 +91,7 @@ fi
 
 # Pipenv
 if command -v pipenv >/dev/null 2>&1; then
-    export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
+    export PIPENV_PYPI_MIRROR="https://pypi.doubanio.com/simple/"
     export PIPENV_IGNORE_VIRTUALENVS=1
     export PIPENV_VERBOSITY=-1
     export PIPENV_SKIP_LOCK=true
@@ -147,7 +147,6 @@ alias myip='curl myip.ipip.net' # 'http://ipecho.net/plain;echo'
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
-alias seed='vim /tmp/`timestamp`.md'
 alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh, eval `ssh-agent -s`
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'

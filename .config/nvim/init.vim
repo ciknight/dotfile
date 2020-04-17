@@ -90,6 +90,7 @@ Plug 'easymotion/vim-easymotion'
 "Plug 'myusuf3/numbers.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'voldikss/vim-floaterm'
+Plug 'honza/vim-snippets'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -138,9 +139,9 @@ scriptencoding utf-8                        " Set utf-8 as default script encodi
 set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
-set textwidth=100                           " Text width is 100 characters, Auto wrap
-"set wrapmargin=0
+"set textwidth=100                          " Text width is 100 characters, Auto wrap
 set cc=100                                  " hit 100 characters, alias cc=colorcolumn
+"set wrapmargin=0
 set nowrap                                  " 不自动折行
 set linebreak
 "set formatoptions=tcqmM                    " format ggvg=
@@ -844,6 +845,7 @@ let g:coc_global_extensions = [
 \  'coc-lists',
 \  'coc-spell-checker',
 \  'coc-floaterm',
+\  'coc-actions',
 \]
 "\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
@@ -1014,6 +1016,7 @@ let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+
 "}}}
 
 " -----------------------------------------------------

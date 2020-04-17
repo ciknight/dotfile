@@ -51,5 +51,8 @@
     "text",
     "yaml",
     "yml"
+  ],
+  "cSpell.userWords": [
+    "submodule"
   ]
 }
