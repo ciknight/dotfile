@@ -13,18 +13,18 @@
   "suggest.snippetIndicator": "►",
   "suggest.floatEnable": true,
   "suggest.enablePreview": true,
-  "suggest.timeout": 1000,
+  "suggest.timeout": 5000,
 
   "diagnostic.enable": true,
   "diagnostic.displayByAle": false,
   "diagnostic.virtualText": false,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.messageDelay": 200,
+  "diagnostic.messageDelay": 300,
   "diagnostic.enableMessage": "always",
   "diagnostic.messageTarget": "float",
 
-  "python.jediEnabled": false,
+  "python.jediEnabled": true,
   "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
@@ -53,6 +53,8 @@
     "yml"
   ],
   "cSpell.userWords": [
+    "asyncio",
+    "pytest",
     "submodule"
   ]
 }
