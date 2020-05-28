@@ -34,7 +34,7 @@ if [ $SYSTEM = "Darwin" ]; then
     if hash nvim 2> /dev/null; then
         echo 'Already install neovim'
     else
-        wget -O $PWD/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.2/nvim-macos.tar.gz
+        wget -O $PWD/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.3/nvim-macos.tar.gz
         tar xzvf $PWD/opt/nvim-macos.tar.gz -C $PWD/opt/
         echo 'Input passwd, link neovim'
         sudo ln -s $PWD/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
@@ -125,8 +125,8 @@ else
     export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
     eval "$(pyenv init -)"
     # Install python3.7
-    pyenv install 3.7.4
-    pyenv global 3.7.4
+    pyenv install 3.7.6
+    pyenv global 3.7.6
 fi
 
 # fzf

@@ -13,7 +13,7 @@
   "suggest.snippetIndicator": "►",
   "suggest.floatEnable": true,
   "suggest.enablePreview": true,
-  "suggest.timeout": 5000,
+  "suggest.timeout": 10000,  // jedi timeout
 
   "diagnostic.enable": true,
   "diagnostic.displayByAle": false,
@@ -37,8 +37,7 @@
   //"python.sortImports.path": "~/workspace/neovim3/bin/isort",
   //"python.sortImports.args": ["-sp", "~/.isort.cfg"],
   "python.autoComplete.addBrackets": true,
-  "python.autoComplete.extraPaths": ["src"],
-  "python.analysis.typeshedPaths": ["~/.cache/typings"],
+  "python.autoComplete.extraPaths": ["src", "src/protos", "scripts", "protos"],
   "python.analysis.diagnosticEnabled": true,
   "cSpell.language": "en",
   "cSpell.enabledLanguageIds": [

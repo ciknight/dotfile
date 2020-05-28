@@ -1107,6 +1107,10 @@ hi! link BufTabLineActive Comment
 hi! link BufTabLineHidden Comment
 hi! link BufTabLineFill Comment
 
+" Background transparent
+highlight Normal guibg=none
+highlight NonText guibg=none
+
 "}}}
 
 " ======================================================================================================================
