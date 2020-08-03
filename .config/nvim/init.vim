@@ -429,11 +429,11 @@ vnoremap <C-d> <C-d>zz
 vnoremap <C-f> <C-f>zz
 vnoremap <C-b> <C-b>zz
 
-" Remap H and L (top, bottom of screen to left and right end of line)
-"nnoremap H ^
-"nnoremap L $
-"vnoremap H ^
-"vnoremap L g_
+" Remap H and L (top, bottom of screen to left and right end of line, breaks the head and low jump)
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L g_
 
 " More logical Y (default was alias for yy)
 nnoremap Y y$
@@ -451,9 +451,9 @@ xnoremap c "xc
 "nnoremap p p`]
 
 " Fix the cw at the end of line bug default vim has special treatment (:help cw)
-nmap cw ce
-nmap dw de
-nmap yw ye
+"nmap cw ce
+"nmap dw de
+"nmap yw ye
 
 " Uppercase word in insert mode
 inoremap <C-u> <ESC>mzgUiw`za
@@ -464,7 +464,7 @@ inoremap <Esc> <C-[>
 nnoremap <C-c> <C-[>
 nnoremap <Esc> <C-[>
 
-" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
+" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C- o)
 map <TAB> %
 silent! unmap [%
 silent! unmap ]%

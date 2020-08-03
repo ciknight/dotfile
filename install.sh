@@ -146,6 +146,7 @@ if [ ! -d ~/workspace/neovim3 ] ; then
         flake8-comprehensions \
         flake8-black \
         flake8-todo \
+        flake8-eradicate \
         jedi black isort mypy \
         neovim-remote
 fi

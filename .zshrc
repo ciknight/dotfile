@@ -11,7 +11,7 @@ fi
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
-ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
+ZSH_THEME="amuse"  # must be before source oh-my-zsh.sh
 export SYSTEM=`uname -s`
 
 # Add wisely, as too many plugins slow down shell startup.
@@ -91,7 +91,7 @@ fi
 
 # Pipenv
 if command -v pipenv >/dev/null 2>&1; then
-    export PIPENV_PYPI_MIRROR="https://pypi.doubanio.com/simple/"
+    #export PIPENV_PYPI_MIRROR="https://pypi.doubanio.com/simple/"
     export PIPENV_IGNORE_VIRTUALENVS=1
     export PIPENV_VERBOSITY=-1
     export PIPENV_SKIP_LOCK=true
