@@ -1,8 +1,10 @@
 {
   "coc.preferences.rootPatterns": [".coc", ".git",".vim", ".vscode"],
   "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnInsertLeave": true,
   "coc.preferences.formatOnSaveFiletypes": ["go", "rust", "python"],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.previewAutoClose": true,
   "coc.preferences.jumpCommand": "drop",
   "coc.source.buffer.ignoreGitignore": false,
 
@@ -13,7 +15,7 @@
   "suggest.snippetIndicator": "►",
   "suggest.floatEnable": true,
   "suggest.enablePreview": true,
-  "suggest.timeout": 10000,  // jedi timeout
+  "suggest.timeout": 2000,  // jedi timeout
 
   "diagnostic.enable": true,
   "diagnostic.displayByAle": false,
@@ -23,6 +25,14 @@
   "diagnostic.messageDelay": 300,
   "diagnostic.enableMessage": "always",
   "diagnostic.messageTarget": "float",
+  "diagnostic.enableHighlightLineNumber": true,
+  "diagnostic.errorSign": "✖",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "ℹ",
+  "diagnostic.hintSign": "➤",
+
+  "codeLens.enable": true,
+  "signature.enable": true,
 
   "python.jediEnabled": true,
   "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/",
@@ -34,8 +44,8 @@
   "python.linting.mypyPath": "~/workspace/neovim3/bin/mypy",
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "~/workspace/neovim3/bin/black",
-  //"python.sortImports.path": "~/workspace/neovim3/bin/isort",
-  //"python.sortImports.args": ["-sp", "~/.isort.cfg"],
+  "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
+  "python.sortImports.args": ["--settings-path", "${env.HOME}/.isort.cfg"],
   "python.autoComplete.addBrackets": true,
   "python.autoComplete.extraPaths": ["src", "src/protos", "scripts", "protos"],
   "python.analysis.diagnosticEnabled": true,

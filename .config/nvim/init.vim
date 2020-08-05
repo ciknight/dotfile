@@ -652,20 +652,23 @@ let g:NERDTreeQuitOnOpen=1
 " -----------------------------------------------------
 " 4.2 ale settings {{{
 " -----------------------------------------------------
+let g:ale_enabled=0
 let g:ale_fix_on_save=1
 let g:ale_fixers = {
 \   '*': [
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\  'python': ['isort']
+\  'python': []
 \}
+let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
 
 "" if you don't want linters to run on opening a file
 let g:ale_linters={}
 let g:ale_lint_on_enter=0
 let g:ale_lint_on_text_changed='never'  " never,always
 let g:ale_lint_on_insert_leave=0
+let g:ale_lint_on_filetype_changed=0
 let g:ale_lint_on_save=0
 "}}}
 
