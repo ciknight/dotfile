@@ -42,6 +42,7 @@ endif
 " ---------------------------------------------------------------------------------------------------------------------
 " Python auto breakpoint
 Plug 'ciknight/setbreakpoint'
+Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
