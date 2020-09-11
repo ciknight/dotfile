@@ -850,6 +850,9 @@ let g:coc_global_extensions = [
 \  'coc-spell-checker',
 \  'coc-floaterm',
 \  'coc-actions',
+\  'coc-markdownlint',
+\  'coc-discord',
+\  'coc-calc',
 \]
 "\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
