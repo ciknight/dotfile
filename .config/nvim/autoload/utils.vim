@@ -1,6 +1,6 @@
 " Informative echo line
 function! g:utils#showToggles() abort
-  echom '<F1> Free | <F2> NERDTree | <F3> Free | <F4> SpellCheck | <F5> Free | <F6> Free |' .
+  echom '<F1> Free | <F2> File Explorer | <F3> TabBar | <F4> SpellCheck | <F5> Free | <F6> Free |' .
         \' <F7> Whitechars | <F8> Free | <F9> Free | <F10> Free  | <F11> Free |' .
         \' <F12> This message'
 endfunction
@@ -66,37 +66,10 @@ endfunction
 " -----------------------------------------------------
 " Third Party {{{
 " -----------------------------------------------------
-" Run NERDTreeFind or Toggle based on current buffer
-function! g:utils#nerdWrapper() abort
-  if &filetype ==# '' " Empty buffer
-    :NERDTreeToggle
-  elseif expand('%:t') =~? 'NERD_tree' " In NERD_tree buffer
-    wincmd w
-  else " Normal file buffer
-    :NERDTreeFind
-  endif
-endfunction
-
 " Open Tagbar
 function! g:utils#TabBar() abort
   :TagbarToggle
 endfunction
-
-" set python debug break point
-fun! g:utils#PySetBreakPoint(lnum) abort "{{{
-    let py_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # ipdb breakpoint'
-
-    let line = getline(a:lnum)
-    let plnum = prevnonblank(a:lnum)
-    if &expandtab
-        let indents = repeat(' ', indent(plnum))
-    else
-        let indents = repeat("\t", plnum / &shiftwidth)
-    endif
-
-    call append(line('.')-1, indents.py_breakpoint_cmd)
-    normal k
-endfunction "}}}
 
 " 定义函数SetFileTitle，自动插入文件头 {{{
 fun! g:utils#SetFileTitle()

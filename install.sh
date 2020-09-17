@@ -46,6 +46,9 @@ if [ $SYSTEM = "Darwin" ]; then
     # git clone https://github.com/powerline/fonts.git ~/.fonts
     # wget https://gist.github.com/baopham/1838072/raw/616d338cea8b9dcc3a5b17c12fe3070df1b738c0/Monaco%2520for%2520Powerline.otf
     # sh ~/.fonts/install.sh
+
+    # https://github.com/ryanoasis/nerd-fonts
+    # curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh | bash
 elif [ $SYSTEM = "Linux" ]; then
     echo 'updating apt and install software'
     if which apt 2>&1 > /dev/null; then

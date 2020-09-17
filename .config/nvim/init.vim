@@ -48,10 +48,6 @@ Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use 
 " ---------------------------------------------------------------------------------------------------------------------
 " Interface improving {{{
 " ---------------------------------------------------------------------------------------------------------------------
-" Nerdtree file browser, TODO: replace by coc-explorer
-Plug 'preservim/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
-" Nerdtree git extend
-Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'ryanoasis/vim-devicons'  " Icon
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -60,6 +56,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tmhedberg/matchit'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
+" fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
 "}}}
 
@@ -80,10 +77,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
-" Auto filejump
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-"Plug 'fszymanski/fzf-gitignore'
+" filejump
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
@@ -554,7 +549,7 @@ nnoremap <leader>/ :let @/=""<CR>
 " Free
 "nnoremap <silent> <F1>
 " NERDTree wrapper
-nnoremap <silent> <F2> :call utils#nerdWrapper()<CR>
+nnoremap <silent> <F2> :CocCommand explorer<CR>
 " TabBar
 nnoremap <silent> <F3> :call utils#TabBar()<CR>
 " Toggle spelling
@@ -631,23 +626,8 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 " ======================================================================================================================
 
 " -----------------------------------------------------
-" 4.1 NERDTree {{{
+" 4.1 {{{
 " -----------------------------------------------------
-let g:NERDTreeWinSize=32
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '__pycache__']
-let g:NERDTreeWinPos="left"
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeHighlightCursorline=0
-let g:NERDTreeRespectWildIgnore=1
-let g:nerdtree_tabs_open_on_console_startup=1
-let g:NERDTreeQuitOnOpen=1
-" Automatically open a NERDTree if no files where specified
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
-" Close vim if the only window left open is a NERDTree
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "}}}
 
 " -----------------------------------------------------
@@ -726,77 +706,17 @@ let g:airline#extensions#coc#enabled=1  " set statusline^=%{coc#status()}
 " -----------------------------------------------------
 " 4.4 FZF {{{
 " -----------------------------------------------------
-
-" Floating Windows function
-function! OpenFloatingWin()
-  let height = &lines - 3
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  let col = float2nr((&columns - width) / 2)
-
-  " 设置浮动窗口打开的位置，大小等。
-  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': height * 0.3,
-        \ 'col': col + 30,
-        \ 'width': width * 2 / 3,
-        \ 'height': height / 2
-        \ }
-
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
-
-  " 设置浮动窗口高亮
-  call setwinvar(win, '&winhl', 'Normal:Pmenu')
-
-  setlocal
-        \ buftype=nofile
-        \ nobuflisted
-        \ bufhidden=hide
-        \ nonumber
-        \ norelativenumber
-        \ signcolumn=no
-endfunction
-
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
-
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_layout = { 'window': '10split enew' }
-if has('nvim-0.4.0')
-  let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
-endif
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-" Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+
+if has('nvim-0.4.0')
+  let g:fzf_preview_use_floating_window=1
+endif
+
+" Enable per-command history.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 "}}}
 
 " -----------------------------------------------------
@@ -853,6 +773,8 @@ let g:coc_global_extensions = [
 \  'coc-markdownlint',
 \  'coc-discord',
 \  'coc-calc',
+\  'coc-explorer',
+\  'coc-fzf-preview'
 \]
 "\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
@@ -1035,8 +957,7 @@ vnoremap <leader>a :Tabularize /
 " -----------------------------------------------------
 " 5.7 FZF {{{
 " -----------------------------------------------------
-nnoremap <Leader>p :FZF<Cr>
-nnoremap <Leader>a :Ag<Cr>
+nnoremap <Leader>p :CocCommand fzf-preview.ProjectFiles<CR>
 "}}}
 
 " -----------------------------------------------------
