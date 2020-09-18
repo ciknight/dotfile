@@ -144,13 +144,13 @@ fi
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    # mccabe  # check check McCabe complexity
+    # mccabe  # check McCabe complexity
+    # flake8-eradicate # Found commented out code
     pip install pynvim flake8 \
         flake8-bugbear \
         flake8-comprehensions \
         flake8-black \
         flake8-todo \
-        flake8-eradicate \
         jedi black isort mypy \
         neovim-remote
 fi

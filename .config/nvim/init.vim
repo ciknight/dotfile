@@ -671,7 +671,7 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
-let g:airline#extensions#coc#enabled=1  " set statusline^=%{coc#status()}
+let g:airline#extensions#coc#enabled=1
 "}}}
 
 " -----------------------------------------------------
@@ -751,8 +751,9 @@ let g:coc_global_extensions = [
 \  'coc-yank',
 \  'coc-template'
 \]
-"\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
+"let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
+"let $NVIM_COC_LOG_LEVEL='debug'
 
 "}}}
 

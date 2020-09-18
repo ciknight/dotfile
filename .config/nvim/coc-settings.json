@@ -26,7 +26,7 @@
   "suggest.snippetIndicator": "►",
   "suggest.floatEnable": true,
   "suggest.enablePreview": true,
-  "suggest.timeout": 3000, // jedi timeout
+  "suggest.timeout": 5000, // jedi timeout
   "diagnostic.enable": true,
   "diagnostic.displayByAle": false,
   "diagnostic.virtualText": false,
@@ -43,26 +43,27 @@
   "codeLens.enable": true,
   "signature.enable": true,
   "python.jediEnabled": true,
-  "python.jediPath": "~/workspace/neovim3/lib/python3.7/site-packages/",
+  "python.jediPath": "${env.HOME}/workspace/neovim3/lib/python3.7/site-packages/",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "~/workspace/neovim3/bin/flake8",
+  "python.linting.flake8Path": "${env.HOME}/workspace/neovim3/bin/flake8",
   "python.linting.mypyEnabled": true,
-  "python.linting.mypyPath": "~/workspace/neovim3/bin/mypy",
+  "python.linting.mypyPath": "${env.HOME}/workspace/neovim3/bin/mypy",
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/workspace/neovim3/bin/black",
+  "python.formatting.blackPath": "${env.HOME}/workspace/neovim3/bin/black",
   "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
   "python.sortImports.args": [
     "--settings-path",
     "${env.HOME}/.isort.cfg"
   ],
   "python.autoComplete.addBrackets": true,
+  "python.disableInstallationCheck": false,
   "python.autoComplete.extraPaths": [
-    "src",
+    "src/",
     "src/protos",
-    "scripts",
-    "protos"
+    "scripts/",
+    "protos/"
   ],
   "python.analysis.diagnosticEnabled": true,
   "json.format.enable": true,
