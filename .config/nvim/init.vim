@@ -29,7 +29,6 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 " Language agnostic plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
-Plug 'w0rp/ale'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
@@ -41,8 +40,10 @@ endif
 " Other languages {{{
 " ---------------------------------------------------------------------------------------------------------------------
 " Python auto breakpoint
-Plug 'ciknight/setbreakpoint'
+"Plug 'ciknight/setbreakpoint'
 Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
+" documentation
+Plug 'kkoomen/vim-doge'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -69,8 +70,6 @@ Plug 'pbrisbin/vim-mkdir'
 Plug 'kien/rainbow_parentheses.vim'
 " Indent line
 Plug 'Yggdroot/indentLine'
-" Ag wrapper search and edit
-Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }  " similar to ack.vim
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
 " Git changes showed on line numbers, TODO: replace by coc-git
@@ -113,13 +112,9 @@ Plug 'icymind/NeoSolarized'
 Plug 'tpope/vim-repeat'
 " Did you mean file open
 Plug 'EinfachToll/DidYouMean'
+" Vim start time debug tool or 'dstein64/vim-startuptime'
+Plug 'tweekmonster/startuptime.vim'
 "}}}
-
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" 1.2 End of plugin declaration {{{
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-filetype plugin indent on
-syntax on
 
 call plug#end()
 "}}}
@@ -152,7 +147,7 @@ set nostartofline                           " Prevent cursor from moving to begi
 set virtualedit=block                       " To be able to select past EOL in visual block mode
 set nojoinspaces                            " No extra space when joining a line which ends with . ? !
 set scrolloff=5                             " Scroll when closing to top or bottom of the screen
-set updatetime=200                          " Update time used to create swap file or other things, You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300                          " Update time used to create swap file or other things, You will have bad experience for diagnostic messages when it's default 4000.
 set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
 set synmaxcol=200                           " Don't try to syntax highlight minified files, highlight max column
 set expandtab                               " Tab转换为空格
@@ -252,6 +247,7 @@ set iskeyword+=_,$,@,%,#,-                      " 带有如下符号的单词不
 " ---------------------------------------------------------------------------------------------------------------------
 filetype plugin on
 filetype indent on
+syntax on
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -577,12 +573,6 @@ nnoremap <F12> :call utils#showToggles()<CR>
 " -----------------------------------------------------
 " 3.6 Window / Buffer management {{{
 " -----------------------------------------------------
-" Intelligent windows resizing using ctrl + arrow keys
-"nnoremap <silent> <C-Right> :call utils#intelligentVerticalResize('right')<CR>
-"nnoremap <silent> <C-Left> :call utils#intelligentVerticalResize('left')<CR>
-"nnoremap <silent> <C-Up> :resize +1<CR>
-"nnoremap <silent> <C-Down> :resize -1<CR>
-
 " Buffers navigation and management
 nnoremap <silent> + :bn<CR>
 nnoremap <silent> _ :bp<CR>
@@ -631,26 +621,8 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 " -----------------------------------------------------
-" 4.2 ale settings {{{
+" 4.2 settings {{{
 " -----------------------------------------------------
-let g:ale_enabled=0
-let g:ale_fix_on_save=1
-let g:ale_fixers = {
-\   '*': [
-\     'trim_whitespace',
-\     'remove_trailing_lines',
-\   ],
-\  'python': []
-\}
-let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
-
-"" if you don't want linters to run on opening a file
-let g:ale_linters={}
-let g:ale_lint_on_enter=0
-let g:ale_lint_on_text_changed='never'  " never,always
-let g:ale_lint_on_insert_leave=0
-let g:ale_lint_on_filetype_changed=0
-let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
@@ -700,7 +672,6 @@ endif
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
 let g:airline#extensions#coc#enabled=1  " set statusline^=%{coc#status()}
-"let g:airline#extensions#ale#enabled=1
 "}}}
 
 " -----------------------------------------------------
@@ -709,6 +680,8 @@ let g:airline#extensions#coc#enabled=1  " set statusline^=%{coc#status()}
 " CTRL-N and CTRL-P will be automatically bound to next-history and
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+
+let g:fzf_preview_floating_window_rate = 0.8
 
 if has('nvim-0.4.0')
   let g:fzf_preview_use_floating_window=1
@@ -774,7 +747,9 @@ let g:coc_global_extensions = [
 \  'coc-discord',
 \  'coc-calc',
 \  'coc-explorer',
-\  'coc-fzf-preview'
+\  'coc-fzf-preview',
+\  'coc-yank',
+\  'coc-template'
 \]
 "\  'coc-pyright', " very slow, and has a logs of bugs)
 let g:coc_snippet_next='<tab>'
@@ -872,23 +847,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.4 CtrlSF {{{
+" 5.4 {{{
 " -----------------------------------------------------
-"nnoremap <leader>g :CtrlSF<Space>
-"nnoremap <leader>G :CtrlSFToggle<Space>
-let g:ctrlsf_mapping = {
-      \ 'next'    : 'n',
-      \ 'prev'    : 'N',
-      \ 'quit'    : 'q',
-      \ 'openb'   : '',
-      \ 'split'   : 's',
-      \ 'tab'     : '',
-      \ 'tabb'    : '',
-      \ 'popen'   : '',
-      \ 'pquit'   : '',
-      \ 'loclist' : '',
-      \ }
-nnoremap <silent> <leader>gs :call utils#searchCurrentWordWithAg()<CR>
 "}}}
 
 " -----------------------------------------------------
@@ -1083,7 +1043,7 @@ augroup END
 
 " Auto Set File Title
 augroup set_file_title
-  autocmd BufNewFile *.cpp,*.sh,*.rb,*.java,*.py,*.c,*.h,*.lua call utils#SetFileTitle()
+  autocmd BufNewFile *.py,*.sh CocCommand template.templateTop
 augroup END
 
 " -----------------------------------------------------
