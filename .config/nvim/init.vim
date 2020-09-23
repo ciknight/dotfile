@@ -154,7 +154,7 @@ set expandtab                               " Tab转换为空格
 set smarttab
 set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
+set mouse=a                                 " 鼠标启用，a 是所有模式下, -a 是禁用鼠标模式
 set selectmode=mouse
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
@@ -1044,7 +1044,7 @@ augroup END
 
 " Auto Set File Title
 augroup set_file_title
-  autocmd BufNewFile *.py,*.sh CocCommand template.templateTop
+  autocmd BufNewFile *.py,*.sh,*.go CocCommand template.templateTop
 augroup END
 
 " -----------------------------------------------------
