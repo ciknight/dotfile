@@ -31,9 +31,6 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
-  Plug 'ncm2/float-preview.nvim'
-endif
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -683,10 +680,6 @@ let g:airline#extensions#coc#enabled=1
 
 let g:fzf_preview_floating_window_rate = 0.8
 
-if has('nvim-0.4.0')
-  let g:fzf_preview_use_floating_window=1
-endif
-
 " Enable per-command history.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
@@ -752,8 +745,12 @@ let g:coc_global_extensions = [
 \  'coc-template'
 \]
 let g:coc_snippet_next='<tab>'
+
+" debug coc
 "let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
 "let $NVIM_COC_LOG_LEVEL='debug'
+"let g:node_client_debug=1
+"Use command :call coc#client#open_log() to open log file, or use :echo $NODE_CLIENT_LOG_FILE to get file path of log.
 
 "}}}
 
@@ -783,16 +780,8 @@ let g:colorizer_nomap=1
 "}}}
 
 " -----------------------------------------------------
-" 4.10 float-preview settings {{{
+" 4.10 settings {{{
 " -----------------------------------------------------
-let g:float_preview#docked=0
-function! DisableExtras()
-  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
-endfunction
-
-autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
@@ -986,6 +975,9 @@ highlight Quote ctermbg=109 guifg=#83a598
 hi FloatermNF guibg=#002b36
 " Set floating window border line color to cyan, and background to orange
 hi FloatermBorderNF guibg=#002b36 guifg=cyan
+
+" Coc highlight
+highlight link CocErrorSign GruvboxRed
 
 " Fix jsonc comment highlight
 autocmd FileType json syntax match Comment +\/\/.\+$+
