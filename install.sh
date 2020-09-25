@@ -49,6 +49,9 @@ if [ $SYSTEM = "Darwin" ]; then
 
     # https://github.com/ryanoasis/nerd-fonts
     # curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh | bash
+
+    # iterm Gruvbox Dark
+    # https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Gruvbox%20Dark.itermcolors
 elif [ $SYSTEM = "Linux" ]; then
     echo 'updating apt and install software'
     if which apt 2>&1 > /dev/null; then

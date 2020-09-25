@@ -100,6 +100,7 @@ Plug 'godlygeek/tabular', { 'on':  'Tabularize' }  " junegunn/vim-easy-align
 " Colorschemes {{{
 " ---------------------------------------------------------------------------------------------------------------------
 Plug 'icymind/NeoSolarized'
+Plug 'morhetz/gruvbox'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -132,9 +133,8 @@ set cc=100                                  " hit 100 characters, alias cc=color
 "set wrapmargin=0
 set nowrap                                  " 不自动折行
 set linebreak
-"set formatoptions=tcqmM                    " format ggvg=
 set cmdheight=1                             " Command line height, Better display for messages
-set pumheight=15                            " Completion window max size
+set pumheight=15                            " Completion window max size, popup_menu
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
 set lazyredraw                              " Don't redraw while executing macros (better performance)
@@ -151,8 +151,7 @@ set expandtab                               " Tab转换为空格
 set smarttab
 set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set mouse=a                                 " 鼠标启用，a 是所有模式下, -a 是禁用鼠标模式
-set selectmode=mouse
+set mouse-=a                                " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
@@ -168,7 +167,7 @@ set title
 set laststatus=2
 set showtabline=2
 set display=lastline
-
+set diffopt+=internal,algorithm:patience
 set number                                  " Line numbers on
 set numberwidth=1
 set ruler
@@ -179,7 +178,7 @@ augroup relative_numbser                    " 插入模式下用绝对行号, �
   autocmd InsertEnter * :set norelativenumber number
   autocmd InsertLeave * :set relativenumber
 augroup END
-augroup auto_highlight                     " 高亮当前行
+augroup auto_highlight_cursor                     " 高亮光标行
   autocmd!
   autocmd WinEnter * set cursorline cursorcolumn
   autocmd WinLeave * set nocursorline nocursorcolumn
@@ -262,7 +261,6 @@ set nofoldenable                            " 启动 vim 时关闭折叠代码
 " ---------------------------------------------------------------------------------------------------------------------
 setlocal omnifunc=                          " disable omnifunc
 set completeopt-=preview                    " Don't show preview scratch buffers
-"autocmd FileType python setlocal completeopt-=preview
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 "}}}
 
@@ -294,7 +292,10 @@ endif
 " 2.10 Neovim specific settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
 if has('nvim')
-  let g:loaded_python_provider=1                                   " Disable python 2 interface
+  let g:loaded_node_provider = 0
+  let g:loaded_ruby_provider = 0
+  let g:loaded_perl_provider = 0
+  let g:loaded_python_provider=0                                   " Disable python 2 interface
   let g:python_host_skip_check=1                                   " Skip python 2 host check
   let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program, using virtualenv
   let g:python3_host_skip_check=1                                  " Skip python 3 host check neovim module
@@ -320,7 +321,9 @@ let $LANG="zh_CN.utf-8"
 " -----------------------------------------------------
 " 2.13 File settings {{{
 " -----------------------------------------------------
+"set formatoptions=tcqmM                    " format ggvg=
 set fileformat=unix
+set formatexpr=CocAction('formatSelected')
 set nobackup                                " no file backup
 set noswapfile                              " New buffers will be loaded without creating a swapfile
 set confirm                                 " Need confrimation while exit
@@ -690,7 +693,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " -----------------------------------------------------
 let g:rbpt_colorpairs=[
             \ ['brown',       'RoyalBlue3'],
-            \ ['Darkblue',    'SeaGreen3'],
             \ ['darkgray',    'DarkOrchid3'],
             \ ['darkgreen',   'firebrick3'],
             \ ['darkcyan',    'RoyalBlue3'],
@@ -699,7 +701,6 @@ let g:rbpt_colorpairs=[
             \ ['brown',       'firebrick3'],
             \ ['gray',        'RoyalBlue3'],
             \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['Darkblue',    'firebrick3'],
             \ ['darkgreen',   'RoyalBlue3'],
             \ ['darkcyan',    'SeaGreen3'],
             \ ['darkred',     'DarkOrchid3'],
@@ -707,6 +708,8 @@ let g:rbpt_colorpairs=[
             \ ]
             " 不加入这行, 防止黑色括号出现, 很难识别
             " \ ['black',       'SeaGreen3'],
+            " \ ['Darkblue',    'SeaGreen3'],
+            " \ ['Darkblue',    'firebrick3'],
 let g:rbpt_max=16
 let g:rbpt_loadcmd_toggle=0
 au VimEnter * RainbowParenthesesToggle
@@ -742,7 +745,8 @@ let g:coc_global_extensions = [
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
-\  'coc-template'
+\  'coc-template',
+\  'coc-pyright',
 \]
 let g:coc_snippet_next='<tab>'
 
@@ -952,32 +956,13 @@ map P <Plug>(miniyank-autoPut)
 " ======================================================================================================================
 " 6.0 Color and highlighting settings {{{
 " ======================================================================================================================
-" Syntax highlighting
-syntax on
-
 " Color scheme
+"colorscheme NeoSolarized
+colorscheme gruvbox
 set background=dark
-colorscheme NeoSolarized
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Highlight term cursor differently
-highlight TermCursor ctermfg=green guifg=green
-
-" Remove underline in folded lines
-highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
-
-" Use transparent background color
-highlight Quote ctermbg=109 guifg=#83a598
-
-" Set floaterm window's background to black
-hi FloatermNF guibg=#002b36
-" Set floating window border line color to cyan, and background to orange
-hi FloatermBorderNF guibg=#002b36 guifg=cyan
-
-" Coc highlight
-highlight link CocErrorSign GruvboxRed
 
 " Fix jsonc comment highlight
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -988,9 +973,22 @@ hi! link BufTabLineActive Comment
 hi! link BufTabLineHidden Comment
 hi! link BufTabLineFill Comment
 
+" Highlight term cursor differently
+"highlight TermCursor ctermfg=green guifg=green
+
+" Set floaterm window's background to black
+"hi FloatermNF guibg=#002b36
+" Set floating window border line color to cyan, and background to orange
+"hi FloatermBorderNF guibg=#002b36 guifg=cyan
+
+" Remove underline in folded lines
+"highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
+
+" Use transparent background color
+"highlight Quote ctermbg=109 guifg=#83a598
 " Background transparent
-highlight Normal guibg=none
-highlight NonText guibg=none
+"highlight Normal guibg=none
+"highlight NonText guibg=none
 
 "}}}
 
@@ -1048,22 +1046,6 @@ augroup END
 "augroup END
 "}}}
 
-"}}}
-
-" ======================================================================================================================
-" 8.0 Todo, Notes
-" ======================================================================================================================
-"{{{
-
-" -----------------------------------------------------
-" 8.1 Todo {{{
-" -----------------------------------------------------
-" 1. Update README file.
-"}}}
-
-" -----------------------------------------------------
-" 8.2 Notes {{{
-" -----------------------------------------------------
 "}}}
 
 "}}}
