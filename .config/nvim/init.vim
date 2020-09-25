@@ -135,6 +135,7 @@ set nowrap                                  " 不自动折行
 set linebreak
 set cmdheight=1                             " Command line height, Better display for messages
 set pumheight=15                            " Completion window max size, popup_menu
+set pumblend=100                            " https://github.com/neovim/neovim/pull/9571, 不透明popup, 影响可读性
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
 set lazyredraw                              " Don't redraw while executing macros (better performance)
