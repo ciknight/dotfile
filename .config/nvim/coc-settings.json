@@ -8,14 +8,14 @@
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnInsertLeave": true,
   "coc.preferences.formatOnSaveFiletypes": [
-   "go",
-   "rust",
-   "python",
-   "json",
-   "yaml"
+    "go",
+    "rust",
+    "python",
+    "json",
+    "yaml"
   ],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.hoverTarget": "float", // K Show Doc
   "coc.preferences.previewAutoClose": true,
   "coc.preferences.jumpCommand": "drop",
   "coc.source.buffer.ignoreGitignore": false,
@@ -27,7 +27,7 @@
   "suggest.autoTrigger": "always",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.noselect": true,
-  "suggest.minTriggerInputLength": 2,
+  "suggest.minTriggerInputLength": 1,
   "suggest.snippetIndicator": "►",
   "suggest.floatEnable": true,
   "suggest.enablePreview": true,
@@ -60,7 +60,7 @@
     "python",
     "go"
   ],
-  "python.jediEnabled": true,
+  "python.jediEnabled": false,
   "python.jediPath": "${env.HOME}/workspace/neovim3/lib/python3.7/site-packages/",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
@@ -106,11 +106,12 @@
   ],
   "cSpell.userWords": [
     "asyncio",
+    "fenc",
     "hexlify",
     "pytest",
+    "struct",
     "submodule",
-    "unhexlify",
-    "struct"
+    "unhexlify"
   ],
   "languageserver": {
     "bash": {

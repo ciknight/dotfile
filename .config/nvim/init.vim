@@ -862,12 +862,22 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+  if coc#util#has_float()
+    call coc#util#float_hide()
+  elseif (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocAction('doHover')
   endif
 endfunction
+
+" Remap for codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+
+xmap <silent> <leader>ac :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>ac :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " use <tab> for trigger completion and navigate to the next complete item
 inoremap <silent><expr> <Tab>
