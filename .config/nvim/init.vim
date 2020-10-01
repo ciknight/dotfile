@@ -134,8 +134,9 @@ set cc=100                                  " hit 100 characters, alias cc=color
 set nowrap                                  " 不自动折行
 set linebreak
 set cmdheight=1                             " Command line height, Better display for messages
-set pumheight=15                            " Completion window max size, popup_menu
-set pumblend=100                            " https://github.com/neovim/neovim/pull/9571, 不透明popup, 影响可读性
+set pumheight=10                            " Completion window max size, popup_menu
+set pumblend=0                              " https://github.com/neovim/neovim/pull/9571, 不透明popup, 影响可读性
+set winblend=0
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
 set lazyredraw                              " Don't redraw while executing macros (better performance)
@@ -983,6 +984,9 @@ hi! link BufTabLineCurrent Identifier
 hi! link BufTabLineActive Comment
 hi! link BufTabLineHidden Comment
 hi! link BufTabLineFill Comment
+
+" opaque pmeue
+hi PmenuSel blend=0
 
 " Highlight term cursor differently
 "highlight TermCursor ctermfg=green guifg=green
