@@ -77,6 +77,8 @@
   ],
   "python.autoComplete.addBrackets": true,
   "python.disableInstallationCheck": false,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "basic",
   "python.autoComplete.extraPaths": [
     "src/",
     "src/protos",

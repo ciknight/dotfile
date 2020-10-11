@@ -878,7 +878,7 @@ function! s:cocActionsOpenFromSelected(type) abort
 endfunction
 
 xmap <silent> <leader>ac :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>ac :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+nmap <silent> <leader>ac :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@<CR>
 
 " use <tab> for trigger completion and navigate to the next complete item
 inoremap <silent><expr> <Tab>
