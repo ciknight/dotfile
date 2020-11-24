@@ -31,12 +31,6 @@ if [ $SYSTEM = "Darwin" ] ; then
         # use java jdk, do not use openjdk
         export JAVA_HOME=$(/usr/libexec/java_home)
         export PATH=$PATH:$JAVA_HOME/bin
-
-        # Android_SDK_HOME
-        if [ -d "/opt/sdk" ]; then
-            export ANDROID_SDK_HOME=/opt/sdk
-            export PATH=$PATH:$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools/bin
-        fi
     fi
 
 fi
@@ -52,8 +46,10 @@ export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
-#export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb)"
+export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb)"
 setopt HIST_IGNORE_SPACE  # ignore duplicated commands history list
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
 # setopt SHARE_HISTORY  # share command history data
 
 # Zsh Autosuggest
