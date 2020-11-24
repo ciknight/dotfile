@@ -5,12 +5,11 @@
     ".vim",
     ".vscode"
   ],
-  "coc.preferences.formatOnType": true,
-  "coc.preferences.formatOnInsertLeave": true,
+  "coc.preferences.formatOnType": false,
+  "coc.preferences.formatOnInsertLeave": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "go",
     "rust",
-    "python",
     "json",
     "yaml"
   ],
@@ -66,19 +65,20 @@
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Path": "${env.HOME}/workspace/neovim3/bin/flake8",
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "${env.HOME}/workspace/neovim3/bin/black",
-  //  "python.linting.mypyEnabled": true,
-  //  "python.linting.mypyPath": "${env.HOME}/workspace/neovim3/bin/mypy",
-  "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
-  "python.sortImports.args": [
-    "--settings-path",
-    "${env.HOME}/.isort.cfg"
-  ],
+  // "python.formatting.provider": "black",
+  // "python.formatting.blackPath": "${env.HOME}/workspace/neovim3/bin/black",
+  // "python.linting.mypyEnabled": true,
+  // "python.linting.mypyPath": "${env.HOME}/workspace/neovim3/bin/mypy",
+  // "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
+  // "python.sortImports.args": [
+  //   "--settings-path",
+  //   "${env.HOME}/.isort.cfg"
+  // ],
   "python.autoComplete.addBrackets": true,
   "python.disableInstallationCheck": false,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.useLibraryCodeForTypes": true,
   "python.autoComplete.extraPaths": [
     "src/",
     "src/protos",
@@ -88,7 +88,7 @@
   "python.analysis.diagnosticEnabled": true,
   "python.analysis.autoSearchPaths": true,
   "json.format.enable": true,
-  "yaml.format.enable": false,
+  "yaml.format.enable": true,
   "markdownlint.onOpen": true,
   "markdownlint.onChange": true,
   "markdownlint.config": {

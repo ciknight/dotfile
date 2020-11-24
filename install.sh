@@ -30,11 +30,14 @@ if [ $SYSTEM = "Darwin" ]; then
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
 
+    # openvpn
+    # https://apple.stackexchange.com/questions/203115/installed-openvpn-with-brew-but-it-doesnt-appear-to-be-installed-correctly
+
     # Install neovim
     if hash nvim 2> /dev/null; then
         echo 'Already install neovim'
     else
-        wget -O $PWD/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.3/nvim-macos.tar.gz
+        wget -O $PWD/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.4/nvim-macos.tar.gz
         tar xzvf $PWD/opt/nvim-macos.tar.gz -C $PWD/opt/
         echo 'Input passwd, link neovim'
         sudo ln -s $PWD/opt/nvim-macos/bin/nvim /usr/local/bin/nvim

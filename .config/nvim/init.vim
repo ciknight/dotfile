@@ -31,6 +31,7 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'w0rp/ale'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -39,8 +40,6 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Python auto breakpoint
 "Plug 'ciknight/setbreakpoint'
 Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
-" documentation
-Plug 'kkoomen/vim-doge'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -299,6 +298,8 @@ if has('nvim')
   let g:loaded_perl_provider = 0
   let g:loaded_python_provider=0                                   " Disable python 2 interface
   let g:python_host_skip_check=1                                   " Skip python 2 host check
+
+  set pyxversion=3
   let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program, using virtualenv
   let g:python3_host_skip_check=1                                  " Skip python 3 host check neovim module
   set inccommand=nosplit                                           " Live preview of substitutes and other similar commands
@@ -623,8 +624,27 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 " -----------------------------------------------------
-" 4.2 settings {{{
+" 4.2 ale settings {{{
 " -----------------------------------------------------
+"
+let g:ale_enabled=0
+let g:ale_fix_on_save=1
+let g:ale_fixers = {
+\   '*': [
+\     'trim_whitespace',
+\     'remove_trailing_lines',
+\   ],
+\  'python': ["black", "isort"]
+\}
+let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
+
+"" if you don't want linters to run on opening a file
+let g:ale_linters={}
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'  " never,always
+let g:ale_lint_on_insert_leave=0
+let g:ale_lint_on_filetype_changed=0
+let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------

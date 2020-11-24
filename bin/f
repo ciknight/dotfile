@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! $1 ]; then
-    echo 'what do you seach for?'
+    echo 'What do you seach for?'
 else
     # -I ignore binary
     # -i ignore case

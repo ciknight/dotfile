@@ -64,6 +64,8 @@
     insteadOf = http://github.com/
 [url "git@github.com:"]
     insteadOf = git://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [i18n]
     commitencoding = utf-8
 [commit]
