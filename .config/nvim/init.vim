@@ -753,7 +753,6 @@ let g:coc_global_extensions = [
 \  'coc-highlight',
 \  'coc-marketplace',
 \  'coc-yaml',
-\  'coc-sql',
 \  'coc-emoji',
 \  'coc-go',
 \  'coc-ci',
