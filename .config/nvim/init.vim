@@ -896,8 +896,9 @@ function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
 
-xmap <silent> <leader>ac :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>ac :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@<CR>
+" Usage: aw for current word, aap for current paragraph
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " use <tab> for trigger completion and navigate to the next complete item
 inoremap <silent><expr> <Tab>
@@ -936,7 +937,7 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " -----------------------------------------------------
 " 5.6 Tabularize -> [a]lign {{{
 " -----------------------------------------------------
-vnoremap <leader>a :Tabularize /
+vnoremap <leader>ta :Tabularize /
 "}}}
 
 " -----------------------------------------------------
