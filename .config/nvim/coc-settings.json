@@ -69,11 +69,11 @@
   // "python.formatting.blackPath": "${env.HOME}/workspace/neovim3/bin/black",
   // "python.linting.mypyEnabled": true,
   // "python.linting.mypyPath": "${env.HOME}/workspace/neovim3/bin/mypy",
-  // "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
-  // "python.sortImports.args": [
-  //   "--settings-path",
-  //   "${env.HOME}/.isort.cfg"
-  // ],
+  "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
+  "python.sortImports.args": [
+    "--settings-path",
+    "${env.HOME}/.isort.cfg"
+  ],
   "python.autoComplete.addBrackets": true,
   "python.disableInstallationCheck": false,
   "python.analysis.autoImportCompletions": true,

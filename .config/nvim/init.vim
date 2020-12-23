@@ -634,7 +634,7 @@ let g:ale_fixers = {
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\  'python': ["black", "isort"]
+\  'python': ["black"]
 \}
 let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
 
