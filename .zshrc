@@ -67,8 +67,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
-    export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
-    export PYTHON_BUILD_MIRROR_URL="http://140.143.140.234"
+    export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
     eval "$(pyenv init -)"
 fi
 

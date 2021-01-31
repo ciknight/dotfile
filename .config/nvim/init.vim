@@ -82,6 +82,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/goyo.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'honza/vim-snippets'
+Plug 'aperezdc/vim-template'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -766,7 +767,6 @@ let g:coc_global_extensions = [
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
-\  'coc-template',
 \  'coc-pyright',
 \]
 let g:coc_snippet_next='<tab>'

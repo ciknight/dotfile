@@ -25,7 +25,7 @@
 --ignore-dir=.mypy_cache/
 
 ## Intellij project files (old=fileformat).
---ignore-file=match:.*.(ipr|iml)
+--ignore-file=match:.*.(ipr|iml|js)
 --ignore-dir=.idea/
 
 --ignore-dir=undo/
