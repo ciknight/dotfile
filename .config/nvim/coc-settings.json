@@ -75,16 +75,16 @@
     "${env.HOME}/.isort.cfg"
   ],
   "python.autoComplete.addBrackets": true,
-  "python.disableInstallationCheck": false,
-  "python.analysis.autoImportCompletions": true,
-  "python.analysis.typeCheckingMode": "basic",
-  "python.analysis.useLibraryCodeForTypes": true,
   "python.autoComplete.extraPaths": [
     "src/",
     "src/protos",
     "scripts/",
     "protos/"
   ],
+  "python.disableInstallationCheck": false,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.useLibraryCodeForTypes": true,
   "python.analysis.diagnosticEnabled": true,
   "python.analysis.autoSearchPaths": true,
   "json.format.enable": true,
