@@ -147,6 +147,7 @@ alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh, eval `ssh-agent 
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv
+alias pps='pipenv shell'
 alias vo='vi -o$#'
 alias clntrash='\rm -rf $HOME/.trash/*'
 
