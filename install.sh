@@ -74,6 +74,7 @@ elif [ $SYSTEM = "Linux" ]; then
         yum install -y fd-find
         curl -sL install-node.now.sh/lts | bash
         curl -o- -L https://yarnpkg.com/install.sh | bash
+        # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     else
         echo 'Unsupport Linux System'
         exit 0

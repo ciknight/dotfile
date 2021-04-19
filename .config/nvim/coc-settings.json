@@ -6,7 +6,6 @@
     ".vscode"
   ],
   "coc.preferences.formatOnType": false,
-  "coc.preferences.formatOnInsertLeave": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "go",
     "rust",
@@ -14,7 +13,7 @@
     "yaml"
   ],
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "coc.preferences.hoverTarget": "float", // K Show Doc
+  "coc.preferences.floatActions": true, // K Show Doc
   "coc.preferences.previewAutoClose": true,
   "coc.preferences.jumpCommand": "drop",
   "coc.source.buffer.ignoreGitignore": false,
@@ -39,7 +38,6 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
   "diagnostic.refreshOnInsertMode": true,
-  "diagnostic.refreshAfterSave": true,
   "diagnostic.maxWindowWidth": 100,
   "diagnostic.maxWindowHeight": 10,
   "diagnostic.messageDelay": 200,
@@ -51,10 +49,14 @@
   "diagnostic.infoSign": "ℹ",
   "diagnostic.hintSign": "➤",
   "snippets.ultisnips.usePythonx": false,
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "gosnippets/UltiSnips"
+  ],
   "codeLens.enable": true,
   "pairs.enableBackspace": true,
   "signature.enable": true,
-  "signature.floatMaxWidth": 100,
+  "signature.maxWindowWidth": 100,
   "highlight.disableLanguages": [
     "python",
     "go"
