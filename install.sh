@@ -67,11 +67,10 @@ elif [ $SYSTEM = "Linux" ]; then
         # yum -y install https://centos7.iuscommunity.org/ius-release.rpm  # CentOS 7,
         yum update
         yum install openssl-devel readline-devel sqlite-devel
+        yum install bzip2-devel libffi-devel python-devel
         yum install -y git htop vim zsh tmux neovim
+        yum install -y cmake jq ack-grep the_silver_searcher fd-find ctags curl tig
         yum install -y gcc gcc-c++ golang npm
-        yum install -y ctags python-devel curl tig
-        yum install -y cmake jq ack-grep the_silver_searcher
-        yum install -y fd-find
         curl -sL install-node.now.sh/lts | bash
         curl -o- -L https://yarnpkg.com/install.sh | bash
         # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -157,8 +156,8 @@ if [ ! -d ~/workspace/neovim3 ] ; then
         flake8-bugbear \
         flake8-comprehensions \
         flake8-black \
+        jedi black isort \
         flake8-todo \
-        jedi black isort mypy \
         neovim-remote
 fi
 
