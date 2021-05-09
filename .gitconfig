@@ -38,26 +38,25 @@
     ignorecase = false
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
 [branch]
-    autosetuprebase = always
+    autosetuprebase = always # autosetupmerge, which will link the upstream branch each time you create or checkout a new branch.
 [pull]
     autoStash = true
     rebase = true
     default = current  # set current branch upstream
+    ff = only  # fast forward
 [rebase]
     autoStash = true
 [push]
     default = current  # set current branch upstream
 [mergetool "vimdiff"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[diff]
+    tool = vimdiff
 [difftool]
     prompt = false
 [merge]
     log = true
     tool = vimdiff
-[diff]
-    tool = vimdiff
-[difftool]
-    prompt = 0
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [url "git@github.com:"]
