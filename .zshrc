@@ -11,7 +11,7 @@ fi
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
-ZSH_THEME="af-magic"  # must be before source oh-my-zsh.sh
+ZSH_THEME="amuse"  # must be before source oh-my-zsh.sh
 export SYSTEM=`uname -s`
 
 # Add wisely, as too many plugins slow down shell startup.
@@ -31,21 +31,9 @@ if [ $SYSTEM = "Darwin" ] ; then
         # use java jdk, do not use openjdk
         export JAVA_HOME=$(/usr/libexec/java_home)
         export PATH=$PATH:$JAVA_HOME/bin
-
-        # Android_SDK_HOME
-        if [ -d "/opt/sdk" ]; then
-            export ANDROID_SDK_HOME=/opt/sdk
-            export PATH=$PATH:$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools/bin
-        fi
     fi
 
 fi
-
-# Path
-export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-# Fix Neovim mypy flake8 yapf isort bin path
-export PATH="$HOME/bin:$PATH:$HOME/workspace/neovim3/bin"
 
 # Language setting
 export PYTHONIOENCODING=UTF-8  # Fix python shell failed to write data to stream
@@ -58,21 +46,28 @@ export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
-#export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb)"
+export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb|fzf)"
 setopt HIST_IGNORE_SPACE  # ignore duplicated commands history list
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
 # setopt SHARE_HISTORY  # share command history data
 
 # Zsh Autosuggest
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=110,underline"
 
-# Load Z jump around, use zsh plugin
-# source $HOME/.z.sh
+# Path
+export XDG_CACHE_HOME="$HOME/.cache/Microsoft/Python Language Server"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+# Fix Neovim mypy flake8 yapf isort bin path
+export PATH="$HOME/bin:$HOME/workspace/neovim3/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # Pyenv
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
-    export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
+    export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
     eval "$(pyenv init -)"
 fi
 
@@ -86,12 +81,12 @@ fi
 
 if [ -d "$HOME/.cargo" ]; then
     export PATH="$HOME/.cargo/bin:$PATH"
-    export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
+    #export RUSTUP_DIST_SERVER="https://mirrors.tuna.tsinghua.edu.cn/rustup"
 fi
 
 # Pipenv
 if command -v pipenv >/dev/null 2>&1; then
-    export PIPENV_PYPI_MIRROR="https://pypi.tuna.tsinghua.edu.cn/simple"
+    #export PIPENV_PYPI_MIRROR="https://pypi.doubanio.com/simple/"
     export PIPENV_IGNORE_VIRTUALENVS=1
     export PIPENV_VERBOSITY=-1
     export PIPENV_SKIP_LOCK=true
@@ -102,12 +97,13 @@ fi
 # Fzf
 if [ -f "$HOME/.fzf.zsh" ]; then
     export FZF_DEFAULT_COMMAND='ag -i -U --hidden -g ""'
-    export FZF_DEFAULT_OPTS="--no-mouse --height 40% --reverse --border --prompt '>>>' \
+    export FZF_DEFAULT_OPTS="--no-mouse --height 40% --layout=reverse --border --prompt '>>>' \
         --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
-        --header 'A-j/k: preview down/up, C-v: open in nvim, C-y: copy, ?: toggle preview' \
+        --header 'A-j/k: preview down/up, C-v: open in nvim(vsplit), C-y: copy, ?: toggle preview' \
         --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
     # ctrl-t:fzf-file-widget
     # ctrl-r:serach-zsh-history
+    # ctrl-x:open in nvim(split)
     source $HOME/.fzf.zsh
 fi
 
@@ -129,11 +125,12 @@ alias pg='ps -ef | grep'
 alias ports='netstat -tulanp'
 alias pong='ping -c 5 ' # Ping limited
 alias tailf='tail -f'
-alias reload='source ~/.zshrc'
+alias reload='source $HOME/.zshrc'
 
 # Git alias
-alias gdc='git diff --cached'
+alias gup="git branch | awk '/^\\* / { print \$2 }' | xargs -I {} git branch --set-upstream-to=origin/{} {}"
 alias gll="git stash && git pull origin $(git_current_branch) && git stash pop"
+alias gdc="git dc"
 
 # Other alias
 alias tn='tmux -2 new -s'
@@ -142,17 +139,18 @@ alias rm=safe_rm
 alias cp=smart_cp
 alias sed=super_sed
 alias weather='curl wttr.in/~上海'
-alias myip='curl myip.ipip.net' # 'http://ipecho.net/plain;echo'
+alias myip='curl https://myip.ipip.net' # 'http://ipecho.net/plain;echo'
+alias iplocation="_f(){ curl https://cip.cc/\$1; }; _f"  # freeapi.ipip.net/{ip}
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
 alias resdns='dscacheutil -flushcache'
 alias netlisten='lsof -i -P | grep -i "listen"'
-alias seed='vim /tmp/`timestamp`.md'
 alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh, eval `ssh-agent -s`
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
 alias pip=pipenv
+alias pps='pipenv shell'
 alias vo='vi -o$#'
-alias clntrash='\rm -rf ~/.trash/*'
+alias clntrash='\rm -rf $HOME/.trash/*'
 
 # Docker alias
 alias dorkrmall='docker ps --all | tail -n 8 | awk -F ' ' '{print $1}' | xargs docker rm'

@@ -7,10 +7,8 @@
 " ######################################################################################################################
 
 " ======================================================================================================================
-" 1.0 Plugin manager (Plug) settings
+" 1.0 Plugin manager (Plug) settings {{{
 " ======================================================================================================================
-"{{{
-
 " Autoinstall {{{
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -21,71 +19,33 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 " }}}
 
+" ---------------------------------------------------------------------------------------------------------------------
+" 1.1 Plugin list {{{
+" ---------------------------------------------------------------------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
-
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" 1.1 Plugin list
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 filetype plugin indent off
 syntax off
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Language agnostic plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
-" Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
-" Deoplete Plugins
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
-Plug 'sebastianmarkow/deoplete-rust'
-
-Plug 'davidhalter/jedi-vim'  " Only Usage goto jump
-" Snippet engine (C-j)
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine.
-Plug 'honza/vim-snippets'
-" Automatically pair stuff
-Plug 'jiangmiao/auto-pairs'
-if has('nvim-0.4.0')
-  Plug 'ncm2/float-preview.nvim'
-  "Plug 'wsdjeg/notifications.vim' " float windows notification, Use Echo, Echoerr
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'bash-lsp/bash-language-server'
+Plug 'w0rp/ale'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Other languages {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
-" Syntax check
-Plug 'w0rp/ale' ", { 'do': 'pip install flake8 mypy isort yapf' }
-" Golang syntax
-"Plug 'fatih/vim-go', { 'for': 'go', 'on': 'GoInstallBinaries', 'tag': '*' }
-" Python automate format
-Plug 'mindriot101/vim-yapf'
 " Python auto breakpoint
-Plug 'ciknight/setbreakpoint'
-" Python auto set python venv
-Plug 'ciknight/python-venv'
-" Python sort import
-Plug 'fisadev/vim-isort'
-" Kotlin
-Plug 'udalov/kotlin-vim'
-" Rust
-"Plug 'rust-lang/rust.vim'
+"Plug 'ciknight/setbreakpoint'
+Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Interface improving {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
-" Nerdtree file browser
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
-" Nerdtree git extend
-Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'ryanoasis/vim-devicons'  " Icon
 " Airline
 Plug 'vim-airline/vim-airline'
@@ -94,47 +54,41 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tmhedberg/matchit'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
-" Vim-Multiple-Cursors
-Plug 'terryma/vim-multiple-cursors'
+" fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " External tools integration plugins {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " Auto create not exists dir
 Plug 'pbrisbin/vim-mkdir'
 " Rainbow pair
 Plug 'kien/rainbow_parentheses.vim'
 " Indent line
 Plug 'Yggdroot/indentLine'
-" Ag wrapper search and edit
-Plug 'dyng/ctrlsf.vim', { 'on': ['CtrlSF', 'CtrlSFToggle'] }  " similar to ack.vim
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
-" Git changes showed on line numbers
+" Git changes showed on line numbers, TODO: replace by coc-git
 Plug 'airblade/vim-gitgutter'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
-" Auto filejump
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-"Plug 'fszymanski/fzf-gitignore'
+" filejump
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 " Quick annotation
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
 Plug 'easymotion/vim-easymotion'
-" Wrapper of some vim/neovim's :terminal functions.
-Plug 'kassio/neoterm'
 "Plug 'myusuf3/numbers.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'voldikss/vim-floaterm'
+Plug 'honza/vim-snippets'
+Plug 'aperezdc/vim-template'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Text insertion/manipulation {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " Surround (cs"')
 Plug 'tpope/vim-surround'  " yss, cs, ysiw
 " Easy alignment, Use :Tab\"
@@ -146,25 +100,20 @@ Plug 'godlygeek/tabular', { 'on':  'Tabularize' }  " junegunn/vim-easy-align
 " ---------------------------------------------------------------------------------------------------------------------
 " Colorschemes {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 Plug 'icymind/NeoSolarized'
+Plug 'morhetz/gruvbox'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " Other {{{
 " ---------------------------------------------------------------------------------------------------------------------
-
 " More . repeat functionality
 Plug 'tpope/vim-repeat'
 " Did you mean file open
 Plug 'EinfachToll/DidYouMean'
+" Vim start time debug tool or 'dstein64/vim-startuptime'
+Plug 'tweekmonster/startuptime.vim'
 "}}}
-
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-" 1.2 End of plugin declaration
-" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-filetype plugin indent on
-syntax on
 
 call plug#end()
 "}}}
@@ -172,8 +121,6 @@ call plug#end()
 " ======================================================================================================================
 " 2.0 Basic settings (Neovim defaults: https://neovim.io/doc/user/vim_diff.html#nvim-option-defaults) {{{
 " ======================================================================================================================
-"{{{
-
 set encoding=utf-8                          " The encoding displayed.
 set fileencoding=utf-8                      " The encoding written to file.
 set termencoding=utf-8
@@ -183,10 +130,14 @@ set shell=/bin/zsh                          " Setting shell to zsh
 set showmode                                " Always show mode
 set showcmd                                 " Show commands as you type them
 "set textwidth=100                          " Text width is 100 characters, Auto wrap
-set cc=100                                  " hit 100 characters
-"set formatoptions=tcqmM                    " format ggvg=
+set cc=100                                  " hit 100 characters, alias cc=colorcolumn
+"set wrapmargin=0
+set nowrap                                  " 不自动折行
+set linebreak
 set cmdheight=1                             " Command line height, Better display for messages
-set pumheight=10                            " Completion window max size
+set pumheight=10                            " Completion window max size, popup_menu
+set pumblend=0                              " https://github.com/neovim/neovim/pull/9571, 不透明popup, 影响可读性
+set winblend=0
 set hidden                                  " Enables to switch between unsaved buffers and keep undo history
 set clipboard^=unnamed,unnamedplus          " Allow to use system clipboard
 set lazyredraw                              " Don't redraw while executing macros (better performance)
@@ -201,9 +152,9 @@ set suffixesadd+=.js,.rb                    " Add js and ruby files to suffixes
 set synmaxcol=200                           " Don't try to syntax highlight minified files, highlight max column
 set expandtab                               " Tab转换为空格
 set smarttab
+set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set mouse-=a                                " 鼠标暂不启用，a 是所有模式下
-set nowrap                                  " 不自动折行
+set mouse-=a                                " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
@@ -212,9 +163,17 @@ set tabstop=4                               " 每四行一个缩进
 set shiftround
 set shortmess+=c                            " don't give |ins-completion-menu| messages.
 set signcolumn=yes                          " always show signcolumns
-
+set whichwrap+=<,>,h,l                      " 箭头键可以跳到下一行
+set backspace=2
+set backspace=eol,start,indent
+set title
+set laststatus=2
+set showtabline=2
+set display=lastline
+set diffopt+=internal,algorithm:patience
 set number                                  " Line numbers on
 set numberwidth=1
+set ruler
 set relativenumber
 set cursorline cursorcolumn
 augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
@@ -222,7 +181,7 @@ augroup relative_numbser                    " 插入模式下用绝对行号, �
   autocmd InsertEnter * :set norelativenumber number
   autocmd InsertLeave * :set relativenumber
 augroup END
-augroup auto_hightlight                     " 高亮当前行
+augroup auto_highlight_cursor                     " 高亮光标行
   autocmd!
   autocmd WinEnter * set cursorline cursorcolumn
   autocmd WinLeave * set nocursorline nocursorcolumn
@@ -275,9 +234,9 @@ endif
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.6 White characters settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-set list                                  " Show listchars by default
-set listchars=tab:»·,trail:·              " Display extra whitespace
-set iskeyword+=_,$,@,%,#,-                " 带有如下符号的单词不要被换行分割
+set list                                        " Show listchars by default
+set listchars=tab:»·,trail:·                    ",eol:↵,nbsp:␣  " Display extra whitespace
+set iskeyword+=_,$,@,%,#,-                      " 带有如下符号的单词不要被换行分割
 "set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:·,nbsp:·
 "set showbreak=↪
 "}}}
@@ -287,6 +246,7 @@ set iskeyword+=_,$,@,%,#,-                " 带有如下符号的单词不要被
 " ---------------------------------------------------------------------------------------------------------------------
 filetype plugin on
 filetype indent on
+syntax on
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -304,28 +264,48 @@ set nofoldenable                            " 启动 vim 时关闭折叠代码
 " ---------------------------------------------------------------------------------------------------------------------
 setlocal omnifunc=                          " disable omnifunc
 set completeopt-=preview                    " Don't show preview scratch buffers
-"autocmd FileType python setlocal completeopt-=preview
 set nocompatible                            " 禁用Vi的兼容模式,去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
-set laststatus=2
+"}}}
+
+" ---------------------------------------------------------------------------------------------------------------------
+" 2.9.1 Command Window settings {{{
+" ---------------------------------------------------------------------------------------------------------------------
 set wildmenu                                " Tab自动补全时，单行菜单形式显示
-set wildmode=longest,list
+set wildignorecase
+set wildmode=longest,full                   " longest,list
 set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
 set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
-set wildignore+=*.pyc,                      " include __pycache__
+set wildignore+=*.pyc,__pycache__,
 set wildignore+=*DS_Store*
 set wildignore+=tmp/**,*/tmp/*
+set cpoptions+=I
+" neovim only
+if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
+  set shada='20,<50,s10
+  set inccommand=nosplit
+  set wildoptions+=pum
+  set signcolumn=yes:2
+  set pumblend=10
+endif
+
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.10 Neovim specific settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
 if has('nvim')
-  let g:loaded_python_provider=1                                   " Disable python 2 interface
+  let g:loaded_node_provider = 0
+  let g:loaded_ruby_provider = 0
+  let g:loaded_perl_provider = 0
+  let g:loaded_python_provider=0                                   " Disable python 2 interface
   let g:python_host_skip_check=1                                   " Skip python 2 host check
+
+  set pyxversion=3
   let g:python3_host_prog=$HOME.'/workspace/neovim3/bin/python'    " Set python 3 host program, using virtualenv
   let g:python3_host_skip_check=1                                  " Skip python 3 host check neovim module
   set inccommand=nosplit                                           " Live preview of substitutes and other similar commands
+  set pyxversion=3
 endif
 "}}}
 
@@ -346,12 +326,15 @@ let $LANG="zh_CN.utf-8"
 " -----------------------------------------------------
 " 2.13 File settings {{{
 " -----------------------------------------------------
+"set formatoptions=tcqmM                    " format ggvg=
 set fileformat=unix
+set formatexpr=CocAction('formatSelected')
 set nobackup                                " no file backup
 set noswapfile                              " New buffers will be loaded without creating a swapfile
 set confirm                                 " Need confrimation while exit
 set autowrite                               " Automatically :write before running commands
 set autoread                                " Set to auto read when a file is changed from the outside
+set nowritebackup
 set autowriteall
 cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when forgot to start vim using sudo
 "}}}
@@ -362,25 +345,24 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " indentLine will overwrite your "concealcursor" and "conceallevel" with default value
 let g:indentLine_concealcursor='inc'
 let g:indentLine_conceallevel=0
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,xhtml,css,xml,yaml,yml,vim setlocal shiftwidth=2 tabstop=2 expandtab
-autocmd FileType markdown setlocal fo-=t wrap
+autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2
+autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
 "}}}
 
 " ======================================================================================================================
-" 3.0 Mapping settings
+" 3.0 Mapping settings {{{
 " ======================================================================================================================
-"{{{
 
 " -----------------------------------------------------
 " 3.1 Setting leader {{{
 " -----------------------------------------------------
 "let g:mapleader="\<space>"
 let mapleader = ","
-set timeoutlen=500  " wait leader
+set timeoutlen=400  " wait leader
 "}}}
 
 " -----------------------------------------------------
@@ -444,11 +426,11 @@ vnoremap <C-d> <C-d>zz
 vnoremap <C-f> <C-f>zz
 vnoremap <C-b> <C-b>zz
 
-" Remap H and L (top, bottom of screen to left and right end of line)
-"nnoremap H ^
-"nnoremap L $
-"vnoremap H ^
-"vnoremap L g_
+" Remap H and L (top, bottom of screen to left and right end of line, breaks the head and low jump)
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L g_
 
 " More logical Y (default was alias for yy)
 nnoremap Y y$
@@ -466,9 +448,9 @@ xnoremap c "xc
 "nnoremap p p`]
 
 " Fix the cw at the end of line bug default vim has special treatment (:help cw)
-nmap cw ce
-nmap dw de
-nmap yw ye
+"nmap cw ce
+"nmap dw de
+"nmap yw ye
 
 " Uppercase word in insert mode
 inoremap <C-u> <ESC>mzgUiw`za
@@ -479,7 +461,7 @@ inoremap <Esc> <C-[>
 nnoremap <C-c> <C-[>
 nnoremap <Esc> <C-[>
 
-" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump)
+" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C- o)
 map <TAB> %
 silent! unmap [%
 silent! unmap ]%
@@ -568,8 +550,8 @@ nnoremap <leader>/ :let @/=""<CR>
 " Free
 "nnoremap <silent> <F1>
 " NERDTree wrapper
-nnoremap <silent> <F2> :call utils#nerdWrapper()<CR>
-" Free
+nnoremap <silent> <F2> :CocCommand explorer<CR>
+" TabBar
 nnoremap <silent> <F3> :call utils#TabBar()<CR>
 " Toggle spelling
 nnoremap <silent> <F4> :set spell!<CR> :set spell?<CR>
@@ -579,8 +561,8 @@ nnoremap <silent> <F4> :set spell!<CR> :set spell?<CR>
 " nnoremap <silent> <F6>
 " Toggle white characters visibility
 nnoremap <silent> <F7> :set list!<CR> :set list?<CR>
-" New term buffer
-nnoremap <silent> <F8> :terminal<CR>
+" Free
+" nnoremap <silent> <F8>
 " Fire REST Request
 " Free
 " nnoremap <silent> <F9>
@@ -596,13 +578,6 @@ nnoremap <F12> :call utils#showToggles()<CR>
 " -----------------------------------------------------
 " 3.6 Window / Buffer management {{{
 " -----------------------------------------------------
-
-" Intelligent windows resizing using ctrl + arrow keys
-"nnoremap <silent> <C-Right> :call utils#intelligentVerticalResize('right')<CR>
-"nnoremap <silent> <C-Left> :call utils#intelligentVerticalResize('left')<CR>
-"nnoremap <silent> <C-Up> :resize +1<CR>
-"nnoremap <silent> <C-Down> :resize -1<CR>
-
 " Buffers navigation and management
 nnoremap <silent> + :bn<CR>
 nnoremap <silent> _ :bp<CR>
@@ -616,8 +591,8 @@ nnoremap <silent> <leader>, <C-^>
 " -----------------------------------------------------
 
 " Quiting and saving all, command :
-cnoremap ww wqall
-cnoremap qq qall
+"cnoremap ww wqall
+"cnoremap qq qall
 "}}}
 
 " -----------------------------------------------------
@@ -642,36 +617,36 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 " ======================================================================================================================
-" 4.0 Plugins settings
+" 4.0 Plugins settings {{{
 " ======================================================================================================================
-"{{{
 
 " -----------------------------------------------------
-" 4.1 NERDTree {{{
+" 4.1 {{{
 " -----------------------------------------------------
-let g:NERDTreeWinSize=32
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '__pycache__']
-let g:NERDTreeWinPos="left"
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeHighlightCursorline=0
-let g:NERDTreeRespectWildIgnore=1
-let g:nerdtree_tabs_open_on_console_startup=1
-let g:NERDTreeQuitOnOpen=1
-" Automatically open a NERDTree if no files where specified
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTreeToggle | endif
-" Close vim if the only window left open is a NERDTree
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "}}}
 
 " -----------------------------------------------------
-" 4.2 Ultisnips settings {{{
+" 4.2 ale settings {{{
 " -----------------------------------------------------
-let g:UltiSnipsUsePythonVersion=3
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"
+let g:ale_enabled=0
+let g:ale_fix_on_save=1
+let g:ale_fixers = {
+\   '*': [
+\     'trim_whitespace',
+\     'remove_trailing_lines',
+\   ],
+\  'python': ["black"]
+\}
+let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
+
+"" if you don't want linters to run on opening a file
+let g:ale_linters={}
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'  " never,always
+let g:ale_lint_on_insert_leave=0
+let g:ale_lint_on_filetype_changed=0
+let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
@@ -680,7 +655,7 @@ let g:UltiSnipsEditSplit="vertical"
 if exists('&signcolumn')
   set signcolumn=yes
 else
-  let g:gitgutter_sign_column_always = 1
+  let g:gitgutter_sign_column_always=1
 endif
 
 let g:gitgutter_sign_added='+'
@@ -720,83 +695,21 @@ endif
 " 是否打开tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='minimalist' " molokai
-let g:airline#extensions#ale#enabled=1
+let g:airline#extensions#coc#enabled=1
 "}}}
 
 " -----------------------------------------------------
 " 4.4 FZF {{{
 " -----------------------------------------------------
-
-" Floating Windows function
-function! OpenFloatingWin()
-  let height = &lines - 3
-  let width = float2nr(&columns - (&columns * 2 / 10))
-  let col = float2nr((&columns - width) / 2)
-
-  " 设置浮动窗口打开的位置，大小等。
-  " 这里的大小配置可能不是那么的 flexible 有继续改进的空间
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': height * 0.3,
-        \ 'col': col + 30,
-        \ 'width': width * 2 / 3,
-        \ 'height': height / 2
-        \ }
-
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
-
-  " 设置浮动窗口高亮
-  call setwinvar(win, '&winhl', 'Normal:Pmenu')
-
-  setlocal
-        \ buftype=nofile
-        \ nobuflisted
-        \ bufhidden=hide
-        \ nonumber
-        \ norelativenumber
-        \ signcolumn=no
-endfunction
-
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
-
-" In Neovim, you can set up fzf window using a Vim command
-let g:fzf_layout = { 'window': 'enew' }
-let g:fzf_layout = { 'window': '-tabnew' }
-let g:fzf_layout = { 'window': '10split enew' }
-if has('nvim-0.4.0')
-  let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
-endif
-
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-" Enable per-command history.
 " CTRL-N and CTRL-P will be automatically bound to next-history and
 " previous-history instead of down and up. If you don't like the change,
 " explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+
+let g:fzf_preview_floating_window_rate = 0.8
+
+" Enable per-command history.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
 "}}}
 
 " -----------------------------------------------------
@@ -804,7 +717,6 @@ let g:fzf_history_dir = '~/.local/share/fzf-history'
 " -----------------------------------------------------
 let g:rbpt_colorpairs=[
             \ ['brown',       'RoyalBlue3'],
-            \ ['Darkblue',    'SeaGreen3'],
             \ ['darkgray',    'DarkOrchid3'],
             \ ['darkgreen',   'firebrick3'],
             \ ['darkcyan',    'RoyalBlue3'],
@@ -813,7 +725,6 @@ let g:rbpt_colorpairs=[
             \ ['brown',       'firebrick3'],
             \ ['gray',        'RoyalBlue3'],
             \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['Darkblue',    'firebrick3'],
             \ ['darkgreen',   'RoyalBlue3'],
             \ ['darkcyan',    'SeaGreen3'],
             \ ['darkred',     'DarkOrchid3'],
@@ -821,6 +732,8 @@ let g:rbpt_colorpairs=[
             \ ]
             " 不加入这行, 防止黑色括号出现, 很难识别
             " \ ['black',       'SeaGreen3'],
+            " \ ['Darkblue',    'SeaGreen3'],
+            " \ ['Darkblue',    'firebrick3'],
 let g:rbpt_max=16
 let g:rbpt_loadcmd_toggle=0
 au VimEnter * RainbowParenthesesToggle
@@ -830,52 +743,41 @@ au Syntax * RainbowParenthesesLoadBraces
 "}}}
 
 " -----------------------------------------------------
-" 4.6 Deoplete autocomplete settings {{{
+" 4.6 coc settings {{{
 " -----------------------------------------------------
-let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_smart_case=1
-let g:deoplete#enable_refresh_always=1
-let g:deoplete#file#enable_buffer_path=1
+let g:coc_global_extensions = [
+\  'coc-json',
+\  'coc-pairs',
+\  'coc-python',
+\  'coc-rls',
+\  'coc-vimlsp',
+\  'coc-snippets',
+\  'coc-highlight',
+\  'coc-marketplace',
+\  'coc-yaml',
+\  'coc-emoji',
+\  'coc-go',
+\  'coc-ci',
+\  'coc-lists',
+\  'coc-spell-checker',
+\  'coc-floaterm',
+\  'coc-actions',
+\  'coc-markdownlint',
+\  'coc-discord',
+\  'coc-calc',
+\  'coc-explorer',
+\  'coc-fzf-preview',
+\  'coc-yank',
+\  'coc-pyright',
+\]
+let g:coc_snippet_next='<tab>'
 
-let g:deoplete#sources#jedi#server_timeout=8
-let g:deoplete#sources#jedi#enable_cache=1
-let g:deoplete#sources#jedi#statement_length=70
-let g:deoplete#sources#jedi#enable_typeinfo=1
-let g:deoplete#sources#jedi#show_docstring=1
+" debug coc
+"let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
+"let $NVIM_COC_LOG_LEVEL='debug'
+"let g:node_client_debug=1
+"Use command :call coc#client#open_log() to open log file, or use :echo $NODE_CLIENT_LOG_FILE to get file path of log.
 
-"let deoplete#sources#jedi#python_path=''  # jedi server python path
-"let g:deoplete#sources#jedi#extra_path=''  # sys.path, auto reload jedi
-
-let g:deoplete#sources#go#gocode_binary=$GOPATH.'/bin/gocode-gomod'
-let g:deoplete#sources#go#sort_class=['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#use_cache=1
-let g:deoplete#sources#go#package_dot=1
-let g:deoplete#sources#go#pointer=1
-let g:deoplete#sources#go#builtin_objects=1
-let g:deoplete#sources#go#source_importer=1
-let g:deoplete#sources#go#unimported_packages=1
-
-let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path=$HOME.'/workspace/rust/src'
-
-let g:deoplete#sources={}
-let g:deoplete#sources._=['around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.python=['jedi', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.go=['go', 'around', 'buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.rust=['rust', 'around', 'buffer', 'member', 'file', 'ultisnips']
-"}}}
-
-" -----------------------------------------------------
-" 4.6.1 float-preview settings {{{
-" -----------------------------------------------------
-let g:float_preview#docked=0
-function! DisableExtras()
-  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
-endfunction
-
-autocmd User FloatPreviewWinOpen call DisableExtras()
 "}}}
 
 " -----------------------------------------------------
@@ -904,57 +806,19 @@ let g:colorizer_nomap=1
 "}}}
 
 " -----------------------------------------------------
-" 4.10 vim-go settings {{{
+" 4.10 settings {{{
 " -----------------------------------------------------
-let g:go_autodetect_gopath=1
-let g:go_version_warning=1
 "}}}
 
 " -----------------------------------------------------
-" 4.11 ale {{{
+" 4.11 Floaterm settings {{{
 " -----------------------------------------------------
-let g:ale_linters={
-\   'python' : ['flake8', 'mypy'],
-\   'sh' : ['shellcheck'],
-\   'go': ['golint'],
-\}
-"\   'rust': ['cargo', 'rustc']
-let g:ale_fixers = {
-\   '*': [
-\     'trim_whitespace',
-\     'remove_trailing_lines',
-\   ],
-\   'python': ['isort', 'yapf'],
-\   'go': ['gofmt'],
-\}
-"\   'rust': ['rustfmt']
-let g:ale_lint_on_text_changed='always'  " never,always
-" if you don't want linters to run on opening a file
-let g:ale_lint_on_enter=1
-let g:ale_lint_on_insert_leave=1
-
-let g:ale_lint_on_save=1
-let g:ale_fix_on_save=1
-
-let g:ale_sign_column_always=1
-let g:ale_set_highlights=1
-let g:ale_sign_error='•'
-let g:ale_sign_warning='•'
-let g:ale_echo_msg_error_str='E'
-let g:ale_echo_msg_warning_str='W'
-let g:ale_echo_msg_format='[%linter%] %code% %s [%severity%]'
-
-let g:ale_rust_cargo_use_check=1
+let g:floaterm_keymap_new = 'T'
+let g:floaterm_position = 'center'
 "}}}
 
 " -----------------------------------------------------
-" 4.12 Yapf {{{
-" -----------------------------------------------------
-let g:yapf_style=$HOME."/.config/yapf/style"
-"}}}
-
-" -----------------------------------------------------
-" 4.13 Nerdcommenter {{{
+" 4.12 Nerdcommenter {{{
 " -----------------------------------------------------
 " <leader>cc   加注释
 " <leader>cu   解开注释
@@ -971,36 +835,15 @@ let g:NERDCustomDelimiters={ 'c': { 'left': '/**','right': '*/' } }
 let g:NERDToggleCheckAllLines=1
 "}}}
 
-" -----------------------------------------------------
-" 4.13 jedi-vim {{{
-" -----------------------------------------------------
-let g:jedi#auto_initialization=1
-let g:jedi#auto_vim_configuration=0
-let g:jedi#show_call_signatures="0"
-let g:jedi#completions_enabled=0
-let g:jedi#smart_auto_mappings=0
-let g:jedi#popup_on_dot=0
-let g:jedi#popup_select_first=0
-let g:jedi#auto_close_doc=1
-let g:jedi#force_py_version=3  " fix autojump to site-packages, davidhalter/jedi-vim/issues/744
-"}}}
-
 "}}}
 
 " ======================================================================================================================
-" 5.0 Plugin mappings
+" 5.0 Plugin mappings {{{
 " ======================================================================================================================
-"{{{
 
 " -----------------------------------------------------
-" 5.1 Ultisnips {{{
+" 5.1 {{{
 " -----------------------------------------------------
-" Disable built-in cx-ck to be able to go backward
-"inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger="<C-h>"  " do not use tab, if you use deoplete and ycm
-let g:UltiSnipsListSnippets="<C-s>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 "}}}
 
 " -----------------------------------------------------
@@ -1020,91 +863,106 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.4 Deoplete autocomplete {{{
+" 5.4 {{{
 " -----------------------------------------------------
-" Insert <TAB> or select next match
-inoremap <silent> <expr> <Tab> utils#tabComplete()
-
-" Manually trigger tag autocomplete
-inoremap <silent> <expr> <C-]> utils#manualTagComplete()
-
-" <C-h>, <BS>: close popup and delete backword char
-inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-nmap <buffer> gd <plug>DeopleteRustGoToDefinitionDefault
-nmap <buffer> K  <plug>DeopleteRustShowDocumentation
 "}}}
 
 " -----------------------------------------------------
-" 5.5 CtrlSF {{{
+" 5.5 Coc {{{
 " -----------------------------------------------------
-"nnoremap <leader>g :CtrlSF<Space>
-"nnoremap <leader>G :CtrlSFToggle<Space>
-let g:ctrlsf_mapping = {
-      \ 'next'    : 'n',
-      \ 'prev'    : 'N',
-      \ 'quit'    : 'q',
-      \ 'openb'   : '',
-      \ 'split'   : 's',
-      \ 'tab'     : '',
-      \ 'tabb'    : '',
-      \ 'popen'   : '',
-      \ 'pquit'   : '',
-      \ 'loclist' : '',
-      \ }
-nnoremap <silent> <leader>gs :call utils#searchCurrentWordWithAg()<CR>
+" Use `M-j` and `M-k` to navigate diagnostics
+nmap <silent> <M-j> <Plug>(coc-diagnostic-next)
+nmap <silent> <M-k> <Plug>(coc-diagnostic-prev)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if coc#util#has_float()
+    call coc#util#float_hide()
+  elseif (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap for codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+
+" Usage: aw for current word, aap for current paragraph
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+" use <tab> for trigger completion and navigate to the next complete item
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+
+" use <tab> for trigger completion and navigate next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" ---- snippet ----
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
 "}}}
 
 " -----------------------------------------------------
-" 5.6 ale {{{
+" 5.6 Tabularize -> [a]lign {{{
 " -----------------------------------------------------
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+vnoremap <leader>ta :Tabularize /
 "}}}
 
 " -----------------------------------------------------
-" 5.7 Tabularize -> [a]lign {{{
+" 5.7 FZF {{{
 " -----------------------------------------------------
-vnoremap <leader>a :Tabularize /
+nnoremap <Leader>p :CocCommand fzf-preview.ProjectFiles<CR>
 "}}}
 
 " -----------------------------------------------------
-" 5.8 vim-multiple-cursors {{{
-" -----------------------------------------------------
-let g:multi_cursor_use_default_mapping=1
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-m>'
-let g:multi_cursor_select_all_word_key = '<A-m>'
-let g:multi_cursor_start_key           = 'g<C-m>'
-let g:multi_cursor_select_all_key      = 'g<A-m>'
-let g:multi_cursor_next_key            = '<C-m>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-"}}}
-
-
-" -----------------------------------------------------
-" 5.9 jedi-vim {{{
-" -----------------------------------------------------
-let g:jedi#goto_command="<leader>gg"
-let g:jedi#goto_assignments_command="<leader>ga"
-let g:jedi#goto_definitions_command="<leader>gd"
-let g:jedi#documentation_command="K"
-let g:jedi#usages_command="<leader>gu"
-let g:jedi#rename_command="<leader>gr"
-"}}}
-
-" -----------------------------------------------------
-" 5.10 FZF {{{
-" -----------------------------------------------------
-nnoremap <Leader>p :FZF<Cr>
-nnoremap <Leader>a :Ag<Cr>
-"}}}
-
-" -----------------------------------------------------
-" 5.11 easymotion {{{
+" 5.8 easymotion {{{
 " -----------------------------------------------------
 map <Leader> <Plug>(easymotion-prefix)
 
@@ -1125,14 +983,14 @@ nmap <Leader>f <Plug>(easymotion-overwin-w)
 "}}}
 
 " -----------------------------------------------------
-" 5.12 vim-miniyank {{{
+" 5.9 vim-miniyank {{{
 " -----------------------------------------------------
 map p <Plug>(miniyank-autoput)
 map P <Plug>(miniyank-autoPut)
 "}}}
 
 " -----------------------------------------------------
-" 5.13 vim-surround {{{
+" 5.10 vim-surround {{{
 " -----------------------------------------------------
 " ysiwb
 " yssb
@@ -1143,36 +1001,44 @@ map P <Plug>(miniyank-autoPut)
 "}}}
 
 " ======================================================================================================================
-" 6.0 Color and highlighting settings
+" 6.0 Color and highlighting settings {{{
 " ======================================================================================================================
-"{{{
-" Syntax highlighting {{{
-syntax on
-"}}}
-
-" Color scheme {{{
+" Color scheme
+"colorscheme NeoSolarized
+colorscheme gruvbox
 set background=dark
-colorscheme NeoSolarized
-"}}}
 
-" Highlight VCS conflict markers {{{
+" Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-"}}}
 
-" Highlight term cursor differently {{{
-highlight TermCursor ctermfg=green guifg=green
-"}}}
+" Fix jsonc comment highlight
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
-" Remove underline in folded lines {{{
-highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
-"}}}
-
-" Link highlight groups to improve buftabline colors {{{
+" Link highlight groups to improve buftabline colors
 hi! link BufTabLineCurrent Identifier
 hi! link BufTabLineActive Comment
 hi! link BufTabLineHidden Comment
 hi! link BufTabLineFill Comment
-"}}}
+
+" opaque pmeue
+hi PmenuSel blend=0
+
+" Highlight term cursor differently
+"highlight TermCursor ctermfg=green guifg=green
+
+" Set floaterm window's background to black
+"hi FloatermNF guibg=#002b36
+" Set floating window border line color to cyan, and background to orange
+"hi FloatermBorderNF guibg=#002b36 guifg=cyan
+
+" Remove underline in folded lines
+"highlight! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
+
+" Use transparent background color
+"highlight Quote ctermbg=109 guifg=#83a598
+" Background transparent
+"highlight Normal guibg=none
+"highlight NonText guibg=none
 
 "}}}
 
@@ -1193,11 +1059,6 @@ augroup auto_spellcheck
 augroup END
 "}}}
 
-" Remove trailing whitespaces automatically before save {{{
-" use ale
-"augroup strip_ws
-"  autocmd BufWritePre * call utils#stripTrailingWhitespaces()
-"augroup END
 "}}}
 
 " Resize splits when the window is resized {{{
@@ -1222,9 +1083,10 @@ augroup prevent_q_colon
 augroup END
 
 " Auto Set File Title
-augroup set_file_title
-  autocmd BufNewFile *.cpp,*.sh,*.rb,*.java,*.py,*.c,*.h,*.lua call utils#SetFileTitle()
-augroup END
+"augroup set_file_title
+"  " coc-template deprecated
+"  autocmd BufNewFile *.py,*.sh,*.go CocCommand template.templateTop
+"augroup END
 
 " -----------------------------------------------------
 " 7.1 Run something after save {{{
@@ -1235,22 +1097,6 @@ augroup END
 "augroup END
 "}}}
 
-"}}}
-
-" ======================================================================================================================
-" 8.0 Todo, Notes
-" ======================================================================================================================
-"{{{
-
-" -----------------------------------------------------
-" 8.1 Todo {{{
-" -----------------------------------------------------
-" 1. Update README file.
-"}}}
-
-" -----------------------------------------------------
-" 8.2 Notes {{{
-" -----------------------------------------------------
 "}}}
 
 "}}}

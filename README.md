@@ -29,7 +29,7 @@ sh install.sh
 
 ```shell
 cd /usr/local/bin/
-rm flake8 yapf mypy pyflake isort
+rm flake8 black mypy isort
 ```
 
 ### Upgrade neovim virtualenv

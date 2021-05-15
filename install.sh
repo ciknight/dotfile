@@ -1,7 +1,5 @@
 #!/bin/bash
-
-PWD_DIR=`pwd`
-echo 'installing..., current dir: ' $PWD_DIR
+echo 'installing..., current dir: ' $PWD
 SYSTEM=`uname -s`
 
 # first, initialize ssh key
@@ -18,7 +16,8 @@ if [ $SYSTEM = "Darwin" ]; then
         echo 'Install homebrew...'
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    brew install zsh git htop tmux
+    brew install zsh git htop tmux lazygit
+
     brew install golang
     curl -sL install-node.now.sh/lts | bash
     curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -31,14 +30,17 @@ if [ $SYSTEM = "Darwin" ]; then
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
 
+    # openvpn
+    # https://apple.stackexchange.com/questions/203115/installed-openvpn-with-brew-but-it-doesnt-appear-to-be-installed-correctly
+
     # Install neovim
     if hash nvim 2> /dev/null; then
         echo 'Already install neovim'
     else
-        wget -O $PWD_DIR/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.2/nvim-macos.tar.gz
-        tar xzvf $PWD_DIR/opt/nvim-macos.tar.gz -C $PWD_DIR/opt/
+        wget -O $PWD/opt/nvim-macos.tar.gz https://github.com/neovim/neovim/releases/download/v0.4.4/nvim-macos.tar.gz
+        tar xzvf $PWD/opt/nvim-macos.tar.gz -C $PWD/opt/
         echo 'Input passwd, link neovim'
-        sudo ln -s $PWD_DIR/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
+        sudo ln -s $PWD/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
     fi
 
     # brew cask install java
@@ -47,6 +49,12 @@ if [ $SYSTEM = "Darwin" ]; then
     # git clone https://github.com/powerline/fonts.git ~/.fonts
     # wget https://gist.github.com/baopham/1838072/raw/616d338cea8b9dcc3a5b17c12fe3070df1b738c0/Monaco%2520for%2520Powerline.otf
     # sh ~/.fonts/install.sh
+
+    # https://github.com/ryanoasis/nerd-fonts
+    # curl -L https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh | bash
+
+    # iterm Gruvbox Dark
+    # https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Gruvbox%20Dark.itermcolors
 elif [ $SYSTEM = "Linux" ]; then
     echo 'updating apt and install software'
     if which apt 2>&1 > /dev/null; then
@@ -59,11 +67,13 @@ elif [ $SYSTEM = "Linux" ]; then
         # yum -y install https://centos7.iuscommunity.org/ius-release.rpm  # CentOS 7,
         yum update
         yum install openssl-devel readline-devel sqlite-devel
+        yum install bzip2-devel libffi-devel python-devel
         yum install -y git htop vim zsh tmux neovim
+        yum install -y cmake jq ack-grep the_silver_searcher fd-find ctags curl tig
         yum install -y gcc gcc-c++ golang npm
-        yum install -y ctags python-devel curl tig
-        yum install -y cmake jq ack-grep the_silver_searcher
-        yum install -y fd-find
+        curl -sL install-node.now.sh/lts | bash
+        curl -o- -L https://yarnpkg.com/install.sh | bash
+        # cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     else
         echo 'Unsupport Linux System'
         exit 0
@@ -79,7 +89,9 @@ if [ ! -d ~/workspace ]; then
     # make workspace
     mkdir ~/workspace
     # make go workspace
-    mkdir -p $HOME/workspace/go/{bin,pkg,src}
+    mkdir -p ~/workspace/go/{bin,pkg,src}
+    # coc-vim typings path
+    mkdir -p ~/.cache/typings
 fi
 
 # rust
@@ -97,11 +109,11 @@ go get -u github.com/stamblerre/gocode
 if [ -d ~/.pip ] ; then
     mv ~/.pip ~/.pip.old
 fi
-ln -s $PWD_DIR/.pip ~/
+ln -s $PWD/.pip ~/
 
-if [ ! -f $PWD_DIR/opt/get-pip.py ] ; then
+if [ ! -f $PWD/opt/get-pip.py ] ; then
     echo 'Input passwd, install pip'
-    wget https://bootstrap.pypa.io/get-pip.py -O $PWD_DIR/opt/get-pip.py && sudo $PYTHON $PWD_DIR/opt/get-pip.py
+    wget https://bootstrap.pypa.io/get-pip.py -O $PWD/opt/get-pip.py && sudo $PYTHON $PWD/opt/get-pip.py
     # python util
     sudo pip install virtualenv pipenv
 fi
@@ -122,8 +134,8 @@ else
     export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
     eval "$(pyenv init -)"
     # Install python3.7
-    pyenv install 3.7.4
-    pyenv global 3.7.4
+    pyenv install 3.7.6
+    pyenv global 3.7.6
 fi
 
 # fzf
@@ -138,19 +150,28 @@ fi
 if [ ! -d ~/workspace/neovim3 ] ; then
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
-    pip install pynvim flake8 mccabe flake8-isort flake8-bugbear flake8-comprehensions jedi yapf isort mypy ipdb
+    # mccabe  # check McCabe complexity
+    # flake8-eradicate # Found commented out code
+    pip install pynvim flake8 \
+        flake8-bugbear \
+        flake8-comprehensions \
+        flake8-black \
+        jedi black isort \
+        flake8-todo \
+        neovim-remote
 fi
+
 #pip install mycli ipython ipdb cheat forex-python
 
 # vim
 #if [ -f ~/.vimrc ] ; then
 #    mv ~/.vimrc ~/.vimrc.old
 #fi
-#ln -s $PWD_DIR/.vimrc ~/
+#ln -s $PWD/.vimrc ~/
 #if [ -f ~/.vim ] ; then
 #    mv ~/.vim ~/.vimrc.old
 #fi
-#ln -s $PWD_DIR/.vim ~/
+#ln -s $PWD/.vim ~/
 
 # tmux
 if [ ! -d ~/.tmux/plugins/tpm ] ; then
@@ -159,56 +180,56 @@ fi
 if [ -f ~/.tmux.conf ] ; then
     mv ~/.tmux.conf ~/.tmux.conf.old
 fi
-ln -s $PWD_DIR/.tmux.conf ~/
+ln -s $PWD/.tmux.conf ~/
 
 # ycm extra config
-ln -s $PWD_DIR/.ycm_extra_conf ~/
+ln -s $PWD/.ycm_extra_conf ~/
 
 # flake8 config
-ln -s $PWD_DIR/.flake8 ~/
+ln -s $PWD/.flake8 ~/
 
 # npm config
-ln -s $PWD_DIR/.npmrc ~/
+ln -s $PWD/.npmrc ~/
 
 # conda config
-ln -s $PWD_DIR/.condarc ~/
+ln -s $PWD/.condarc ~/
 
 # home bin
 if [ ! -d ~/bin ]; then
-    ln -s $PWD_DIR/bin ~/
+    ln -s $PWD/bin ~/
 fi
 
 # ipython
 if [ -d ~/.ipython ]; then
     mv ~/.ipython ~/.ipython.old
 fi
-ln -s $PWD_DIR/.ipython ~/
+ln -s $PWD/.ipython ~/
 
 # isort config
 if [ -d ~/.isort.cfg ]; then
     mv ~/.isort.cfg ~/.isort.cfg.old
 fi
-ln -s $PWD_DIR/.isort.cfg ~/
+ln -s $PWD/.isort.cfg ~/
 
 # mypy config
-ln -s $PWD_DIR/.mypy.ini ~/
+ln -s $PWD/.mypy.ini ~/
 
 # ack config
-ln -s $PWD_DIR/.ackrc ~/
+ln -s $PWD/.ackrc ~/
 
 # ag config
-ln -s $PWD_DIR/.agignore ~/
+ln -s $PWD/.agignore ~/
 
 # .config
 if [ -d ~/.config ] ; then
     mv ~/.config ~/.config.old
 fi
-ln -s $PWD_DIR/.config ~/
+ln -s $PWD/.config ~/
 
 # git config
-ln -s $PWD_DIR/.gitconfig ~/
-ln -s $PWD_DIR/.gitmessage ~/
-ln -s $PWD_DIR/.gitignore.global ~/
+ln -s $PWD/.gitconfig ~/
+ln -s $PWD/.gitmessage ~/
+ln -s $PWD/.gitignore.global ~/
 
 # zsh
 if [ ! -d ~/.oh-my-zsh ]; then
@@ -217,13 +238,10 @@ fi
 if [ ! -f ~/.zshrc ] ; then
     mv ~/.zshrc ~/.zsh.old
 fi
-ln -s $PWD_DIR/.zshrc ~/.zshrc
-ln -s $PWD/.zshenv ~/.zshenv
+ln -s $PWD/.zshrc ~/
+ln -s $PWD/.zshenv ~/
 
-# z jump around, use zsh plugin
-#if hash z 2>/dev/null; then
-#    wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.z.sh
-#fi
+ln -s $PWD/pyrightconfig.json ~/
 
 # zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions

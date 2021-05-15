@@ -1,1 +1,134 @@
-{}
+{
+  "coc.preferences.rootPatterns": [
+    ".coc",
+    ".git",
+    ".vim",
+    ".vscode"
+  ],
+  "coc.preferences.formatOnType": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "go",
+    "rust",
+    "json",
+    "yaml"
+  ],
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.floatActions": true, // K Show Doc
+  "coc.preferences.previewAutoClose": true,
+  "coc.preferences.jumpCommand": "drop",
+  "coc.source.buffer.ignoreGitignore": false,
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.enableFloatHighlight": true,
+  "coc.preferences.colorSupport": true,
+  "suggest.maxPreviewWidth": 100,
+  "suggest.labelMaxLength": 300,
+  "suggest.autoTrigger": "always",
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.noselect": true,
+  "suggest.minTriggerInputLength": 1,
+  "suggest.snippetIndicator": "►",
+  "suggest.floatEnable": true,
+  "suggest.enablePreview": true,
+  "suggest.detailMaxLength": 80,
+  "suggest.asciiCharactersOnly": true,
+  "suggest.timeout": 5000, // jedi timeout
+  "diagnostic.enable": true,
+  "diagnostic.displayByAle": false,
+  "diagnostic.virtualText": false,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.separateRelatedInformationAsDiagnostics": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.maxWindowWidth": 100,
+  "diagnostic.maxWindowHeight": 10,
+  "diagnostic.messageDelay": 200,
+  "diagnostic.enableMessage": "always",
+  "diagnostic.messageTarget": "float",
+  "diagnostic.enableHighlightLineNumber": true,
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "ℹ",
+  "diagnostic.hintSign": "➤",
+  "snippets.ultisnips.usePythonx": false,
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "gosnippets/UltiSnips"
+  ],
+  "codeLens.enable": true,
+  "pairs.enableBackspace": true,
+  "signature.enable": true,
+  "signature.maxWindowWidth": 100,
+  "highlight.disableLanguages": [
+    "python",
+    "go"
+  ],
+  "python.jediEnabled": false,
+  "python.jediPath": "${env.HOME}/workspace/neovim3/lib/python3.7/site-packages/",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "${env.HOME}/workspace/neovim3/bin/flake8",
+  // "python.formatting.provider": "black",
+  // "python.formatting.blackPath": "${env.HOME}/workspace/neovim3/bin/black",
+  // "python.linting.mypyEnabled": true,
+  // "python.linting.mypyPath": "${env.HOME}/workspace/neovim3/bin/mypy",
+  "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
+  "python.sortImports.args": [
+    "--settings-path",
+    "${env.HOME}/.isort.cfg"
+  ],
+  "python.autoComplete.addBrackets": true,
+  "python.autoComplete.extraPaths": [
+    "src/",
+    "src/protos",
+    "scripts/",
+    "protos/"
+  ],
+  "python.disableInstallationCheck": false,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.useLibraryCodeForTypes": true,
+  "python.analysis.diagnosticEnabled": true,
+  "python.analysis.autoSearchPaths": true,
+  "json.format.enable": true,
+  "yaml.format.enable": true,
+  "markdownlint.onOpen": true,
+  "markdownlint.onChange": true,
+  "markdownlint.config": {
+    "default": true,
+    "line-length": false
+  },
+  "cSpell.language": "en",
+  "cSpell.enabledLanguageIds": [
+    "git-commit",
+    "go",
+    "markdown",
+    "python",
+    "rust",
+    "text",
+    "yaml",
+    "yml"
+  ],
+  "cSpell.userWords": [
+    "asyncio",
+    "fenc",
+    "hexlify",
+    "pytest",
+    "struct",
+    "submodule",
+    "unhexlify"
+  ],
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "filetypes": [
+        "sh"
+      ],
+      "args": [
+        "start"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
+    }
+  }
+}

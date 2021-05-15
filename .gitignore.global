@@ -121,3 +121,7 @@ ssh/
 *.pub
 id_rsa
 *.pem
+
+# coc
+.coc/
+.vim/

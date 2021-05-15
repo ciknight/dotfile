@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ ! $1 ]; then
+    echo 'What do you seach for?'
+    exit 1
+fi
+
+aws ec2 describe-instances --filters "Name=tag:Name,Values=*${1}*" \
+    --query 'Reservations[*].Instances[*].{Instance:InstanceId,InstanceType:InstanceType,PrivateIp:PrivateIpAddress,AZ:Placement.AvailabilityZone,Name:Tags[?Key==`Name`]|[0].Value}' \
+    --output table

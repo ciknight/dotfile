@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-file=$(echo $1|sed 's/ /?/g')
-target_file=$(echo $2|sed 's/ /?/g')
-
+_file=$(echo $1|sed 's/ /?/g')
+_target_file=$(echo $2|sed 's/ /?/g')
+file="$(dirname $_file)/$(basename $_file)"
+target_file="$(dirname $_target_file)/$(basename $_target_file)"
 
 function file_exist()
 {
@@ -30,9 +31,13 @@ else
     exit 1
 fi
 
-if [ -d $target_file ]; then
+file_name=${_file##*/}
+if [ -f "$target_file/$file_name" ]; then
+    target_file=$target_file/$file_name
     file_exist;
 elif [ -f $target_file ]; then
+    file_exist;
+elif [ -d $target_file ]; then
     file_exist;
 fi
 
