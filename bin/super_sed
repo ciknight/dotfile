@@ -4,5 +4,5 @@ if [ ! $1 ]; then
     echo 'what do you replace for?'
 else
     # MACOS
-    sed -i -e "s/$1/$2/g" `grep "$1" -rl ./*`
+    sed -i '' "s/$1/$2/g" `grep "$1" -rl ./*`
 fi
