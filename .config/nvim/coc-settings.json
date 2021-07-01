@@ -114,14 +114,20 @@
     "yml"
   ],
   "cSpell.userWords": [
+    "POSTGRES",
     "asyncio",
+    "circleci",
+    "eval",
     "fenc",
     "hexlify",
     "ipfs",
     "pytest",
+    "rabbitmq",
     "struct",
     "submodule",
-    "unhexlify"
+    "unhexlify",
+    "venv",
+    "virtualenv"
   ],
   "languageserver": {
     "bash": {
