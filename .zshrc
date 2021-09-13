@@ -1,14 +1,5 @@
-# Path to your oh-my-zsh installation.
-if [ -f "/tmp/MYPATH" ]; then
-    # init /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
-    # cleanup -/etc/paths -.zshrc -.zprofile -.bash_profile -.bashrc -.profile -/etc/profile -.zshenv
-    # typeset -U PATH
-    PATH=`cat /tmp/MYPATH`
-else
-    echo $PATH > "/tmp/MYPATH"
-fi
-
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_LOCAL=$HOME/.zshrc_local
 
 # Set name of the theme to load.
 ZSH_THEME="amuse"  # must be before source oh-my-zsh.sh
@@ -20,6 +11,7 @@ if [ $SYSTEM = "Darwin" ] ; then
 elif [ $SYSTEM = "Linux" ] ; then
     plugins=(git systemd zsh-autosuggestions z)
 fi
+
 source $ZSH/oh-my-zsh.sh
 
 if [ $SYSTEM = "Darwin" ] ; then
@@ -169,9 +161,6 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # Load local zsh env
-zshrc_local=$HOME/.zshrc_local
-if [ -f $zshrc_local ]; then
-    source $zshrc_local
+if [ -f $ZSH_LOCAL ]; then
+    source $ZSH_LOCAL
 fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -43,7 +43,7 @@ if [ $SYSTEM = "Darwin" ]; then
         sudo ln -s $PWD/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
     fi
 
-    # brew cask install java
+    # brew cask install java or download java sdk.
 
     # install powerline fonts, set terminal font support powerline
     # git clone https://github.com/powerline/fonts.git ~/.fonts
@@ -128,6 +128,7 @@ else
     # pyenv, https://github.com/pyenv/pyenv-installer.git
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
     mkdir $(pyenv root)/cache
+
     # enable pyenv
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PATH"
@@ -245,4 +246,5 @@ ln -s $PWD/pyrightconfig.json ~/
 
 # zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
 source ~/.zshrc
