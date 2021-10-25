@@ -58,8 +58,10 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Pyenv
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
+    export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
     export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
+    eval "$(pyenv init --path)"
+    # eval "$(pyenv virtualenv-init -)"
     eval "$(pyenv init -)"
 fi
 
