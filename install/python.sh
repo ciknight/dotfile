@@ -1,6 +1,6 @@
 #! /bin/sh
 
-install () {
+install_py () {
     ln -s $PWD/config/python/flake8 $HOME/.flake8
     ln -s $PWD/config/python/ipython $HOME/.ipython
     ln -s $PWD/config/python/isort.cfg $HOME/.isort.cfg
@@ -10,7 +10,7 @@ install () {
     echo "install python done"
 }
 
-uninstall () {
+uninstall_py () {
     # TODO: implement
     echo "implement"
 }
