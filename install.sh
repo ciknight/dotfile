@@ -15,8 +15,11 @@ if [ $SYSTEM = "Darwin" ]; then
     else
         echo 'Install homebrew...'
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        # arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
-    brew install zsh git htop tmux lazygit
+
+    # python dependency
+    brew install openssl@1.1 readline sqlite3 xz zlib bzip2 libffi pkg-config
 
     brew install golang
     curl -sL install-node.now.sh/lts | bash
@@ -25,6 +28,7 @@ if [ $SYSTEM = "Darwin" ]; then
 
     # ack, ag, pt or rg, support vim ctrlsf and tagbar
     brew install ack the_silver_searcher ctags
+    brew install zsh git htop tmux lazygit ipcalc
     brew install cloc tig jq wget ncdu
 
     # Fix tmux exited on osx
@@ -32,6 +36,9 @@ if [ $SYSTEM = "Darwin" ]; then
 
     # openvpn
     # https://apple.stackexchange.com/questions/203115/installed-openvpn-with-brew-but-it-doesnt-appear-to-be-installed-correctly
+
+    # https://tclementdev.com/timemachineeditor/
+    # brew install --cask timemachineeditor
 
     # Install neovim
     if hash nvim 2> /dev/null; then
@@ -43,7 +50,7 @@ if [ $SYSTEM = "Darwin" ]; then
         sudo ln -s $PWD/opt/nvim-macos/bin/nvim /usr/local/bin/nvim
     fi
 
-    # brew cask install java or download java sdk.
+    # brew install --cask java or download java sdk.
 
     # install powerline fonts, set terminal font support powerline
     # git clone https://github.com/powerline/fonts.git ~/.fonts
@@ -131,8 +138,9 @@ else
 
     # enable pyenv
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    export PYTHON_BUILD_MIRROR_URL="http://pyenv.qiniudn.com/pythons"
+    export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+    export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     # Install python3.7
     pyenv install 3.7.6
@@ -184,7 +192,7 @@ fi
 ln -s $PWD/.tmux.conf ~/
 
 # ycm extra config
-ln -s $PWD/.ycm_extra_conf ~/
+#ln -s $PWD/.ycm_extra_conf ~/
 
 # flake8 config
 ln -s $PWD/.flake8 ~/

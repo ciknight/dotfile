@@ -636,9 +636,8 @@ let g:ale_fixers = {
 \     'trim_whitespace',
 \     'remove_trailing_lines',
 \   ],
-\  'python': ["black"]
+\  'python': ['black'],
 \}
-let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
 
 "" if you don't want linters to run on opening a file
 let g:ale_linters={}
@@ -748,7 +747,9 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:coc_global_extensions = [
 \  'coc-json',
 \  'coc-pairs',
-\  'coc-python',
+\  'coc-jedi',
+\  'coc-diagnostic',
+\  'coc-pyright',
 \  'coc-rls',
 \  'coc-vimlsp',
 \  'coc-snippets',
@@ -768,7 +769,6 @@ let g:coc_global_extensions = [
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
-\  'coc-pyright',
 \]
 let g:coc_snippet_next='<tab>'
 

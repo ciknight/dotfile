@@ -1,3 +1,15 @@
+# Path to your oh-my-zsh installation.
+# Remove redundant paths from $PATH variable
+if [ -f "/tmp/MYPATH" ]; then
+    # init /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+    # cleanup -/etc/paths -.zshrc -.zprofile -.bash_profile -.bashrc -.profile -/etc/profile -.zshenv
+    # typeset -U PATH
+    PATH=`cat /tmp/MYPATH`
+    \rm /tmp/MYPATH
+else
+    echo $PATH > "/tmp/MYPATH"
+fi
+
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_LOCAL=$HOME/.zshrc_local
 
@@ -20,7 +32,9 @@ if [ $SYSTEM = "Darwin" ] ; then
 
     # JAVA_HOME
     if command -v java > /dev/null 2>&1; then
-        # use java jdk, do not use openjdk
+        # use java jdk, m1 use azul sdk https://www.azul.com/downloads/?package=jdk
+        # Install, http://www.oracle.com/java/technologies/downloads/
+        # UnInstall: https://www.java.com/en/download/help/mac_uninstall_java.html
         export JAVA_HOME=$(/usr/libexec/java_home)
         export PATH=$PATH:$JAVA_HOME/bin
     fi
@@ -58,11 +72,11 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # Pyenv
 if [ -d "$HOME/.pyenv" ]; then
     export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+    export PATH="$PYENV_ROOT/bin:$PATH"
     export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
+    eval "$(pyenv init -)"
     eval "$(pyenv init --path)"
     # eval "$(pyenv virtualenv-init -)"
-    eval "$(pyenv init -)"
 fi
 
 # Golang
