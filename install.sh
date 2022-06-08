@@ -119,6 +119,7 @@ fi
 ln -s $PWD/.pip ~/
 
 if [ ! -f $PWD/opt/get-pip.py ] ; then
+    # python -m ensurepip --upgrade
     echo 'Input passwd, install pip'
     wget https://bootstrap.pypa.io/get-pip.py -O $PWD/opt/get-pip.py && sudo $PYTHON $PWD/opt/get-pip.py
     # python util

@@ -2,6 +2,10 @@
 
 DATE=`date +%s`
 
+# the Internal Field Separator
+MY_SAVEIFS=$IFS
+IFS=$'\n'
+
 until [ $# -eq 0 ]
 do
     file=$(echo $1|sed 's/ /?/g')
@@ -15,3 +19,5 @@ do
     fi
     shift
 done
+
+IFS=$MY_SAVEIFS

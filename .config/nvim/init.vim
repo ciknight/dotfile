@@ -893,6 +893,7 @@ function! s:show_documentation()
 endfunction
 
 " Remap for codeAction of selected region
+" TODO
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction

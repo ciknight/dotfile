@@ -180,3 +180,18 @@ bindkey '^Z' fancy-ctrl-z
 if [ -f $ZSH_LOCAL ]; then
     source $ZSH_LOCAL
 fi
+
+function auto_pipenv_shell {
+    if [ ! -n "${PIPENV_ACTIVE+1}" ]; then
+        if [ -f "Pipfile" ] ; then
+            pipenv shell
+        fi
+    fi
+}
+
+function cd {
+    builtin cd "$@"
+    auto_pipenv_shell
+}
+
+auto_pipenv_shell
