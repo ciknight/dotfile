@@ -64,7 +64,7 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=110,underline"
 # Path
 export XDG_CACHE_HOME="$HOME/.cache/Microsoft/Python Language Server"
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
-export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+# export WORKER_SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 # Fix Neovim mypy flake8 yapf isort bin path
 export PATH="$HOME/bin:$HOME/workspace/neovim3/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -147,7 +147,7 @@ alias rm=safe_rm
 alias cp=smart_cp
 alias sed=super_sed
 alias weather='curl wttr.in/~上海'
-alias myip='curl https://myip.ipip.net' # 'http://ipecho.net/plain;echo'
+alias myip='curl https://myip.ipip.net' # 'https://ipinfo.io/plain;echo'
 alias iplocation="_f(){ curl https://cip.cc/\$1; }; _f"  # freeapi.ipip.net/{ip}
 alias rmpyc='find . -name "*.pyc" -exec rm -rf {} \; >> /dev/null 2>&1'  # 递归删除目录下所有pyc
 alias resdns='dscacheutil -flushcache'

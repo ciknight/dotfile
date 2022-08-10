@@ -4,5 +4,6 @@ if [ ! $1 ]; then
     echo 'what do you replace for?'
 else
     # MACOS
+    # 1 source, 2 target
     sed -i '' "s/$1/$2/g" `grep "$1" -rl --binary-files=without-match ./*`
 fi

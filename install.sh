@@ -168,7 +168,8 @@ if [ ! -d ~/workspace/neovim3 ] ; then
         flake8-black \
         jedi black isort \
         flake8-todo \
-        neovim-remote
+        neovim-remote \
+        jedi-language-server
 fi
 
 #pip install mycli ipython ipdb cheat forex-python

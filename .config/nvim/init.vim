@@ -31,8 +31,6 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'bash-lsp/bash-language-server'
-Plug 'w0rp/ale'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -40,7 +38,7 @@ Plug 'w0rp/ale'
 " ---------------------------------------------------------------------------------------------------------------------
 " Python auto breakpoint
 "Plug 'ciknight/setbreakpoint'
-Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
+"Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -56,6 +54,7 @@ Plug 'tmhedberg/matchit'
 Plug 'terryma/vim-expand-region'
 " fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
+Plug 'github/copilot.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -66,7 +65,7 @@ Plug 'pbrisbin/vim-mkdir'
 " Rainbow pair
 Plug 'kien/rainbow_parentheses.vim'
 " Indent line
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
 " Git changes showed on line numbers, TODO: replace by coc-git
@@ -328,7 +327,6 @@ let $LANG="zh_CN.utf-8"
 " -----------------------------------------------------
 "set formatoptions=tcqmM                    " format ggvg=
 set fileformat=unix
-set formatexpr=CocAction('formatSelected')
 set nobackup                                " no file backup
 set noswapfile                              " New buffers will be loaded without creating a swapfile
 set confirm                                 " Need confrimation while exit
@@ -342,9 +340,6 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.14 Ident settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-" indentLine will overwrite your "concealcursor" and "conceallevel" with default value
-let g:indentLine_concealcursor='inc'
-let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
 autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2
@@ -626,26 +621,8 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 " -----------------------------------------------------
-" 4.2 ale settings {{{
+" 4.2 {{{
 " -----------------------------------------------------
-"
-let g:ale_enabled=0
-let g:ale_fix_on_save=1
-let g:ale_fixers = {
-\   '*': [
-\     'trim_whitespace',
-\     'remove_trailing_lines',
-\   ],
-\  'python': ['black'],
-\}
-
-"" if you don't want linters to run on opening a file
-let g:ale_linters={}
-let g:ale_lint_on_enter=0
-let g:ale_lint_on_text_changed='never'  " never,always
-let g:ale_lint_on_insert_leave=0
-let g:ale_lint_on_filetype_changed=0
-let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
@@ -746,10 +723,11 @@ au Syntax * RainbowParenthesesLoadBraces
 " -----------------------------------------------------
 let g:coc_global_extensions = [
 \  'coc-json',
+\  'coc-tsserver',
 \  'coc-pairs',
 \  'coc-jedi',
-\  'coc-diagnostic',
 \  'coc-pyright',
+\  'coc-diagnostic',
 \  'coc-rls',
 \  'coc-vimlsp',
 \  'coc-snippets',
@@ -762,8 +740,6 @@ let g:coc_global_extensions = [
 \  'coc-lists',
 \  'coc-spell-checker',
 \  'coc-floaterm',
-\  'coc-actions',
-\  'coc-markdownlint',
 \  'coc-discord',
 \  'coc-calc',
 \  'coc-explorer',
@@ -880,38 +856,33 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if coc#util#has_float()
-    call coc#util#float_hide()
-  elseif (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
-" Remap for codeAction of selected region
-" TODO
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
 
-" Usage: aw for current word, aap for current paragraph
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
-" use <tab> for trigger completion and navigate to the next complete item
-inoremap <silent><expr> <Tab>
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
+      \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" use <tab> for trigger completion and navigate next complete item
-function! s:check_back_space() abort
+function! CheckBackspace() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
@@ -919,6 +890,12 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" Add missing imports on save
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
 " ---- snippet ----
 " Remap for rename current word
