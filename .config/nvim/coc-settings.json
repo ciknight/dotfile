@@ -25,9 +25,6 @@
   "suggest.noselect": true,
   "suggest.minTriggerInputLength": 1,
   "suggest.snippetIndicator": "►",
-  "suggest.floatEnable": true,
-  "suggest.enablePreview": true,
-  "suggest.detailMaxLength": 80,
   "suggest.asciiCharactersOnly": true,
   "suggest.timeout": 5000,
   "diagnostic.enable": true,
@@ -75,16 +72,16 @@
   "jedi.markupKindPreferred": "plaintext",
   "jedi.diagnostics.enable": false,
   "jedi.hover.enable": true,
-  "jedi.workspace.extraPaths": [
-    "src/",
-    "protos/"
-  ],
   "jedi.workspace.symbols.ignoreFolders": [
     ".nox",
     ".tox",
     ".venv",
     "__pycache__",
     "venv"
+  ],
+  "jedi.workspace.extraPaths": [
+    "stc",
+    "protos"
   ],
   "diagnostic-languageserver.enable": true,
   "diagnostic-languageserver.filetypes": {

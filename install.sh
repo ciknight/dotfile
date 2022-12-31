@@ -28,9 +28,10 @@ if [ $SYSTEM = "Darwin" ]; then
 
     # ack, ag, pt or rg, support vim ctrlsf and tagbar
     brew install ack the_silver_searcher ctags
-    brew install zsh git htop tmux lazygit ipcalc
+    brew install zsh git htop lazygit ipcalc
     brew install cloc tig jq wget ncdu
 
+    # Install tmux version 2.8
     # Fix tmux exited on osx
     brew install reattach-to-user-namespace
 
@@ -67,7 +68,7 @@ elif [ $SYSTEM = "Linux" ]; then
     if which apt 2>&1 > /dev/null; then
         apt update
         apt install -y git htop vim zsh tmux neovim
-        apt install -y gcc python3 python-dev curl tig
+        apt install -y gcc python3 python-dev curl tig lynx
         apt install -y ctags cmake silversearcher-ag jq ack-grep
     elif which yum 2>&1 > /dev/null; then
         # yum -y install epel-release
@@ -172,7 +173,7 @@ if [ ! -d ~/workspace/neovim3 ] ; then
         jedi-language-server
 fi
 
-#pip install mycli ipython ipdb cheat forex-python
+#pip install mycli ipython ipdb cheat forex-python ranger-fm
 
 # vim
 #if [ -f ~/.vimrc ] ; then

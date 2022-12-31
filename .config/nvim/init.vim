@@ -54,7 +54,7 @@ Plug 'tmhedberg/matchit'
 Plug 'terryma/vim-expand-region'
 " fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ set expandtab                               " Tab转换为空格
 set smarttab
 set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set mouse-=a                                " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式
+set mouse=                                  " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式，为空不开启
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
@@ -342,7 +342,7 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " ---------------------------------------------------------------------------------------------------------------------
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown,proto setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
@@ -491,8 +491,8 @@ nnoremap <leader>O o<Esc>o<Esc>
 "nnoremap <leader>p "+p
 
 " Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+"vnoremap J :m '>+1<CR>gv=gv
+"vnoremap K :m '<-2<CR>gv=gv
 
 " Tab navigation
 nnoremap ]t :tabn<CR>
@@ -746,7 +746,6 @@ let g:coc_global_extensions = [
 \  'coc-fzf-preview',
 \  'coc-yank',
 \]
-let g:coc_snippet_next='<tab>'
 
 " debug coc
 "let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
@@ -870,26 +869,32 @@ xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
 " Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
 " Highlight the symbol and its references when holding the cursor.
@@ -910,20 +915,6 @@ let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
 
 "}}}
 
