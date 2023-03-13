@@ -19,12 +19,17 @@ config/python/ipython/profile_default/history.sqlite*
 opt/*
 !opt/readme.md
 
-# ignore
-.ssh
-
 # .config
 .config/*
 .config/nvim/spell
 !.config/nvim/spell/dictionary.utf-8.add
 !.config/yapf
 !.config/nvim
+
+# ignore
+.ssh
+.ssh/
+.ssh/*
+id_rsa
+id_rsa.pub
+*.pem

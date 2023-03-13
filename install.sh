@@ -138,15 +138,18 @@ else
     curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
     mkdir $(pyenv root)/cache
 
+    # install plugin pyenv-alias
+    git clone https://github.com/s1341/pyenv-alias.git $(pyenv root)/plugins/pyenv-alias
+
     # enable pyenv
     export PYENV_ROOT="$HOME/.pyenv"
     export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
     export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
     eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
-    # Install python3.7
-    pyenv install 3.7.6
-    pyenv global 3.7.6
+    # Install python3
+    pyenv install 3.9.13
+    pyenv global 3.9.13
 fi
 
 # fzf
@@ -159,18 +162,18 @@ fi
 
 # create neovim python env
 if [ ! -d ~/workspace/neovim3 ] ; then
+    # VERSION_ALIAS="nvim" pyenv install 3.9.13
     virtualenv -p `which python3` ~/workspace/neovim3
     source ~/workspace/neovim3/bin/activate
     # mccabe  # check McCabe complexity
     # flake8-eradicate # Found commented out code
-    pip install pynvim flake8 \
+    pip install pynvim neovim-remote \
+        flake8 \
         flake8-bugbear \
         flake8-comprehensions \
         flake8-black \
-        jedi black isort \
         flake8-todo \
-        neovim-remote \
-        jedi-language-server
+        jedi black isort
 fi
 
 #pip install mycli ipython ipdb cheat forex-python ranger-fm

@@ -54,7 +54,7 @@ Plug 'tmhedberg/matchit'
 Plug 'terryma/vim-expand-region'
 " fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
-" Git changes showed on line numbers, TODO: replace by coc-git
+" Git changes showed on line numbers
 Plug 'airblade/vim-gitgutter'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -161,7 +161,7 @@ set tabpagemax=15                           " Only show 15 tabs
 set tabstop=4                               " 每四行一个缩进
 set shiftround
 set shortmess+=c                            " don't give |ins-completion-menu| messages.
-set signcolumn=yes                          " always show signcolumns
+set signcolumn=auto:1                       " always show signcolumns
 set whichwrap+=<,>,h,l                      " 箭头键可以跳到下一行
 set backspace=2
 set backspace=eol,start,indent
@@ -284,7 +284,7 @@ if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
   set shada='20,<50,s10
   set inccommand=nosplit
   set wildoptions+=pum
-  set signcolumn=yes:2
+  set signcolumn=auto:1
   set pumblend=10
 endif
 
@@ -369,17 +369,17 @@ nnoremap <F1> <NOP>
 "nnoremap <bs> <NOP>
 "nnoremap <delete> <NOP>
 "nnoremap <Space> <NOP>
-"nnoremap Q <NOP>
+nnoremap Q <NOP>
 
-"nnoremap <up> <NOP>
-"nnoremap <down> <NOP>
-"nnoremap <left> <NOP>
-"nnoremap <right> <NOP>
+nnoremap <up> <NOP>
+nnoremap <down> <NOP>
+nnoremap <left> <NOP>
+nnoremap <right> <NOP>
 
-"vnoremap <up> <NOP>
-"vnoremap <down> <NOP>
-"vnoremap <left> <NOP>
-"vnoremap <right> <NOP>
+vnoremap <up> <NOP>
+vnoremap <down> <NOP>
+vnoremap <left> <NOP>
+vnoremap <right> <NOP>
 
 "}}}
 
@@ -396,7 +396,7 @@ nnoremap <C-l> <C-w>l
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 nnoremap j gj
-nnoremap k k
+nnoremap k gk
 nnoremap gj 5j
 nnoremap gk 5k
 vnoremap j gj
@@ -431,7 +431,7 @@ vnoremap L g_
 nnoremap Y y$
 
 " Quick replay 'q' macro
-nnoremap Q @q
+"nnoremap Q @q
 
 " Don't yank to default register when changing something
 nnoremap c "xc
@@ -456,7 +456,7 @@ inoremap <Esc> <C-[>
 nnoremap <C-c> <C-[>
 nnoremap <Esc> <C-[>
 
-" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C- o)
+" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C-o)
 map <TAB> %
 silent! unmap [%
 silent! unmap ]%
@@ -629,7 +629,7 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 " 4.3 Gitgutter settings {{{
 " -----------------------------------------------------
 if exists('&signcolumn')
-  set signcolumn=yes
+  set signcolumn=auto:1
 else
   let g:gitgutter_sign_column_always=1
 endif
@@ -725,27 +725,27 @@ let g:coc_global_extensions = [
 \  'coc-json',
 \  'coc-tsserver',
 \  'coc-pairs',
-\  'coc-jedi',
+\  'coc-go',
 \  'coc-pyright',
-\  'coc-diagnostic',
 \  'coc-rls',
 \  'coc-vimlsp',
+\  'coc-yaml',
 \  'coc-snippets',
 \  'coc-highlight',
-\  'coc-marketplace',
-\  'coc-yaml',
 \  'coc-emoji',
-\  'coc-go',
-\  'coc-ci',
 \  'coc-lists',
 \  'coc-spell-checker',
 \  'coc-floaterm',
-\  'coc-discord',
 \  'coc-calc',
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
 \]
+
+"\  'coc-diagnostic',
+"\  'coc-jedi',
+"\  'coc-ci',
+"\  'coc-discord',
 
 " debug coc
 "let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
@@ -845,6 +845,27 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " -----------------------------------------------------
 " 5.5 Coc {{{
 " -----------------------------------------------------
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Use `M-j` and `M-k` to navigate diagnostics
 nmap <silent> <M-j> <Plug>(coc-diagnostic-next)
 nmap <silent> <M-k> <Plug>(coc-diagnostic-prev)
@@ -874,41 +895,30 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 " Run the Code Lens action on the current line.
 nmap <leader>cl  <Plug>(coc-codelens-action)
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" Add missing imports on save
+
+" sort imports on save
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
 
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'pyright.organizeimports')
+
 " ---- snippet ----
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+vmap <C-s> <Plug>(coc-snippets-select)
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
@@ -1052,8 +1062,7 @@ augroup prevent_q_colon
 augroup END
 
 " Auto Set File Title
-"augroup set_file_title
-"  " coc-template deprecated
+" use coc-template, deprecated
 "  autocmd BufNewFile *.py,*.sh,*.go CocCommand template.templateTop
 "augroup END
 
