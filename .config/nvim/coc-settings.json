@@ -50,14 +50,14 @@
   "pyright.disableDiagnostics": false,
   "pyright.completion.importSupport": true,
   "pyright.completion.snippetSupport": false,
-  "pyright.organizeimports.provider": "isort",
+  "pyright.organizeimports.provider": "ruff",
   "python.linting.enabled": true,
   "python.linting.lintOnSave": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "${env.HOME}/workspace/neovim3/bin/flake8",
-  "python.linting.flake8Args": [
+  "python.linting.ruffEnabled": true,
+  "python.linting.ruffPath": "${env.HOME}/workspace/neovim3/bin/ruff",
+  "python.linting.ruffArgs": [
     "--config",
-    "${env.HOME}/.flake8"
+    "${env.HOME}/.config/ruff.toml"
   ],
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "${env.HOME}/workspace/neovim3/bin/black",
@@ -66,11 +66,17 @@
     "--quiet",
     "--fast"
   ],
-  "python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
-  "python.sortImports.args": [
-    "--settings-path",
-    "${env.HOME}/.isort.cfg"
-  ],
+  //"python.linting.flake8Enabled": true,
+  //"python.linting.flake8Path": "${env.HOME}/workspace/neovim3/bin/flake8",
+  //"python.linting.flake8Args": [
+  //  "--config",
+  //  "${env.HOME}/.flake8"
+  //],
+  //"python.sortImports.path": "${env.HOME}/workspace/neovim3/bin/isort",
+  //"python.sortImports.args": [
+  //  "--settings-path",
+  //  "${env.HOME}/.isort.cfg"
+  //],
   "python.analysis.autoImportCompletions": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.analysis.useLibraryCodeForTypes": true,
@@ -87,44 +93,6 @@
   "go.goplsOptions": {
     "completeUnimported": true
   },
-  // "jedi.enable": false,
-  // "jedi.startupMessage": false,
-  // "jedi.diagnostics.enable": false,
-  // "jedi.hover.enable": true,
-  // "jedi.workspace.symbols.ignoreFolders": [
-  // ".nox",
-  //  ".tox",
-  //  ".venv",
-  //  "__pycache__",
-  //  "venv"
-  //],
-  //"jedi.workspace.extraPaths": [
-  //  "src",
-  //  "protos"
-  //],
-  //"diagnostic-languageserver.enable": false,
-  //"diagnostic-languageserver.filetypes": {
-  //"vim": "vint",
-  // "markdown": [
-  //   "write-good",
-  //   "markdownlint"
-  // ],
-  //  "sh": "shellcheck",
-  //  "python": [
-  //    "flake8"
-  //  ],
-  // "yaml": [
-  //  "yamllint"
-  // ],
-  // "systemd": "systemd-analyze"
-  //},
-  //"diagnostic-languageserver.formatFiletypes": {
-  // "isrot",
-  // "python": [
-  //   "black"
-  // ],
-  //"sh": "shfmt"
-  //},
   "cSpell.language": "en",
   "cSpell.enabledLanguageIds": [
     "git-commit",
@@ -134,9 +102,11 @@
     "rust",
     "text",
     "yaml",
+    "json",
     "yml"
   ],
   "cSpell.userWords": [
+    "pyright",
     "asyncio",
     "circleci",
     "eval",
