@@ -46,6 +46,7 @@ celerybeat-schedule
 *.db
 *.sqlite
 *.sqlite3
+*.dump
 
 #----- C & C++ -----
 *.out

@@ -37,7 +37,7 @@
 [core]
     editor = 'nvim'
     safecrlf = true
-    excludesfile = ~/.gitignore.global
+    excludesfile = /Users/andywang/.gitignore.global
     ignorecase = false
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
 [branch]

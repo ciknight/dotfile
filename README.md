@@ -38,4 +38,13 @@ rm flake8 black mypy isort
 pip freeze | awk -F '=' '{print $1}' | xargs pip install --upgrade
 ```
 
+
+### Enable vscode key-repeat
+
+https://github.com/VSCodeVim/Vim#vscodevim-settings
+
+Run in shell
+
+> defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
 ### TODO

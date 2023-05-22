@@ -51,7 +51,6 @@
   "pyright.completion.importSupport": true,
   "pyright.completion.snippetSupport": false,
   "pyright.organizeimports.provider": "isort",
-  "pyright.testing.provider": "pytest",
   "python.linting.enabled": true,
   "python.linting.lintOnSave": true,
   "python.linting.flake8Enabled": true,

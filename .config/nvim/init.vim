@@ -153,6 +153,7 @@ set expandtab                               " Tab转换为空格
 set smarttab
 set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
+set cindent
 set mouse=                                  " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式，为空不开启
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
@@ -338,7 +339,7 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
-" 2.14 Ident settings {{{
+" 2.14 Indent settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
@@ -733,7 +734,6 @@ let g:coc_global_extensions = [
 \  'coc-snippets',
 \  'coc-highlight',
 \  'coc-emoji',
-\  'coc-lists',
 \  'coc-spell-checker',
 \  'coc-floaterm',
 \  'coc-calc',
@@ -742,6 +742,7 @@ let g:coc_global_extensions = [
 \  'coc-yank',
 \]
 
+"\  'coc-lists',
 "\  'coc-diagnostic',
 "\  'coc-jedi',
 "\  'coc-ci',
