@@ -48,13 +48,13 @@ Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Matchit enhances jump motions, Improved % matching
-Plug 'tmhedberg/matchit'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
 " fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
 Plug 'github/copilot.vim'
+" Matchit enhances jump motions, Improved % matching
+"Plug 'tmhedberg/matchit'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -78,11 +78,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
 Plug 'easymotion/vim-easymotion'
-"Plug 'myusuf3/numbers.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'honza/vim-snippets'
 Plug 'aperezdc/vim-template'
+"Plug 'junegunn/goyo.vim'
+"Plug 'myusuf3/numbers.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -207,7 +207,8 @@ set ttimeoutlen=10
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.3 Spelling settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-set spellfile=~/.config/nvim/dictionary.utf-8.add
+" :echo &spelllang, show splellang language
+set spellfile=~/.config/nvim/spell/dictionary.utf-8.add
 set spelllang=en_us                         " Set language to US English
 set nospell                                 " Disable checking by default (use <F4> to toggle)
 "}}}
@@ -270,9 +271,9 @@ set nocompatible                            " 禁用Vi的兼容模式,去掉讨�
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.9.1 Command Window settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-set wildmenu                                " Tab自动补全时，单行菜单形式显示
+set wildmenu                                " 启用增强模式的命令行补全
 set wildignorecase
-set wildmode=longest,full                   " longest,list
+set wildmode=longest,full                   " longest,list Tab自动补全时，单行菜单形式显示(wildchar键默认是tab)
 set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
 set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
@@ -280,6 +281,7 @@ set wildignore+=*.pyc,__pycache__,
 set wildignore+=*DS_Store*
 set wildignore+=tmp/**,*/tmp/*
 set cpoptions+=I
+set nrformats=bin,hex,octal,alpha           " 加减操作时，支持二进制、十六进制、八进制、字母
 " neovim only
 if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
   set shada='20,<50,s10
@@ -458,9 +460,9 @@ nnoremap <C-c> <C-[>
 nnoremap <Esc> <C-[>
 
 " Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C-o)
-map <TAB> %
-silent! unmap [%
-silent! unmap ]%
+"map <TAB> %
+"silent! unmap [%
+"silent! unmap ]%
 
 " Don't cancel visual select when shifting
 xnoremap <  <gv
@@ -887,8 +889,9 @@ endfunction
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+"xmap <leader>a  <Plug>(coc-codeaction-selected)
+"nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>aw <Plug>(coc-codeaction-line)
 " Remap keys for applying codeAction to the current buffer.
 nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)

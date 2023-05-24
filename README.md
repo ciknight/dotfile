@@ -39,7 +39,7 @@ pip freeze | awk -F '=' '{print $1}' | xargs pip install --upgrade
 ```
 
 
-### Enable vscode key-repeat
+### Enable vscode key-repeat(长按hjkl)
 
 https://github.com/VSCodeVim/Vim#vscodevim-settings
 

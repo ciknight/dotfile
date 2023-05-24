@@ -106,7 +106,6 @@
     "yml"
   ],
   "cSpell.userWords": [
-    "pyright",
     "asyncio",
     "circleci",
     "eval",
@@ -115,6 +114,7 @@
     "hexlify",
     "ipfs",
     "noqa",
+    "pyright",
     "pytest",
     "rabbitmq",
     "segwit",
@@ -122,6 +122,7 @@
     "submodule",
     "unhexlify",
     "venv",
-    "virtualenv"
+    "virtualenv",
+    "vsplit"
   ]
 }
