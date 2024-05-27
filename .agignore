@@ -28,6 +28,7 @@ htmlcov/
 
 # ----- JavaScript -----
 node_modules/
+dist/
 package-lock.json
 
 # Java-gen

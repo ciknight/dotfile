@@ -2,8 +2,9 @@ set encoding=utf-8                          " The encoding displayed.
 set fileencoding=utf-8                      " The encoding written to file.
 set nowrap                                  " 不自动折行
 set expandtab                               " Tab转换为空格
+set smarttab
+set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set mouse-=a                                " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
 set tabstop=4                               " 每四行一个缩进
@@ -35,11 +36,6 @@ set nowritebackup
 set autowriteall
 cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when forgot to start vim using sudo
 
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
-autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2
-autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
-
 nnoremap j gj
 nnoremap k k
 nnoremap gj 5j
@@ -53,6 +49,11 @@ nnoremap H ^
 nnoremap L $
 vnoremap H ^
 vnoremap L g_
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 nnoremap <C-u> <C-u>zz
 nnoremap <C-d> <C-d>zz
@@ -71,6 +72,9 @@ inoremap <Esc> <C-[>
 nnoremap <C-c> <C-[>
 nnoremap <Esc> <C-[>
 map <TAB> %
+
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
 
 let mapleader = ","
 nnoremap <leader>/ :let @/=""<CR>

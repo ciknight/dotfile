@@ -10,17 +10,14 @@ plugged/
 plug.vim
 
 # ipython
-.ipython/extensions/
-.ipython/nbextensions/
-.ipython/profile_default/db/
-.ipython/profile_default/startup/README
-.ipython/profile_default/history.sqlite-journal
+config/python/ipython/extensions/
+config/python/ipython/nbextensions/
+config/python/ipython/profile_default/db/
+config/python/ipython/profile_default/startup/README
+config/python/ipython/profile_default/history.sqlite*
 
 opt/*
 !opt/readme.md
-
-# ignore
-.ssh
 
 # .config
 .config/*
@@ -28,3 +25,11 @@ opt/*
 !.config/nvim/spell/dictionary.utf-8.add
 !.config/yapf
 !.config/nvim
+
+# ignore
+.ssh
+.ssh/
+.ssh/*
+id_rsa
+id_rsa.pub
+*.pem

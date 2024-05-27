@@ -31,8 +31,6 @@ syntax off
 " ---------------------------------------------------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'bash-lsp/bash-language-server'
-Plug 'w0rp/ale'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -40,7 +38,7 @@ Plug 'w0rp/ale'
 " ---------------------------------------------------------------------------------------------------------------------
 " Python auto breakpoint
 "Plug 'ciknight/setbreakpoint'
-Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
+"Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use type hint
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -50,12 +48,14 @@ Plug 'vim-scripts/indentpython.vim'  " Fix Python vim error indentions, eg. use 
 " Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Matchit enhances jump motions, Improved % matching
-Plug 'tmhedberg/matchit'
 " Use V or v, easily expand region selected
 Plug 'terryma/vim-expand-region'
 " fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
+"Plug 'github/copilot.vim'
+"Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
+" Matchit enhances jump motions, Improved % matching
+"Plug 'tmhedberg/matchit'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -66,10 +66,10 @@ Plug 'pbrisbin/vim-mkdir'
 " Rainbow pair
 Plug 'kien/rainbow_parentheses.vim'
 " Indent line
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 " Git swiss-army knife
 Plug 'tpope/vim-fugitive'
-" Git changes showed on line numbers, TODO: replace by coc-git
+" Git changes showed on line numbers
 Plug 'airblade/vim-gitgutter'
 " Class/module browser, ctag support, suppoer powerline
 Plug 'majutsushi/tagbar'
@@ -79,11 +79,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'scrooloose/nerdcommenter'
 " Motions on speed
 Plug 'easymotion/vim-easymotion'
-"Plug 'myusuf3/numbers.vim'
-Plug 'junegunn/goyo.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'honza/vim-snippets'
 Plug 'aperezdc/vim-template'
+"Plug 'junegunn/goyo.vim'
+"Plug 'myusuf3/numbers.vim'
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
@@ -154,7 +154,8 @@ set expandtab                               " Tab转换为空格
 set smarttab
 set autoindent
 set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
-set mouse-=a                                " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式
+set cindent
+set mouse=                                  " 鼠标禁用，a 是所有模式下, -a 是禁用鼠标模式，为空不开启
 set viminfo+=!                              " 保存全局变量
 set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
 set shiftwidth=4                            " 设置格式化时制表符占用空格数
@@ -162,7 +163,7 @@ set tabpagemax=15                           " Only show 15 tabs
 set tabstop=4                               " 每四行一个缩进
 set shiftround
 set shortmess+=c                            " don't give |ins-completion-menu| messages.
-set signcolumn=yes                          " always show signcolumns
+set signcolumn=auto:1                       " always show signcolumns
 set whichwrap+=<,>,h,l                      " 箭头键可以跳到下一行
 set backspace=2
 set backspace=eol,start,indent
@@ -207,7 +208,8 @@ set ttimeoutlen=10
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.3 Spelling settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-set spellfile=~/.config/nvim/dictionary.utf-8.add
+" :echo &spelllang, show splellang language
+set spellfile=~/.config/nvim/spell/dictionary.utf-8.add
 set spelllang=en_us                         " Set language to US English
 set nospell                                 " Disable checking by default (use <F4> to toggle)
 "}}}
@@ -270,9 +272,9 @@ set nocompatible                            " 禁用Vi的兼容模式,去掉讨�
 " ---------------------------------------------------------------------------------------------------------------------
 " 2.9.1 Command Window settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-set wildmenu                                " Tab自动补全时，单行菜单形式显示
+set wildmenu                                " 启用增强模式的命令行补全
 set wildignorecase
-set wildmode=longest,full                   " longest,list
+set wildmode=longest,full                   " longest,list Tab自动补全时，单行菜单形式显示(wildchar键默认是tab)
 set wildignore=*.o,*.obj,*~                 " MacOSX/Linux, not support Windows
 set wildignore+=*.so,*.swp,*.zip,*.png,*.jpg,*.gif
 set wildignore+=*vim/backups*
@@ -280,12 +282,13 @@ set wildignore+=*.pyc,__pycache__,
 set wildignore+=*DS_Store*
 set wildignore+=tmp/**,*/tmp/*
 set cpoptions+=I
+set nrformats=bin,hex,octal,alpha           " 加减操作时，支持二进制、十六进制、八进制、字母
 " neovim only
 if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
   set shada='20,<50,s10
   set inccommand=nosplit
   set wildoptions+=pum
-  set signcolumn=yes:2
+  set signcolumn=auto:1
   set pumblend=10
 endif
 
@@ -295,6 +298,8 @@ endif
 " 2.10 Neovim specific settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
 if has('nvim')
+  let g:email="ci_knight@msn.cn" " vim-template
+  let g:username="andy.wang"
   let g:loaded_node_provider = 0
   let g:loaded_ruby_provider = 0
   let g:loaded_perl_provider = 0
@@ -328,7 +333,6 @@ let $LANG="zh_CN.utf-8"
 " -----------------------------------------------------
 "set formatoptions=tcqmM                    " format ggvg=
 set fileformat=unix
-set formatexpr=CocAction('formatSelected')
 set nobackup                                " no file backup
 set noswapfile                              " New buffers will be loaded without creating a swapfile
 set confirm                                 " Need confrimation while exit
@@ -340,14 +344,11 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 "}}}
 
 " ---------------------------------------------------------------------------------------------------------------------
-" 2.14 Ident settings {{{
+" 2.14 Indent settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
-" indentLine will overwrite your "concealcursor" and "conceallevel" with default value
-let g:indentLine_concealcursor='inc'
-let g:indentLine_conceallevel=0
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript,typescript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown,proto setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
@@ -374,17 +375,17 @@ nnoremap <F1> <NOP>
 "nnoremap <bs> <NOP>
 "nnoremap <delete> <NOP>
 "nnoremap <Space> <NOP>
-"nnoremap Q <NOP>
+nnoremap Q <NOP>
 
-"nnoremap <up> <NOP>
-"nnoremap <down> <NOP>
-"nnoremap <left> <NOP>
-"nnoremap <right> <NOP>
+nnoremap <up> <NOP>
+nnoremap <down> <NOP>
+nnoremap <left> <NOP>
+nnoremap <right> <NOP>
 
-"vnoremap <up> <NOP>
-"vnoremap <down> <NOP>
-"vnoremap <left> <NOP>
-"vnoremap <right> <NOP>
+vnoremap <up> <NOP>
+vnoremap <down> <NOP>
+vnoremap <left> <NOP>
+vnoremap <right> <NOP>
 
 "}}}
 
@@ -401,7 +402,7 @@ nnoremap <C-l> <C-w>l
 
 " Visual linewise up and down by default (and use gj gk to go quicker)
 nnoremap j gj
-nnoremap k k
+nnoremap k gk
 nnoremap gj 5j
 nnoremap gk 5k
 vnoremap j gj
@@ -436,7 +437,7 @@ vnoremap L g_
 nnoremap Y y$
 
 " Quick replay 'q' macro
-nnoremap Q @q
+"nnoremap Q @q
 
 " Don't yank to default register when changing something
 nnoremap c "xc
@@ -461,10 +462,10 @@ inoremap <Esc> <C-[>
 nnoremap <C-c> <C-[>
 nnoremap <Esc> <C-[>
 
-" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C- o)
-map <TAB> %
-silent! unmap [%
-silent! unmap ]%
+" Matching brackets with TAB (using matchit) (Breaks the <C-i> jump, can use C-o)
+"map <TAB> %
+"silent! unmap [%
+"silent! unmap ]%
 
 " Don't cancel visual select when shifting
 xnoremap <  <gv
@@ -496,8 +497,8 @@ nnoremap <leader>O o<Esc>o<Esc>
 "nnoremap <leader>p "+p
 
 " Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+"vnoremap J :m '>+1<CR>gv=gv
+"vnoremap K :m '<-2<CR>gv=gv
 
 " Tab navigation
 nnoremap ]t :tabn<CR>
@@ -598,11 +599,6 @@ nnoremap <silent> <leader>, <C-^>
 " -----------------------------------------------------
 " 3.8 Custom commands and functions {{{
 " -----------------------------------------------------
-
-" Reformat whole or selection from file
-"command! Format :call utils#formatFile()
-"nnoremap <silent> <leader>f :Format<CR>
-
 " Profile
 command! Profile :call utils#profile()
 
@@ -626,34 +622,15 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 "}}}
 
 " -----------------------------------------------------
-" 4.2 ale settings {{{
+" 4.2 {{{
 " -----------------------------------------------------
-"
-let g:ale_enabled=0
-let g:ale_fix_on_save=1
-let g:ale_fixers = {
-\   '*': [
-\     'trim_whitespace',
-\     'remove_trailing_lines',
-\   ],
-\  'python': ["black"]
-\}
-let g:ale_python_isort_options = '--settings-path ${HOME}/.isort.cfg'
-
-"" if you don't want linters to run on opening a file
-let g:ale_linters={}
-let g:ale_lint_on_enter=0
-let g:ale_lint_on_text_changed='never'  " never,always
-let g:ale_lint_on_insert_leave=0
-let g:ale_lint_on_filetype_changed=0
-let g:ale_lint_on_save=0
 "}}}
 
 " -----------------------------------------------------
 " 4.3 Gitgutter settings {{{
 " -----------------------------------------------------
 if exists('&signcolumn')
-  set signcolumn=yes
+  set signcolumn=auto:1
 else
   let g:gitgutter_sign_column_always=1
 endif
@@ -747,30 +724,27 @@ au Syntax * RainbowParenthesesLoadBraces
 " -----------------------------------------------------
 let g:coc_global_extensions = [
 \  'coc-json',
+\  'coc-tsserver',
 \  'coc-pairs',
-\  'coc-python',
+\  'coc-go',
+\  'coc-pyright',
 \  'coc-rls',
 \  'coc-vimlsp',
+\  'coc-yaml',
 \  'coc-snippets',
 \  'coc-highlight',
-\  'coc-marketplace',
-\  'coc-yaml',
 \  'coc-emoji',
-\  'coc-go',
-\  'coc-ci',
-\  'coc-lists',
 \  'coc-spell-checker',
 \  'coc-floaterm',
-\  'coc-actions',
-\  'coc-markdownlint',
-\  'coc-discord',
 \  'coc-calc',
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
-\  'coc-pyright',
+\  'coc-tabnine',
 \]
-let g:coc_snippet_next='<tab>'
+
+"\  'coc-lists',
+"\  'coc-diagnostic',
 
 " debug coc
 "let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
@@ -863,13 +837,29 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.4 {{{
+" 5.4 Coc {{{
 " -----------------------------------------------------
-"}}}
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" -----------------------------------------------------
-" 5.5 Coc {{{
-" -----------------------------------------------------
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Use `M-j` and `M-k` to navigate diagnostics
 nmap <silent> <M-j> <Plug>(coc-diagnostic-next)
 nmap <silent> <M-k> <Plug>(coc-diagnostic-prev)
@@ -880,52 +870,50 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if coc#util#has_float()
-    call coc#util#float_hide()
-  elseif (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
-" Remap for codeAction of selected region
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+"xmap <leader>a  <Plug>(coc-codeaction-selected)
+"nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>aw <Plug>(coc-codeaction-line)
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Usage: aw for current word, aap for current paragraph
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
 
-" use <tab> for trigger completion and navigate to the next complete item
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
-
-" use <tab> for trigger completion and navigate next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" ---- snippet ----
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" sort imports on save
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'pyright.organizeimports')
+
+" ---- snippet ----
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+vmap <C-s> <Plug>(coc-snippets-select)
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
@@ -933,20 +921,22 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+"}}}
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-
+" -----------------------------------------------------
+" 5.4 tabnine, after coc config {{{
+" -----------------------------------------------------
+"lua <<EOF
+"require('tabnine').setup({
+"  disable_auto_comment=true,
+"  accept_keymap="<TAB>",
+"  dismiss_keymap = "<C-]>",
+"  debounce_ms = 800,
+"  suggestion_color = {gui = "#808080", cterm = 244},
+"  exclude_filetypes = {"TelescopePrompt"},
+"  log_file_path = nil, -- absolute path to Tabnine log file
+"})
+"EOF
 "}}}
 
 " -----------------------------------------------------
@@ -958,7 +948,7 @@ vnoremap <leader>ta :Tabularize /
 " -----------------------------------------------------
 " 5.7 FZF {{{
 " -----------------------------------------------------
-nnoremap <Leader>p :CocCommand fzf-preview.ProjectFiles<CR>
+nnoremap <silent> <leader>p :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
 "}}}
 
 " -----------------------------------------------------
@@ -1083,8 +1073,7 @@ augroup prevent_q_colon
 augroup END
 
 " Auto Set File Title
-"augroup set_file_title
-"  " coc-template deprecated
+" use coc-template, deprecated
 "  autocmd BufNewFile *.py,*.sh,*.go CocCommand template.templateTop
 "augroup END
 

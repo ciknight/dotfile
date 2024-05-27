@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+STR=$1
+python -c "print(len('${STR}'))"

@@ -1,0 +1,42 @@
+cache-dir = "~/.cache/ruff"
+ignore = ["E203", "E402", "E501", "C901"]
+select = ["C", "E", "F", "W", "B"]
+exclude = [
+    "*.pyc",
+    "*migrations*",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "__pycache__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "typing",
+]
+line-length = 100
+
+[isort]
+# https://beta.ruff.rs/docs/settings/#known-third-party
+# https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/#import
+split-on-trailing-comma = true
+force-wrap-aliases = true
+combine-as-imports = true
+
+[mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 10.
+max-complexity = 10

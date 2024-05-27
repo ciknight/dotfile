@@ -1,5 +1,5 @@
 [flake8]
-ignore=E203,W503,E501,C901
+ignore=E203,E402,W503,E501,C901
 select=C,E,F,W,B,B950
 exclude=
   .git,
@@ -11,6 +11,7 @@ exclude=
   *.pyc,
   *migrations*,
   .venv
+  typing
 max-complexity=12
 format=black
 max-line-length=100

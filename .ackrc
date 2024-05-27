@@ -12,7 +12,13 @@
 # No env
 --ignore-dir=venv/
 --ignore-dir=env/
+--ignore-dir=.env/
 --ignore-dir=node_models/
+--ignore-dir=.git/
+--ignore-file=match:.env
+
+## JS
+--ignore-dir=dist/
 
 # Vim development
 --ignore-file=match:cscope.out
@@ -20,12 +26,12 @@
 --ignore-file=match:tags
 --ignore-file=match:Session.vim
 --ignore-file=match:.syntastic_javac_config
+--ignore-dir=undo/
+--ignore-dir=.vim/
 
 --ignore-dir=.cache/
 --ignore-dir=.mypy_cache/
 
 ## Intellij project files (old=fileformat).
---ignore-file=match:.*.(ipr|iml|js)
+--ignore-file=match:.*.(ipr|iml)
 --ignore-dir=.idea/
-
---ignore-dir=undo/

@@ -37,7 +37,7 @@
 [core]
     editor = 'nvim'
     safecrlf = true
-    excludesfile = ~/.gitignore.global
+    excludesfile = /Users/andywang/.gitignore.global
     ignorecase = false
     quotepath = false  # 不会对0×80以上的字符进行quote。中文显示正常
 [branch]
@@ -51,6 +51,7 @@
     autoStash = true
 [push]
     default = current  # set current branch upstream
+    autoSetupRemote = true
 [mergetool "vimdiff"]
     cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [diff]

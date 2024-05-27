@@ -1,4 +1,10 @@
 #----- Python  -----
+# black format
+*.py.*.py
+# stubs
+typings/
+
+
 # Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
@@ -40,6 +46,7 @@ celerybeat-schedule
 *.db
 *.sqlite
 *.sqlite3
+*.dump
 
 #----- C & C++ -----
 *.out
@@ -83,6 +90,7 @@ proguard/
 
 # Keystore files
 *.jks
+*.keystore
 
 # Java-gen
 app/src/main/java-gen/
@@ -99,6 +107,8 @@ env/
 .venv/
 venv/
 .cache/
+
+.env
 
 # Max OS
 .DS_Store
