@@ -1,6 +1,6 @@
 #! /bin/sh
 
-install_py () {
+install_python () {
     #### Link pip config
     if [ -d ~/.pip ] ; then
         mv ~/.pip ~/.pip.old
@@ -29,8 +29,8 @@ install_py () {
         eval "$(pyenv init -)"
 
         # install python3
-        pyenv install 3.10.11
-        pyenv global 3.10.11
+        pyenv install 3.10.12
+        pyenv global 3.10.12
     fi
 
     #### Install pip
@@ -61,7 +61,7 @@ install_py () {
     echo "Install python done"
 }
 
-uninstall_py () {
+uninstall_python () {
     # TODO: implement
-    echo "implement"
+    echo "not implemented"
 }

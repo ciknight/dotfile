@@ -15,6 +15,10 @@
 --ignore-dir=.env/
 --ignore-dir=node_models/
 --ignore-dir=.git/
+--ignore-file=match:.env
+
+## JS
+--ignore-dir=dist/
 
 # Vim development
 --ignore-file=match:cscope.out

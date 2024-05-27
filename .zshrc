@@ -52,7 +52,7 @@ export HISTFILE=$HOME/.zsh_histfile     # Where to save history.
 export HISTSIZE=1000000             # How many lines in the current session to remember.
 export SAVEHIST=1000000             # How many lines to save to disk. Must be <=HISTSIZE.
 # Patterns to exclue. Separate with |. *-matching.
-export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb|fzf)"
+export HISTORY_IGNORE="(poweroff|reboot|halt|shutdown|xlogout|exit|who|fzf|pwd|gl|gst|gbr|gdc|gb)"
 setopt HIST_IGNORE_SPACE  # ignore duplicated commands history list
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
@@ -97,21 +97,20 @@ if command -v pipenv >/dev/null 2>&1; then
     #export PIPENV_PYPI_MIRROR="https://pypi.doubanio.com/simple/"
     export PIPENV_IGNORE_VIRTUALENVS=1
     export PIPENV_VERBOSITY=-1
-    export PIPENV_SKIP_LOCK=true
     # load very slow
     # eval "$(pipenv --completion)"
 fi
 
 # Fzf
 if [ -f "$HOME/.fzf.zsh" ]; then
+    # ctrl-t:fzf-file-widget
+    # ctrl-r:serach-zsh-history
+    # ctrl-x:open in nvim(split)
     export FZF_DEFAULT_COMMAND='ag -i -U --hidden -g ""'
     export FZF_DEFAULT_OPTS="--no-mouse --height 40% --layout=reverse --border --prompt '>>>' \
         --bind 'alt-j:preview-down,alt-k:preview-up,ctrl-v:execute(nvim {})+abort,ctrl-y:execute-silent(cat {} | pbcopy)+abort,?:toggle-preview' \
         --header 'A-j/k: preview down/up, C-v: open in nvim(vsplit), C-y: copy, ?: toggle preview' \
         --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -100'"
-    # ctrl-t:fzf-file-widget
-    # ctrl-r:serach-zsh-history
-    # ctrl-x:open in nvim(split)
     source $HOME/.fzf.zsh
 fi
 
@@ -155,7 +154,7 @@ alias netlisten='lsof -i -P | grep -i "listen"'
 alias worker-agent='ssh-add $HOME/.ssh/id_rsa' # ssh-agent zsh, eval `ssh-agent -s`
 alias cvenv='virtualenv -p `which python3` venv; source venv/bin/activate'
 alias avenv='source venv/bin/activate'
-alias pip=pipenv
+#alias pip=pipenv
 alias pps='pipenv shell'
 alias vo='vi -o$#'
 alias clntrash='\rm -rf $HOME/.trash/*'

@@ -61,6 +61,12 @@
 ## CocCommand
 :CocCommand workspace.showOutput, 可以显示执行命令的输出，调试时很有帮助  # https://github.com/fannheyward/coc-pyright/issues/229
 
+### coc-explorer
+- F1 打开explorer
+- H,L 打开关闭目录
+- J,K 上下移动
+- yy,pp 复制粘贴文件
+
 ## Python
 
 :CocCommand python.sortImports
@@ -74,3 +80,5 @@ c-j/c-k 在snippet中移动
 ### Debug
 
 :checkhealth
+
+

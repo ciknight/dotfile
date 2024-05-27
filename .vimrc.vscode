@@ -1,0 +1,81 @@
+set encoding=utf-8                          " The encoding displayed.
+set fileencoding=utf-8                      " The encoding written to file.
+set nowrap                                  " 不自动折行
+set expandtab                               " Tab转换为空格
+set smarttab
+set autoindent
+set smartindent                             " 更加智能的缩进，当遇到缩进不为整数与上对齐
+set softtabstop=4                           " 让 vim 把连续数量的空格视为一个制表符
+set shiftwidth=4                            " 设置格式化时制表符占用空格数
+set tabstop=4                               " 每四行一个缩进
+set backspace=2
+set backspace=eol,start,indent
+set number                                  " Line numbers on
+set relativenumber
+augroup relative_numbser                    " 插入模式下用绝对行号, 普通模式下用相对
+  autocmd!
+  autocmd InsertEnter * :set norelativenumber number
+  autocmd InsertLeave * :set relativenumber
+augroup END
+
+set ignorecase                              " Ignore case by default
+set smartcase                               " Make search case sensitive only if it contains uppercase letters
+set wrapscan                                " Search again from top when reached the bottom
+set incsearch                               " do incremental searching
+set hlsearch                                " 检索时高亮显示匹配项
+
+set list                                        " Show listchars by default
+set listchars=tab:»·,trail:·                    ",eol:↵,nbsp:␣  " Display extra whitespace
+set iskeyword+=_,$,@,%,#,-                      " 带有如下符号的单词不要被换行分割
+
+set nobackup                                " no file backup
+set noswapfile                              " New buffers will be loaded without creating a swapfile
+set confirm                                 " Need confrimation while exit
+set autoread                                " Set to auto read when a file is changed from the outside
+set nowritebackup
+set autowriteall
+cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when forgot to start vim using sudo
+
+nnoremap j gj
+nnoremap k k
+nnoremap gj 5j
+nnoremap gk 5k
+vnoremap j gj
+vnoremap k gk
+vnoremap gj 5j
+vnoremap gk 5k
+
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L g_
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-f> <C-f>zz
+nnoremap <C-b> <C-b>zz
+vnoremap <C-u> <C-u>zz
+vnoremap <C-d> <C-d>zz
+vnoremap <C-f> <C-f>zz
+vnoremap <C-b> <C-b>zz
+
+nnoremap c "xc
+xnoremap c "xc
+
+inoremap <C-c> <C-[>
+inoremap <Esc> <C-[>
+nnoremap <C-c> <C-[>
+nnoremap <Esc> <C-[>
+map <TAB> %
+
+nnoremap ]t :tabn<CR>
+nnoremap [t :tabp<CR>
+
+let mapleader = ","
+nnoremap <leader>/ :let @/=""<CR>
+nnoremap <silent> <leader>, <C-^>

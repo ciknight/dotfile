@@ -112,6 +112,7 @@
     "fenc",
     "grpc",
     "hexlify",
+    "hmac",
     "ipfs",
     "noqa",
     "pyright",
@@ -123,6 +124,8 @@
     "unhexlify",
     "venv",
     "virtualenv",
-    "vsplit"
-  ]
+    "vsplit",
+    "youtube"
+  ],
+  "snippets.ultisnips.pythonPrompt": false
 }

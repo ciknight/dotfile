@@ -52,7 +52,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 " fix C-v copy yank
 Plug 'bfredl/nvim-miniyank'
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
+"Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 " Matchit enhances jump motions, Improved % matching
 "Plug 'tmhedberg/matchit'
 "}}}
@@ -297,6 +298,8 @@ endif
 " 2.10 Neovim specific settings {{{
 " ---------------------------------------------------------------------------------------------------------------------
 if has('nvim')
+  let g:email="ci_knight@msn.cn" " vim-template
+  let g:username="andy.wang"
   let g:loaded_node_provider = 0
   let g:loaded_ruby_provider = 0
   let g:loaded_perl_provider = 0
@@ -345,7 +348,7 @@ cmap w!! w !sudo tee % > /dev/null          " Allow saving file as sudo when for
 " ---------------------------------------------------------------------------------------------------------------------
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 fo-=t nowrap
 autocmd FileType go setlocal shiftwidth=4 tabstop=4
-autocmd FileType javascript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown,proto setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript,typescript,sql,json,html,css,xml,yaml,yml,vim,shell,markdown,proto setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal fo-=t wrap " alias fo=formatoptions, https://vim.fandom.com/wiki/Automatic_word_wrapping
 "}}}
 
@@ -596,11 +599,6 @@ nnoremap <silent> <leader>, <C-^>
 " -----------------------------------------------------
 " 3.8 Custom commands and functions {{{
 " -----------------------------------------------------
-
-" Reformat whole or selection from file
-"command! Format :call utils#formatFile()
-"nnoremap <silent> <leader>f :Format<CR>
-
 " Profile
 command! Profile :call utils#profile()
 
@@ -742,13 +740,11 @@ let g:coc_global_extensions = [
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
+\  'coc-tabnine',
 \]
 
 "\  'coc-lists',
 "\  'coc-diagnostic',
-"\  'coc-jedi',
-"\  'coc-ci',
-"\  'coc-discord',
 
 " debug coc
 "let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
@@ -841,12 +837,7 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "}}}
 
 " -----------------------------------------------------
-" 5.4 {{{
-" -----------------------------------------------------
-"}}}
-
-" -----------------------------------------------------
-" 5.5 Coc {{{
+" 5.4 Coc {{{
 " -----------------------------------------------------
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -933,6 +924,22 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 "}}}
 
 " -----------------------------------------------------
+" 5.4 tabnine, after coc config {{{
+" -----------------------------------------------------
+"lua <<EOF
+"require('tabnine').setup({
+"  disable_auto_comment=true,
+"  accept_keymap="<TAB>",
+"  dismiss_keymap = "<C-]>",
+"  debounce_ms = 800,
+"  suggestion_color = {gui = "#808080", cterm = 244},
+"  exclude_filetypes = {"TelescopePrompt"},
+"  log_file_path = nil, -- absolute path to Tabnine log file
+"})
+"EOF
+"}}}
+
+" -----------------------------------------------------
 " 5.6 Tabularize -> [a]lign {{{
 " -----------------------------------------------------
 vnoremap <leader>ta :Tabularize /
@@ -941,7 +948,7 @@ vnoremap <leader>ta :Tabularize /
 " -----------------------------------------------------
 " 5.7 FZF {{{
 " -----------------------------------------------------
-nnoremap <Leader>p :CocCommand fzf-preview.ProjectFiles<CR>
+nnoremap <silent> <leader>p :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
 "}}}
 
 " -----------------------------------------------------

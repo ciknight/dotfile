@@ -108,6 +108,8 @@ env/
 venv/
 .cache/
 
+.env
+
 # Max OS
 .DS_Store
 
