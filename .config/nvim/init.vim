@@ -163,7 +163,7 @@ set tabpagemax=15                           " Only show 15 tabs
 set tabstop=4                               " 每四行一个缩进
 set shiftround
 set shortmess+=c                            " don't give |ins-completion-menu| messages.
-set signcolumn=auto:1                       " always show signcolumns
+set signcolumn=yes                          " always show signcolumns
 set whichwrap+=<,>,h,l                      " 箭头键可以跳到下一行
 set backspace=2
 set backspace=eol,start,indent
@@ -288,7 +288,7 @@ if matchstr(execute('silent version'), 'NVIM v\zs[^\n-]*') >= '0.4.0'
   set shada='20,<50,s10
   set inccommand=nosplit
   set wildoptions+=pum
-  set signcolumn=auto:1
+  set signcolumn=yes
   set pumblend=10
 endif
 
@@ -630,7 +630,7 @@ autocmd! FileType python nnoremap <leader>b :call ToggleBreakPoint()<Cr>
 " 4.3 Gitgutter settings {{{
 " -----------------------------------------------------
 if exists('&signcolumn')
-  set signcolumn=auto:1
+  set signcolumn=yes
 else
   let g:gitgutter_sign_column_always=1
 endif

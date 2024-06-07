@@ -122,6 +122,7 @@
     "struct",
     "submodule",
     "unhexlify",
+    "uvicorn",
     "venv",
     "virtualenv",
     "vsplit",
