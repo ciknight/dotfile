@@ -16,3 +16,4 @@ split_arguments_when_comma_terminated = true
 split_before_dict_set_generator = true
 split_before_logical_operator = true
 use_tabs = false
+

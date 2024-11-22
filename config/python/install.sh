@@ -1,12 +1,6 @@
 #! /bin/sh
 
 install_python () {
-    #### Link pip config
-    if [ -d ~/.pip ] ; then
-        mv ~/.pip ~/.pip.old
-    fi
-    ln -s $PWD/config/python/pip $HOME/.pip
-
     #### Install pyenv and python3
     if hash pyenv 2>/dev/null; then
         echo 'Already install pyenv'
@@ -29,8 +23,8 @@ install_python () {
         eval "$(pyenv init -)"
 
         # install python3
-        pyenv install 3.10.12
-        pyenv global 3.10.12
+        pyenv install 3.11.10
+        pyenv global 3.11.10
     fi
 
     #### Install pip
@@ -43,25 +37,5 @@ install_python () {
         sudo pip install virtualenv pipenv
     fi
 
-
-    if [ -d ~/.ipython ]; then
-        mv ~/.ipython ~/.ipython.old
-    fi
-    ln -s $PWD/config/python/ipython $HOME/.ipython
-
-    ln -s $PWD/config/python/pyrightconfig.json $HOME/.config/pyrightconfig.json
-
-    ln -s $PWD/config/python/ruff.toml $HOME/.config/ruff.toml
-
-    # Deprecated
-    #ln -s $PWD/config/python/isort.cfg $HOME/.isort.cfg
-    #ln -s $PWD/config/python/mypy.ini $HOME/.mypy.ini
-    #ln -s $PWD/config/python/flake8 $HOME/.flake8
-    #ln -s $PWD/config/python/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
     echo "Install python done"
-}
-
-uninstall_python () {
-    # TODO: implement
-    echo "not implemented"
 }

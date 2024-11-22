@@ -1,46 +1,34 @@
-#!/bin/bash
-echo 'installing..., current dir: ' $PWD
+#! /bin/sh
 SYSTEM=`uname -s`
 
-# first, initialize ssh key
-if [ ! -f ~/.ssh/id_rsa ] ; then
-    ssh-keygen -t rsa -b 4096 -C "ci_knight@msn.cn"
-fi
-
-echo 'OS: ' $SYSTEM
-if [ $SYSTEM = "Darwin" ]; then
-    # disable command + q
+if [ $SYSTEM == "Darwin" ]; then
+    # Need disable command + q, modify osx keyboard shortcuts
     if hash brew 2> /dev/null; then
         echo 'Already install homebrew'
     else
         echo 'Install homebrew...'
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         # arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    fi
 
+    # Install tools
+    ## ack, ag, pt or rg, support vim ctrlsf and tagbar
+    brew install ack the_silver_searcher ctags
+    brew install htop lazygit ipcalc cloc tig jq wget ncdu
+    ## Install neovim tmux
+    brew install git zsh tmux neovim
+    # Fix tmux exited on osx
+    brew install reattach-to-user-namespace
+
+    # Install languages
     # python dependency
     brew install openssl@1.1 readline sqlite3 xz zlib bzip2 libffi pkg-config
-
     brew install golang
     curl -sL install-node.now.sh/lts | bash
     curl -o- -L https://yarnpkg.com/install.sh | bash
 
-    # ack, ag, pt or rg, support vim ctrlsf and tagbar
-    brew install ack the_silver_searcher ctags
-    brew install zsh git htop lazygit ipcalc
-    brew install cloc tig jq wget ncdu
-
-    brew install neovim
-
-    # Install tmux version 2.8
-    # Fix tmux exited on osx
-    brew install reattach-to-user-namespace
-
-    # openvpn
-    # https://apple.stackexchange.com/questions/203115/installed-openvpn-with-brew-but-it-doesnt-appear-to-be-installed-correctly
-
     # https://tclementdev.com/timemachineeditor/
     # brew install --cask timemachineeditor
+    # brew install --cask mounty
     # brew install --cask java or download java sdk.
 
     # install powerline fonts, set terminal font support powerline
@@ -53,13 +41,14 @@ if [ $SYSTEM = "Darwin" ]; then
 
     # iterm Gruvbox Dark
     # https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Gruvbox%20Dark.itermcolors
+    fi
 elif [ $SYSTEM = "Linux" ]; then
-    echo 'updating apt and install software'
+    echo 'Updating apt and install software'
     if which apt 2>&1 > /dev/null; then
-        apt update
-        apt install -y git htop vim zsh tmux neovim
-        apt install -y gcc curl tig lynx
-        apt install -y ctags cmake silversearcher-ag jq ack-grep
+        apt update -y
+        apt install -y gcc cmake curl tig lynx htop ctags silversearcher-ag jq ack-grep
+        apt install -y git zsh tmux vim neovim
+
         apt install -y golang npm
     elif which yum 2>&1 > /dev/null; then
         # yum -y install epel-release
@@ -82,37 +71,4 @@ else
     exit 0
 fi
 
-# golang
-go get -u golang.org/x/tools/gopls@latest
-go get -u golang.org/x/lint/golint
-go get -u github.com/stamblerre/gocode
-
-
-# fzf
-if hash fzf 2>/dev/null; then
-    echo 'Already install fzf'
-else
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-fi
-
-
-# tmux
-if [ ! -d ~/.tmux/plugins/tpm ] ; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-# home bin
-if [ ! -d ~/bin ]; then
-    ln -s $PWD/bin ~/
-fi
-
-
-# zsh
-if [ ! -d ~/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-# zsh-autosuggestions, zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-source ~/.zshrc
+# Install
