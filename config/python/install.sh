@@ -34,7 +34,7 @@ install_python () {
         echo 'Input passwd, install pip'
         wget https://bootstrap.pypa.io/get-pip.py -O $PWD/opt/get-pip.py && sudo $PYTHON $PWD/opt/get-pip.py
         # python util
-        sudo pip install virtualenv pipenv
+        pip install virtualenv pipenv ipython
     fi
 
     echo "Install python done"

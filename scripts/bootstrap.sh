@@ -12,12 +12,19 @@ echo ''
 setup_workspace() {
     # Initialize workspace
     if [ ! -d ~/workspace ]; then
+        info 'setup workspace'
         # Make workspace directory
         mkdir ~/workspace
         # Make go workspace directory
         mkdir -p ~/workspace/go/{bin,pkg,src}
         # Make coc-vim typings path directory
         mkdir -p ~/.cache/typings
+
+        success 'workspace'
+    fi
+
+    if [ ! -d ~/bin ]; then
+        ln -s $PWD/bin ~/
     fi
 }
 
@@ -41,6 +48,13 @@ setup_gitconfig () {
     fi
 }
 
+install_software () {
+    source ./install.sh
+    source ./config/python/install.sh
+    source ./config/nvim/install.sh
+    source ./config/zsh/install.sh
+}
+
 install_dotfiles () {
     info "installing dotfiles"
 
@@ -54,28 +68,17 @@ install_dotfiles () {
         link_file "$src" "$dst"
     done
 
+    source ./config/nvim/bootstrap.sh
+    source ./config/python/bootstrap.sh
+
     success 'dotfiles'
-}
-
-
-install_software () {
-    source ./install.sh
 }
 
 
 setup_workspace
 setup_gitconfig
+install_software
 install_dotfiles
-
-#if [ "$(uname -s)" == "Darwin" ]; then
-#    info "installing dependencies"
-#    if source bin/dot | while read -r data; do info "$data"; done
-#    then
-#        success "dependencies installed"
-#    else
-#        fail "error installing dependencies"
-#    fi
-#fi
 
 echo ''
 echo '  All installed!'
