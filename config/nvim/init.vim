@@ -92,7 +92,7 @@ Plug 'aperezdc/vim-template'
 " Surround (cs"')
 Plug 'tpope/vim-surround'  " yss, cs, ysiw
 " Easy alignment, Use :Tab\"
-Plug 'godlygeek/tabular', { 'on':  'Tabularize' }  " junegunn/vim-easy-align
+"Plug 'godlygeek/tabular', { 'on':  'Tabularize' }  " junegunn/vim-easy-align
 " Show content of registers when pasting
 "Plug 'junegunn/vim-peekaboo'
 "}}}
@@ -112,7 +112,7 @@ Plug 'tpope/vim-repeat'
 " Did you mean file open
 Plug 'EinfachToll/DidYouMean'
 " Vim start time debug tool or 'dstein64/vim-startuptime'
-Plug 'tweekmonster/startuptime.vim'
+"Plug 'tweekmonster/startuptime.vim'
 "}}}
 
 call plug#end()
@@ -740,11 +740,11 @@ let g:coc_global_extensions = [
 \  'coc-explorer',
 \  'coc-fzf-preview',
 \  'coc-yank',
-\  'coc-tabnine',
 \]
 
 "\  'coc-lists',
 "\  'coc-diagnostic',
+"\  'coc-tabnine',
 
 " debug coc
 "let g:coc_node_args = ['--nolazy', '--inspect-brk=9222']
@@ -948,7 +948,10 @@ vnoremap <leader>ta :Tabularize /
 " -----------------------------------------------------
 " 5.7 FZF {{{
 " -----------------------------------------------------
-nnoremap <silent> <leader>p :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+"nnoremap <silent> <leader>p :<C-u>CocCommand fzf-preview.FromResources project_mru git<CR>
+
+"Required [ripgrep]
+nnoremap <silent> <leader>p :<C-u>CocCommand fzf-preview.DirectoryFiles<CR>
 "}}}
 
 " -----------------------------------------------------

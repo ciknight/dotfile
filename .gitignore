@@ -1,13 +1,17 @@
+.DS_Store
 tmp/
 .netrwhist
 
 # zsh
 zsh-cache
 
-# plug manager
+# nvim
 bundle/
 plugged/
 plug.vim
+.config/nvim/spell
+!.config/nvim/spell/dictionary.utf-8.add
+!.config/nvim
 
 # ipython
 config/python/ipython/extensions/
@@ -21,10 +25,7 @@ opt/*
 
 # .config
 .config/*
-.config/nvim/spell
-!.config/nvim/spell/dictionary.utf-8.add
 !.config/yapf
-!.config/nvim
 
 # ignore
 .ssh
@@ -33,3 +34,8 @@ opt/*
 id_rsa
 id_rsa.pub
 *.pem
+*.pub
+*.key
+
+# bootstrap files
+gitconfig.local.symlink

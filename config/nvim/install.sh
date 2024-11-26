@@ -1,16 +1,5 @@
 #! /bin/sh
 
-install_vim_config () {
-    if [ -f ~/.vimrc ] ; then
-        mv ~/.vimrc ~/.vimrc.old
-    fi
-    ln -s $PWD/.vimrc ~/
-    if [ -f ~/.vim ] ; then
-        mv ~/.vim ~/.vimrc.old
-    fi
-    ln -s $PWD/.vim ~/
-}
-
 install_neovim_python_dependency () {
     # create neovim python env
     if [ ! -d ~/workspace/neovim3 ] ; then
