@@ -1,5 +1,5 @@
 #! /bin/sh
-source ../../util.sh
+source util.sh
 
 bootstrap () {
     local overwrite_all=false backup_all=false skip_all=false

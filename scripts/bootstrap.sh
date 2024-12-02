@@ -22,7 +22,9 @@ setup_workspace() {
 
         success 'workspace'
     fi
-
+    if [ ! -d ~/.config ]; then
+        mkdir ~/.config
+    fi
     if [ ! -d ~/bin ]; then
         ln -s $PWD/bin ~/
     fi
@@ -49,7 +51,7 @@ setup_gitconfig () {
 }
 
 install_software () {
-    source ./install.sh
+    source ./scripts/install.sh
     source ./config/python/install.sh
     source ./config/nvim/install.sh
     source ./config/zsh/install.sh
@@ -63,8 +65,6 @@ install_dotfiles () {
     for src in $(find -H "$DOTFILES_ROOT/config" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
     do
         dst="$HOME/.$(basename "${src%.*}")"
-        echo $src
-        echo $dst
         link_file "$src" "$dst"
     done
 

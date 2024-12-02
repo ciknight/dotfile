@@ -1,5 +1,5 @@
 #! /bin/sh
-source ../../util.sh
+source util.sh
 
 cd "$(dirname "$0")/.."
 ROOT=$(pwd -P)

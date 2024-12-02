@@ -1,22 +1,15 @@
-# Dotfile
+# Dotfiles
 
 welcome to my dotfile
 
-### 软件依赖
-
-- vim8
-- zsh
-- tmux
-- git
-- python2
-- python3
-- autojump
-- pip
-- virtualenv
+### 生成ssh key
+if [ ! -f ~/.ssh/id_rsa ] ; then
+    ssh-keygen -t rsa -b 4096 -C "andy@example.com"
+fi
 
 ### 安装
 
-sh install.sh
+> ./scripts/bootstrap.sh
 
 
 ### Test your zsh speed
@@ -37,7 +30,6 @@ rm flake8 black mypy isort
 ```shell
 pip freeze | awk -F '=' '{print $1}' | xargs pip install --upgrade
 ```
-
 
 ### Enable vscode key-repeat(长按hjkl)
 
