@@ -1,0 +1,133 @@
+{
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+    },
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.indexing": true,
+    "ruff.enable": true,
+    "ruff.fixAll": true,
+    "ruff.lineLength": 120,
+    "ruff.lint.select": [
+        "C",
+        "E",
+        "F",
+        "W"
+    ],
+    // "ruff.configuration": "/path/to/ruff.toml",
+    "editor.inlineSuggest.enabled": true,
+    "editor.rulers": [
+        88,
+        120
+    ],
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.lineNumbers": "relative",
+    "editor.fontSize": 15,
+    "editor.cursorStyle": "block",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "files.autoSave": "afterDelay",
+    "files.exclude": {
+        "**/.bak": true
+    },
+    "workbench.colorTheme": "Default Dark+ Experimental",
+    "workbench.preferredDarkColorTheme": "Default Dark+ Experimental",
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBackground": "#49b2b93d",
+        "editor.lineHighlightBorder": "#ffffff30"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "settingsSync.ignoredSettings": [],
+    "explorer.confirmDelete": false,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "c:\\Users\\ci_kn\\.vimrc.vscode",
+    "vim.useSystemClipboard": true,
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.insert": "line-thin",
+    "vim.cursorStylePerMode.replace": "block-outline",
+    "vim.searchHighlightColor": "#969696",
+    "vim.leader": ",",
+    "vim.startInInsertMode": false,
+    "vim.useCtrlKeys": true,
+    "vim.handleKeys": {
+        "<C-d>": true,
+        "<C-u>": true
+    },
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "python": true
+    },
+    // VSpaceCode start
+    "vim.easymotion": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        }
+    ],
+    "git.autofetch": true,
+    "Lingma.DisplayLanguage": "简体中文",
+    "python.createEnvironment.trigger": "off",
+    // VSpaceCode end
+}
