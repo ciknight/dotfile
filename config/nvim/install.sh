@@ -20,3 +20,4 @@ install_neovim_python_dependency () {
     #pip install mycli ipython ipdb cheat forex-python ranger-fm
 }
 
+install_neovim_python_dependency;

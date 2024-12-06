@@ -51,10 +51,10 @@ setup_gitconfig () {
 }
 
 install_software () {
-    source ./scripts/install.sh
-    source ./config/python/install.sh
-    source ./config/nvim/install.sh
-    source ./config/zsh/install.sh
+    . ./scripts/install.sh
+    . ./config/python/install.sh
+    . ./config/nvim/install.sh
+    . ./config/zsh/install.sh
 }
 
 install_dotfiles () {
@@ -68,8 +68,8 @@ install_dotfiles () {
         link_file "$src" "$dst"
     done
 
-    source ./config/nvim/bootstrap.sh
-    source ./config/python/bootstrap.sh
+    bash ./config/nvim/bootstrap.sh
+    bash ./config/python/bootstrap.sh
 
     success 'dotfiles'
 }

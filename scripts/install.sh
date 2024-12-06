@@ -45,11 +45,11 @@ if [ $SYSTEM == "Darwin" ]; then
 elif [ $SYSTEM = "Linux" ]; then
     echo 'Updating apt and install software'
     if which apt 2>&1 > /dev/null; then
-        apt update -y
-        apt install -y gcc cmake curl tig lynx htop exuberant-ctags silversearcher-ag jq ack-grep
-        apt install -y git zsh tmux vim neovim
+        sudo apt update -y
+        sudo apt install -y gcc cmake curl tig lynx htop exuberant-ctags silversearcher-ag jq ack-grep
+        sudo apt install -y git zsh tmux vim neovim
 
-        apt install -y golang npm
+        sudo apt install -y golang npm
     elif which yum 2>&1 > /dev/null; then
         # yum -y install epel-release
         # yum -y install https://centos7.iuscommunity.org/ius-release.rpm  # CentOS 7,

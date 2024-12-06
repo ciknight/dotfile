@@ -6,36 +6,36 @@ install_python () {
         echo 'Already install pyenv'
     else
         if [ -d ~/.pyenv ] ; then
-            mv ~/.pyenv ~/.pyenv.old
+            timestamp=$(date +%Y%m%d%H%M%S)
+            mv ~/.pyenv ~/.pyenv.old.$timestamp
         fi
+
         # pyenv, https://github.com/pyenv/pyenv-installer.git
         curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-        mkdir $(pyenv root)/cache
-
-        # install plugin pyenv-alias
-        git clone https://github.com/s1341/pyenv-alias.git $(pyenv root)/plugins/pyenv-alias
 
         # enable pyenv
-        export PYENV_ROOT="$HOME/.pyenv"
-        export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
+	    export PYENV_ROOT="$HOME/.pyenv"
+        [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
         export PYTHON_BUILD_MIRROR_URL="https://pyenv.ibeats.top"
-        eval "$(pyenv init --path)"
         eval "$(pyenv init -)"
-
-        # install python3
+        eval "$(pyenv init --path)"
+        # install plugin pyenv-alias
+        #git clone https://github.com/s1341/pyenv-alias.git $(pyenv root)/plugins/pyenv-alias
+        # install python3, install tk dependency
+        sudo apt-get install -y tk-dev libx11-dev libxss1 libxcursor1 libxrandr2 libxrender1 libxi6 libxtst6
         pyenv install 3.11.10
         pyenv global 3.11.10
     fi
 
+    pyenv global 3.11.10
+
     #### Install pip
     PYTHON=`which python`
-    if [ ! -f $PWD/opt/get-pip.py ] ; then
-        # python -m ensurepip --upgrade
-        echo 'Input passwd, install pip'
-        wget https://bootstrap.pypa.io/get-pip.py -O $PWD/opt/get-pip.py && sudo $PYTHON $PWD/opt/get-pip.py
-        # python util
-        pip install virtualenv pipenv ipython
-    fi
-
+    # python -m ensurepip --upgrade
+    wget https://bootstrap.pypa.io/get-pip.py -O /tmp/get-pip.py && $PYTHON /tmp/get-pip.py
+    # python util
+    pip install virtualenv pipenv ipython
     echo "Install python done"
 }
+
+install_python;
